@@ -217,11 +217,11 @@ def research_dash():
 # Fotografije (Unsplash License, simbolične). Zamenjaj z lastnimi fotografijami centrov, ko bodo soglasja.
 PHOTOS = {
     "touch": ("photo-1501677901416-076b6f71acb7", "Otroška roka na glavi konja", "Sebastian Abbruzzese"),
-    "bond": ("photo-1555019685-686f4f67aa19", "Dekle z obrazom ob konju", "Donald Giannatti"),
+    "girl": ("photo-1518963216893-6d7a01b4ace4", "Dekle ob temnem konju ob jezeru", "Luca M"),
     "stable": ("photo-1739249678653-105d71f61463", "Dekle in konj v hlevu", "A B"),
     "hand": ("photo-1756639292737-f2c89a3ab5bb", "Roka nežno boža konja", "Thomas Marquize"),
-    "herd": ("photo-1714151676676-7471bc1a0794", "Roka, iztegnjena proti čredi konj", "Musa Ortaç"),
-    "rope": ("photo-1758400399553-2546ca6c4710", "Človek s konjem v hlevu", "lhon karwan"),
+    "meadow": ("photo-1562883129-4fa82f9f47dd", "Konji na travniku ob jezeru med griči", "Gianni Scognamiglio"),
+    "ears": ("photo-1417686597246-b99b258b2aa8", "Pozorna konjska ušesa", "Trent Hancock"),
 }
 
 
@@ -292,7 +292,7 @@ home = f"""
       <p class="what-p">Strokovnjak ima temeljno izobrazbo, na primer iz fizioterapije, delovne terapije, psihologije ali specialne pedagogike, in dodatno usposabljanje za delo s konjem. Konj je posebej izbran in pripravljen, srečanja pa potekajo po načrtu in v varnem okolju.</p>
       <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="/terapija-s-pomocjo-konja/">Več o terapiji s pomočjo konja</a><a class="btn btn-ghost" href="/hipoterapija/">Hipoterapija</a></div></div>
     <div class="what-cards">
-      <div class="what-photo reveal-img">{photo("bond", 1000)}</div>
+      <div class="what-photo reveal-img">{photo("stable", 1000)}</div>
       <div class="wc">{badge("heart")}<div><b>Terapija</b><p>Zdravstvena, psihološka ali delovnoterapevtska obravnava. Sem sodi tudi hipoterapija.</p></div></div>
       <div class="wc">{badge("book")}<div><b>Učenje</b><p>Pedagoške in specialnopedagoške intervencije za pozornost, učenje in socialne veščine.</p></div></div>
       <div class="wc">{badge("sun")}<div><b>Aktivnosti</b><p>Prilagojeno jahanje, nega in druženje s konji z rekreativnim ali izobraževalnim namenom.</p></div></div>
@@ -316,11 +316,11 @@ home = f"""
   <div class="wrap">
     <div class="mo-grid">
       <figure class="mo reveal-img">{photo("hand", 900)}<figcaption><b>Dotik</b><span>Prvi stik pogosto ni na konju, ampak ob njem.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("stable", 900)}<figcaption><b>Mir</b><span>Hlev je predvidljivo okolje z jasno rutino.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("herd", 900)}<figcaption><b>Odnos</b><span>Konj se odzove na to, kako se mu približamo.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("rope", 900)}<figcaption><b>Skrb</b><span>Nega in vodenje konja sta del srečanja.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("meadow", 900)}<figcaption><b>Mir</b><span>Pašnik in čreda: okolje, ki umiri.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("girl", 900)}<figcaption><b>Odnos</b><span>Konj se odzove na to, kako se mu približamo.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("ears", 900)}<figcaption><b>Pozornost</b><span>Konj zazna vsak glas in vsak gib.</span></figcaption></figure>
     </div>
-    <p class="credit-line">Simbolične fotografije: Thomas Marquize, A B, Musa Ortaç, lhon karwan, Donald Giannatti (Unsplash). Kmalu jih bodo zamenjale fotografije slovenskih centrov.</p>
+    <p class="credit-line">Simbolične fotografije: Thomas Marquize, Gianni Scognamiglio, Luca M, Trent Hancock, A B (Unsplash). Kmalu jih bodo zamenjale fotografije slovenskih centrov.</p>
   </div>
 </section>
 
