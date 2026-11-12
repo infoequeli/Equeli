@@ -595,3 +595,4 @@ table.data td:last-child,table.data th:last-child{text-align:right}
 .aud-c b{font:500 20px/1.3 var(--f-head)}
 .aud-c p{color:var(--muted);font-size:15px;margin:0}
 .aud-c .go{margin-top:auto;padding-top:10px;font:500 15px/1 var(--f-head);color:var(--blue)}
+.hero2 h1{font-size:clamp(38px,5vw,64px);line-height:1.08}
