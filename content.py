@@ -4,11 +4,11 @@ SITE = "https://equeli.info-equeli.workers.dev"          # zamenjaj z lastno dom
 EMAIL = "info.equeli@gmail.com"
 UPDATED = "12. 11. 2026"
 
-# Obrazci: dokler ni obrazcev v Tallyju, vodijo na delujoče obrazce na WordPressu.
+# Obrazci so na strani sami (glej forms.py). Povezave do njih:
 FORMS = {
-    "izvajalci": "https://equeli.wordpress.com/za-izvajalce/",
-    "ustanove": "https://equeli.wordpress.com/za-ustanove/",
-    "kontakt": "https://equeli.wordpress.com/kontakt/",
+    "izvajalci": "/za-izvajalce/#obrazec",
+    "ustanove": "/za-sole-in-zavode/#povprasevanje",
+    "kontakt": "/kontakt/#obrazec",
 }
 
 # Raziskovalna baza (štetje po regijah, stanje 12. 11. 2026). Imen izvajalcev ne objavljamo, dokler jih ne potrdijo.

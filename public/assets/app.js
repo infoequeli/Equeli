@@ -126,3 +126,21 @@
     if (window.innerWidth < 900) panel.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
   });
 })();
+
+/* Obrazci: preverjanje pred oddajo in povratna informacija */
+document.querySelectorAll('form.eform').forEach(function (f) {
+  f.addEventListener('submit', function (ev) {
+    var err = f.querySelector('.form-error');
+    if (!f.checkValidity()) {
+      ev.preventDefault();
+      f.classList.add('touched');
+      if (err) err.hidden = false;
+      var bad = f.querySelector(':invalid:not(fieldset)');
+      if (bad) { bad.focus(); bad.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+      return;
+    }
+    if (err) err.hidden = true;
+    var b = f.querySelector('button[type=submit]');
+    if (b) { b.disabled = true; b.textContent = 'Pošiljam …'; }
+  });
+});

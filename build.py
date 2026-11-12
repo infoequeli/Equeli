@@ -8,6 +8,7 @@ import html
 import os
 from datetime import date
 from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES
+from forms import provider_form, school_form, contact_form
 
 e = html.escape
 NAV = [("/za-starse/", "Za starše"), ("/za-sole-in-zavode/", "Za šole in zavode"), ("/vodnik/", "Vodniki"),
@@ -277,7 +278,7 @@ pages.append(page("/za-starse/", "Za starše", "Vodnik za starše: od tega, kar 
 # ================= ZA ŠOLE IN ZAVODE =================
 schools = hero("Za šole, vrtce in zavode", "Programi s pomočjo konj za skupine",
                "Šolam, vrtcem, CUDV, domovom in društvom pomagamo najti ustrezne izvajalce, pripraviti povpraševanje in poiskati možnosti financiranja. Dogovor in plačilo urejate neposredno z izvajalcem.",
-               f'<a class="btn btn-dark" href="{FORMS["ustanove"]}">Oddajte povpraševanje</a><a class="btn btn-ghost" href="#potek">Kako poteka sodelovanje</a>', seed=3)
+               '<a class="btn btn-dark" href="#povprasevanje">Oddajte povpraševanje</a><a class="btn btn-ghost" href="#potek">Kako poteka sodelovanje</a>', seed=3)
 schools += f"""
 <section class="section white">
   <div class="wrap">
@@ -316,9 +317,9 @@ schools += f"""
     <details><summary>Kdo sklene pogodbo in komu plačamo?</summary><div>Ustanova sklene dogovor in plača neposredno izvajalcu. Povezovanje prek Equeli je brezplačno.</div></details>
     <details><summary>Kako lahko program financiramo?</summary><div>Ustanove programe financirajo iz lastnih sredstev, prispevkov staršev, razpisov ali s podporo podjetij. Če potrebujete dodatno financiranje, to označite v povpraševanju.</div></details>
     <details><summary>Kakšne soglasja potrebujemo?</summary><div>Za mladoletne udeležence potrebujete soglasje staršev za udeležbo. Za fotografiranje in snemanje je potrebno ločeno soglasje.</div></details>
-    <div class="cta-card"><h2>Povpraševanje ustanove</h2><p>Izpolnjevanje traja približno 5 minut. Odgovorimo v nekaj delovnih dneh.</p><div class="btn-row"><a class="btn btn-light" href="{FORMS['ustanove']}">Oddajte povpraševanje</a><a class="btn btn-line" href="/kontakt/">Vprašajte nas</a></div></div>
   </div>
-</section>"""
+</section>
+<section class="section form-section" id="povprasevanje-sekcija"><div class="wrap narrow"><div class="head"><p class="kicker">Povpraševanje</p><h2>Povpraševanje ustanove</h2><p class="lede">Izpolnjevanje traja približno 5 minut.</p></div>{school_form()}</div></section>"""
 pages.append(page("/za-sole-in-zavode/", "Za šole in zavode", "Šolam, vrtcem, CUDV in drugim ustanovam pomagamo najti izvajalce programov s pomočjo konj in možnosti financiranja.", schools, "/za-sole-in-zavode/"))
 
 # ================= VODNIKI =================
@@ -379,7 +380,7 @@ pages.append(page("/izvajalci/", "Imenik izvajalcev", "Nacionalni imenik izvajal
 # ================= ZA IZVAJALCE =================
 pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pomočjo konj lahko brezplačno potrdijo in dopolnijo podatke o svojem centru.",
                   hero("Za izvajalce", "Predstavite svoj center", "Equeli pripravlja neodvisen pregled intervencij s pomočjo konj v Sloveniji. Predstavitev je brezplačna, profil objavimo šele po vaši potrditvi.",
-                       f'<a class="btn btn-dark" href="{FORMS["izvajalci"]}">Izpolnite obrazec</a><a class="btn btn-ghost" href="/kontakt/">Imate vprašanje?</a>', seed=14) + f"""
+                       '<a class="btn btn-dark" href="#obrazec">Izpolnite obrazec</a><a class="btn btn-ghost" href="/kontakt/">Imate vprašanje?</a>', seed=14) + f"""
 <section class="section white"><div class="wrap">
   <div class="head"><p class="kicker">Kako poteka</p><h2>Potek</h2></div>
   <ol class="process"><li><h3>Obrazec</h3><p>Izpolnite, kar veste (približno 15 minut). Manjkajoče lahko dopolnimo po telefonu.</p></li><li><h3>Preverjanje</h3><p>Podatke preverimo in vas po potrebi kontaktiramo.</p></li><li><h3>Osnutek profila</h3><p>Pripravimo osnutek in vam ga pošljemo v pregled.</p></li><li><h3>Objava</h3><p>Profil objavimo šele po vaši potrditvi.</p></li></ol>
@@ -388,8 +389,8 @@ pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pom
   <h2>Kaj vas bomo vprašali</h2>
   <ul><li>organizacija, lokacije izvajanja in kontaktna oseba,</li><li>strokovna ekipa, izobrazba in usposabljanje za delo s konjem,</li><li>programi, starostne skupine, oblike, trajanje in cena (če jo želite objaviti),</li><li>konji, infrastruktura in dostopnost,</li><li>sodelovanja ter interes za povezovanje s šolami in zunanje financirane projekte.</li></ul>
   <div class="callout"><strong>Kaj bo javno in kaj ne.</strong> Javno objavimo samo podatke o organizaciji, ekipi in programih, ki jih potrdite. Podatki o zmogljivostih, omejitvah, financiranju in sodelovanjih ostanejo zasebni.</div>
-  <div class="cta-card"><h2>Obrazec za izvajalce</h2><p>Manjkajoče podatke lahko dopolnimo naknadno.</p><div class="btn-row"><a class="btn btn-light" href="{FORMS['izvajalci']}">Izpolnite obrazec</a></div></div>
-</div>""", "/za-izvajalce/"))
+</div>
+<section class="section form-section"><div class="wrap narrow"><div class="head"><p class="kicker">Obrazec</p><h2>Prijava izvajalca</h2><p class="lede">Približno 15 minut. Napredek se ne shrani, zato si vzemite čas naenkrat.</p></div>{provider_form()}</div></section>""", "/za-izvajalce/"))
 
 # ================= O Equeli =================
 pages.append(page("/o-equeli/", "O Equeli", "Equeli je neodvisna platforma za intervencije s pomočjo konj v Sloveniji.",
@@ -406,11 +407,18 @@ pages.append(page("/o-equeli/", "O Equeli", "Equeli je neodvisna platforma za in
 # ================= KONTAKT =================
 pages.append(page("/kontakt/", "Kontakt", "Pišite Equeli za pomoč pri iskanju izvajalca, popravke podatkov, sodelovanje ali podporo programom.",
                   hero("Kontakt", "Kontakt", "Za pomoč pri iskanju izvajalca, popravke podatkov, sodelovanje ali podporo programom. Odgovorimo v nekaj delovnih dneh.",
-                       f'<a class="btn btn-dark" href="{FORMS["kontakt"]}">Odprite obrazec</a>', seed=16) + f"""
+                       seed=16) + f"""
 <div class="wrap narrow article">
+  {contact_form()}
+  <h2 style="margin-top:56px">Drugi načini</h2>
   <div class="two"><div class="box"><h3>E-pošta</h3><p style="font-size:19px;color:var(--ink);user-select:all">{EMAIL}</p></div><div class="box"><h3>Za šole in zavode</h3><p>Za programe za skupine uporabite <a href="/za-sole-in-zavode/">povpraševanje za ustanove</a>.</p></div></div>
-  <p class="fine">Ne pošiljajte zdravstvene dokumentacije ali podatkov o diagnozah. Vaših sporočil ne posredujemo izvajalcem brez vašega soglasja.</p>
+  <p class="fine">Vaših sporočil ne posredujemo izvajalcem brez vašega soglasja.</p>
 </div>"""))
+
+# ================= HVALA =================
+pages.append(page("/hvala/", "Hvala", "Sporočilo je bilo poslano.",
+                  hero("Poslano", "Hvala, prejeli smo vaše sporočilo.", "Odgovorimo v nekaj delovnih dneh na e-poštni naslov, ki ste ga navedli. Če je nujno, nam pišite na " + EMAIL + ".",
+                       '<a class="btn btn-dark" href="/">Na prvo stran</a><a class="btn btn-ghost" href="/vodnik/">Vodniki po potrebah</a>', seed=20)))
 
 # ================= PRAVNO =================
 pages.append(page("/zasebnost/", "Obvestilo o zasebnosti", "Kako Equeli obdeluje osebne podatke.",
@@ -420,7 +428,7 @@ pages.append(page("/zasebnost/", "Obvestilo o zasebnosti", "Kako Equeli obdeluje
   <h2>Katere podatke zbiramo</h2><ul><li><strong>Obrazec za izvajalce:</strong> podatki o organizaciji, ekipi, programih in kontaktni osebi, za pripravo profila in povezovanje.</li><li><strong>Povpraševanje ustanove:</strong> podatki o ustanovi, kontaktni osebi in opis potreb skupine.</li><li><strong>Kontaktni obrazec:</strong> ime, e-pošta in sporočilo, za odgovor.</li></ul>
   <p>Pravna podlaga je vaša privolitev ob oddaji obrazca. Ne zbiramo zdravstvenih podatkov o posameznikih.</p>
   <h2>Spletna stran</h2><p>Stran ne uporablja piškotkov za sledenje ali oglaševanje. Interaktivni vodnik ne shranjuje vaših izbir. Pisave nalagamo prek storitve Bunny Fonts, ki ne beleži osebnih podatkov. Stran gostuje pri Cloudflare.</p>
-  <h2>Kje so podatki iz obrazcev</h2><p>Oddaje obrazcev se shranijo pri ponudniku obrazcev (WordPress.com) in se posredujejo na e-poštni naslov Equeli (Google). Hranimo jih, dokler je potrebno za namen, ali do preklica privolitve.</p>
+  <h2>Kje so podatki iz obrazcev</h2><p>Obrazci na tej strani pošiljajo podatke prek storitve FormSubmit (formsubmit.co) na e-poštni naslov Equeli (Google Gmail). Hranimo jih, dokler je potrebno za namen, ali do preklica privolitve.</p>
   <h2>Kaj objavimo</h2><p>Javno objavimo samo podatke, ki jih je izvajalec potrdil. Fotografije in video objavimo le z ločenim soglasjem vsake osebe.</p>
   <h2>Vaše pravice</h2><p>Kadar koli lahko zahtevate dostop, popravek ali izbris podatkov ter prekličete privolitev na {EMAIL}. Pritožbo lahko vložite pri Informacijskem pooblaščencu Republike Slovenije.</p>
 </div>"""))
