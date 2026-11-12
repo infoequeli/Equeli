@@ -242,11 +242,25 @@ home = f"""
       <div class="hero-copy">
         <p class="kicker reveal">Neodvisna platforma · Slovenija</p>
         <h1 class="reveal d1">Svet intervencij s pomočjo konj. <em>Na enem mestu.</em></h1>
-        <p class="lede reveal d2">Informacije o pristopih, strokovnjakih in programih v Sloveniji. Za starše in družine ter za šole in zavode.</p>
-        <div class="btn-row reveal d3"><a class="btn btn-dark" href="/za-starse/">Za starše</a><a class="btn btn-ghost" href="/za-sole-in-zavode/">Za šole in zavode</a></div>
+        <p class="lede reveal d2">Ko iščete pravo pomoč za otroka, za skupino ali zase, vam ni treba iskati sami. Tukaj zbiramo preverjene informacije o pristopih, strokovnjakih in centrih po vsej Sloveniji.</p>
+        <div class="btn-row reveal d3"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/za-sole-in-zavode/">Za šole in zavode</a></div>
       </div>
     </div>
     <div class="hero-meta"><div><b class="tnum">46</b>organizacij v raziskovalni bazi</div><div><b class="tnum">7</b>vodnikov po potrebah</div><div><b>Brezplačno</b>za družine in ustanove</div></div>
+  </div>
+</section>
+
+<section class="moment">
+  <div class="wrap">
+    <figure class="quote reveal">
+      <blockquote><p>»Ganljivo je, kako močna čustva lahko privrejo na površje ob konju.«</p></blockquote>
+      <figcaption><b>Metka Demšar Goljevšček</b><span>strokovna vodja Zavoda Nazaj na konja, <a href="https://www.metropolitan.si/zdravje/metka-demsar-goljevscek-ganljivo-je-kako-mocna-custva-lahko-privrejo-na-povrsje-ob-konju/" target="_blank" rel="noopener">za Metropolitan.si</a></span></figcaption>
+    </figure>
+    <div class="moment-cols">
+      <div><b>Vsak otrok je drugačen.</b><p>Zato je tudi delo ob konju lahko zelo različno: od fizioterapije na konju do mirnega opazovanja črede.</p></div>
+      <div><b>Strokovnost je pomembna.</b><p>Za vsakim dobrim programom stoji usposobljen strokovnjak in skrbno izbran konj.</p></div>
+      <div><b>Prvi korak je vprašanje.</b><p>Ni vam treba poznati strokovnih izrazov. Povejte, kaj si želite, in pokazali vam bomo pot.</p></div>
+    </div>
   </div>
 </section>
 
@@ -314,6 +328,15 @@ home = f"""
 <section class="section white">
   <div class="wrap">
     <div class="cta-card"><p class="kicker">Za izvajalce</p><h2 style="margin-top:14px">Predstavite svoj center</h2><p>Potrdite in dopolnite podatke o ekipi, programih in konjih. Predstavitev je brezplačna. Profil objavimo po vaši potrditvi.</p><div class="btn-row"><a class="btn btn-light" href="/za-izvajalce/">Izpolnite obrazec</a></div></div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <p class="kicker">Equeli</p>
+    <h2>Povezujemo ljudi, strokovnjake in možnosti.</h2>
+    <p class="lede">Equeli je nastal iz preproste želje: da bi družine, šole in strokovnjaki lažje našli drug drugega. Če ne veste, kje začeti, nam pišite. Skupaj bomo poiskali naslednji korak.</p>
+    <div class="btn-row"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/kontakt/">Pišite nam</a></div>
   </div>
 </section>
 """

@@ -523,3 +523,26 @@ table.data td:last-child,table.data th:last-child{text-align:right}
 .stroka-link h3{margin:4px 0 6px;font-size:21px}.stroka-link p{margin:0;color:var(--muted)}
 .stroka-link .go{font:500 15px/1 var(--f-head);color:var(--blue);white-space:nowrap}
 @media (max-width:640px){.stroka-link{grid-template-columns:1fr}}
+/* domača stran – toplina */
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 0%,#eef6f5 0%,rgba(238,246,245,0) 70%),var(--bg)}
+.hero-copy .lede{font-size:clamp(18px,1.6vw,20px);line-height:1.6}
+@media (prefers-reduced-motion:no-preference){
+  .hero .reveal,.moment .reveal{animation:softIn .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero .d1{animation-delay:.08s}.hero .d2{animation-delay:.18s}.hero .d3{animation-delay:.28s}
+}
+@keyframes softIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.moment{padding-block:clamp(56px,9vw,120px);background:linear-gradient(180deg,var(--bg) 0%,#f3f8f7 100%)}
+.quote{margin:0 auto;max-width:900px;text-align:center}
+.quote blockquote{margin:0}
+.quote p{font:400 clamp(28px,4.2vw,48px)/1.25 var(--f-head);letter-spacing:-.015em;color:var(--text);margin:0;text-wrap:balance}
+.quote figcaption{margin-top:28px;display:flex;flex-direction:column;gap:4px;align-items:center}
+.quote figcaption b{font:500 16px/1.3 var(--f-head)}
+.quote figcaption span{font-size:14px;color:var(--muted)}
+.moment-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,48px);margin-top:clamp(48px,7vw,88px);padding-top:clamp(32px,5vw,48px);border-top:1px solid var(--line)}
+@media (max-width:800px){.moment-cols{grid-template-columns:1fr}}
+.moment-cols b{font:500 19px/1.3 var(--f-head);color:var(--blue-ink)}
+.moment-cols p{color:var(--text-2);margin:8px 0 0}
+.closing{padding-block:clamp(64px,10vw,128px);text-align:center;background:radial-gradient(ellipse 70% 80% at 50% 100%,#eaf3f2 0%,rgba(234,243,242,0) 70%),var(--bg)}
+.closing h2{font-size:clamp(32px,4.6vw,54px);letter-spacing:-.02em;margin:12px auto 0;max-width:18ch;text-wrap:balance}
+.closing .lede{margin:20px auto 0;max-width:58ch}
+.closing .btn-row{justify-content:center;margin-top:32px}
