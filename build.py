@@ -174,9 +174,7 @@ def articles_block(limit=None):
 OFFER = {"H": "Hipoterapija", "T": "Terapija s pomočjo konja", "P": "Pedagoške intervencije", "S": "Psihosocialne intervencije",
          "D": "Delovnoterapevtske intervencije", "J": "Prilagojeno in terapevtsko jahanje", "A": "Aktivnosti s konji"}
 GROUPS = [("javni", "Javni zavodi", "Centri za usposabljanje, zavodi in bolnišnice, ki konje vključujejo v rehabilitacijo, vzgojo in terapijo."),
-          ("register", "Strokovnjaki v registru Nazaj na konja", "Centri in samostojni strokovnjaki z nazivom iz registra Zavoda Nazaj na konja."),
-          ("drugi", "Drugi centri", "Konjeniški centri in zavodi, ki ponujajo terapije ali aktivnosti s konji. Ponudba je povzeta po njihovih navedbah."),
-          ("organizator", "Društva, ki programe organizirajo", "Društva za svoje člane organizirajo hipoterapijo ali jahanje pri partnerskih izvajalcih.")]
+          ("register", "Strokovnjaki v registru Nazaj na konja", "Centri in samostojni strokovnjaki z nazivom iz registra Zavoda Nazaj na konja.")]
 
 
 def _host(u):
@@ -457,7 +455,7 @@ pages.append(page("/izvajalci/", "Terapevtski centri", "Javni zavodi in terapevt
   </div>
   {"".join(f'<div class="cgroup" data-group="{g}"><div class="head"><h2>{t}</h2><p class="lede">{d}</p></div>{center_cards([c for c in CENTERS if c["group"] == g])}</div>' for g, t, d in GROUPS)}
   <div class="cf-empty" hidden><h3>Za ta izbor še nimamo centra.</h3><p>Pišite nam, pomagamo poiskati izvajalca v bližini.</p><a class="btn btn-dark" href="/za-starse/#iskanje">Pomoč pri iskanju</a></div>
-  <p class="fine">Podatki so povzeti po registru Nazaj na konja, spletnih straneh centrov in Konjeniški zvezi Slovenije. Za termine in cene se obrnite neposredno na center.</p>
+  <p class="fine">Podatki so povzeti po registru Nazaj na konja in spletnih straneh centrov. Za termine in cene se obrnite neposredno na center.</p>
 </div></section>
 <section class="section"><div class="wrap">
   <a class="stroka-link" href="/strokovni-okvir/">{badge("shield", "lg")}<div><p class="kicker">Stroka</p><h3>Kdo je usposobljen za delo s konjem?</h3><p>Zavod Nazaj na konja, register strokovnjakov, mednarodne smernice HETI in razlike med pristopi.</p></div><span class="go">Strokovni okvir →</span></a>
@@ -623,8 +621,8 @@ pages.append(page("/hipoterapija/", "Hipoterapija", "Kaj je hipoterapija, kako p
   </div>
 </div></section>
 <section class="section white" id="kje"><div class="wrap">
-  <div class="head"><p class="kicker">Kje</p><h2>Hipoterapija v Sloveniji</h2><p class="lede">Hipoterapijo izvajajo predvsem javni zavodi v okviru rehabilitacije. Programe organizirajo tudi društva Sonček za svoje člane.</p></div>
-  {center_cards([c for c in CENTERS if "H" in c["offer"] and c["group"] in ("javni", "register", "drugi")])}
+  <div class="head"><p class="kicker">Kje</p><h2>Hipoterapija v Sloveniji</h2><p class="lede">Hipoterapijo izvajajo predvsem javni zavodi v okviru rehabilitacije.</p></div>
+  {center_cards([c for c in CENTERS if "H" in c["offer"] and c["group"] in ("javni", "register")])}
   <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="/za-starse/#iskanje">Pomagamo poiskati izvajalca</a><a class="btn btn-ghost" href="/vodnik/gibalne-tezave/">Vodnik: gibalne težave</a></div>
 </div></section>"""))
 

@@ -54,7 +54,7 @@ GUIDES = [
                    "Kako je urejeno nameščanje na konja (rampa, podest, pomoč)?",
                    "Ali je prostor dostopen z vozičkom? Ali so na voljo dostopne sanitarije?",
                    "Kako spremljate napredek in kako pogosto se srečujemo?"],
-     "slovenia": "Hipoterapijo izvajajo nekateri centri za usposabljanje, delo in varstvo (CUDV), CIRIUS Kamnik in zasebni izvajalci. Društva Sonček za cerebralno paralizo v več regijah organizirajo hipoterapijo ali terapevtsko jahanje za svoje člane, zato je dobro vprašati tudi pri društvu v vaši regiji. V raziskovalni bazi Equeli je 20 organizacij, ki navajajo hipoterapijo, delovno terapijo s konjem ali delo z gibalnimi izzivi."},
+     "slovenia": "Hipoterapijo izvajajo nekateri centri za usposabljanje, delo in varstvo (CUDV), CIRIUS Kamnik in zasebni izvajalci. V raziskovalni bazi Equeli je 20 organizacij, ki navajajo hipoterapijo, delovno terapijo s konjem ali delo z gibalnimi izzivi."},
     {"slug": "adhd", "title": "ADHD in težave s pozornostjo",
      "card": "Pozornost, samoregulacija in samozavest, povezano s šolo.",
      "lede": "Za starše otrok, ki težko ohranjajo pozornost, so zelo nemirni ali impulzivni. Kateri programi s konji obstajajo in kako izbrati.",
