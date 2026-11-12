@@ -66,65 +66,6 @@
     if ('IntersectionObserver' in window && !reduce) new IntersectionObserver(function (en) { var v = en[0].isIntersecting; if (v && !visible) { visible = true; raf = requestAnimationFrame(frame); } visible = v; }).observe(cv);
   });
 
-  /* interaktivni vodnik */
-  var guide = document.getElementById('guide');
-  if (!guide) return;
-  var base = guide.dataset.base || '/';
-  var NEEDS = {
-    avtizem: { label: 'Avtizem', who: ['otrok', 'mladostnik', 'odrasel'], url: 'vodnik/avtizem/',
-      tags: ['Terapija s pomočjo konja', 'Specialnopedagoške intervencije', 'Delovna terapija s konjem'],
-      q: ['Kakšne izkušnje imate z osebami z avtizmom?', 'Kako prilagodite okolje (hrup, število ljudi, potek)?', 'Je mogoč predhodni ogled?'] },
-    gibanje: { label: 'Cerebralna paraliza in gibalne težave', who: ['otrok', 'mladostnik', 'odrasel'], url: 'vodnik/gibalne-tezave/',
-      tags: ['Hipoterapija', 'Delovna terapija s konjem', 'Prilagojeno jahanje'],
-      q: ['Kdo vodi obravnavo in kakšno usposabljanje ima?', 'Ali potrebujete mnenje zdravnika ali fizioterapevta?', 'Kako je urejeno nameščanje na konja?'] },
-    adhd: { label: 'ADHD in težave s pozornostjo', who: ['otrok', 'mladostnik'], url: 'vodnik/adhd/',
-      tags: ['Pedagoške intervencije', 'Terapija s pomočjo konja', 'Psihosocialne intervencije'],
-      q: ['Kako je srečanje strukturirano?', 'Ali sodelujete s šolo?', 'Kako bomo spremljali napredek?'] },
-    razvoj: { label: 'Downov sindrom in motnje v duševnem razvoju', who: ['otrok', 'mladostnik', 'odrasel'], url: 'vodnik/motnje-v-dusevnem-razvoju/',
-      tags: ['Terapija s pomočjo konja', 'Delovna terapija s konjem', 'Prilagojeno jahanje'],
-      q: ['Ali imate izkušnje s to skupino, tudi z odraslimi?', 'Ali pred vključitvijo potrebujete zdravniško mnenje?', 'So mogoči skupinski programi ali tabori?'] },
-    ucne: { label: 'Učne, čustvene in vedenjske težave', who: ['otrok', 'mladostnik'], url: 'vodnik/ucne-custvene-vedenjske-tezave/',
-      tags: ['Pedagoške intervencije', 'Psihosocialne intervencije', 'Terapija s pomočjo konja'],
-      q: ['Kakšna je vaša temeljna stroka?', 'Kako bomo starši vključeni?', 'Ali ponujate programe za šole?'] },
-    tesnoba: { label: 'Tesnoba, samopodoba in odnosi', who: ['mladostnik', 'odrasel'], url: 'vodnik/tesnoba-samopodoba-odnosi/',
-      tags: ['Psihosocialne intervencije', 'Terapija s pomočjo konja', 'Aktivnosti s konji'],
-      q: ['Kakšno izobrazbo imate in ste vpisani v register svoje stroke?', 'Kako je poskrbljeno za zaupnost?', 'Kdaj boste predlagali drugo obliko pomoči?'] },
-    aktivnost: { label: 'Predvsem prijetna aktivnost ob konjih', who: ['otrok', 'mladostnik', 'odrasel'], url: 'vodnik/aktivnost-ob-konjih/',
-      tags: ['Prilagojeno jahanje', 'Aktivnosti s konji'],
-      q: ['Kakšna varnostna oprema je na voljo?', 'Koliko ljudi pomaga pri jahanju?', 'Ali so na voljo skupinski termini ali tabori?'] }
-  };
-  var WHO = { otrok: 'otroke', mladostnik: 'mladostnike', odrasel: 'odrasle' };
-  var state = { who: null, need: null };
-  var whoBox = guide.querySelector('[data-step="who"]'), needBox = guide.querySelector('[data-step="need"]'),
-      needChips = needBox.querySelector('.chips'), panel = guide.querySelector('.guide-panel'), placeholder = panel.innerHTML;
-  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function link(p) { return base + p + (base === '/' ? '' : 'index.html'); }
-  function renderNeeds() {
-    needChips.innerHTML = Object.keys(NEEDS).filter(function (k) { return NEEDS[k].who.indexOf(state.who) > -1; })
-      .map(function (k) { return '<button type="button" class="chip" data-need="' + k + '" aria-pressed="' + (state.need === k) + '">' + esc(NEEDS[k].label) + '</button>'; }).join('') +
-      '<a class="chip" href="' + link('kako-izbrati/') + '">Ne vem, kje začeti</a>';
-  }
-  function renderPanel() {
-    var n = NEEDS[state.need];
-    if (!n || n.who.indexOf(state.who) < 0) { panel.innerHTML = placeholder; return; }
-    panel.innerHTML = '<p class="kicker">Začnite tukaj</p><h3>' + esc(n.label) + '</h3>' +
-      '<p class="muted" style="margin-top:14px;font-size:15.5px">Pristopi, ki jih izvajalci za ' + esc(WHO[state.who]) + ' pri tem pogosto ponujajo:</p>' +
-      '<div class="tags">' + n.tags.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>' +
-      '<p style="margin-top:24px;font-weight:600;font-size:15px">Vprašanja za izvajalca</p><ul>' + n.q.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') + '</ul>' +
-      '<div class="btn-row" style="margin-top:26px"><a class="btn btn-dark btn-sm" href="' + link(n.url) + '">Odprite vodnik <span class="arr">→</span></a><a class="btn btn-ghost btn-sm" href="' + link('kontakt/') + '">Pomagamo poiskati izvajalca</a></div>' +
-      '<p class="note">O primernosti programa odloči usposobljen strokovnjak.</p>';
-  }
-  whoBox.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-who]'); if (!b) return;
-    state.who = b.dataset.who;
-    whoBox.querySelectorAll('[data-who]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-    needBox.hidden = false; renderNeeds(); renderPanel();
-  });
-  needBox.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-need]'); if (!b) return;
-    state.need = b.dataset.need; renderNeeds(); renderPanel();
-    if (window.innerWidth < 900) panel.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
-  });
 })();
 
 /* Obrazci: vodeni koraki, preverjanje in povratna informacija.
@@ -196,3 +137,137 @@ document.querySelectorAll('form.eform').forEach(function (f) {
     submit.disabled = true; submit.textContent = 'Pošiljam …';
   });
 });
+
+
+/* Vodeno iskanje: korak za korakom do pristopov in centrov */
+document.querySelectorAll('.finder').forEach(function (root) {
+  var cfg = JSON.parse(root.querySelector('script[type="application/json"]').textContent);
+  var base = root.dataset.base || '/';
+  var steps = cfg.steps, M = cfg.maps, A = cfg.A;
+  var body = root.querySelector('.fd-body'), back = root.querySelector('.fd-back'), next = root.querySelector('.fd-next');
+  var bar = root.querySelector('.fd-bar i'), num = root.querySelector('.fd-n');
+  var st = {}, i = 0;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function link(p) { if (p.charAt(0) === '/') p = p.slice(1); var h = ''; var k = p.indexOf('#'); if (k > -1) { h = p.slice(k); p = p.slice(0, k); } return base + p + (base === '/' ? '' : (p ? 'index.html' : 'index.html')) + h; }
+  function val(id) { return st[id] || (steps.filter(function (s) { return s.id === id; })[0] || {}).type === 'many' ? (st[id] || []) : st[id]; }
+  function ready(s) { var v = st[s.id]; if (s.optional) return true; if (s.type === 'many') return v && v.length; if (s.type === 'region') return v !== undefined; return !!v; }
+
+  function renderStep() {
+    var s = steps[i];
+    num.textContent = 'Vprašanje ' + (i + 1) + ' od ' + steps.length;
+    bar.style.width = ((i + 1) / (steps.length + 1) * 100) + '%';
+    var v = st[s.id];
+    var html = '<h3 class="fd-q" tabindex="-1">' + esc(s.q) + '</h3>' + (s.hint ? '<p class="fd-hint">' + esc(s.hint) + '</p>' : '');
+    if (s.type === 'region') {
+      html += '<div class="fd-opts fd-regions">' + s.opts.map(function (o) {
+        var on = v === o[0]; return '<button type="button" class="fd-opt' + (o[0] === '' ? ' any' : '') + '" aria-pressed="' + on + '" data-v="' + esc(o[0]) + '">' + esc(o[1]) + '</button>'; }).join('') + '</div>';
+    } else {
+      html += '<div class="fd-opts' + (s.type === 'many' ? ' many' : '') + '">' + s.opts.map(function (o) {
+        var on = s.type === 'many' ? (v || []).indexOf(o[0]) > -1 : v === o[0];
+        return '<button type="button" class="fd-opt" aria-pressed="' + on + '" data-v="' + esc(o[0]) + '"><span class="tick" aria-hidden="true"></span>' + esc(o[1]) + '</button>'; }).join('') +
+        (s.extra || []).map(function (x) { return '<a class="fd-opt link" href="' + link(x[0]) + '">' + esc(x[1]) + ' →</a>'; }).join('') + '</div>';
+    }
+    body.innerHTML = html;
+    back.hidden = i === 0;
+    next.hidden = false;
+    next.textContent = i === steps.length - 1 ? 'Pokaži možnosti' : (s.optional && !(v && v.length) ? 'Preskoči' : 'Naprej');
+    next.disabled = !ready(s);
+  }
+
+  function score() {
+    var sc = {}, why = {};
+    function add(codes, w, label) { codes.forEach(function (c, k) { sc[c] = (sc[c] || 0) + w + (k === 0 ? 1 : 0); (why[c] = why[c] || []).indexOf(label) < 0 && why[c].push(label); }); }
+    (st.goals || []).forEach(function (g) { add(M.goals[g] || [], 3, M.labels[g]); });
+    (st.needs || []).forEach(function (n) { add(M.needs[n] || [], 2, M.labels[n]); });
+    if (st.who === 'starejsi') { add(['A', 'D'], 1, 'starejša oseba'); }
+    return Object.keys(sc).sort(function (a, b) { return sc[b] - sc[a]; }).map(function (c) { return { c: c, why: why[c] }; });
+  }
+
+  function renderResult() {
+    num.textContent = 'Vaše možnosti';
+    bar.style.width = '100%';
+    var ranked = score().slice(0, 3);
+    var codes = ranked.map(function (r) { return r.c; });
+    var html = '<div class="fd-res"><h3 class="fd-q" tabindex="-1">Pristopi, ki bi lahko ustrezali</h3>';
+    if (!ranked.length) html += '<p class="fd-hint">Vaši izbiri ustreza več pristopov. Pišite nam in pomagamo izbrati.</p>';
+    html += '<div class="fd-apps">' + ranked.map(function (r, k) {
+      var a = A[r.c];
+      return '<div class="fd-app' + (k === 0 ? ' top' : '') + '"><b>' + esc(a.n) + '</b><p>' + esc(a.d) + '</p><p class="fd-why"><span>Ker ste izbrali:</span> ' + esc(r.why.join(', ').toLowerCase()) + '</p><p class="fd-who"><span>Kdo izvaja:</span> ' + esc(a.w) + '</p>' +
+        (r.c === 'H' ? '<a href="' + link('hipoterapija/') + '">Več o hipoterapiji →</a>' : '') + '</div>'; }).join('') + '</div>';
+    var notes = [];
+    (st.needs || []).concat(st.goals || []).forEach(function (n) { if (M.notes[n] && notes.indexOf(M.notes[n]) < 0) notes.push(M.notes[n]); });
+    if (notes.length) html += '<div class="fd-notes"><b>Dobro je vedeti</b><ul>' + notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul></div>';
+    var guides = [];
+    (st.needs || []).forEach(function (n) { if (M.guides[n] && guides.indexOf(M.guides[n]) < 0) guides.push(M.guides[n]); });
+    (st.goals || []).forEach(function (g) { if (M.goalGuides[g] && guides.indexOf(M.goalGuides[g]) < 0) guides.push(M.goalGuides[g]); });
+    // centri
+    var pool = cfg.C.filter(function (c) { return c.g !== 'organizator' && (cfg.mode !== 'schools' || c.g !== 'javni') && c.o.some(function (o) { return codes.indexOf(o) > -1; }); });
+    var reg = st.region || '';
+    var local = reg ? pool.filter(function (c) { return c.r.indexOf(reg) > -1; }) : pool;
+    function rank(c) { return c.o.reduce(function (s, o) { var k = codes.indexOf(o); return s + (k > -1 ? 3 - k : 0); }, 0) + (c.g === 'javni' || c.g === 'register' ? 1 : 0); }
+    local.sort(function (a, b) { return rank(b) - rank(a); });
+    var show = local.slice(0, 6), other = false;
+    if (reg && show.length < 2) { other = true; show = show.concat(pool.filter(function (c) { return show.indexOf(c) < 0; }).sort(function (a, b) { return rank(b) - rank(a); }).slice(0, 4 - show.length)); }
+    if (show.length) {
+      html += '<div class="fd-centers"><b>' + (reg && !other ? 'Centri v regiji ' + esc(reg) : reg ? 'V regiji ' + esc(reg) + ' je izbira še majhna. Centri drugod:' : 'Centri s temi pristopi') + '</b><ul>' +
+        show.map(function (c) { return '<li><a href="' + esc(c.u) + '" target="_blank" rel="noopener"><span class="cn">' + esc(c.n) + '</span><span class="cp">' + esc(c.p) + '</span><span class="co">' + c.o.filter(function (o) { return codes.indexOf(o) > -1; }).map(function (o) { return esc(A[o].n); }).join(' · ') + '</span></a></li>'; }).join('') + '</ul></div>';
+    }
+    if (guides.length) html += '<p class="fd-guides">Vodniki: ' + guides.map(function (g) { return '<a href="' + link('vodnik/' + g + '/') + '">' + esc((M.gtitle && M.gtitle[g]) || g) + '</a>'; }).join(', ') + '.</p>';
+    html += '<div class="btn-row fd-cta">' + cfg.cta.map(function (c) { return '<a class="btn ' + (c[2] ? 'btn-dark' : 'btn-ghost') + '" href="' + link(c[0]) + '">' + esc(c[1]) + '</a>'; }).join('') + '<button type="button" class="btn btn-text fd-restart">Začni znova</button></div>';
+    html += '<p class="fd-fine">O primernosti programa odloči usposobljen strokovnjak.</p></div>';
+    body.innerHTML = html;
+    back.hidden = false; next.hidden = true;
+    body.querySelector('.fd-restart').addEventListener('click', function () { st = {}; i = 0; go(); });
+  }
+
+  function go(focus) {
+    if (i < steps.length) renderStep(); else renderResult();
+    if (focus) {
+      var h = body.querySelector('.fd-q'); if (h) h.focus({ preventScroll: true });
+      var y = root.getBoundingClientRect().top + window.scrollY - 90;
+      if (window.scrollY > y + 10) window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    }
+  }
+  body.addEventListener('click', function (ev) {
+    var b = ev.target.closest('.fd-opt[data-v]'); if (!b) return;
+    var s = steps[i], v = b.dataset.v;
+    if (s.type === 'many') {
+      var arr = st[s.id] || [];
+      if (v === 'brez') arr = arr.indexOf('brez') > -1 ? [] : ['brez'];
+      else { arr = arr.filter(function (x) { return x !== 'brez'; }); var k = arr.indexOf(v); if (k > -1) arr.splice(k, 1); else arr.push(v); }
+      st[s.id] = arr; renderStep();
+    } else { st[s.id] = v; i++; go(true); }
+  });
+  next.addEventListener('click', function () { if (ready(steps[i])) { i++; go(true); } });
+  back.addEventListener('click', function () { if (i > 0) { i--; go(true); } });
+  go(false);
+});
+
+/* Centri: filter po pristopu in regiji */
+(function () {
+  var f = document.getElementById('cfilter'); if (!f) return;
+  var offer = '', sel = f.querySelector('#cf-reg'), count = f.querySelector('.cf-count');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.center[data-offer]'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('.cgroup'));
+  var empty = document.querySelector('.cf-empty');
+  function apply() {
+    var r = sel.value, n = 0;
+    cards.forEach(function (c) {
+      var ok = (!offer || c.dataset.offer.split(' ').indexOf(offer) > -1) && (!r || c.dataset.region.split('|').indexOf(r) > -1);
+      c.hidden = !ok; if (ok) n++;
+    });
+    groups.forEach(function (g) { g.hidden = !g.querySelector('.center:not([hidden])'); });
+    count.textContent = n + (n === 1 ? ' center' : n === 2 ? ' centra' : n < 5 && n > 2 ? ' centri' : ' centrov');
+    if (empty) empty.hidden = n > 0;
+  }
+  f.addEventListener('click', function (e) {
+    var b = e.target.closest('.cf-chip'); if (!b) return;
+    offer = b.dataset.offer;
+    f.querySelectorAll('.cf-chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    apply();
+  });
+  sel.addEventListener('change', apply);
+  var m = location.hash.match(/^#(H|T|P|S|D|J|A)$/); if (m) { var b = f.querySelector('[data-offer="' + m[1] + '"]'); if (b) b.click(); }
+  apply();
+})();

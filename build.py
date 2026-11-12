@@ -9,6 +9,7 @@ import os
 from datetime import date
 from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES, ARTICLES, RUBRICS, CENTERS
 from icons import icon, badge
+from finder import finder
 from forms import provider_form, school_form, contact_form, parent_form, supporter_form
 
 
@@ -23,8 +24,8 @@ def _v(p):
 
 ASSET_V = {'css': _v('public/assets/style.css'), 'js': _v('public/assets/app.js')}
 
-NAV = [("/za-starse/", "Za starše"), ("/za-sole-in-zavode/", "Za šole in zavode"), ("/vodnik/", "Vodniki"),
-       ("/izvajalci/", "Centri"), ("/strokovni-okvir/", "Stroka"), ("/raziskava/", "Raziskava"), ("/clanki/", "Članki"), ("/o-equeli/", "O Equeli")]
+NAV = [("/za-starse/", "Za starše"), ("/za-sole-in-zavode/", "Za šole in zavode"),
+       ("/izvajalci/", "Centri"), ("/raziskava/", "Raziskava"), ("/clanki/", "Članki"), ("/o-equeli/", "O Equeli")]
 ARR = '<span class="arr" aria-hidden="true">→</span>'
 
 # mehki prelivi za vizualne ploščice (po vrsti za vodnike)
@@ -170,17 +171,37 @@ def articles_block(limit=None):
             f'<a class="link-arrow" href="/kontakt/#obrazec">Predlagajte zgodbo ali temo →</a></div></div><div class="rubrics">{rub}</div></div>')
 
 
+OFFER = {"H": "Hipoterapija", "T": "Terapija s pomočjo konja", "P": "Pedagoške intervencije", "S": "Psihosocialne intervencije",
+         "D": "Delovnoterapevtske intervencije", "J": "Prilagojeno in terapevtsko jahanje", "A": "Aktivnosti s konji"}
+GROUPS = [("javni", "Javni zavodi", "Centri za usposabljanje, zavodi in bolnišnice, ki konje vključujejo v rehabilitacijo, vzgojo in terapijo."),
+          ("register", "Strokovnjaki v registru Nazaj na konja", "Centri in samostojni strokovnjaki z nazivom iz registra Zavoda Nazaj na konja."),
+          ("drugi", "Drugi centri", "Konjeniški centri in zavodi, ki ponujajo terapije ali aktivnosti s konji. Ponudba je povzeta po njihovih navedbah."),
+          ("organizator", "Društva, ki programe organizirajo", "Društva za svoje člane organizirajo hipoterapijo ali jahanje pri partnerskih izvajalcih.")]
+
+
+def _host(u):
+    return u.split("/")[2].replace("www.", "") if u else ""
+
+
+def center_card(c):
+    meta = " · ".join([c["place"], ", ".join(c["region"])])
+    tags = "".join(f'<span class="otag{" h" if k == "H" else ""}">{OFFER[k]}</span>' for k in c["offer"])
+    facts = f'<li>{icon("target")}<span>{e(c["who"])}</span></li>' if c["who"] else ""
+    facts += f'<li>{icon("people")}<span>{e(c["team"])}</span></li>' if c["team"] else ""
+    facts += f'<li>{icon("leaf")}<span>Terapevtski konji: {e(c["horses"])}</span></li>' if c["horses"] else ""
+    links = ""
+    if c["url"]:
+        links += f'<a href="{c["url"]}" target="_blank" rel="noopener">{e(_host(c["url"]))} ↗</a>'
+    if c["reg"]:
+        links += f'<a href="{c["reg"]}" target="_blank" rel="noopener">Profil v registru ↗</a>'
+    return (f'<article class="center" data-offer="{" ".join(c["offer"])}" data-region="{"|".join(c["region"])}">'
+            f'<h3>{e(c["name"])}</h3><p class="center-meta">{icon("pin")}{e(meta)}</p><div class="otags">{tags}</div>'
+            f'<ul class="center-facts">{facts}</ul><div class="center-links">{links}</div></article>')
+
+
 def center_cards(items):
-    out = []
-    for c in items:
-        meta = " · ".join(x for x in [c["place"], c["region"]] if x)
-        horses = f'<li>{icon("leaf")}<span>Terapevtski konji: {e(c["horses"])}</span></li>' if c["horses"] else ""
-        host = c["src"].split("/")[2].replace("www.", "")
-        out.append(f'<article class="center"><div class="center-top"><span class="chip">{e(c["kind"])}</span>{"<span class=chip-h>Hipoterapija</span>" if c["hipo"] else ""}</div>'
-                   f'<h3>{e(c["name"])}</h3><p class="center-meta">{icon("pin")}{e(meta)}</p><p class="center-focus">{e(c["focus"])}</p>'
-                   f'<ul class="center-facts"><li>{icon("people")}<span>{e(c["team"])}</span></li>{horses}</ul>'
-                   f'<a class="center-link" href="{c["src"]}" rel="noopener">{e(host)} →</a></article>')
-    return '<div class="centers">' + "".join(out) + '</div>'
+    return '<div class="centers">' + "".join(center_card(c) for c in items) + '</div>'
+
 
 
 def guide_cards():
@@ -188,34 +209,8 @@ def guide_cards():
     return cards + f'<a class="gcard dark" href="/kako-izbrati/"><div class="body" style="justify-content:flex-end;min-height:260px"><h3 style="color:#fff">Ne vem, kje začeti</h3><p>Kratek vodnik in vprašanja za prvo odločitev.</p><span class="go">Začnite tukaj</span></div></a>'
 
 
-def guide_widget(title="Poiščite ustrezen pristop", lede="Odgovorite na dve vprašanji. Prikažemo pristope, ki se pogosto ponujajo, in vprašanja za izvajalca. Odgovori se ne shranijo."):
-    return f"""
-<section class="band section" id="vodnik-start">
-  <div class="wrap">
-    <div class="head"><p class="kicker">Interaktivni vodnik</p><h2>{title}</h2><p class="lede">{lede}</p></div>
-    <div class="guide" id="guide" data-base="/">
-      <div>
-        <div class="guide-step" data-step="who">
-          <p class="guide-q"><span class="n">01</span>Za koga iščete?</p>
-          <div class="chips" role="group" aria-label="Za koga iščete">
-            <button type="button" class="chip" data-who="otrok" aria-pressed="false">Za otroka</button>
-            <button type="button" class="chip" data-who="mladostnik" aria-pressed="false">Za mladostnika</button>
-            <button type="button" class="chip" data-who="odrasel" aria-pressed="false">Za odraslo osebo</button>
-            <a class="chip" href="/za-sole-in-zavode/">Za šolo ali zavod</a>
-          </div>
-        </div>
-        <div class="guide-step" data-step="need" hidden>
-          <p class="guide-q"><span class="n">02</span>S čim se srečujete?</p>
-          <div class="chips" role="group" aria-label="S čim se srečujete"></div>
-        </div>
-      </div>
-      <div class="guide-panel" aria-live="polite">
-        <div class="placeholder"><p class="kicker">Rezultat</p><h3>Izberite odgovora na levi.</h3><p>Diagnoza ni potrebna. Izberite možnost, ki je najbližja vaši situaciji.</p></div>
-      </div>
-      <noscript><p><a href="/vodnik/">Odprite seznam vodnikov</a></p></noscript>
-    </div>
-  </div>
-</section>"""
+def guide_widget(*a, **k):
+    return finder("parents")
 
 
 def approaches_html(keys):
@@ -366,6 +361,7 @@ pages.append(page("/za-starse/", "Za starše", "Vodnik za starše: od tega, kar 
 schools = hero("Za šole, vrtce in zavode", "Programi s pomočjo konj za skupine",
                "Šolam, vrtcem, CUDV, domovom in društvom pomagamo najti ustrezne izvajalce, pripraviti povpraševanje in poiskati možnosti financiranja. Dogovor in plačilo urejate neposredno z izvajalcem.",
                '<a class="btn btn-dark" href="#povprasevanje">Oddajte povpraševanje</a><a class="btn btn-ghost" href="#potek">Kako poteka sodelovanje</a>', seed=3)
+schools += finder("schools")
 schools += f"""
 <section class="section white">
   <div class="wrap">
@@ -455,13 +451,16 @@ pages.append(page("/izvajalci/", "Terapevtski centri", "Javni zavodi in terapevt
                   hero("Centri", "Terapevtski centri v Sloveniji", "Javni zavodi, centri in strokovnjaki, ki izvajajo intervencije s pomočjo konj. Predstavitve dopolnjujemo z obiski na terenu.",
                        f'<a class="btn btn-dark" href="/za-starse/#iskanje">Pomagamo poiskati izvajalca</a><a class="btn btn-ghost" href="/strokovni-okvir/">Strokovni okvir</a>', seed=13) + f"""
 <section class="section white"><div class="wrap">
-  <div class="head"><p class="kicker">Javni zavodi</p><h2>Programi v javnih zavodih</h2><p class="lede">Centri za usposabljanje, zavodi in bolnišnice, ki konje vključujejo v rehabilitacijo, vzgojo in terapijo.</p></div>
-  {center_cards([c for c in CENTERS if c["kind"].startswith("Javni")])}
+  <div class="cfilter" id="cfilter">
+    <div class="cf-row"><span class="cf-l">Pristop</span><div class="cf-chips"><button type="button" class="cf-chip" aria-pressed="true" data-offer="">Vsi</button>{"".join(f'<button type="button" class="cf-chip" aria-pressed="false" data-offer="{k}">{v}</button>' for k, v in OFFER.items())}</div></div>
+    <div class="cf-row"><label class="cf-l" for="cf-reg">Regija</label><select id="cf-reg"><option value="">Vsa Slovenija</option>{"".join(f'<option>{r}</option>' for r, _ in REGIONS)}</select><span class="cf-count" aria-live="polite"></span></div>
+  </div>
+  {"".join(f'<div class="cgroup" data-group="{g}"><div class="head"><h2>{t}</h2><p class="lede">{d}</p></div>{center_cards([c for c in CENTERS if c["group"] == g])}</div>' for g, t, d in GROUPS)}
+  <div class="cf-empty" hidden><h3>Za ta izbor še nimamo centra.</h3><p>Pišite nam, pomagamo poiskati izvajalca v bližini.</p><a class="btn btn-dark" href="/za-starse/#iskanje">Pomoč pri iskanju</a></div>
+  <p class="fine">Podatki so povzeti po registru Nazaj na konja, spletnih straneh centrov in Konjeniški zvezi Slovenije. Za termine in cene se obrnite neposredno na center.</p>
 </div></section>
 <section class="section"><div class="wrap">
-  <div class="head"><p class="kicker">Centri in zavodi</p><h2>Terapevtski centri</h2><p class="lede">Izbor centrov s strokovnjaki, vpisanimi v register Zavoda Nazaj na konja.</p></div>
-  {center_cards([c for c in CENTERS if not c["kind"].startswith("Javni")])}
-  <p class="fine">Podatki so povzeti po registru Nazaj na konja in spletnih straneh centrov. Za termine in cene se obrnite neposredno na center.</p>
+  <a class="stroka-link" href="/strokovni-okvir/">{badge("shield", "lg")}<div><p class="kicker">Stroka</p><h3>Kdo je usposobljen za delo s konjem?</h3><p>Zavod Nazaj na konja, register strokovnjakov, mednarodne smernice HETI in razlike med pristopi.</p></div><span class="go">Strokovni okvir →</span></a>
 </div></section>
 <section class="section white"><div class="wrap split">
   <div class="head"><p class="kicker">Po Sloveniji</p><h2>Kje so izvajalci</h2><p class="lede">V raziskovalni bazi je 46 organizacij in izvajalskih mest. Nekatera društva programe organizirajo, izvajajo pa jih partnerski strokovnjaki.</p>
@@ -625,7 +624,7 @@ pages.append(page("/hipoterapija/", "Hipoterapija", "Kaj je hipoterapija, kako p
 </div></section>
 <section class="section white" id="kje"><div class="wrap">
   <div class="head"><p class="kicker">Kje</p><h2>Hipoterapija v Sloveniji</h2><p class="lede">Hipoterapijo izvajajo predvsem javni zavodi v okviru rehabilitacije. Programe organizirajo tudi društva Sonček za svoje člane.</p></div>
-  {center_cards([c for c in CENTERS if c["hipo"]])}
+  {center_cards([c for c in CENTERS if "H" in c["offer"] and c["group"] in ("javni", "register", "drugi")])}
   <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="/za-starse/#iskanje">Pomagamo poiskati izvajalca</a><a class="btn btn-ghost" href="/vodnik/gibalne-tezave/">Vodnik: gibalne težave</a></div>
 </div></section>"""))
 
