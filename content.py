@@ -111,3 +111,18 @@ GUIDES = [
      "slovenia": "V raziskovalni bazi Equeli je 20 organizacij, ki navajajo prilagojeno ali terapevtsko jahanje oziroma aktivnosti s konji: konjeniški klubi, društva, kmetije in centri. Podatke še preverjamo."},
 ]
 
+
+
+# Rubrike člankov
+RUBRICS = [
+    ("obiski", "Obiski na terenu", "camera", "Zapisi in fotografije z obiskov izvajalcev po Sloveniji."),
+    ("strokovnjaki", "Pogovori s strokovnjaki", "mic", "Kako delajo, kaj jih vodi in kaj svetujejo."),
+    ("starsi", "Vprašanja staršev", "message", "Odgovori na pogosta vprašanja družin."),
+    ("raziskava", "Iz raziskave", "chart", "Ugotovitve nacionalnega pregleda področja."),
+]
+
+# Članki. Dodaj nov slovar in zaženi build.py. Objavi samo potrjene vsebine (soglasja za fotografije in izjave!).
+# Primer:
+# {"slug": "obisk-pri-...", "title": "...", "rubric": "obiski", "date": "2027-01-15", "lede": "Kratek povzetek.",
+#  "body": "<p>Besedilo članka v HTML.</p>"}
+ARTICLES = []

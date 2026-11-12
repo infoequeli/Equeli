@@ -7,7 +7,8 @@ Rezultat je mapa public/, ki jo objavi Cloudflare Pages.
 import html
 import os
 from datetime import date
-from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES
+from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES, ARTICLES, RUBRICS
+from icons import icon, badge
 from forms import provider_form, school_form, contact_form, parent_form, supporter_form
 
 
@@ -16,7 +17,7 @@ def form_section(sid, kicker, title, lede, form_html, bg=True):
 
 e = html.escape
 NAV = [("/za-starse/", "Za starše"), ("/za-sole-in-zavode/", "Za šole in zavode"), ("/vodnik/", "Vodniki"),
-       ("/izvajalci/", "Imenik"), ("/o-equeli/", "O Equeli")]
+       ("/izvajalci/", "Imenik"), ("/raziskava/", "Raziskava"), ("/clanki/", "Članki"), ("/o-equeli/", "O Equeli")]
 ARR = '<span class="arr" aria-hidden="true">→</span>'
 
 # mehki prelivi za vizualne ploščice (po vrsti za vodnike)
@@ -109,8 +110,8 @@ def page(path, title, desc, body, active=""):
     <div class="fgrid">
       <div><a class="logo" href="/">{LOGO}Equeli</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
       <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Imenik izvajalcev</a></li></ul></div>
-      <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Podjetja in fundacije</a></li></ul></div>
-      <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
+      <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Donatorji in vlagatelji</a></li></ul></div>
+      <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
     </div>
     <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma</span><span>Povezujemo izvajalce, družine, ustanove in podpornike.</span></div>
   </div>
@@ -132,8 +133,38 @@ def hero(kicker, title, lede, buttons="", crumbs=None, seed=1):
     return f'<section class="page-hero"><div class="wrap"><div>{top}<h1>{title}</h1><p class="lede">{lede}</p>{btns}</div></div></section>'
 
 
+GUIDE_ICONS = {"avtizem": "grid", "gibalne-tezave": "move", "adhd": "target", "motnje-v-dusevnem-razvoju": "people",
+               "ucne-custvene-vedenjske-tezave": "book", "tesnoba-samopodoba-odnosi": "leaf", "aktivnost-ob-konjih": "sun"}
+
+
+def regions_chart(full=False):
+    mx = max(n for _, n in REGIONS) or 1
+    rows = "".join(f'<li><span class="rg">{e(r)}</span><span class="bar"><i style="width:{max(n / mx * 100, 1.5):.0f}%"></i></span><span class="rn tnum">{n}</span></li>' for r, n in REGIONS)
+    total = sum(n for _, n in REGIONS)
+    return f'<figure class="regions"><figcaption><b>Organizacije v raziskovalni bazi po regijah</b><span>Stanje {UPDATED}. Organizacije, ki delujejo v več regijah, so štete v vsaki.</span></figcaption><ol>{rows}</ol></figure>'
+
+
+RUB = {k: (t, ic, d) for k, t, ic, d in RUBRICS}
+
+
+def fmt_date(s):
+    y, m, d = s.split("-")
+    return f"{int(d)}. {int(m)}. {y}"
+
+
+def articles_block(limit=None):
+    items = sorted(ARTICLES, key=lambda a: a["date"], reverse=True)[:limit]
+    if items:
+        return '<div class="cards">' + "".join(
+            f'<a class="gcard art" href="/clanki/{a["slug"]}/"><div class="body">{badge(RUB[a["rubric"]][1])}<p class="meta">{RUB[a["rubric"]][0]} · {fmt_date(a["date"])}</p><h3>{e(a["title"])}</h3><p>{e(a["lede"])}</p><span class="go">Preberite</span></div></a>'
+            for a in items) + '</div>'
+    rub = "".join(f'<div class="rubric">{badge(ic)}<div><b>{t}</b><span>{d}</span></div></div>' for _, t, ic, d in RUBRICS)
+    return (f'<div class="empty"><div class="empty-main">{badge("article", "lg")}<div><h3>Prvi zapisi so v pripravi</h3><p>Članke objavljamo sproti z obiski izvajalcev. Vsaka zgodba je objavljena s soglasjem vseh, ki v njej nastopajo.</p>'
+            f'<a class="link-arrow" href="/kontakt/#obrazec">Predlagajte zgodbo ali temo →</a></div></div><div class="rubrics">{rub}</div></div>')
+
+
 def guide_cards():
-    cards = "".join(f'<a class="gcard" href="/vodnik/{g["slug"]}/">{tile(i)}<div class="body"><h3>{e(g["title"])}</h3><p>{e(g["card"])}</p><span class="go">Odprite vodnik</span></div></a>' for i, g in enumerate(GUIDES))
+    cards = "".join(f'<a class="gcard" href="/vodnik/{g["slug"]}/">{tile(i)}<div class="body">{badge(GUIDE_ICONS.get(g["slug"], "compass"))}<h3>{e(g["title"])}</h3><p>{e(g["card"])}</p><span class="go">Odprite vodnik</span></div></a>' for i, g in enumerate(GUIDES))
     return cards + f'<a class="gcard dark" href="/kako-izbrati/"><div class="body" style="justify-content:flex-end;min-height:260px"><h3 style="color:#fff">Ne vem, kje začeti</h3><p>Kratek vodnik in vprašanja za prvo odločitev.</p><span class="go">Začnite tukaj</span></div></a>'
 
 
@@ -184,12 +215,6 @@ TRUST = """
         <div class="figure"><div class="v tnum">46</div><p class="l">organizacij in izvajalskih mest v raziskovalni bazi</p></div>
         <div class="figure"><div class="v tnum">11/12</div><p class="l">slovenskih regij z vsaj enim izvajalcem</p></div>
       </div>
-      <div class="levels">
-        <div class="level"><span class="pill" style="--c:#c3d6d4">Nepotrjeno</span><p>Podatki iz javnih virov, še brez stika z izvajalcem.</p></div>
-        <div class="level"><span class="pill" style="--c:#8dbab6">Samoprijavljeno</span><p>Izvajalec je podatke posredoval sam.</p></div>
-        <div class="level"><span class="pill" style="--c:#3f7f7d">Preverjeno po dokazilu</span><p>Izobrazba in usposobljenost preverjeni na podlagi dokazil.</p></div>
-        <div class="level"><span class="pill" style="--c:#172426">Potrjeno s strani centra</span><p>Izvajalec je pregledal in odobril objavo profila.</p></div>
-      </div>
     </div>
   </div>
 </section>"""
@@ -216,11 +241,23 @@ home = f"""
   <div class="wrap">
     <div class="head"><p class="kicker">Začnite tukaj</p><h2>Za koga iščete?</h2></div>
     <div class="doors">
-      <a class="door" href="/za-starse/"><div class="body"><span class="chip">Za starše in družine</span><h3>Za otroka ali družinskega člana</h3><p>Vodniki glede na situacijo, na primer avtizem, gibalne težave ali ADHD. Strokovni izrazi niso potrebni.</p>
+      <a class="door" href="/za-starse/"><div class="body"><div class="door-top">{badge("family", "lg")}<span class="chip">Za starše in družine</span></div><h3>Za otroka ali družinskega člana</h3><p>Vodniki glede na situacijo, na primer avtizem, gibalne težave ali ADHD. Strokovni izrazi niso potrebni.</p>
         <ul><li>Vodniki po potrebah</li><li>Vprašanja za izvajalca</li><li>Pomoč pri iskanju izvajalca v regiji</li></ul><span class="go">Za starše</span></div></a>
-      <a class="door" href="/za-sole-in-zavode/"><div class="body"><span class="chip">Za šole, vrtce in zavode</span><h3>Za šolo, vrtec ali zavod</h3><p>Programi za razred, skupino ali uporabnike zavoda. Povpraševanje, povezava z izvajalci in možnosti financiranja.</p>
+      <a class="door" href="/za-sole-in-zavode/"><div class="body"><div class="door-top">{badge("school", "lg")}<span class="chip">Za šole, vrtce in zavode</span></div><h3>Za šolo, vrtec ali zavod</h3><p>Programi za razred, skupino ali uporabnike zavoda. Povpraševanje, povezava z izvajalci in možnosti financiranja.</p>
         <ul><li>Vrste programov za skupine</li><li>Povezava z izvajalci v regiji</li><li>Možnosti financiranja</li></ul><span class="go">Za šole in zavode</span></div></a>
     </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="head"><p class="kicker">Kako vam pomagamo</p><h2>Od vprašanja do pravega stika</h2><p class="lede">Ni vam treba poznati strokovnih izrazov. Začnite tam, kjer ste.</p></div>
+    <ol class="journey">
+      <li><a href="#vodnik-start">{badge("compass", "ring")}<b>Opišite situacijo</b><span>Dve vprašanji v interaktivnem vodniku.</span></a></li>
+      <li><a href="/vodnik/">{badge("book", "ring")}<b>Razumite možnosti</b><span>Pristopi, kdo jih izvaja in kaj vprašati.</span></a></li>
+      <li><a href="/za-starse/#iskanje">{badge("pin", "ring")}<b>Poiščite izvajalca</b><span>Predlog izvajalcev v vaši regiji.</span></a></li>
+      <li><a href="/kontakt/">{badge("message", "ring")}<b>Stopite v stik</b><span>Neposredno z izvajalcem, brez posrednika.</span></a></li>
+    </ol>
   </div>
 </section>
 
@@ -234,6 +271,32 @@ home = f"""
 </section>
 
 {TRUST}
+
+<section class="section white">
+  <div class="wrap split">
+    <div class="head"><p class="kicker">Nacionalna raziskava</p><h2>Kartiramo področje po vsej Sloveniji</h2>
+      <p class="lede">Obiskujemo izvajalce, se pogovarjamo s strokovnjaki in zbiramo podatke o programih, zmogljivostih in ovirah pri dostopnosti.</p>
+      <ul class="ilist"><li>{icon("pin")}Obiski in intervjuji na terenu</li><li>{icon("clipboard")}Vprašalnik za izvajalce</li><li>{icon("chart")}Pregled stanja in potreb</li></ul>
+      <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/raziskava/">O raziskavi</a></div></div>
+    {regions_chart()}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="head-row"><div class="head"><p class="kicker">Članki in zgodbe</p><h2>Ljudje, konji in programi</h2><p class="lede">Zapisi z obiskov, pogovori s strokovnjaki in odgovori na vprašanja staršev.</p></div><a class="btn btn-ghost btn-sm" href="/clanki/">Vsi članki</a></div>
+    {articles_block(3)}
+  </div>
+</section>
+
+<section class="section white">
+  <div class="wrap">
+    <div class="support-band">
+      <div><p class="kicker">Za donatorje in vlagatelje</p><h2>Podprite dostopnost programov</h2><p>Podjetja, fundacije in posamezniki lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.</p><div class="btn-row"><a class="btn btn-dark" href="/za-podpornike/">Kako lahko pomagate</a></div></div>
+      <ul class="ways"><li>{badge("euro")}<b>Financiranje programa</b><span>za razred, skupino ali zavod</span></li><li>{badge("heart")}<b>Sofinanciranje za družine</b><span>nižja cena za tiste, ki jo potrebujejo</span></li><li>{badge("box")}<b>Oprema in znanje</b><span>material, prostovoljstvo, pro bono</span></li></ul>
+    </div>
+  </div>
+</section>
 
 <section class="section white">
   <div class="wrap">
@@ -272,7 +335,7 @@ parents += f"""
     <div class="head"><p class="kicker">Pogosta vprašanja</p><h2>Pogosta vprašanja</h2></div>
     <details><summary>Ali potrebujemo napotnico ali diagnozo?</summary><div>Za večino programov ne. Nekateri izvajalci pred vključitvijo, zlasti pri hipoterapiji, zahtevajo mnenje zdravnika ali fizioterapevta. Vprašajte izvajalca vnaprej.</div></details>
     <details><summary>Koliko stane?</summary><div>Cene se razlikujejo glede na pristop, trajanje in obliko. Nekateri programi v javnih zavodih in društvih so sofinancirani. Vprašajte izvajalca za ceno srečanja in cikla ter za morebitno sofinanciranje.</div></details>
-    <details><summary>Kako vem, da je izvajalec usposobljen?</summary><div>Vprašajte za temeljno izobrazbo, dodatno usposabljanje za delo s konjem in vpis v strokovni register. Equeli bo pri vsakem profilu označil, kaj je preverjeno.</div></details>
+    <details><summary>Kako vem, da je izvajalec usposobljen?</summary><div>Vprašajte za temeljno izobrazbo, dodatno usposabljanje za delo s konjem in vpis v strokovni register.</div></details>
     <details><summary>Ali lahko Equeli presodi, kaj je primerno za mojega otroka?</summary><div>Ne. Equeli pomaga z informacijami in iskanjem. O primernosti odloči usposobljen strokovnjak po osebnem pogovoru.</div></details>
   </div>
 </section>
@@ -377,7 +440,7 @@ pages.append(page("/izvajalci/", "Imenik izvajalcev", "Nacionalni imenik izvajal
   <table class="data"><thead><tr><th scope="col">Regija</th><th scope="col">Zapisi</th></tr></thead><tbody>{rows}</tbody></table>
   <p class="fine" style="margin-top:12px">Organizacije, ki delujejo v več regijah, so štete v vsaki. Stanje {UPDATED}.</p>
   <h2>Kaj bo v imeniku</h2>
-  <ul><li>iskanje po regiji, kraju, vrsti programa, starosti in obliki,</li><li>zemljevid izvajalcev po Sloveniji,</li><li>profili z izobrazbo in usposobljenostjo strokovnjakov, programi, konji in dostopnostjo,</li><li>oznaka preverjenosti in datum zadnjega preverjanja,</li><li>neposredni kontakt izvajalca.</li></ul>
+  <ul><li>iskanje po regiji, kraju, vrsti programa, starosti in obliki,</li><li>zemljevid izvajalcev po Sloveniji,</li><li>profili z izobrazbo in usposobljenostjo strokovnjakov, programi, konji in dostopnostjo,</li><li>neposredni kontakt izvajalca.</li></ul>
   <p>Vrstni red bo odvisen samo od vaših izbir in popolnosti podatkov. Plačila nanj ne vplivajo.</p>
 </div>""", "/izvajalci/"))
 
@@ -401,7 +464,7 @@ pages.append(page("/o-equeli/", "O Equeli", "Equeli je neodvisna platforma za in
                   hero("O Equeli", "O platformi Equeli", "Equeli zbira in preverja informacije o izvajalcih, pristopih in možnostih vključevanja po vsej Sloveniji, da bi ljudje lažje našli zanesljive informacije in ustrezne programe.", seed=15) + """
 <div class="wrap narrow article">
   <h2>Komu je namenjen</h2><p>Družinam, ki iščejo podporo za svoje otroke; šolam in zavodom, ki iščejo izvajalce; strokovnjakom in centrom, ki želijo predstaviti svoje delo; ter podjetjem in fundacijam, ki želijo podpreti dostopnost programov.</p>
-  <h2>Usposobljeni strokovnjaki</h2><p>Pri preverjanju usposobljenosti izvajalcev se opiramo na register usposobljenih strokovnjakov za intervencije s pomočjo konj, ki ga vodi <a href="https://nakonju.si/">Zavod Nazaj na konja</a>. Pri vsakem profilu je jasno označeno, katera usposobljenost je preverjena.</p>
+  <h2>Usposobljeni strokovnjaki</h2><p>Pri preverjanju usposobljenosti izvajalcev se opiramo na register usposobljenih strokovnjakov za intervencije s pomočjo konj, ki ga vodi <a href="https://nakonju.si/">Zavod Nazaj na konja</a>.</p>
   <h2>Povezovanje</h2><p>Prizadevamo si za jasno in učinkovito povezovanje med izvajalci, uporabniki, vlagatelji in javnimi ustanovami. Družine hitreje najdejo ustrezen program, šole in zavodi preverjene izvajalce, podjetja in fundacije pa konkretne programe, ki jih lahko podprejo. Dogovori in plačila potekajo neposredno med sodelujočimi.</p>
   <h2>Raziskovalna pobuda</h2><p>Obiskujemo izvajalce po Sloveniji. Zanima nas, kako delajo, kakšne so njihove zmogljivosti, kje so ovire pri dostopnosti in katera sodelovanja bi pomagala. Zasebni raziskovalni zapiski so ločeni od javnih vsebin.</p>
   <h2>Ustanoviteljica</h2><p>Equeli je ustanovila Ela Rebolj. Opravila je usposabljanje pri Zavodu Nazaj na konja in je v preteklosti izvajala aktivnosti s pomočjo konj. Danes ne izvaja lastnih programov; platformo vodi kot neodvisna urednica in raziskovalka.</p>
@@ -417,12 +480,85 @@ pages.append(page("/kontakt/", "Kontakt", "Pišite Equeli za pomoč pri iskanju 
 </div></div>"""))
 
 # ================= ZA PODPORNIKE =================
-pages.append(page("/za-podpornike/", "Za podjetja in fundacije", "Podjetja, fundacije in posamezniki lahko podprejo dostopnost programov s pomočjo konj za otroke, šole in zavode.",
-                  hero("Za podjetja in fundacije", "Podprite dostopnost programov", "Povežemo vas s preverjenimi izvajalci, šolami in zavodi, ki za svoje programe iščejo podporo. Dogovor in financiranje urejate neposredno z odgovorno organizacijo.",
-                       '<a class="btn btn-dark" href="#podpora">Izrazite interes</a>', seed=21) + """
+pages.append(page("/za-podpornike/", "Za donatorje in vlagatelje", "Podjetja, fundacije, donatorji in vlagatelji v družbeni učinek lahko podprejo dostopnost programov s pomočjo konj.",
+                  hero("Za donatorje in vlagatelje", "Podprite dostopnost programov", "Podjetja, fundacije, posamezniki in vlagatelji v družbeni učinek lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.",
+                       '<a class="btn btn-dark" href="#podpora">Izrazite interes</a><a class="btn btn-ghost" href="#priloznosti">Priložnosti</a>', seed=21) + f"""
 <section class="section white"><div class="wrap">
-  <ol class="process"><li><h3>Interes</h3><p>Sporočite, kaj in koga želite podpreti.</p></li><li><h3>Predlog</h3><p>Pripravimo pregled konkretnih programov s cilji in okvirnim proračunom.</p></li><li><h3>Dogovor</h3><p>Dogovor sklenete neposredno z izvajalcem ali ustanovo.</p></li><li><h3>Poročilo</h3><p>Izvajalec poroča o izvedbi in doseženem.</p></li></ol>
+  <div class="head"><p class="kicker">Načela</p><h2>Pregledno in neposredno</h2></div>
+  <div class="goals three">
+    <div>{badge("clipboard")}<b>Jasen namen in proračun</b><span>Vsaka priložnost ima opisan cilj, število udeležencev in razčlenjen proračun.</span></div>
+    <div>{badge("link")}<b>Neposreden dogovor</b><span>Pogodbo in plačilo uredite neposredno z odgovorno organizacijo.</span></div>
+    <div>{badge("chart")}<b>Poročilo o izvedbi</b><span>Izvajalec poroča o izvedbi in doseženem.</span></div>
+  </div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="head"><p class="kicker">Kako poteka</p><h2>Od interesa do izvedbe</h2></div>
+  <ol class="journey">
+    <li><div>{badge("heart", "ring")}<b>Interes</b><span>Sporočite, kaj in koga želite podpreti.</span></div></li>
+    <li><div>{badge("search", "ring")}<b>Predlog</b><span>Pripravimo pregled programov s cilji in proračunom.</span></div></li>
+    <li><div>{badge("link", "ring")}<b>Dogovor</b><span>Dogovor z izvajalcem ali ustanovo sklenete neposredno.</span></div></li>
+    <li><div>{badge("chart", "ring")}<b>Poročilo</b><span>Izvajalec poroča o izvedbi.</span></div></li>
+  </ol>
+</div></section>
+<section class="section white" id="priloznosti"><div class="wrap split">
+  <div class="head"><p class="kicker">Priložnosti za podporo</p><h2>Konkretne potrebe šol, zavodov in izvajalcev</h2><p class="lede">Prve priložnosti objavimo, ko jih potrdijo sodelujoče ustanove in izvajalci. Vsaka bo prikazana tako, da boste na prvi pogled videli, kaj podpirate.</p>
+    <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="#podpora">Obvestite me o priložnostih</a></div></div>
+  <div class="opp" aria-label="Prikaz, kako bo videti objava priložnosti">
+    <p class="opp-tag">Tako bo videti objava</p>
+    <div class="opp-head">{badge("school")}<div><b>Ime programa</b><span>Ustanova · regija</span></div></div>
+    <dl>
+      <div><dt>{icon("target")}Cilj</dt><dd><i style="width:80%"></i></dd></div>
+      <div><dt>{icon("people")}Udeleženci</dt><dd><i style="width:40%"></i></dd></div>
+      <div><dt>{icon("shield")}Izvajalec</dt><dd><i style="width:60%"></i><em>preverjen</em></dd></div>
+      <div><dt>{icon("euro")}Proračun</dt><dd><i style="width:50%"></i></dd></div>
+    </dl>
+    <div class="opp-bar"><span>Zbrano</span><div><i></i></div></div>
+  </div>
 </div></section>""" + form_section("podpora", "Interes", "Izrazite interes za podporo", "Odgovorimo s predlogom programov, ki ustrezajo vašim željam.", supporter_form()), "/za-podpornike/"))
+
+# ================= RAZISKAVA =================
+pages.append(page("/raziskava/", "Nacionalna raziskava", "Equeli obiskuje izvajalce intervencij s pomočjo konj po Sloveniji in pripravlja pregled stanja, zmogljivosti in potreb.",
+                  hero("Raziskava", "Nacionalni pregled intervencij s pomočjo konj", "Obiskujemo izvajalce po vsej Sloveniji. Zbiramo podatke o pristopih, strokovnih ekipah, zmogljivostih in ovirah pri dostopnosti, da bi družine in ustanove lažje našle ustrezne programe.",
+                       '<a class="btn btn-dark" href="/za-izvajalce/#obrazec">Sodelujte kot izvajalec</a><a class="btn btn-ghost" href="#metoda">Kako poteka</a>', seed=22) + f"""
+<section class="section white"><div class="wrap">
+  <div class="head"><p class="kicker">Cilji</p><h2>Kaj želimo razumeti</h2></div>
+  <div class="goals">
+    <div>{badge("search")}<b>Stanje področja</b><span>Kdo izvaja programe, kje in s katerimi pristopi.</span></div>
+    <div>{badge("shield")}<b>Usposobljenost</b><span>Strokovne ekipe, izobrazba in usposabljanja za delo s konjem.</span></div>
+    <div>{badge("people")}<b>Zmogljivosti in povpraševanje</b><span>Koliko udeležencev izvajalci sprejmejo in kje so čakalne vrste.</span></div>
+    <div>{badge("euro")}<b>Finančna dostopnost</b><span>Cene, sofinanciranje in ovire za družine.</span></div>
+    <div>{badge("link")}<b>Sodelovanja</b><span>Obstoječa partnerstva s šolami, zavodi in občinami.</span></div>
+    <div>{badge("leaf")}<b>Konji in prostor</b><span>Infrastruktura, dostopnost in skrb za konje.</span></div>
+  </div>
+</div></section>
+<section class="section" id="metoda"><div class="wrap">
+  <div class="head"><p class="kicker">Metoda</p><h2>Kako poteka</h2></div>
+  <ol class="journey">
+    <li><div>{badge("search", "ring")}<b>Pregled virov</b><span>Javni podatki, registri in spletne strani.</span></div></li>
+    <li><div>{badge("clipboard", "ring")}<b>Vprašalnik</b><span>Izvajalec dopolni podatke o ekipi in programih.</span></div></li>
+    <li><div>{badge("mic", "ring")}<b>Obisk in pogovor</b><span>Osebni obisk, intervju in fotografije s soglasjem.</span></div></li>
+    <li><div>{badge("shield", "ring")}<b>Potrjen profil</b><span>Objava šele po potrditvi izvajalca.</span></div></li>
+  </ol>
+</div></section>
+<section class="section white"><div class="wrap split">
+  <div class="head"><p class="kicker">Prvi podatki</p><h2>Kje so izvajalci</h2><p class="lede">Raziskovalna baza trenutno vključuje 46 organizacij in izvajalskih mest. Podatke postopoma preverjamo, zato se številke še spreminjajo.</p>
+    <p class="fine" style="margin-top:20px">Zasebni raziskovalni zapiski ostanejo ločeni od javnih vsebin. Javno objavljamo samo zbirne podatke in potrjene profile.</p></div>
+  {regions_chart(True)}
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="head-row"><div class="head"><p class="kicker">Objave</p><h2>Iz raziskave</h2></div><a class="btn btn-ghost btn-sm" href="/clanki/">Vsi članki</a></div>
+  {articles_block(3)}
+</div></section>"""))
+
+# ================= ČLANKI =================
+pages.append(page("/clanki/", "Članki in zgodbe", "Zapisi z obiskov izvajalcev, pogovori s strokovnjaki in odgovori na vprašanja staršev.",
+                  hero("Članki in zgodbe", "Ljudje, konji in programi", "Zapisi z obiskov izvajalcev po Sloveniji, pogovori s strokovnjaki in odgovori na vprašanja, ki jih zastavljajo družine in ustanove.", seed=23) + f"""
+<section class="section white"><div class="wrap">{articles_block()}</div></section>""", "/clanki/"))
+for a in ARTICLES:
+    t, ic, _ = RUB[a["rubric"]]
+    pages.append(page(f'/clanki/{a["slug"]}/', a["title"], a["lede"],
+                      hero(t, e(a["title"]), e(a["lede"]), crumbs=f'<a href="/clanki/">Članki</a> / {t} · {fmt_date(a["date"])}') +
+                      f'<div class="wrap narrow article">{a["body"]}</div>', "/clanki/"))
 
 # ================= HVALA =================
 pages.append(page("/hvala/", "Hvala", "Sporočilo je bilo poslano.",
@@ -445,7 +581,7 @@ pages.append(page("/uredniska-politika/", "Uredniška politika", "Neodvisnost, p
                   hero("Pravno", "Uredniška politika", "Kako pripravljamo in preverjamo vsebine.", seed=18) + f"""
 <div class="wrap narrow article">
   <h2>Neodvisnost</h2><p>Vsebine pripravljamo neodvisno. Izvajalci ne plačujejo za uvrstitev ali boljši položaj v rezultatih.</p>
-  <h2>Preverjanje</h2><p>Vsak profil ima oznako stopnje preverjenosti in datum zadnjega preverjanja. Profile objavimo šele, ko jih potrdi izvajalec.</p>
+  <h2>Objava profilov</h2><p>Profile objavimo šele, ko jih potrdi izvajalec.</p>
   <h2>Strokovne trditve</h2><p>Ne objavljamo nepodprtih trditev o učinkih programov. Primernost programa vedno oceni usposobljen strokovnjak.</p>
   <h2>Popravki</h2><p>Če opazite napako, nam pišite na {EMAIL}. Popravili jo bomo v najkrajšem času.</p>
 </div>"""))
