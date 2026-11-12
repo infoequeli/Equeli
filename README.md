@@ -15,7 +15,7 @@ Statična spletna stran za Cloudflare Pages. Brez strežnika, brez baze, brez pi
 ## Nastavitev Cloudflare Pages (enkratno)
 1. Cloudflare → Workers & Pages → Create → Pages → Connect to Git → izberi repozitorij `equeli`.
 2. Framework preset: **None**. Build command: *pusto*. Build output directory: **public**.
-3. Save and Deploy. Stran bo na `https://equeli.pages.dev` (ali podobnem naslovu).
+3. Save and Deploy. Stran bo na `https://equeli.info-equeli.workers.dev` (ali podobnem naslovu).
 4. Ko bo domena, jo dodaj pod Custom domains in v `build.py` popravi `SITE`.
 
 ## Obrazci
