@@ -263,9 +263,13 @@ table.data td:last-child,table.data th:last-child{text-align:right}
 
 /* ---------- obrazci (vodeni, korak za korakom) ---------- */
 .form-section{background:var(--surface)}
-.form-section .head{margin-bottom:28px;text-align:center}
-.form-section .head .lede{margin-inline:auto}
-.eform{position:relative;background:#fff;border:1px solid var(--line);border-radius:28px;padding:clamp(24px,5vw,56px);max-width:680px;margin-inline:auto;box-shadow:0 1px 2px rgba(23,36,38,.04),0 8px 32px rgba(23,36,38,.05)}
+.form-section.plain{background:var(--bg);padding-top:0}
+.form-wrap{max-width:680px;margin-inline:auto}
+.form-title{margin-bottom:28px}
+.form-title h2{margin-top:8px}
+.form-title .lede{margin-top:12px;font-size:17px}
+.form-wrap.other{padding-bottom:clamp(48px,8vw,96px)}
+.eform{position:relative;background:#fff;border:1px solid var(--line);border-radius:28px;padding:clamp(24px,5vw,48px);box-shadow:0 1px 2px rgba(23,36,38,.04),0 8px 32px rgba(23,36,38,.05)}
 .article .eform{margin-top:8px}
 .form-head{margin-bottom:8px}
 .form-intro{color:var(--muted);margin:0;font-size:15.5px}
@@ -300,6 +304,7 @@ table.data td:last-child,table.data th:last-child{text-align:right}
 /* izbire kot pregledne vrstice */
 .choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media (max-width:560px){.choices{grid-template-columns:1fr}}
+.choices.one{grid-template-columns:1fr}
 .field .choice,.choice{display:flex;align-items:center;gap:12px;cursor:pointer;font:400 15px/1.35 var(--f-body);color:var(--text-2);background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-height:52px;box-sizing:border-box;transition:background .15s,border-color .15s,box-shadow .15s}
 .choice:hover{border-color:#b9cecb;background:var(--surface)}
 .choice input{appearance:none;-webkit-appearance:none;width:20px;height:20px;min-height:0;margin:0;padding:0;flex:none;border:1.5px solid #9fb3b1;border-radius:6px;background:#fff;display:grid;place-items:center;transition:background .15s,border-color .15s}

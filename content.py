@@ -9,6 +9,8 @@ FORMS = {
     "izvajalci": "/za-izvajalce/#obrazec",
     "ustanove": "/za-sole-in-zavode/#povprasevanje",
     "kontakt": "/kontakt/#obrazec",
+    "starsi": "/za-starse/#iskanje",
+    "podporniki": "/za-podpornike/#podpora",
 }
 
 # Raziskovalna baza (štetje po regijah, stanje 12. 11. 2026). Imen izvajalcev ne objavljamo, dokler jih ne potrdijo.

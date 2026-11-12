@@ -8,7 +8,11 @@ import html
 import os
 from datetime import date
 from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES
-from forms import provider_form, school_form, contact_form
+from forms import provider_form, school_form, contact_form, parent_form, supporter_form
+
+
+def form_section(sid, kicker, title, lede, form_html, bg=True):
+    return f'<section class="section form-section{" plain" if not bg else ""}" id="{sid}-sekcija"><div class="wrap"><div class="form-wrap"><div class="form-title"><p class="kicker">{kicker}</p><h2>{title}</h2><p class="lede">{lede}</p></div>{form_html}</div></div></section>'
 
 e = html.escape
 NAV = [("/za-starse/", "Za starše"), ("/za-sole-in-zavode/", "Za šole in zavode"), ("/vodnik/", "Vodniki"),
@@ -105,7 +109,7 @@ def page(path, title, desc, body, active=""):
     <div class="fgrid">
       <div><a class="logo" href="/">{LOGO}Equeli</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
       <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Imenik izvajalcev</a></li></ul></div>
-      <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/kontakt/">Podjetja in fundacije</a></li></ul></div>
+      <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Podjetja in fundacije</a></li></ul></div>
       <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
     </div>
     <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma</span><span>Povezujemo izvajalce, družine, ustanove in podpornike.</span></div>
@@ -270,9 +274,9 @@ parents += f"""
     <details><summary>Koliko stane?</summary><div>Cene se razlikujejo glede na pristop, trajanje in obliko. Nekateri programi v javnih zavodih in društvih so sofinancirani. Vprašajte izvajalca za ceno srečanja in cikla ter za morebitno sofinanciranje.</div></details>
     <details><summary>Kako vem, da je izvajalec usposobljen?</summary><div>Vprašajte za temeljno izobrazbo, dodatno usposabljanje za delo s konjem in vpis v strokovni register. Equeli bo pri vsakem profilu označil, kaj je preverjeno.</div></details>
     <details><summary>Ali lahko Equeli presodi, kaj je primerno za mojega otroka?</summary><div>Ne. Equeli pomaga z informacijami in iskanjem. O primernosti odloči usposobljen strokovnjak po osebnem pogovoru.</div></details>
-    <div class="cta-card"><h2>Pomoč pri iskanju izvajalca</h2><p>Sporočite regijo in starost. Odgovorimo z informacijami iz raziskovalne baze.</p><div class="btn-row"><a class="btn btn-light" href="/kontakt/">Pišite nam</a></div></div>
   </div>
-</section>"""
+</section>
+{form_section("iskanje", "Pomoč pri iskanju", "Pomagamo vam najti izvajalca", "Odgovorite na nekaj vprašanj. Iz baze izvajalcev vam predlagamo ustrezne programe v vaši regiji. Približno 3 minute.", parent_form())}"""
 pages.append(page("/za-starse/", "Za starše", "Vodnik za starše: od tega, kar veste o svojem otroku, do ustreznih pristopov s pomočjo konj, vprašanj in izvajalcev.", parents, "/za-starse/"))
 
 # ================= ZA ŠOLE IN ZAVODE =================
@@ -319,7 +323,7 @@ schools += f"""
     <details><summary>Kakšne soglasja potrebujemo?</summary><div>Za mladoletne udeležence potrebujete soglasje staršev za udeležbo. Za fotografiranje in snemanje je potrebno ločeno soglasje.</div></details>
   </div>
 </section>
-<section class="section form-section" id="povprasevanje-sekcija"><div class="wrap narrow"><div class="head"><p class="kicker">Povpraševanje</p><h2>Povpraševanje ustanove</h2><p class="lede">Izpolnjevanje traja približno 5 minut.</p></div>{school_form()}</div></section>"""
+{form_section("povprasevanje", "Povpraševanje", "Povpraševanje ustanove", "Opišite, kaj iščete. Pripravimo predlog ustreznih izvajalcev v vaši regiji. Približno 5 minut.", school_form())}"""
 pages.append(page("/za-sole-in-zavode/", "Za šole in zavode", "Šolam, vrtcem, CUDV in drugim ustanovam pomagamo najti izvajalce programov s pomočjo konj in možnosti financiranja.", schools, "/za-sole-in-zavode/"))
 
 # ================= VODNIKI =================
@@ -390,7 +394,7 @@ pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pom
   <ul><li>organizacija, lokacije izvajanja in kontaktna oseba,</li><li>strokovna ekipa, izobrazba in usposabljanje za delo s konjem,</li><li>programi, starostne skupine, oblike, trajanje in cena (če jo želite objaviti),</li><li>konji, infrastruktura in dostopnost,</li><li>sodelovanja ter interes za povezovanje s šolami in zunanje financirane projekte.</li></ul>
   <div class="callout"><strong>Kaj bo javno in kaj ne.</strong> Javno objavimo samo podatke o organizaciji, ekipi in programih, ki jih potrdite. Podatki o zmogljivostih, omejitvah, financiranju in sodelovanjih ostanejo zasebni.</div>
 </div>
-<section class="section form-section"><div class="wrap narrow"><div class="head"><p class="kicker">Obrazec</p><h2>Prijava izvajalca</h2><p class="lede">Približno 15 minut. Napredek se ne shrani, zato si vzemite čas naenkrat.</p></div>{provider_form()}</div></section>""", "/za-izvajalce/"))
+{form_section("obrazec", "Obrazec", "Prijava izvajalca", "Izpolnite, kar veste. Manjkajoče dopolnimo po telefonu ali ob obisku. Profil objavimo šele, ko ga potrdite. Približno 15 minut.", provider_form())}""", "/za-izvajalce/"))
 
 # ================= O Equeli =================
 pages.append(page("/o-equeli/", "O Equeli", "Equeli je neodvisna platforma za intervencije s pomočjo konj v Sloveniji.",
@@ -407,13 +411,18 @@ pages.append(page("/o-equeli/", "O Equeli", "Equeli je neodvisna platforma za in
 # ================= KONTAKT =================
 pages.append(page("/kontakt/", "Kontakt", "Pišite Equeli za pomoč pri iskanju izvajalca, popravke podatkov, sodelovanje ali podporo programom.",
                   hero("Kontakt", "Kontakt", "Za pomoč pri iskanju izvajalca, popravke podatkov, sodelovanje ali podporo programom. Odgovorimo v nekaj delovnih dneh.",
-                       seed=16) + f"""
-<div class="wrap narrow article">
-  {contact_form()}
-  <h2 style="margin-top:56px">Drugi načini</h2>
-  <div class="two"><div class="box"><h3>E-pošta</h3><p style="font-size:19px;color:var(--ink);user-select:all">{EMAIL}</p></div><div class="box"><h3>Za šole in zavode</h3><p>Za programe za skupine uporabite <a href="/za-sole-in-zavode/">povpraševanje za ustanove</a>.</p></div></div>
-  <p class="fine">Vaših sporočil ne posredujemo izvajalcem brez vašega soglasja.</p>
-</div>"""))
+                       seed=16) + form_section("obrazec", "Sporočilo", "Pišite nam", "Če iščete izvajalca, lahko uporabite tudi <a href=\"/za-starse/#iskanje\">vodeno iskanje</a>.", contact_form(), bg=False) + f"""
+<div class="wrap"><div class="form-wrap other">
+  <div class="two"><div class="box"><h3>E-pošta</h3><p style="font-size:19px;user-select:all">{EMAIL}</p></div><div class="box"><h3>Za ustanove in podpornike</h3><p><a href="/za-sole-in-zavode/#povprasevanje">Povpraševanje ustanove</a> · <a href="/za-podpornike/#podpora">Podpora programom</a></p></div></div>
+</div></div>"""))
+
+# ================= ZA PODPORNIKE =================
+pages.append(page("/za-podpornike/", "Za podjetja in fundacije", "Podjetja, fundacije in posamezniki lahko podprejo dostopnost programov s pomočjo konj za otroke, šole in zavode.",
+                  hero("Za podjetja in fundacije", "Podprite dostopnost programov", "Povežemo vas s preverjenimi izvajalci, šolami in zavodi, ki za svoje programe iščejo podporo. Dogovor in financiranje urejate neposredno z odgovorno organizacijo.",
+                       '<a class="btn btn-dark" href="#podpora">Izrazite interes</a>', seed=21) + """
+<section class="section white"><div class="wrap">
+  <ol class="process"><li><h3>Interes</h3><p>Sporočite, kaj in koga želite podpreti.</p></li><li><h3>Predlog</h3><p>Pripravimo pregled konkretnih programov s cilji in okvirnim proračunom.</p></li><li><h3>Dogovor</h3><p>Dogovor sklenete neposredno z izvajalcem ali ustanovo.</p></li><li><h3>Poročilo</h3><p>Izvajalec poroča o izvedbi in doseženem.</p></li></ol>
+</div></section>""" + form_section("podpora", "Interes", "Izrazite interes za podporo", "Odgovorimo s predlogom programov, ki ustrezajo vašim željam.", supporter_form()), "/za-podpornike/"))
 
 # ================= HVALA =================
 pages.append(page("/hvala/", "Hvala", "Sporočilo je bilo poslano.",

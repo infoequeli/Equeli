@@ -158,7 +158,7 @@ document.querySelectorAll('form.eform').forEach(function (f) {
     var top = document.createElement('div');
     top.className = 'wz-top';
     top.innerHTML = '<div class="wz-meta"><b class="wz-n"></b><span class="wz-t"></span></div><div class="wz-bar" aria-hidden="true"><i></i></div>';
-    f.querySelector('.form-head').after(top);
+    f.prepend(top);
     var back = document.createElement('button');
     back.type = 'button'; back.className = 'btn btn-text btn-lg'; back.textContent = '← Nazaj';
     var next = document.createElement('button');
@@ -169,7 +169,6 @@ document.querySelectorAll('form.eform').forEach(function (f) {
     var show = function (i, focus) {
       cur = i;
       steps.forEach(function (s, k) { s.classList.toggle('on', k === i); });
-      f.querySelector('.form-head').hidden = i > 0;
       top.querySelector('.wz-n').textContent = 'Korak ' + (i + 1) + ' od ' + steps.length;
       top.querySelector('.wz-t').textContent = i < steps.length - 1 ? 'Naprej: ' + steps[i + 1].querySelector('h3').textContent : 'Zadnji korak';
       top.querySelector('i').style.width = ((i + 1) / steps.length * 100) + '%';

@@ -52,7 +52,7 @@ def radios(name, label, options, required=False, hint=""):
     star = ' <span class="req" aria-hidden="true">*</span>' if required else ' <span class="opt">neobvezno</span>'
     h = f'<span class="hint">{hint}</span>' if hint else ""
     items = "".join(f'<label class="choice"><input type="radio" name="{e(name)}" value="{e(o)}"{req if k == 0 else ""}><span>{e(o)}</span></label>' for k, o in enumerate(options))
-    return f'<fieldset class="field"><legend>{label}{star}</legend>{h}<div class="choices">{items}</div></fieldset>'
+    return f'<fieldset class="field"><legend>{label}{star}</legend>{h}<div class="choices one">{items}</div></fieldset>'
 
 
 def checks(prefix, label, options, hint=""):
@@ -75,7 +75,6 @@ def form(fid, subject, intro, groups, consent, submit):
   <input type="hidden" name="_captcha" value="false">
   <input type="hidden" name="Obrazec" value="{e(subject)}">
   <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-  <div class="form-head"><p class="form-intro">{intro}</p><p class="form-legend"><span class="req">*</span> obvezno polje</p></div>
   {''.join(groups)}
   <div class="fgroup consent">
     <label class="choice block"><input type="checkbox" name="Soglasje" value="da" required><span>{consent} Več v <a href="/zasebnost/">obvestilu o zasebnosti</a>.</span></label>
@@ -183,3 +182,52 @@ def contact_form():
         ],
         "Soglašam, da Equeli moje podatke uporabi za odgovor na sporočilo.",
         "Pošljite sporočilo")
+
+
+# ---------------- Iskanje izvajalca (starši, družine, odrasli) ----------------
+def parent_form():
+    return form("iskanje", "Equeli – pomoč pri iskanju izvajalca",
+        "",
+        [
+            group("Za koga iščete",
+                radios("Za koga", "Za koga iščete program?", ["Za otroka", "Za mladostnika", "Za odraslo osebo", "Zase"], True),
+                text("Starost", "Starost", True, placeholder="npr. 8 let"),
+                select("Področje", "Kaj najbolje opiše situacijo?", [g["title"] for g in GUIDES] + ["Drugo ali ne vem"], True, hint="Diagnoza ni potrebna. Izberite, kar je najbližje."),
+            ),
+            group("Kaj vam je pomembno",
+                select("Regija", "Regija", REGION_NAMES, True),
+                text("Kraj", "Kraj ali okolica", placeholder="npr. Ljubljana, do 30 km"),
+                checks("Pomembno", "Kaj vam je pomembno", ["Bližina doma", "Dostop za invalidski voziček", "Individualna srečanja", "Delo v skupini", "Termini popoldne ali ob koncih tedna", "Sofinanciranje ali nižja cena"]),
+                area("Opis", "Kaj želite doseči", hint="Nekaj stavkov je dovolj. Ne navajajte imena ali podrobnih zdravstvenih podatkov.", rows=4),
+            ),
+            group("Kako vas dosežemo",
+                text("Ime", "Ime", True, auto="given-name"),
+                text("E-pošta", "E-pošta", True, type="email", auto="email"),
+                text("Telefon", "Telefon", type="tel", auto="tel", hint="Če želite, da vas pokličemo."),
+            ),
+        ],
+        "Soglašam, da Equeli podatke uporabi za odgovor in mi predlaga izvajalce. Izvajalcem jih posreduje samo, če se strinjam.",
+        "Pošljite")
+
+
+# ---------------- Podporniki (podjetja, fundacije, posamezniki) ----------------
+def supporter_form():
+    return form("podpora", "Equeli – interes za podporo programom",
+        "",
+        [
+            group("Kdo ste",
+                text("Organizacija", "Podjetje, fundacija ali organizacija", hint="Če pišete kot posameznik, pustite prazno.", auto="organization"),
+                text("Ime in priimek", "Ime in priimek", True, auto="name"),
+                text("E-pošta", "E-pošta", True, type="email", auto="email"),
+                text("Telefon", "Telefon", type="tel", auto="tel"),
+            ),
+            group("Kaj vas zanima",
+                checks("Oblika podpore", "Oblika podpore", ["Financiranje programa za šolo ali zavod", "Sofinanciranje za družine", "Oprema ali material", "Prostovoljno delo zaposlenih", "Strokovno ali pro bono znanje"]),
+                checks("Skupina", "Komu bi radi pomagali", ["Otroci s posebnimi potrebami", "Mladostniki", "Odrasli z oviranostmi", "Starejši", "Ni pomembno"]),
+                select("Regija", "Regija", REGION_NAMES + ["Vsa Slovenija"]),
+                radios("Obseg", "Okvirni obseg", ["Do 1.000 €", "1.000–5.000 €", "Več kot 5.000 €", "Še ne vemo"]),
+                area("Sporočilo", "Sporočilo", rows=4),
+            ),
+        ],
+        "Soglašam, da Equeli moje podatke uporabi za stik in predstavitev možnosti podpore.",
+        "Pošljite")
