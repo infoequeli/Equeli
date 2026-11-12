@@ -785,3 +785,4 @@ img{image-rendering:auto}
 .ph-photo{border-radius:28px;overflow:hidden;aspect-ratio:4/3;background:#e6efee}
 .ph-photo img{width:100%;height:100%;object-fit:cover;display:block}
 @media (max-width:900px){.page-hero.has-photo .ph-grid{grid-template-columns:1fr}.ph-photo{aspect-ratio:16/10}}
+.photo-art img{object-position:center 35%}.photo-art img,.ph-photo img,.what-photo img,.mo img{filter:none}

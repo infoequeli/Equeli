@@ -220,40 +220,37 @@ def research_dash():
 
 # Fotografije (Unsplash License, simbolične). Zamenjaj z lastnimi fotografijami centrov, ko bodo soglasja.
 PHOTOS = {
-    "hero": ("photo-1514121999587-09c57bd4d8e7", "Deklica nežno poljublja konja"),
-    "what": ("photo-1508343919546-4a5792fee935", "Ženska z obrazom ob konju"),
-    "touch": ("photo-1510715662615-65788376766c", "Ženska drži konjevo glavo v rokah"),
-    "light": ("photo-1783267152523-8304571a5850", "Sončna svetloba v lesenem hlevu"),
-    "girl": ("photo-1607273225241-035d579b8452", "Deklica drži rjavega konja"),
-    "peek": ("photo-1779733769089-247841e24575", "Bel konj pogleda iz lesenega boksa"),
-    "ride": ("photo-1633898409290-b5310b286c83", "Deklica na rjavem konju"),
-    "barn": ("photo-1694885143306-3dfea504b032", "Notranjost hleva z boksi"),
-    "ride2": ("photo-1698653223457-05e00ad9cec2", "Deklica jaha rjavega konja"),
-    "door": ("photo-1761245048235-8e089f329d29", "Konj pogleda skozi lesena vrata hleva"),
-    "pro": ("photo-1636738176866-ae2c0a80d614", "Ženska ob rjavem konju"),
-    "field": ("photo-1761849841029-fd56cf958d51", "Trije konji se pasejo na travniku"),
-    "tack": ("photo-1682636109270-93cb7b720716", "Sedla na lesenih tleh"),
-    "sun": ("photo-1590839823121-c253bf8d1e7d", "Ženska ob rjavem konju na soncu"),
-    "aisle": ("photo-1576692192914-9abed71b3ef9", "Konj med boksi v hlevu"),
-    "hold": ("photo-1629366794937-fb2c3cc69927", "Ženska drži rjavega konja"),
-    "stalls": ("photo-1658935289699-8b6216cc1241", "Konja v hlevu"),
-    "ride3": ("photo-1613387937499-3aa38e2c36c4", "Deklica na konju podnevi"),
+    "hero": ("https://images.pexels.com/photos/7698936/pexels-photo-7698936.jpeg", "Otrok s čelado sedi na poniju, ob njem invalidski voziček"),
+    "what": ("https://images.pexels.com/photos/7883326/pexels-photo-7883326.jpeg", "Ženska objema konja v svetlem hlevu"),
+    "touch": ("https://images.pexels.com/photos/7883432/pexels-photo-7883432.jpeg", "Roka nežno gladi konjevo grivo"),
+    "meadow": ("https://images.pexels.com/photos/8265890/pexels-photo-8265890.jpeg", "Dekle boža dva konja na travniku"),
+    "bond": ("https://images.pexels.com/photos/7883439/pexels-photo-7883439.jpeg", "Ženska z zaprtimi očmi objema konja"),
+    "care": ("https://images.pexels.com/photos/7882325/pexels-photo-7882325.jpeg", "Ščetkanje konjeve grive"),
+    "parents": ("https://images.pexels.com/photos/7698940/pexels-photo-7698940.jpeg", "Deklica na invalidskem vozičku ob poniju s spremljevalko"),
+    "school": ("https://images.pexels.com/photos/21835268/pexels-photo-21835268.jpeg", "Dlan ob konjevem obrazu"),
+    "donors": ("https://images.pexels.com/photos/7698935/pexels-photo-7698935.jpeg", "Nasmejana deklica na poniju, ob njej voziček"),
+    "stable": ("https://images.pexels.com/photos/7883330/pexels-photo-7883330.jpeg", "Konja v čistem, svetlem hlevu"),
+    "pro": ("https://images.pexels.com/photos/7882832/pexels-photo-7882832.jpeg", "Strokovnjakinja ob rjavem konju"),
+    "alps": ("https://images.pexels.com/photos/27740063/pexels-photo-27740063.jpeg", "Konji na planinskem pašniku pod gorami"),
+    "articles": ("https://images.pexels.com/photos/30507387/pexels-photo-30507387.jpeg", "Roka boža ponija v toplem hlevu"),
+    "about": ("https://images.pexels.com/photos/7883130/pexels-photo-7883130.jpeg", "Dlan na konjevem obrazu"),
+    "contact": ("https://images.pexels.com/photos/33312263/pexels-photo-33312263.jpeg", "Dekle se dotika konja v svetlem hlevu"),
+    "therapy": ("https://images.pexels.com/photos/33565494/pexels-photo-33565494.jpeg", "Odrasla oseba drži otroka, ki se dotika konja"),
+    "stroka": ("https://images.pexels.com/photos/7882324/pexels-photo-7882324.jpeg", "Nega konja v urejenem hlevu"),
+    "hipo": ("https://images.pexels.com/photos/7882523/pexels-photo-7882523.jpeg", "Otrok na konju ob vodenju strokovnjakinje"),
 }
-# Vse fotografije: Unsplash License (brezplačno, pripis avtorja ni obvezen). Avtorji: Lucie Hošová, Kenny Webster,
-# Rodolfo Sanches Carvalho, Oleksii Rozanov, Svetlana Svetlana, Tyler Hardie, Emilia Willberg, Brian Wangenheim,
-# Mateusz Zatorski, Alexander Mass, Janosch Jost, Rusty Watson, Levi Arnold, Philippe Oursel, Jacob Jolibois,
-# Tim Schmidbauer, Andres Molina, Helena Lopes. Zamenjaj s fotografijami slovenskih centrov, ko bodo soglasja.
-KICKER_PHOTO = {"Za starše in družine": "ride", "Za šole, vrtce in zavode": "barn", "Centri": "door", "Za izvajalce": "pro",
-                "O Equeli": "sun", "Za donatorje in fundacije": "ride2", "Razlaga": "hold", "Raziskava": "field",
-                "Članki in zgodbe": "tack", "Stroka": "stalls", "Pristop": "ride3", "Kontakt": "aisle"}
+# Fotografije: Pexels (brezplačna licenca, pripis ni obvezen). Izbrane ročno po ogledu. Zamenjaj z lastnimi, ko bodo soglasja centrov.
+KICKER_PHOTO = {"Za starše in družine": "parents", "Za šole, vrtce in zavode": "school", "Centri": "stable", "Za izvajalce": "pro",
+                "O Equeli": "about", "Za donatorje in fundacije": "donors", "Razlaga": "therapy", "Raziskava": "alps",
+                "Članki in zgodbe": "articles", "Stroka": "stroka", "Pristop": "hipo", "Kontakt": "contact"}
 
 
 def photo(key, w=1200, cls="", eager=False):
-    pid, alt = PHOTOS[key]
-    src = f"https://images.unsplash.com/{pid}?auto=format&fit=crop&w={w}&q=70"
-    srcset = ", ".join(f"https://images.unsplash.com/{pid}?auto=format&fit=crop&w={x}&q=70 {x}w" for x in (640, 1000, 1600))
+    base, alt = PHOTOS[key]
+    q = "?auto=compress&cs=tinysrgb&w="
+    srcset = ", ".join(f"{base}{q}{x} {x}w" for x in (640, 1000, 1600))
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
-    return f'<img class="{cls}" src="{src}" srcset="{srcset}" sizes="(max-width: 900px) 100vw, 60vw" alt="{e(alt)}" {load} decoding="async">'
+    return f'<img class="{cls}" src="{base}{q}{w}" srcset="{srcset}" sizes="(max-width: 900px) 100vw, 60vw" alt="{e(alt)}" {load} decoding="async">'
 
 
 def guide_cards():
@@ -338,9 +335,9 @@ home = f"""
   <div class="wrap">
     <div class="mo-grid">
       <figure class="mo reveal-img">{photo("touch", 900)}<figcaption><b>Dotik</b><span>Prvi stik pogosto ni na konju, ampak ob njem.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("light", 900)}<figcaption><b>Mir</b><span>Hlev je predvidljivo okolje z jasno rutino.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("girl", 900)}<figcaption><b>Odnos</b><span>Konj se odzove na to, kako se mu približamo.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("peek", 900)}<figcaption><b>Pozornost</b><span>Konj zazna vsak glas in vsak gib.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("meadow", 900)}<figcaption><b>Mir</b><span>Pašnik in mirni konji: okolje, ki umiri.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("bond", 900)}<figcaption><b>Odnos</b><span>Konj se odzove na to, kako se mu približamo.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("care", 900)}<figcaption><b>Skrb</b><span>Nega konja je del srečanja.</span></figcaption></figure>
     </div>
   </div>
 </section>
