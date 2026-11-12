@@ -220,7 +220,8 @@ def research_dash():
 
 # Fotografije (Unsplash License, simbolične). Zamenjaj z lastnimi fotografijami centrov, ko bodo soglasja.
 PHOTOS = {
-    "hero": ("https://images.pexels.com/photos/7698936/pexels-photo-7698936.jpeg", "Otrok s čelado sedi na poniju, ob njem invalidski voziček"),
+    "field": ("https://images.pexels.com/photos/33829387/pexels-photo-33829387.jpeg", "Dekle se na sončnem pašniku dotakne konja"),
+    "hero": ("https://images.pexels.com/photos/8947415/pexels-photo-8947415.jpeg", "Dekle s konjem na travniku v večerni svetlobi"),
     "what": ("https://images.pexels.com/photos/7883326/pexels-photo-7883326.jpeg", "Ženska objema konja v svetlem hlevu"),
     "touch": ("https://images.pexels.com/photos/7883432/pexels-photo-7883432.jpeg", "Roka nežno gladi konjevo grivo"),
     "meadow": ("https://images.pexels.com/photos/8265890/pexels-photo-8265890.jpeg", "Dekle boža dva konja na travniku"),
@@ -228,7 +229,7 @@ PHOTOS = {
     "care": ("https://images.pexels.com/photos/7882325/pexels-photo-7882325.jpeg", "Ščetkanje konjeve grive"),
     "parents": ("https://images.pexels.com/photos/7698940/pexels-photo-7698940.jpeg", "Deklica na invalidskem vozičku ob poniju s spremljevalko"),
     "school": ("https://images.pexels.com/photos/21835268/pexels-photo-21835268.jpeg", "Dlan ob konjevem obrazu"),
-    "donors": ("https://images.pexels.com/photos/7698935/pexels-photo-7698935.jpeg", "Nasmejana deklica na poniju, ob njej voziček"),
+    "donors": ("https://images.pexels.com/photos/28378042/pexels-photo-28378042.jpeg", "Nasmejano dekle z belim konjem"),
     "stable": ("https://images.pexels.com/photos/7883330/pexels-photo-7883330.jpeg", "Konja v čistem, svetlem hlevu"),
     "pro": ("https://images.pexels.com/photos/7882832/pexels-photo-7882832.jpeg", "Strokovnjakinja ob rjavem konju"),
     "articles": ("https://images.pexels.com/photos/30507387/pexels-photo-30507387.jpeg", "Roka boža ponija v toplem hlevu"),
@@ -236,11 +237,11 @@ PHOTOS = {
     "contact": ("https://images.pexels.com/photos/33312263/pexels-photo-33312263.jpeg", "Dekle se dotika konja v svetlem hlevu"),
     "therapy": ("https://images.pexels.com/photos/33565494/pexels-photo-33565494.jpeg", "Odrasla oseba drži otroka, ki se dotika konja"),
     "stroka": ("https://images.pexels.com/photos/7882324/pexels-photo-7882324.jpeg", "Nega konja v urejenem hlevu"),
-    "hipo": ("https://images.pexels.com/photos/7882523/pexels-photo-7882523.jpeg", "Otrok na konju ob vodenju strokovnjakinje"),
+    "hipo": ("https://images.pexels.com/photos/9864749/pexels-photo-9864749.jpeg", "Mlado dekle s konjem v naravi"),
 }
 # Fotografije: Pexels (brezplačna licenca, pripis ni obvezen). Izbrane ročno po ogledu. Zamenjaj z lastnimi, ko bodo soglasja centrov.
 KICKER_PHOTO = {"Za starše in družine": "parents", "Za šole, vrtce in zavode": "school", "Centri": "contact", "Za izvajalce": "pro",
-                "O Equeli": "about", "Za donatorje in fundacije": "donors", "Razlaga": "therapy", "Raziskava": "meadow",
+                "O Equeli": "about", "Za donatorje in fundacije": "donors", "Razlaga": "therapy", "Raziskava": "field",
                 "Članki in zgodbe": "articles", "Stroka": "stroka", "Pristop": "hipo"}
 
 
