@@ -763,3 +763,25 @@ h2{font-size:clamp(32px,4.4vw,56px);line-height:1.07}
   .js .mo-grid .reveal-img:nth-child(2){transition-delay:.12s}.js .mo-grid .reveal-img:nth-child(3){transition-delay:.24s}.js .mo-grid .reveal-img:nth-child(4){transition-delay:.36s}
 }
 @keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.12) translate(-1.5%,-1%)}}
+/* naslovni del levo poravnan, fotografija desno */
+.hero2{text-align:left;padding-block:clamp(40px,6vw,88px) clamp(48px,7vw,96px)}
+.hero2-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
+.hero2-copy{max-width:none;margin:0}
+.hero2 h1{font-size:clamp(40px,5.4vw,72px)}
+.hero2 .lede,.hero2 .lede2{margin-left:0;margin-right:0}
+.hero2 .btn-row,.hero2-facts{justify-content:flex-start}
+.hero2-facts li{align-items:flex-start}
+.hero2-art{aspect-ratio:4/5;max-width:none;margin:0}
+@media (max-width:900px){.hero2-grid{grid-template-columns:1fr}.hero2-art{aspect-ratio:4/3}}
+.photo-art::after{background:none}
+img{image-rendering:auto}
+.photo-art img,.ph-photo img,.what-photo img,.mo img{filter:brightness(1.07) saturate(1.04) contrast(.98)}
+/* galerija – svetlejši prehod */
+.mo::after{background:linear-gradient(180deg,rgba(0,0,0,0) 62%,rgba(0,0,0,.38) 100%)}
+.mo figcaption{text-shadow:0 1px 12px rgba(0,0,0,.35)}
+/* podstrani s fotografijo */
+.page-hero.has-photo .ph-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.page-hero.has-photo .ph-grid>div:first-child{max-width:none}
+.ph-photo{border-radius:28px;overflow:hidden;aspect-ratio:4/3;background:#e6efee}
+.ph-photo img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:900px){.page-hero.has-photo .ph-grid{grid-template-columns:1fr}.ph-photo{aspect-ratio:16/10}}

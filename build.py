@@ -139,6 +139,10 @@ def page(path, title, desc, body, active=""):
 def hero(kicker, title, lede, buttons="", crumbs=None, seed=1):
     top = f'<p class="crumbs">{crumbs}</p>' if crumbs else f'<p class="kicker">{kicker}</p>'
     btns = f'<div class="btn-row">{buttons}</div>' if buttons else ""
+    k = KICKER_PHOTO.get(kicker)
+    if k:
+        return (f'<section class="page-hero has-photo"><div class="wrap ph-grid"><div>{top}<h1>{title}</h1><p class="lede">{lede}</p>{btns}</div>'
+                f'<div class="ph-photo">{photo(k, 1200, "", True)}</div></div></section>')
     return f'<section class="page-hero"><div class="wrap"><div>{top}<h1>{title}</h1><p class="lede">{lede}</p>{btns}</div></div></section>'
 
 
@@ -216,17 +220,30 @@ def research_dash():
 
 # Fotografije (Unsplash License, simbolične). Zamenjaj z lastnimi fotografijami centrov, ko bodo soglasja.
 PHOTOS = {
-    "touch": ("photo-1501677901416-076b6f71acb7", "Otroška roka na glavi konja", "Sebastian Abbruzzese"),
-    "girl": ("photo-1518963216893-6d7a01b4ace4", "Dekle ob temnem konju ob jezeru", "Luca M"),
-    "stable": ("photo-1739249678653-105d71f61463", "Dekle in konj v hlevu", "A B"),
-    "hand": ("photo-1756639292737-f2c89a3ab5bb", "Roka nežno boža konja", "Thomas Marquize"),
-    "meadow": ("photo-1562883129-4fa82f9f47dd", "Konji na travniku ob jezeru med griči", "Gianni Scognamiglio"),
-    "ears": ("photo-1417686597246-b99b258b2aa8", "Pozorna konjska ušesa", "Trent Hancock"),
+    "hero": ("photo-1590839823121-c253bf8d1e7d", "Ženska ob rjavem konju na soncu"),
+    "what": ("photo-1513966366894-cfe5196c11c0", "Ženska ob črno-belem konju"),
+    "kiss": ("photo-1657429534178-0e070709d462", "Človek nežno poljublja konja"),
+    "meadow": ("photo-1562883129-4fa82f9f47dd", "Konji na travniku ob jezeru med griči"),
+    "girl": ("photo-1518963216893-6d7a01b4ace4", "Dekle ob temnem konju ob jezeru"),
+    "eye": ("photo-1610315311683-ef1706f00523", "Konjsko oko od blizu"),
+    "child": ("photo-1514121999587-09c57bd4d8e7", "Deklica, ki poljublja konja"),
+    "lead": ("photo-1595353798712-3c05a2ec64fc", "Človek vodi rjavega konja"),
+    "two": ("photo-1463748465553-80db1e6ff830", "Dva konja drug ob drugem"),
+    "pet": ("photo-1739249678649-b516dea3371c", "Deklica boža konja v hlevu"),
+    "river": ("photo-1545285926-10654c6f4ece", "Bel konj se pase ob reki"),
+    "close": ("photo-1563443803769-a5c44bd91e39", "Rjav konj od blizu"),
+    "green": ("photo-1620997987907-a721203f15cb", "Konj na zeleni travi"),
+    "day": ("photo-1504310977373-186d29f99322", "Rjav konj podnevi"),
 }
+# Avtorji (Unsplash License): Philippe Oursel, Kirsten LaChance, Gianni Scognamiglio, Luca M, Aurélien Faux, Raphael Wicker,
+# wilsan u, Mathias Reding, Birgith Roosipuu, Kelly Forrister in drugi. Pripis avtorja po licenci ni obvezen.
+KICKER_PHOTO = {"Za starše in družine": "child", "Za šole, vrtce in zavode": "lead", "Centri": "pet", "Za izvajalce": "day",
+                "O Equeli": "green", "Za donatorje in fundacije": "two", "Razlaga": "kiss", "Raziskava": "river",
+                "Članki in zgodbe": "close", "Stroka": "what", "Pristop": "meadow", "Kontakt": "girl"}
 
 
 def photo(key, w=1200, cls="", eager=False):
-    pid, alt, by = PHOTOS[key]
+    pid, alt = PHOTOS[key]
     src = f"https://images.unsplash.com/{pid}?auto=format&fit=crop&w={w}&q=70"
     srcset = ", ".join(f"https://images.unsplash.com/{pid}?auto=format&fit=crop&w={x}&q=70 {x}w" for x in (640, 1000, 1600))
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
@@ -278,8 +295,7 @@ home = f"""
       <ul class="hero2-facts reveal d3"><li><b class="tnum">24</b>centrov in zavodov</li><li><b class="tnum">11</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
     <div class="hero2-art photo-art">
-      {photo("touch", 1600, "kb", True)}
-      <p class="credit">Foto: Sebastian Abbruzzese, Unsplash</p>
+      {photo("hero", 1600, "kb", True)}
     </div>
   </div>
 </section>
@@ -292,7 +308,7 @@ home = f"""
       <p class="what-p">Strokovnjak ima temeljno izobrazbo, na primer iz fizioterapije, delovne terapije, psihologije ali specialne pedagogike, in dodatno usposabljanje za delo s konjem. Konj je posebej izbran in pripravljen, srečanja pa potekajo po načrtu in v varnem okolju.</p>
       <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="/terapija-s-pomocjo-konja/">Več o terapiji s pomočjo konja</a><a class="btn btn-ghost" href="/hipoterapija/">Hipoterapija</a></div></div>
     <div class="what-cards">
-      <div class="what-photo reveal-img">{photo("stable", 1000)}</div>
+      <div class="what-photo reveal-img">{photo("what", 1000)}</div>
       <div class="wc">{badge("heart")}<div><b>Terapija</b><p>Zdravstvena, psihološka ali delovnoterapevtska obravnava. Sem sodi tudi hipoterapija.</p></div></div>
       <div class="wc">{badge("book")}<div><b>Učenje</b><p>Pedagoške in specialnopedagoške intervencije za pozornost, učenje in socialne veščine.</p></div></div>
       <div class="wc">{badge("sun")}<div><b>Aktivnosti</b><p>Prilagojeno jahanje, nega in druženje s konji z rekreativnim ali izobraževalnim namenom.</p></div></div>
@@ -315,12 +331,11 @@ home = f"""
 <section class="moments">
   <div class="wrap">
     <div class="mo-grid">
-      <figure class="mo reveal-img">{photo("hand", 900)}<figcaption><b>Dotik</b><span>Prvi stik pogosto ni na konju, ampak ob njem.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("kiss", 900)}<figcaption><b>Dotik</b><span>Prvi stik pogosto ni na konju, ampak ob njem.</span></figcaption></figure>
       <figure class="mo reveal-img">{photo("meadow", 900)}<figcaption><b>Mir</b><span>Pašnik in čreda: okolje, ki umiri.</span></figcaption></figure>
       <figure class="mo reveal-img">{photo("girl", 900)}<figcaption><b>Odnos</b><span>Konj se odzove na to, kako se mu približamo.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("ears", 900)}<figcaption><b>Pozornost</b><span>Konj zazna vsak glas in vsak gib.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("eye", 900)}<figcaption><b>Pozornost</b><span>Konj zazna vsak glas in vsak gib.</span></figcaption></figure>
     </div>
-    <p class="credit-line">Simbolične fotografije: Thomas Marquize, Gianni Scognamiglio, Luca M, Trent Hancock, A B (Unsplash). Kmalu jih bodo zamenjale fotografije slovenskih centrov.</p>
   </div>
 </section>
 
