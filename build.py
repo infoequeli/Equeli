@@ -98,7 +98,7 @@ def page(path, title, desc, body, active=""):
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.bunny.net">
-<link rel="stylesheet" href="https://fonts.bunny.net/css?family=roboto:400,500,700|outfit:400,500,600&display=swap">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap">
 <link rel="stylesheet" href="/assets/style.css?v={ASSET_V['css']}">
 </head>
 <body>
