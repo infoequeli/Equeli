@@ -127,20 +127,73 @@
   });
 })();
 
-/* Obrazci: preverjanje pred oddajo in povratna informacija */
+/* Obrazci: vodeni koraki, preverjanje in povratna informacija.
+   Brez JavaScripta se pokaže celoten obrazec naenkrat. */
 document.querySelectorAll('form.eform').forEach(function (f) {
-  f.addEventListener('submit', function (ev) {
-    var err = f.querySelector('.form-error');
-    if (!f.checkValidity()) {
-      ev.preventDefault();
-      f.classList.add('touched');
+  var steps = Array.prototype.slice.call(f.querySelectorAll('.fgroup:not(.consent)'));
+  var consent = f.querySelector('.fgroup.consent');
+  var err = f.querySelector('.form-error');
+  var foot = f.querySelector('.form-foot');
+  var submit = foot.querySelector('button[type=submit]');
+  var cur = 0, wizard = steps.length > 1;
+
+  function fieldsOf(el) { return Array.prototype.slice.call(el.querySelectorAll('input:not([type=hidden]):not(.hp),select,textarea')); }
+  function check(el) {
+    var bad = fieldsOf(el).filter(function (x) { return !x.checkValidity(); });
+    if (bad.length) {
+      el.classList.add('touched');
       if (err) err.hidden = false;
-      var bad = f.querySelector(':invalid:not(fieldset)');
-      if (bad) { bad.focus(); bad.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
-      return;
+      bad[0].focus({ preventScroll: true });
+      bad[0].scrollIntoView({ block: 'center', behavior: 'smooth' });
+      return false;
     }
+    el.classList.remove('touched');
     if (err) err.hidden = true;
-    var b = f.querySelector('button[type=submit]');
-    if (b) { b.disabled = true; b.textContent = 'Pošiljam …'; }
+    return true;
+  }
+
+  if (wizard) {
+    f.classList.add('wizard');
+    steps[steps.length - 1].appendChild(consent);
+    var top = document.createElement('div');
+    top.className = 'wz-top';
+    top.innerHTML = '<div class="wz-meta"><b class="wz-n"></b><span class="wz-t"></span></div><div class="wz-bar" aria-hidden="true"><i></i></div>';
+    f.querySelector('.form-head').after(top);
+    var back = document.createElement('button');
+    back.type = 'button'; back.className = 'btn btn-text btn-lg'; back.textContent = '← Nazaj';
+    var next = document.createElement('button');
+    next.type = 'button'; next.className = 'btn btn-dark btn-lg'; next.textContent = 'Naprej';
+    var sp = document.createElement('span'); sp.className = 'sp';
+    foot.innerHTML = ''; foot.append(back, sp, next, submit);
+
+    var show = function (i, focus) {
+      cur = i;
+      steps.forEach(function (s, k) { s.classList.toggle('on', k === i); });
+      f.querySelector('.form-head').hidden = i > 0;
+      top.querySelector('.wz-n').textContent = 'Korak ' + (i + 1) + ' od ' + steps.length;
+      top.querySelector('.wz-t').textContent = i < steps.length - 1 ? 'Naprej: ' + steps[i + 1].querySelector('h3').textContent : 'Zadnji korak';
+      top.querySelector('i').style.width = ((i + 1) / steps.length * 100) + '%';
+      back.hidden = i === 0;
+      next.hidden = i === steps.length - 1;
+      submit.hidden = i !== steps.length - 1;
+      if (err) err.hidden = true;
+      if (focus) {
+        var h = steps[i].querySelector('h3'); h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true });
+        var y = f.getBoundingClientRect().top + window.scrollY - 90;
+        if (Math.abs(window.scrollY - y) > 40) window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    };
+    next.addEventListener('click', function () { if (check(steps[cur])) show(cur + 1, true); });
+    back.addEventListener('click', function () { show(cur - 1, true); });
+    f.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' && ev.target.tagName === 'INPUT' && cur < steps.length - 1) { ev.preventDefault(); next.click(); }
+    });
+    show(0, false);
+  }
+
+  f.addEventListener('submit', function (ev) {
+    var scope = wizard ? steps[cur] : f;
+    if (!check(scope) || !f.checkValidity()) { ev.preventDefault(); return; }
+    submit.disabled = true; submit.textContent = 'Pošiljam …';
   });
 });
