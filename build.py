@@ -56,8 +56,7 @@ CROPS = ["head"] * 7
 
 
 def tile(i, extra=""):
-    g, h = TILES[i % len(TILES)]
-    return f'<div class="tile" style="--g:{g};--h:{h}" aria-hidden="true">{horse()}{extra}</div>'
+    return ""
 
 
 def aura(seed=1):
@@ -125,7 +124,7 @@ def page(path, title, desc, body, active=""):
 def hero(kicker, title, lede, buttons="", crumbs=None, seed=1):
     top = f'<p class="crumbs">{crumbs}</p>' if crumbs else f'<p class="kicker">{kicker}</p>'
     btns = f'<div class="btn-row">{buttons}</div>' if buttons else ""
-    return f'<section class="page-hero"><div class="wrap"><div>{top}<h1>{title}</h1><p class="lede">{lede}</p>{btns}</div><div class="ph-art" aria-hidden="true">{horse()}</div></div></section>'
+    return f'<section class="page-hero"><div class="wrap"><div>{top}<h1>{title}</h1><p class="lede">{lede}</p>{btns}</div></div></section>'
 
 
 def guide_cards():
@@ -197,13 +196,12 @@ home = f"""
 <section class="hero">
   <div class="wrap">
     <div class="hero-grid">
-      <div>
+      <div class="hero-copy">
         <p class="kicker reveal">Neodvisna platforma · Slovenija</p>
         <h1 class="reveal d1">Svet intervencij s pomočjo konj. <em>Na enem mestu.</em></h1>
         <p class="lede reveal d2">Informacije o pristopih, strokovnjakih in programih v Sloveniji. Za starše in družine ter za šole in zavode.</p>
         <div class="btn-row reveal d3"><a class="btn btn-dark" href="/za-starse/">Za starše</a><a class="btn btn-ghost" href="/za-sole-in-zavode/">Za šole in zavode</a></div>
       </div>
-      <div class="hero-art reveal d2">{horse("horse", "Silhueta konjske glave")}</div>
     </div>
     <div class="hero-meta"><div><b class="tnum">46</b>organizacij v raziskovalni bazi</div><div><b class="tnum">7</b>vodnikov po potrebah</div><div><b>Brezplačno</b>za družine in ustanove</div></div>
   </div>
@@ -213,9 +211,9 @@ home = f"""
   <div class="wrap">
     <div class="head"><p class="kicker">Začnite tukaj</p><h2>Za koga iščete?</h2></div>
     <div class="doors">
-      <a class="door" href="/za-starse/"><div class="tile" style="--g:#f3f8f7;--h:#a9cdca" aria-hidden="true">{horse()}<span>Za starše in družine</span></div><div class="body"><h3>Za otroka ali družinskega člana</h3><p>Vodniki glede na situacijo, na primer avtizem, gibalne težave ali ADHD. Strokovni izrazi niso potrebni.</p>
+      <a class="door" href="/za-starse/"><div class="body"><span class="chip">Za starše in družine</span><h3>Za otroka ali družinskega člana</h3><p>Vodniki glede na situacijo, na primer avtizem, gibalne težave ali ADHD. Strokovni izrazi niso potrebni.</p>
         <ul><li>Vodniki po potrebah</li><li>Vprašanja za izvajalca</li><li>Pomoč pri iskanju izvajalca v regiji</li></ul><span class="go">Za starše</span></div></a>
-      <a class="door" href="/za-sole-in-zavode/"><div class="tile" style="--g:#f3f8f7;--h:#a9cdca" aria-hidden="true">{horse()}<span>Za šole, vrtce in zavode</span></div><div class="body"><h3>Za šolo, vrtec ali zavod</h3><p>Programi za razred, skupino ali uporabnike zavoda. Povpraševanje, povezava z izvajalci in možnosti financiranja.</p>
+      <a class="door" href="/za-sole-in-zavode/"><div class="body"><span class="chip">Za šole, vrtce in zavode</span><h3>Za šolo, vrtec ali zavod</h3><p>Programi za razred, skupino ali uporabnike zavoda. Povpraševanje, povezava z izvajalci in možnosti financiranja.</p>
         <ul><li>Vrste programov za skupine</li><li>Povezava z izvajalci v regiji</li><li>Možnosti financiranja</li></ul><span class="go">Za šole in zavode</span></div></a>
     </div>
   </div>
