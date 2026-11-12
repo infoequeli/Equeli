@@ -252,15 +252,6 @@ home = f"""
   </div>
 </section>
 
-<section class="section moment2">
-  <div class="wrap">
-    <div class="moment-cols">
-      <div>{badge("heart", "lg")}<b>Vsak otrok je drugačen</b><p>Zato je tudi delo ob konju zelo različno: od fizioterapije na konju do mirnega opazovanja črede.</p></div>
-      <div>{badge("shield", "lg")}<b>Za programom stoji stroka</b><p>Usposobljen strokovnjak in skrbno izbran konj sta temelj vsakega dobrega programa.</p></div>
-      <div>{badge("compass", "lg")}<b>Prvi korak je vprašanje</b><p>Strokovnih izrazov vam ni treba poznati. Povejte, kaj si želite, in pokazali vam bomo pot.</p></div>
-    </div>
-  </div>
-</section>
 
 <section class="section white">
   <div class="wrap">
