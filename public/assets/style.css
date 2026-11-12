@@ -596,3 +596,17 @@ table.data td:last-child,table.data th:last-child{text-align:right}
 .aud-c p{color:var(--muted);font-size:15px;margin:0}
 .aud-c .go{margin-top:auto;padding-top:10px;font:500 15px/1 var(--f-head);color:var(--blue)}
 .hero2 h1{font-size:clamp(38px,5vw,64px);line-height:1.08}
+.what .lede{font-size:clamp(18px,1.6vw,20px)}
+.what-p{color:var(--text-2);margin-top:16px;max-width:60ch}
+.what-cards{display:grid;gap:12px}
+.wc{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;padding:22px;border:1px solid var(--line);border-radius:var(--r-lg);background:#fff}
+.wc b{font:500 18px/1.3 var(--f-head)}
+.wc p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.areas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.areas{grid-template-columns:1fr}}
+.area{display:flex;flex-direction:column;gap:10px;padding:28px;border:1px solid var(--line);border-radius:var(--r-xl);background:#fff}
+.area h3{font-size:22px;margin:8px 0 0}
+.area p{margin:0;color:var(--text-2)}
+.area ul{margin:4px 0;padding-left:18px;color:var(--text-2);display:grid;gap:4px}
+.area .who{margin-top:auto;padding-top:12px;border-top:1px solid var(--line-2);font-size:14px;color:var(--muted)}
+.goals.four{grid-template-columns:repeat(4,1fr)}@media (max-width:1000px){.goals.four{grid-template-columns:1fr 1fr}}@media (max-width:560px){.goals.four{grid-template-columns:1fr}}

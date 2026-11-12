@@ -119,7 +119,7 @@ def page(path, title, desc, body, active=""):
       <div><a class="logo" href="/">{LOGO}Equeli</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
       <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Terapevtski centri</a></li></ul></div>
       <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Donatorji in fundacije</a></li></ul></div>
-      <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
+      <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/terapija-s-pomocjo-konja/">Kaj je terapija s pomočjo konja</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
     </div>
     <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma</span><span>Povezujemo izvajalce, družine, ustanove in podpornike.</span></div>
   </div>
@@ -252,6 +252,20 @@ home = f"""
   </div>
 </section>
 
+
+<section class="section what">
+  <div class="wrap split">
+    <div class="head"><p class="kicker">Kaj je terapija s pomočjo konja?</p><h2>Konj kot sodelavec v strokovnem delu</h2>
+      <p class="lede">Pri intervencijah s pomočjo konj usposobljen strokovnjak vključi konja v svoje delo, da bi s posameznikom ali skupino dosegel jasno zastavljene cilje: gibalne, čustvene, socialne ali učne.</p>
+      <p class="what-p">Strokovnjak ima temeljno izobrazbo, na primer iz fizioterapije, delovne terapije, psihologije ali specialne pedagogike, in dodatno usposabljanje za delo s konjem. Konj je posebej izbran in pripravljen, srečanja pa potekajo po načrtu in v varnem okolju.</p>
+      <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="/terapija-s-pomocjo-konja/">Več o terapiji s pomočjo konja</a><a class="btn btn-ghost" href="/hipoterapija/">Hipoterapija</a></div></div>
+    <div class="what-cards">
+      <div class="wc">{badge("heart")}<div><b>Terapija</b><p>Zdravstvena, psihološka ali delovnoterapevtska obravnava. Sem sodi tudi hipoterapija.</p></div></div>
+      <div class="wc">{badge("book")}<div><b>Učenje</b><p>Pedagoške in specialnopedagoške intervencije za pozornost, učenje in socialne veščine.</p></div></div>
+      <div class="wc">{badge("sun")}<div><b>Aktivnosti</b><p>Prilagojeno jahanje, nega in druženje s konji z rekreativnim ali izobraževalnim namenom.</p></div></div>
+    </div>
+  </div>
+</section>
 
 <section class="section white">
   <div class="wrap">
@@ -549,6 +563,48 @@ pages.append(page("/za-podpornike/", "Za donatorje in fundacije", "Podjetja, fun
     <div class="opp-bar"><span>Zbrano</span><div><i></i></div></div>
   </div>
 </div></section>""" + form_section("podpora", "Interes", "Izrazite interes za podporo", "Odgovorimo s predlogom programov, ki ustrezajo vašim željam.", supporter_form()), "/za-podpornike/"))
+
+# ================= TERAPIJA S POMOČJO KONJA =================
+pages.append(page("/terapija-s-pomocjo-konja/", "Terapija s pomočjo konja", "Kaj so intervencije s pomočjo konj, zakaj konj, katera področja obstajajo, kako poteka srečanje in kdo jih izvaja.",
+                  hero("Razlaga", "Kaj je terapija s pomočjo konja?", "Intervencije s pomočjo konj so strokovno vodeno delo, pri katerem usposobljen strokovnjak vključi konja v obravnavo, učenje ali aktivnost, da bi s posameznikom ali skupino dosegel jasno zastavljene cilje.",
+                       '<a class="btn btn-dark" href="#vodnik-start">Poiščite ustrezen pristop</a><a class="btn btn-ghost" href="/izvajalci/">Centri</a>', seed=26) + f"""
+<section class="section white"><div class="wrap">
+  <div class="head"><p class="kicker">Zakaj konj</p><h2>Kaj konj prinese v strokovno delo</h2></div>
+  <div class="goals four">
+    <div>{badge("people")}<b>Odziven sogovornik</b><span>Konj se odziva na telesno govorico, napetost in umirjenost človeka. Ne ocenjuje in ne obsoja, odziva pa se takoj.</span></div>
+    <div>{badge("move")}<b>Ritmično gibanje</b><span>Konj v koraku premika telo jahača podobno kot človeška hoja. To uporablja hipoterapija.</span></div>
+    <div>{badge("shield")}<b>Velikost in meje</b><span>Delo z veliko živaljo zahteva jasnost, mirnost in spoštovanje meja, svojih in konjevih.</span></div>
+    <div>{badge("leaf")}<b>Okolje in rutina</b><span>Hlev, pašnik in skrb za konja ustvarijo predvidljivo okolje zunaj ambulante ali učilnice.</span></div>
+  </div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="head"><p class="kicker">Področja</p><h2>Tri področja, različne stroke</h2><p class="lede">Pomembno je, kaj želite doseči. Od tega je odvisno, kateri pristop in kateri strokovnjak sta primerna.</p></div>
+  <div class="areas">
+    <div class="area">{badge("heart", "lg")}<h3>Terapija</h3><p>Zdravstvena, psihološka ali delovnoterapevtska obravnava z jasnimi terapevtskimi cilji.</p><ul><li><a href="/hipoterapija/">Hipoterapija</a></li><li>Terapija s pomočjo konja</li><li>Psihosocialne intervencije</li><li>Delovnoterapevtske intervencije</li></ul><p class="who"><b>Izvajajo:</b> fizioterapevti, delovni terapevti, psihologi, psihoterapevti, socialni delavci z dodatnim usposabljanjem.</p></div>
+    <div class="area">{badge("book", "lg")}<h3>Učenje</h3><p>Strukturirano delo ob konju za pozornost, samoregulacijo, komunikacijo in socialne veščine.</p><ul><li>Pedagoške intervencije</li><li>Specialnopedagoške intervencije</li></ul><p class="who"><b>Izvajajo:</b> specialni in socialni pedagogi, učitelji, vzgojitelji z dodatnim usposabljanjem.</p></div>
+    <div class="area">{badge("sun", "lg")}<h3>Aktivnosti</h3><p>Rekreacija, gibanje in druženje ob konjih. Podporni ali izobraževalni namen, ni terapija.</p><ul><li>Prilagojeno jahanje</li><li>Aktivnosti s konji</li></ul><p class="who"><b>Izvajajo:</b> inštruktorji jahanja in strokovni sodelavci z usposabljanjem.</p></div>
+  </div>
+</div></section>
+<section class="section white"><div class="wrap">
+  <div class="head"><p class="kicker">Srečanje</p><h2>Kako običajno poteka</h2></div>
+  <ol class="journey">
+    <li><div>{badge("message", "ring")}<b>Pogovor in cilji</b><span>Strokovnjak spozna udeleženca in skupaj določita, kaj želita doseči.</span></div></li>
+    <li><div>{badge("leaf", "ring")}<b>Na tleh</b><span>Spoznavanje konja, nega, vodenje in opazovanje.</span></div></li>
+    <li><div>{badge("move", "ring")}<b>Na konju</b><span>Kadar je primerno in varno, delo poteka tudi na konju.</span></div></li>
+    <li><div>{badge("chart", "ring")}<b>Spremljanje</b><span>Pogovor o doživetem in spremljanje napredka skozi več srečanj.</span></div></li>
+  </ol>
+</div></section>
+<section class="section"><div class="wrap split">
+  <div class="head"><p class="kicker">Varnost in dobrobit</p><h2>Dobro za človeka in za konja</h2><p class="lede">Strokovni programi skrbijo za varnost udeležencev in za dobrobit konj: konji imajo dovolj počitka, ustrezno delovno obremenitev in so izbrani glede na svoj značaj.</p>
+    <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/strokovni-okvir/">Strokovni okvir in smernice</a></div></div>
+  <div class="path"><p class="path-t">Vprašajte izvajalca</p><ol>
+    <li>{badge("book")}<div><b>Kakšna je vaša temeljna stroka?</b><span>In kje ste se usposobili za delo s konjem?</span></div></li>
+    <li>{badge("target")}<div><b>Kakšni so cilji programa?</b><span>In kako bomo spremljali napredek?</span></div></li>
+    <li>{badge("shield")}<div><b>Kako skrbite za varnost?</b><span>Oprema, vodnik konja, zavarovanje.</span></div></li>
+    <li>{badge("leaf")}<div><b>Kako skrbite za konje?</b><span>Počitek, obremenitev, izbor konj.</span></div></li>
+  </ol></div>
+</div></section>
+{guide_widget()}"""))
 
 # ================= STROKOVNI OKVIR =================
 pages.append(page("/strokovni-okvir/", "Strokovni okvir", "Zavod Nazaj na konja kot izobraževalno in strokovno središče, register usposobljenih strokovnjakov in mednarodne smernice HETI.",
