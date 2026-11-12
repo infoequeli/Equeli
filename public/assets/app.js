@@ -1,4 +1,4 @@
-/* EQUELI – meni, glava, generativna vizualija in interaktivni vodnik. Brez piškotkov in brez zbiranja podatkov. */
+/* Equeli – meni, glava, generativna vizualija in interaktivni vodnik. Brez piškotkov in brez zbiranja podatkov. */
 (function () {
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -112,7 +112,7 @@
       '<div class="tags">' + n.tags.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>' +
       '<p style="margin-top:24px;font-weight:600;font-size:15px">Vprašanja za izvajalca</p><ul>' + n.q.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') + '</ul>' +
       '<div class="btn-row" style="margin-top:26px"><a class="btn btn-dark btn-sm" href="' + link(n.url) + '">Odprite vodnik <span class="arr">→</span></a><a class="btn btn-ghost btn-sm" href="' + link('kontakt/') + '">Pomagamo poiskati izvajalca</a></div>' +
-      '<p class="note">O primernosti programa vedno odloči usposobljen strokovnjak. EQUELI ne svetuje o zdravljenju.</p>';
+      '<p class="note">O primernosti programa odloči usposobljen strokovnjak.</p>';
   }
   whoBox.addEventListener('click', function (e) {
     var b = e.target.closest('[data-who]'); if (!b) return;

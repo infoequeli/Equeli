@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""EQUELI – generator statične spletne strani.
+"""Equeli – generator statične spletne strani.
 
 Vsebino urejaš v content.py. Nato zaženi:  python3 build.py
 Rezultat je mapa public/, ki jo objavi Cloudflare Pages.
@@ -16,7 +16,7 @@ ARR = '<span class="arr" aria-hidden="true">→</span>'
 
 # mehki prelivi za vizualne ploščice (po vrsti za vodnike)
 TILES = [("#f3f8f7", "#a9cdca")] * 7
-# izvirna ilustracija konjske glave (EQUELI), uporabljena v glavi, naslovni sliki in ploščicah
+# izvirna ilustracija konjske glave (Equeli), uporabljena v glavi, naslovni sliki in ploščicah
 HORSE_INNER = (
     '<g fill="none" stroke="#1d1b19" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke">'
     '<path vector-effect="non-scaling-stroke" d="M108 400 C98 300 118 172 212 100"/>'
@@ -65,7 +65,7 @@ def aura(seed=1):
 
 def page(path, title, desc, body, active=""):
     nav = "".join(f'<a href="{u}"{" aria-current=" + chr(34) + "page" + chr(34) if u == active else ""}>{t}</a>' for u, t in NAV)
-    full = title if title.startswith("EQUELI") else f"{title} · EQUELI"
+    full = title if title.startswith("Equeli") else f"{title} · Equeli"
     out = f"""<!doctype html>
 <html lang="sl">
 <head>
@@ -75,7 +75,7 @@ def page(path, title, desc, body, active=""):
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{SITE}{path}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="EQUELI">
+<meta property="og:site_name" content="Equeli">
 <meta property="og:title" content="{e(full)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{SITE}{path}">
@@ -90,7 +90,7 @@ def page(path, title, desc, body, active=""):
 <a class="skip" href="#vsebina">Preskoči na vsebino</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="EQUELI, domov">{LOGO}EQUELI</a>
+    <a class="logo" href="/" aria-label="Equeli, domov">{LOGO}Equeli</a>
     <nav class="nav" id="nav" aria-label="Glavni meni">{nav}</nav>
     <a class="btn btn-ghost btn-sm cta" href="/za-izvajalce/">Za izvajalce</a>
     <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Odpri meni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg></button>
@@ -102,12 +102,12 @@ def page(path, title, desc, body, active=""):
 <footer class="site-footer">
   <div class="wrap">
     <div class="fgrid">
-      <div><a class="logo" href="/">{LOGO}EQUELI</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
+      <div><a class="logo" href="/">{LOGO}Equeli</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
       <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Imenik izvajalcev</a></li></ul></div>
       <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/kontakt/">Podjetja in fundacije</a></li></ul></div>
-      <div><h2>EQUELI</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
+      <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
     </div>
-    <div class="legal"><span>© {date.today().year} EQUELI · Neodvisna platforma</span><span>Uvrstitev na EQUELI ni strokovna akreditacija. EQUELI ne izvaja terapij in ne posreduje plačil.</span></div>
+    <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma</span><span>Povezujemo izvajalce, družine, ustanove in podpornike.</span></div>
   </div>
 </footer>
 <script src="/assets/app.js" defer></script>
@@ -172,7 +172,7 @@ TRUST = """
 <section class="section sand">
   <div class="wrap trust">
     <div class="head" style="margin-bottom:0"><p class="kicker">Preverjanje</p><h2>Kako preverjamo podatke</h2>
-      <p class="lede">Podatke preverjamo pri izvajalcih in z obiski. Profil objavimo, ko ga izvajalec potrdi. Uvrstitve ni mogoče plačati in ni strokovna akreditacija.</p>
+      <p class="lede">Podatke preverjamo pri izvajalcih, z obiski in v registru usposobljenih strokovnjakov. Profil objavimo, ko ga izvajalec potrdi. Vrstni red izvajalcev ni odvisen od plačil.</p>
       <div class="btn-row" style="margin-top:32px"><a class="link-arrow" href="/uredniska-politika/">Uredniška politika →</a></div></div>
     <div>
       <div class="figures">
@@ -236,7 +236,7 @@ home = f"""
   </div>
 </section>
 """
-pages.append(page("/", "EQUELI · Intervencije s pomočjo konj v Sloveniji",
+pages.append(page("/", "Equeli · Intervencije s pomočjo konj v Sloveniji",
                   "Neodvisna platforma za intervencije s pomočjo konj v Sloveniji: vodniki za starše, izvajalci za šole in zavode.", home))
 
 # ================= ZA STARŠE =================
@@ -267,8 +267,8 @@ parents += f"""
     <div class="head"><p class="kicker">Pogosta vprašanja</p><h2>Pogosta vprašanja</h2></div>
     <details><summary>Ali potrebujemo napotnico ali diagnozo?</summary><div>Za večino programov ne. Nekateri izvajalci pred vključitvijo, zlasti pri hipoterapiji, zahtevajo mnenje zdravnika ali fizioterapevta. Vprašajte izvajalca vnaprej.</div></details>
     <details><summary>Koliko stane?</summary><div>Cene se razlikujejo glede na pristop, trajanje in obliko. Nekateri programi v javnih zavodih in društvih so sofinancirani. Vprašajte izvajalca za ceno srečanja in cikla ter za morebitno sofinanciranje.</div></details>
-    <details><summary>Kako vem, da je izvajalec usposobljen?</summary><div>Vprašajte za temeljno izobrazbo, dodatno usposabljanje za delo s konjem in vpis v strokovni register. EQUELI bo pri vsakem profilu označil, kaj je preverjeno.</div></details>
-    <details><summary>Ali lahko EQUELI presodi, kaj je primerno za mojega otroka?</summary><div>Ne. EQUELI pomaga z informacijami in iskanjem. O primernosti odloči usposobljen strokovnjak po osebnem pogovoru.</div></details>
+    <details><summary>Kako vem, da je izvajalec usposobljen?</summary><div>Vprašajte za temeljno izobrazbo, dodatno usposabljanje za delo s konjem in vpis v strokovni register. Equeli bo pri vsakem profilu označil, kaj je preverjeno.</div></details>
+    <details><summary>Ali lahko Equeli presodi, kaj je primerno za mojega otroka?</summary><div>Ne. Equeli pomaga z informacijami in iskanjem. O primernosti odloči usposobljen strokovnjak po osebnem pogovoru.</div></details>
     <div class="cta-card"><h2>Pomoč pri iskanju izvajalca</h2><p>Sporočite regijo in starost. Odgovorimo z informacijami iz raziskovalne baze.</p><div class="btn-row"><a class="btn btn-light" href="/kontakt/">Pišite nam</a></div></div>
   </div>
 </section>"""
@@ -313,7 +313,7 @@ schools += f"""
   <div class="wrap narrow">
     <div class="head"><p class="kicker">Pogosta vprašanja</p><h2>Pogosta vprašanja</h2></div>
     <details><summary>Ali programi potekajo na naši lokaciji?</summary><div>Praviloma potekajo pri izvajalcu, kjer so konji in ustrezna infrastruktura. Zato je pomembno vnaprej urediti prevoz. Nekateri izvajalci ponujajo predavanja tudi na vaši lokaciji.</div></details>
-    <details><summary>Kdo sklene pogodbo in komu plačamo?</summary><div>Ustanova sklene dogovor neposredno z izvajalcem in mu plača neposredno. EQUELI ne posreduje plačil in ne zaračunava povezovanja.</div></details>
+    <details><summary>Kdo sklene pogodbo in komu plačamo?</summary><div>Ustanova sklene dogovor in plača neposredno izvajalcu. Povezovanje prek Equeli je brezplačno.</div></details>
     <details><summary>Kako lahko program financiramo?</summary><div>Ustanove programe financirajo iz lastnih sredstev, prispevkov staršev, razpisov ali s podporo podjetij. Če potrebujete dodatno financiranje, to označite v povpraševanju.</div></details>
     <details><summary>Kakšne soglasja potrebujemo?</summary><div>Za mladoletne udeležence potrebujete soglasje staršev za udeležbo. Za fotografiranje in snemanje je potrebno ločeno soglasje.</div></details>
     <div class="cta-card"><h2>Povpraševanje ustanove</h2><p>Izpolnjevanje traja približno 5 minut. Odgovorimo v nekaj delovnih dneh.</p><div class="btn-row"><a class="btn btn-light" href="{FORMS['ustanove']}">Oddajte povpraševanje</a><a class="btn btn-line" href="/kontakt/">Vprašajte nas</a></div></div>
@@ -340,7 +340,7 @@ for i, g in enumerate(GUIDES):
   <p>{e(g["slovenia"])}</p>
   {alert}
   <div class="cta-card"><h2>Pomoč pri iskanju izvajalca</h2><p>Sporočite regijo in starost. Dokler imenik ni objavljen, odgovorimo z informacijami iz raziskovalne baze.</p><div class="btn-row"><a class="btn btn-light" href="/kontakt/">Pišite nam</a><a class="btn btn-line" href="/kako-izbrati/">Kako izbrati program</a></div></div>
-  <p class="fine">EQUELI ne svetuje o zdravljenju in ne ocenjuje primernosti programov. O primernosti odloči usposobljen strokovnjak. Zadnja posodobitev {UPDATED}.</p>
+  <p class="fine">Vodnik je informativen. O primernosti programa odloči usposobljen strokovnjak. Zadnja posodobitev {UPDATED}.</p>
   <p class="fine" style="margin-top:10px">Drugi vodniki: {others}</p>
 </div>"""
     pages.append(page(f"/vodnik/{g['slug']}/", g["title"], g["lede"], body, "/vodnik/"))
@@ -378,7 +378,7 @@ pages.append(page("/izvajalci/", "Imenik izvajalcev", "Nacionalni imenik izvajal
 
 # ================= ZA IZVAJALCE =================
 pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pomočjo konj lahko brezplačno potrdijo in dopolnijo podatke o svojem centru.",
-                  hero("Za izvajalce", "Predstavite svoj center", "EQUELI pripravlja neodvisen pregled intervencij s pomočjo konj v Sloveniji. Predstavitev je brezplačna, profil objavimo šele po vaši potrditvi.",
+                  hero("Za izvajalce", "Predstavite svoj center", "Equeli pripravlja neodvisen pregled intervencij s pomočjo konj v Sloveniji. Predstavitev je brezplačna, profil objavimo šele po vaši potrditvi.",
                        f'<a class="btn btn-dark" href="{FORMS["izvajalci"]}">Izpolnite obrazec</a><a class="btn btn-ghost" href="/kontakt/">Imate vprašanje?</a>', seed=14) + f"""
 <section class="section white"><div class="wrap">
   <div class="head"><p class="kicker">Kako poteka</p><h2>Potek</h2></div>
@@ -387,23 +387,24 @@ pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pom
 <div class="wrap narrow article">
   <h2>Kaj vas bomo vprašali</h2>
   <ul><li>organizacija, lokacije izvajanja in kontaktna oseba,</li><li>strokovna ekipa, izobrazba in usposabljanje za delo s konjem,</li><li>programi, starostne skupine, oblike, trajanje in cena (če jo želite objaviti),</li><li>konji, infrastruktura in dostopnost,</li><li>sodelovanja ter interes za povezovanje s šolami in zunanje financirane projekte.</li></ul>
-  <div class="callout"><strong>Kaj bo javno in kaj ne.</strong> Javno objavimo samo podatke o organizaciji, ekipi in programih, ki jih potrdite. Podatki o zmogljivostih, omejitvah, financiranju in sodelovanjih ostanejo zasebni. Uvrstitev na EQUELI ni strokovna akreditacija.</div>
+  <div class="callout"><strong>Kaj bo javno in kaj ne.</strong> Javno objavimo samo podatke o organizaciji, ekipi in programih, ki jih potrdite. Podatki o zmogljivostih, omejitvah, financiranju in sodelovanjih ostanejo zasebni.</div>
   <div class="cta-card"><h2>Obrazec za izvajalce</h2><p>Manjkajoče podatke lahko dopolnimo naknadno.</p><div class="btn-row"><a class="btn btn-light" href="{FORMS['izvajalci']}">Izpolnite obrazec</a></div></div>
 </div>""", "/za-izvajalce/"))
 
-# ================= O EQUELI =================
-pages.append(page("/o-equeli/", "O Equeli", "EQUELI je neodvisna platforma za intervencije s pomočjo konj v Sloveniji.",
-                  hero("O Equeli", "O platformi EQUELI", "EQUELI zbira in preverja informacije o izvajalcih, pristopih in možnostih vključevanja po vsej Sloveniji, da bi ljudje lažje našli zanesljive informacije in ustrezne programe.", seed=15) + """
+# ================= O Equeli =================
+pages.append(page("/o-equeli/", "O Equeli", "Equeli je neodvisna platforma za intervencije s pomočjo konj v Sloveniji.",
+                  hero("O Equeli", "O platformi Equeli", "Equeli zbira in preverja informacije o izvajalcih, pristopih in možnostih vključevanja po vsej Sloveniji, da bi ljudje lažje našli zanesljive informacije in ustrezne programe.", seed=15) + """
 <div class="wrap narrow article">
   <h2>Komu je namenjen</h2><p>Družinam, ki iščejo podporo za svoje otroke; šolam in zavodom, ki iščejo izvajalce; strokovnjakom in centrom, ki želijo predstaviti svoje delo; ter podjetjem in fundacijam, ki želijo podpreti dostopnost programov.</p>
-  <h2>Kaj EQUELI ni</h2><p>EQUELI ne izvaja terapij, ni zdravstvena ustanova, ni jahalna šola in ne podeljuje strokovnih nazivov. Uvrstitev na EQUELI ni akreditacija. EQUELI ne zbira donacij in ne posreduje plačil.</p>
+  <h2>Usposobljeni strokovnjaki</h2><p>Pri preverjanju usposobljenosti izvajalcev se opiramo na register usposobljenih strokovnjakov za intervencije s pomočjo konj, ki ga vodi <a href="https://nakonju.si/">Zavod Nazaj na konja</a>. Pri vsakem profilu je jasno označeno, katera usposobljenost je preverjena.</p>
+  <h2>Povezovanje</h2><p>Prizadevamo si za jasno in učinkovito povezovanje med izvajalci, uporabniki, vlagatelji in javnimi ustanovami. Družine hitreje najdejo ustrezen program, šole in zavodi preverjene izvajalce, podjetja in fundacije pa konkretne programe, ki jih lahko podprejo. Dogovori in plačila potekajo neposredno med sodelujočimi.</p>
   <h2>Raziskovalna pobuda</h2><p>Obiskujemo izvajalce po Sloveniji. Zanima nas, kako delajo, kakšne so njihove zmogljivosti, kje so ovire pri dostopnosti in katera sodelovanja bi pomagala. Zasebni raziskovalni zapiski so ločeni od javnih vsebin.</p>
-  <h2>Ustanoviteljica</h2><p>EQUELI je ustanovila Ela Rebolj. Opravila je usposabljanje pri Zavodu Nazaj na konja in je v preteklosti izvajala aktivnosti s pomočjo konj. Danes ne izvaja lastnih programov; platformo vodi kot neodvisna urednica in raziskovalka.</p>
+  <h2>Ustanoviteljica</h2><p>Equeli je ustanovila Ela Rebolj. Opravila je usposabljanje pri Zavodu Nazaj na konja in je v preteklosti izvajala aktivnosti s pomočjo konj. Danes ne izvaja lastnih programov; platformo vodi kot neodvisna urednica in raziskovalka.</p>
   <div class="btn-row" style="margin-top:36px"><a class="btn btn-dark" href="/kontakt/">Kontakt</a><a class="btn btn-ghost" href="/uredniska-politika/">Uredniška politika</a></div>
 </div>""", "/o-equeli/"))
 
 # ================= KONTAKT =================
-pages.append(page("/kontakt/", "Kontakt", "Pišite EQUELI za pomoč pri iskanju izvajalca, popravke podatkov, sodelovanje ali podporo programom.",
+pages.append(page("/kontakt/", "Kontakt", "Pišite Equeli za pomoč pri iskanju izvajalca, popravke podatkov, sodelovanje ali podporo programom.",
                   hero("Kontakt", "Kontakt", "Za pomoč pri iskanju izvajalca, popravke podatkov, sodelovanje ali podporo programom. Odgovorimo v nekaj delovnih dneh.",
                        f'<a class="btn btn-dark" href="{FORMS["kontakt"]}">Odprite obrazec</a>', seed=16) + f"""
 <div class="wrap narrow article">
@@ -412,18 +413,18 @@ pages.append(page("/kontakt/", "Kontakt", "Pišite EQUELI za pomoč pri iskanju 
 </div>"""))
 
 # ================= PRAVNO =================
-pages.append(page("/zasebnost/", "Obvestilo o zasebnosti", "Kako EQUELI obdeluje osebne podatke.",
+pages.append(page("/zasebnost/", "Obvestilo o zasebnosti", "Kako Equeli obdeluje osebne podatke.",
                   hero("Pravno", "Obvestilo o zasebnosti", f"Zadnja posodobitev: {UPDATED}", seed=17) + f"""
 <div class="wrap narrow article">
-  <h2>Upravljavec</h2><p>EQUELI, Ela Rebolj, e-pošta: {EMAIL}.</p>
+  <h2>Upravljavec</h2><p>Equeli, Ela Rebolj, e-pošta: {EMAIL}.</p>
   <h2>Katere podatke zbiramo</h2><ul><li><strong>Obrazec za izvajalce:</strong> podatki o organizaciji, ekipi, programih in kontaktni osebi, za pripravo profila in povezovanje.</li><li><strong>Povpraševanje ustanove:</strong> podatki o ustanovi, kontaktni osebi in opis potreb skupine.</li><li><strong>Kontaktni obrazec:</strong> ime, e-pošta in sporočilo, za odgovor.</li></ul>
   <p>Pravna podlaga je vaša privolitev ob oddaji obrazca. Ne zbiramo zdravstvenih podatkov o posameznikih.</p>
   <h2>Spletna stran</h2><p>Stran ne uporablja piškotkov za sledenje ali oglaševanje. Interaktivni vodnik ne shranjuje vaših izbir. Pisave nalagamo prek storitve Bunny Fonts, ki ne beleži osebnih podatkov. Stran gostuje pri Cloudflare.</p>
-  <h2>Kje so podatki iz obrazcev</h2><p>Oddaje obrazcev se shranijo pri ponudniku obrazcev (WordPress.com) in se posredujejo na e-poštni naslov EQUELI (Google). Hranimo jih, dokler je potrebno za namen, ali do preklica privolitve.</p>
+  <h2>Kje so podatki iz obrazcev</h2><p>Oddaje obrazcev se shranijo pri ponudniku obrazcev (WordPress.com) in se posredujejo na e-poštni naslov Equeli (Google). Hranimo jih, dokler je potrebno za namen, ali do preklica privolitve.</p>
   <h2>Kaj objavimo</h2><p>Javno objavimo samo podatke, ki jih je izvajalec potrdil. Fotografije in video objavimo le z ločenim soglasjem vsake osebe.</p>
   <h2>Vaše pravice</h2><p>Kadar koli lahko zahtevate dostop, popravek ali izbris podatkov ter prekličete privolitev na {EMAIL}. Pritožbo lahko vložite pri Informacijskem pooblaščencu Republike Slovenije.</p>
 </div>"""))
-pages.append(page("/uredniska-politika/", "Uredniška politika", "Neodvisnost, preverjanje in popravki na EQUELI.",
+pages.append(page("/uredniska-politika/", "Uredniška politika", "Neodvisnost, preverjanje in popravki na Equeli.",
                   hero("Pravno", "Uredniška politika", "Kako pripravljamo in preverjamo vsebine.", seed=18) + f"""
 <div class="wrap narrow article">
   <h2>Neodvisnost</h2><p>Vsebine pripravljamo neodvisno. Izvajalci ne plačujejo za uvrstitev ali boljši položaj v rezultatih.</p>
@@ -431,7 +432,7 @@ pages.append(page("/uredniska-politika/", "Uredniška politika", "Neodvisnost, p
   <h2>Strokovne trditve</h2><p>Ne objavljamo nepodprtih trditev o učinkih programov. Primernost programa vedno oceni usposobljen strokovnjak.</p>
   <h2>Popravki</h2><p>Če opazite napako, nam pišite na {EMAIL}. Popravili jo bomo v najkrajšem času.</p>
 </div>"""))
-pages.append(page("/dostopnost/", "Izjava o dostopnosti", "Izjava o dostopnosti spletne strani EQUELI.",
+pages.append(page("/dostopnost/", "Izjava o dostopnosti", "Izjava o dostopnosti spletne strani Equeli.",
                   hero("Pravno", "Izjava o dostopnosti", "Stran je zasnovana tako, da jo lahko uporabljajo vsi.", seed=19) + f"""
 <div class="wrap narrow article">
   <p>Sledimo smernicam WCAG 2.2, raven AA: stran deluje s tipkovnico, ima vidne oznake fokusa, zadosten kontrast in povezavo za preskok na vsebino. Animacije se izklopijo, če ste jih zmanjšali v nastavitvah naprave.</p>

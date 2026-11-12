@@ -1,4 +1,4 @@
-"""EQUELI – vsebina strani. Tu urejaš besedila; nato zaženi: python3 build.py"""
+"""Equeli – vsebina strani. Tu urejaš besedila; nato zaženi: python3 build.py"""
 
 SITE = "https://equeli.info-equeli.workers.dev"          # zamenjaj z lastno domeno, ko bo
 EMAIL = "info.equeli@gmail.com"
@@ -39,7 +39,7 @@ GUIDES = [
                    "Kako otroka pripravite na novo okolje? Je mogoč predhodni ogled?",
                    "Kako boste postavili cilje in ali sodelujete s šolo ali drugimi strokovnjaki?",
                    "Kaj se zgodi, če otrok med srečanjem potrebuje premor?"],
-     "slovenia": "V raziskovalni bazi EQUELI vsaj 6 izvajalcev v javnih opisih izrecno navaja delo z otroki z avtizmom, med njimi samostojni strokovnjaki in konjeniški centri v več regijah. Podatke še preverjamo."},
+     "slovenia": "V raziskovalni bazi Equeli vsaj 6 izvajalcev v javnih opisih izrecno navaja delo z otroki z avtizmom, med njimi samostojni strokovnjaki in konjeniški centri v več regijah. Podatke še preverjamo."},
     {"slug": "gibalne-tezave", "title": "Cerebralna paraliza in gibalne težave",
      "card": "Hipoterapija, delovna terapija s konjem in prilagojeno jahanje.",
      "lede": "Za otroke in odrasle z gibalnimi izzivi ter njihove bližnje. Kaj je hipoterapija, kako se razlikuje od prilagojenega jahanja in kje se izvaja.",
@@ -52,7 +52,7 @@ GUIDES = [
                    "Kako je urejeno nameščanje na konja (rampa, podest, pomoč)?",
                    "Ali je prostor dostopen z vozičkom? Ali so na voljo dostopne sanitarije?",
                    "Kako spremljate napredek in kako pogosto se srečujemo?"],
-     "slovenia": "Hipoterapijo izvajajo nekateri centri za usposabljanje, delo in varstvo (CUDV), CIRIUS Kamnik in zasebni izvajalci. Društva Sonček za cerebralno paralizo v več regijah organizirajo hipoterapijo ali terapevtsko jahanje za svoje člane, zato je dobro vprašati tudi pri društvu v vaši regiji. V raziskovalni bazi EQUELI je 20 organizacij, ki navajajo hipoterapijo, delovno terapijo s konjem ali delo z gibalnimi izzivi."},
+     "slovenia": "Hipoterapijo izvajajo nekateri centri za usposabljanje, delo in varstvo (CUDV), CIRIUS Kamnik in zasebni izvajalci. Društva Sonček za cerebralno paralizo v več regijah organizirajo hipoterapijo ali terapevtsko jahanje za svoje člane, zato je dobro vprašati tudi pri društvu v vaši regiji. V raziskovalni bazi Equeli je 20 organizacij, ki navajajo hipoterapijo, delovno terapijo s konjem ali delo z gibalnimi izzivi."},
     {"slug": "adhd", "title": "ADHD in težave s pozornostjo",
      "card": "Pozornost, samoregulacija in samozavest, povezano s šolo.",
      "lede": "Za starše otrok, ki težko ohranjajo pozornost, so zelo nemirni ali impulzivni. Kateri programi s konji obstajajo in kako izbrati.",
@@ -63,7 +63,7 @@ GUIDES = [
      "questions": ["Kakšne izkušnje imate z otroki z ADHD?", "Kako je srečanje strukturirano in koliko traja?",
                    "Ali je program individualen ali v skupini?", "Ali sodelujete z učitelji ali šolsko svetovalno službo?",
                    "Kako boste skupaj z nami spremljali napredek?"],
-     "slovenia": "V raziskovalni bazi EQUELI vsaj 4 izvajalci v javnih opisih izrecno navajajo ADHD ali težave s pozornostjo, več pa jih navaja učne in vedenjske težave. Podatke še preverjamo."},
+     "slovenia": "V raziskovalni bazi Equeli vsaj 4 izvajalci v javnih opisih izrecno navajajo ADHD ali težave s pozornostjo, več pa jih navaja učne in vedenjske težave. Podatke še preverjamo."},
     {"slug": "motnje-v-dusevnem-razvoju", "title": "Downov sindrom in motnje v duševnem razvoju",
      "card": "Gibanje, komunikacija, samostojnost in druženje, za otroke in odrasle.",
      "lede": "Za otroke in odrasle ter njihove bližnje. Programi s konji lahko podpirajo gibanje, komunikacijo, samostojnost in druženje.",
@@ -73,7 +73,7 @@ GUIDES = [
      "approaches": "TDHJ",
      "questions": ["Ali imate izkušnje s to skupino, tudi z odraslimi?", "Ali pred vključitvijo potrebujete zdravniško mnenje?",
                    "Kako prilagodite komunikacijo in potek srečanja?", "Ali so mogoči skupinski programi ali tabori?"],
-     "slovenia": "Programe s konji izvajajo nekateri centri za usposabljanje, delo in varstvo (CUDV) ter zasebni izvajalci. V raziskovalni bazi EQUELI več izvajalcev izrecno navaja Downov sindrom ali motnje v duševnem razvoju. Podatke še preverjamo."},
+     "slovenia": "Programe s konji izvajajo nekateri centri za usposabljanje, delo in varstvo (CUDV) ter zasebni izvajalci. V raziskovalni bazi Equeli več izvajalcev izrecno navaja Downov sindrom ali motnje v duševnem razvoju. Podatke še preverjamo."},
     {"slug": "ucne-custvene-vedenjske-tezave", "title": "Učne, čustvene in vedenjske težave",
      "card": "Težave v šoli, z obvladovanjem čustev, vedenjem ali samozavestjo.",
      "lede": "Za starše otrok in mladostnikov, ki imajo težave v šoli, z obvladovanjem čustev, vedenjem ali samozavestjo.",
@@ -83,7 +83,7 @@ GUIDES = [
      "approaches": "PST",
      "questions": ["Kakšna je vaša temeljna stroka (pedagog, psiholog, socialni delavec)?", "Kako boste postavili cilje in kako bomo starši vključeni?",
                    "Ali ponujate tudi programe za šole ali skupine?", "Kdaj boste predlagali drugo obliko pomoči?"],
-     "slovenia": "V raziskovalni bazi EQUELI vsaj 8 izvajalcev izrecno navaja učne ali vedenjske težave, več kot 10 pa čustvene izzive. Nekateri ponujajo tudi programe za šole. Podatke še preverjamo."},
+     "slovenia": "V raziskovalni bazi Equeli vsaj 8 izvajalcev izrecno navaja učne ali vedenjske težave, več kot 10 pa čustvene izzive. Nekateri ponujajo tudi programe za šole. Podatke še preverjamo."},
     {"slug": "tesnoba-samopodoba-odnosi", "title": "Tesnoba, samopodoba in odnosi",
      "card": "Za mladostnike in odrasle: čustva, meje, zaupanje in samozavest.",
      "lede": "Za mladostnike in odrasle, ki iščejo podporo pri čustvih, samozavesti, mejah ali odnosih.",
@@ -93,7 +93,7 @@ GUIDES = [
      "approaches": "STA",
      "questions": ["Kakšno izobrazbo imate in ali ste vpisani v register svoje stroke?", "Kako poteka delo, če se med srečanjem odprejo težke vsebine?",
                    "Kako je poskrbljeno za zaupnost?", "Kdaj boste predlagali drugo obliko pomoči?"],
-     "slovenia": "V raziskovalni bazi EQUELI več kot 10 izvajalcev navaja čustvene izzive, samopodobo ali psihosocialno delo. Podatke še preverjamo.",
+     "slovenia": "V raziskovalni bazi Equeli več kot 10 izvajalcev navaja čustvene izzive, samopodobo ali psihosocialno delo. Podatke še preverjamo.",
      "alert": "<strong>Če ste v hudi stiski</strong>, ne čakajte na program. Obrnite se na osebnega zdravnika, pokličite Klic v duševni stiski (01 520 99 00) ali Samarijan (116 123). V nujnih primerih pokličite 112."},
     {"slug": "aktivnost-ob-konjih", "title": "Aktivnost ob konjih",
      "card": "Prilagojeno jahanje, druženje in čas v naravi, brez terapevtskih ciljev.",
@@ -106,6 +106,6 @@ GUIDES = [
                    "Kakšna varnostna oprema je na voljo (čelada, prilagojeno sedlo)?",
                    "Koliko ljudi pomaga pri jahanju (vodnik, spremljevalci ob strani)?",
                    "Ali so na voljo skupinski termini, tabori ali družinske aktivnosti?"],
-     "slovenia": "V raziskovalni bazi EQUELI je 20 organizacij, ki navajajo prilagojeno ali terapevtsko jahanje oziroma aktivnosti s konji: konjeniški klubi, društva, kmetije in centri. Podatke še preverjamo."},
+     "slovenia": "V raziskovalni bazi Equeli je 20 organizacij, ki navajajo prilagojeno ali terapevtsko jahanje oziroma aktivnosti s konji: konjeniški klubi, društva, kmetije in centri. Podatke še preverjamo."},
 ]
 
