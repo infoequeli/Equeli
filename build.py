@@ -10,6 +10,7 @@ from datetime import date
 from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES, ARTICLES, RUBRICS, CENTERS
 from icons import icon, badge
 from finder import finder
+from mapsvg import regions_map
 from forms import provider_form, school_form, contact_form, parent_form, supporter_form
 
 
@@ -146,10 +147,7 @@ GUIDE_ICONS = {"avtizem": "grid", "gibalne-tezave": "move", "adhd": "target", "m
 
 
 def regions_chart(full=False):
-    mx = max(n for _, n in REGIONS) or 1
-    rows = "".join(f'<li><span class="rg">{e(r)}</span><span class="bar"><i style="width:{max(n / mx * 100, 1.5):.0f}%"></i></span><span class="rn tnum">{n}</span></li>' for r, n in REGIONS)
-    total = sum(n for _, n in REGIONS)
-    return f'<figure class="regions"><figcaption><b>Organizacije v raziskovalni bazi po regijah</b><span>Stanje {UPDATED}. Organizacije, ki delujejo v več regijah, so štete v vsaki.</span></figcaption><ol>{rows}</ol></figure>'
+    return regions_map(REGIONS, f"Stanje {UPDATED}. Velikost kroga pomeni število organizacij. Organizacije v več regijah so štete v vsaki.")
 
 
 RUB = {k: (t, ic, d) for k, t, ic, d in RUBRICS}
@@ -305,7 +303,7 @@ home = f"""
 
 <section class="section white">
   <div class="wrap split">
-    <div class="head"><p class="kicker">Nacionalna raziskava</p><h2>Kartiramo področje po vsej Sloveniji</h2>
+    <div class="head"><p class="kicker">Nacionalna raziskava</p><h2>Kdo, kje in kako dela s konji v Sloveniji</h2>
       <p class="lede">Obiskujemo izvajalce, se pogovarjamo s strokovnjaki in zbiramo podatke o programih, zmogljivostih in ovirah pri dostopnosti.</p>
       <ul class="ilist"><li>{icon("pin")}Obiski in intervjuji na terenu</li><li>{icon("clipboard")}Vprašalnik za izvajalce</li><li>{icon("chart")}Pregled stanja in potreb</li></ul>
       <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/raziskava/">O raziskavi</a></div></div>
