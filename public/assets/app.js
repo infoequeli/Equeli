@@ -1,3 +1,4 @@
+document.documentElement.classList.add("js");
 /* Equeli – meni, glava, generativna vizualija in interaktivni vodnik. Brez piškotkov in brez zbiranja podatkov. */
 (function () {
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -270,4 +271,24 @@ document.querySelectorAll('.finder').forEach(function (root) {
   sel.addEventListener('change', apply);
   var m = location.hash.match(/^#(H|T|P|S|D|J|A)$/); if (m) { var b = f.querySelector('[data-offer="' + m[1] + '"]'); if (b) b.click(); }
   apply();
+})();
+
+
+/* anim-observer: animacije ob prikazu (grafi, zemljevid, štetje) */
+(function () {
+  var els = document.querySelectorAll('.anim'); if (!els.length) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function count(root) {
+    root.querySelectorAll('[data-count]').forEach(function (n) {
+      var to = +n.dataset.count; if (reduce || !to) { n.textContent = to; return; }
+      var t0 = null, d = 1100;
+      function step(t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / d); n.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); }
+      n.textContent = '0'; requestAnimationFrame(step);
+    });
+  }
+  if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (en) {
+    en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); count(x.target); io.unobserve(x.target); } });
+  }, { threshold: 0.25 });
+  els.forEach(function (e) { io.observe(e); });
 })();

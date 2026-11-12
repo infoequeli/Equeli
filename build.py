@@ -200,6 +200,20 @@ def center_cards(items):
 
 
 
+def research_dash():
+    from collections import Counter
+    cs = [c for c in CENTERS if c["group"] in ("javni", "register")]
+    cnt = Counter(o for c in cs for o in c["offer"])
+    horses = sum(int(c["horses"].split()[0]) for c in cs if c["horses"])
+    mx = max(cnt.values())
+    bars = "".join(f'<li><span class="ab-l">{OFFER[k]}</span><span class="ab-b"><i style="--w:{v / mx * 100:.0f}%"></i></span><b class="tnum" data-count="{v}">{v}</b></li>'
+                   for k, v in sorted(cnt.items(), key=lambda x: -x[1]))
+    tiles = [("46", "organizacij v raziskovalni bazi"), ("11", "od 12 regij z izvajalcem"), (str(len(cs)), "predstavljenih centrov in zavodov"), (str(horses), "terapevtskih konj pri predstavljenih centrih")]
+    t = "".join(f'<div class="dt"><b class="tnum" data-count="{v}">{v}</b><span>{l}</span></div>' for v, l in tiles)
+    return (f'<div class="dash anim"><div class="dtiles">{t}</div>'
+            f'<div class="abars"><p class="ab-t">Kaj ponujajo predstavljeni centri</p><ol>{bars}</ol></div></div>')
+
+
 def guide_cards():
     cards = "".join(f'<a class="gcard" href="/vodnik/{g["slug"]}/">{tile(i)}<div class="body">{badge(GUIDE_ICONS.get(g["slug"], "compass"))}<h3>{e(g["title"])}</h3><p>{e(g["card"])}</p><span class="go">Odprite vodnik</span></div></a>' for i, g in enumerate(GUIDES))
     return cards + f'<a class="gcard dark" href="/kako-izbrati/"><div class="body" style="justify-content:flex-end;min-height:260px"><h3 style="color:#fff">Ne vem, kje začeti</h3><p>Kratek vodnik in vprašanja za prvo odločitev.</p><span class="go">Začnite tukaj</span></div></a>'
@@ -307,6 +321,7 @@ home = f"""
       <p class="lede">Obiskujemo izvajalce, se pogovarjamo s strokovnjaki in zbiramo podatke o programih, zmogljivostih in ovirah pri dostopnosti.</p>
       <ul class="ilist"><li>{icon("pin")}Obiski in intervjuji na terenu</li><li>{icon("clipboard")}Vprašalnik za izvajalce</li><li>{icon("chart")}Pregled stanja in potreb</li></ul>
       <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/raziskava/">O raziskavi</a></div></div>
+    {research_dash()}
     {regions_chart()}
   </div>
 </section>
