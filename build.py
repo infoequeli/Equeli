@@ -231,7 +231,6 @@ PHOTOS = {
     "donors": ("https://images.pexels.com/photos/7698935/pexels-photo-7698935.jpeg", "Nasmejana deklica na poniju, ob njej voziček"),
     "stable": ("https://images.pexels.com/photos/7883330/pexels-photo-7883330.jpeg", "Konja v čistem, svetlem hlevu"),
     "pro": ("https://images.pexels.com/photos/7882832/pexels-photo-7882832.jpeg", "Strokovnjakinja ob rjavem konju"),
-    "alps": ("https://images.pexels.com/photos/27740063/pexels-photo-27740063.jpeg", "Konji na planinskem pašniku pod gorami"),
     "articles": ("https://images.pexels.com/photos/30507387/pexels-photo-30507387.jpeg", "Roka boža ponija v toplem hlevu"),
     "about": ("https://images.pexels.com/photos/7883130/pexels-photo-7883130.jpeg", "Dlan na konjevem obrazu"),
     "contact": ("https://images.pexels.com/photos/33312263/pexels-photo-33312263.jpeg", "Dekle se dotika konja v svetlem hlevu"),
@@ -240,9 +239,9 @@ PHOTOS = {
     "hipo": ("https://images.pexels.com/photos/7882523/pexels-photo-7882523.jpeg", "Otrok na konju ob vodenju strokovnjakinje"),
 }
 # Fotografije: Pexels (brezplačna licenca, pripis ni obvezen). Izbrane ročno po ogledu. Zamenjaj z lastnimi, ko bodo soglasja centrov.
-KICKER_PHOTO = {"Za starše in družine": "parents", "Za šole, vrtce in zavode": "school", "Centri": "stable", "Za izvajalce": "pro",
-                "O Equeli": "about", "Za donatorje in fundacije": "donors", "Razlaga": "therapy", "Raziskava": "alps",
-                "Članki in zgodbe": "articles", "Stroka": "stroka", "Pristop": "hipo", "Kontakt": "contact"}
+KICKER_PHOTO = {"Za starše in družine": "parents", "Za šole, vrtce in zavode": "school", "Centri": "contact", "Za izvajalce": "pro",
+                "O Equeli": "about", "Za donatorje in fundacije": "donors", "Razlaga": "therapy", "Raziskava": "meadow",
+                "Članki in zgodbe": "articles", "Stroka": "stroka", "Pristop": "hipo"}
 
 
 def photo(key, w=1200, cls="", eager=False):
@@ -335,7 +334,7 @@ home = f"""
   <div class="wrap">
     <div class="mo-grid">
       <figure class="mo reveal-img">{photo("touch", 900)}<figcaption><b>Dotik</b><span>Prvi stik pogosto ni na konju, ampak ob njem.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("meadow", 900)}<figcaption><b>Mir</b><span>Pašnik in mirni konji: okolje, ki umiri.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("stable", 900)}<figcaption><b>Mir</b><span>Urejen hlev in mirni konji.</span></figcaption></figure>
       <figure class="mo reveal-img">{photo("bond", 900)}<figcaption><b>Odnos</b><span>Konj se odzove na to, kako se mu približamo.</span></figcaption></figure>
       <figure class="mo reveal-img">{photo("care", 900)}<figcaption><b>Skrb</b><span>Nega konja je del srečanja.</span></figcaption></figure>
     </div>
