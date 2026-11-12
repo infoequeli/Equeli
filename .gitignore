@@ -1,0 +1,6 @@
+preview/
+mkpreview.py
+__pycache__/
+*.zip
+*.svg.tmp
+.DS_Store
