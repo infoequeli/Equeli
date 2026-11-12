@@ -7,7 +7,7 @@ Rezultat je mapa public/, ki jo objavi Cloudflare Pages.
 import html
 import os
 from datetime import date
-from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES, ARTICLES, RUBRICS
+from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES, ARTICLES, RUBRICS, CENTERS
 from icons import icon, badge
 from forms import provider_form, school_form, contact_form, parent_form, supporter_form
 
@@ -24,7 +24,7 @@ def _v(p):
 ASSET_V = {'css': _v('public/assets/style.css'), 'js': _v('public/assets/app.js')}
 
 NAV = [("/za-starse/", "Za starše"), ("/za-sole-in-zavode/", "Za šole in zavode"), ("/vodnik/", "Vodniki"),
-       ("/izvajalci/", "Imenik"), ("/raziskava/", "Raziskava"), ("/clanki/", "Članki"), ("/o-equeli/", "O Equeli")]
+       ("/izvajalci/", "Centri"), ("/strokovni-okvir/", "Stroka"), ("/raziskava/", "Raziskava"), ("/clanki/", "Članki"), ("/o-equeli/", "O Equeli")]
 ARR = '<span class="arr" aria-hidden="true">→</span>'
 
 # mehki prelivi za vizualne ploščice (po vrsti za vodnike)
@@ -116,9 +116,9 @@ def page(path, title, desc, body, active=""):
   <div class="wrap">
     <div class="fgrid">
       <div><a class="logo" href="/">{LOGO}Equeli</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
-      <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Imenik izvajalcev</a></li></ul></div>
+      <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Terapevtski centri</a></li></ul></div>
       <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Donatorji in vlagatelji</a></li></ul></div>
-      <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
+      <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
     </div>
     <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma</span><span>Povezujemo izvajalce, družine, ustanove in podpornike.</span></div>
   </div>
@@ -170,6 +170,19 @@ def articles_block(limit=None):
             f'<a class="link-arrow" href="/kontakt/#obrazec">Predlagajte zgodbo ali temo →</a></div></div><div class="rubrics">{rub}</div></div>')
 
 
+def center_cards(items):
+    out = []
+    for c in items:
+        meta = " · ".join(x for x in [c["place"], c["region"]] if x)
+        horses = f'<li>{icon("leaf")}<span>Terapevtski konji: {e(c["horses"])}</span></li>' if c["horses"] else ""
+        host = c["src"].split("/")[2].replace("www.", "")
+        out.append(f'<article class="center"><div class="center-top"><span class="chip">{e(c["kind"])}</span>{"<span class=chip-h>Hipoterapija</span>" if c["hipo"] else ""}</div>'
+                   f'<h3>{e(c["name"])}</h3><p class="center-meta">{icon("pin")}{e(meta)}</p><p class="center-focus">{e(c["focus"])}</p>'
+                   f'<ul class="center-facts"><li>{icon("people")}<span>{e(c["team"])}</span></li>{horses}</ul>'
+                   f'<a class="center-link" href="{c["src"]}" rel="noopener">{e(host)} →</a></article>')
+    return '<div class="centers">' + "".join(out) + '</div>'
+
+
 def guide_cards():
     cards = "".join(f'<a class="gcard" href="/vodnik/{g["slug"]}/">{tile(i)}<div class="body">{badge(GUIDE_ICONS.get(g["slug"], "compass"))}<h3>{e(g["title"])}</h3><p>{e(g["card"])}</p><span class="go">Odprite vodnik</span></div></a>' for i, g in enumerate(GUIDES))
     return cards + f'<a class="gcard dark" href="/kako-izbrati/"><div class="body" style="justify-content:flex-end;min-height:260px"><h3 style="color:#fff">Ne vem, kje začeti</h3><p>Kratek vodnik in vprašanja za prvo odločitev.</p><span class="go">Začnite tukaj</span></div></a>'
@@ -216,7 +229,7 @@ TRUST = """
   <div class="wrap trust">
     <div class="head" style="margin-bottom:0"><p class="kicker">Preverjanje</p><h2>Kako preverjamo podatke</h2>
       <p class="lede">Podatke preverjamo pri izvajalcih, z obiski in v registru usposobljenih strokovnjakov. Profil objavimo, ko ga izvajalec potrdi. Vrstni red izvajalcev ni odvisen od plačil.</p>
-      <div class="btn-row" style="margin-top:32px"><a class="link-arrow" href="/uredniska-politika/">Uredniška politika →</a></div></div>
+      <div class="btn-row" style="margin-top:32px"><a class="link-arrow" href="/strokovni-okvir/">Strokovni okvir →</a><a class="link-arrow" href="/uredniska-politika/">Uredniška politika →</a></div></div>
     <div>
       <div class="figures">
         <div class="figure"><div class="v tnum">46</div><p class="l">organizacij in izvajalskih mest v raziskovalni bazi</p></div>
@@ -438,18 +451,23 @@ pages.append(page("/kako-izbrati/", "Kako izbrati program", "Vprašanja, ki jih 
 # ================= IMENIK =================
 mx = max(n for _, n in REGIONS)
 rows = "".join(f'<tr><td>{r}</td><td class="tnum">{n if n else "še ni zapisov"}' + (f'<span class="bar" style="width:{round(n / mx * 100)}px" aria-hidden="true"></span>' if n else "") + '</td></tr>' for r, n in REGIONS)
-pages.append(page("/izvajalci/", "Imenik izvajalcev", "Nacionalni imenik izvajalcev intervencij s pomočjo konj v Sloveniji je v pripravi. Stanje raziskovalne baze po regijah.",
-                  hero("Imenik izvajalcev", "Imenik izvajalcev je v pripravi", "Po vsej Sloveniji preverjamo podatke o izvajalcih. Profile objavimo šele, ko jih potrdijo izvajalci sami, da bodo informacije zanesljive.",
-                       f'<a class="btn btn-dark" href="/kontakt/">Pomagamo poiskati izvajalca že zdaj</a>', seed=13) + f"""
-<div class="wrap narrow article">
-  <h2>Stanje po regijah</h2>
-  <p>V raziskovalni bazi je 46 organizacij in izvajalskih mest: zavodi, društva, konjeniški centri, samostojni strokovnjaki in javni zavodi. Nekatera društva programe le organizirajo, izvajajo pa jih partnerski strokovnjaki; v imeniku bo to jasno označeno.</p>
-  <table class="data"><thead><tr><th scope="col">Regija</th><th scope="col">Zapisi</th></tr></thead><tbody>{rows}</tbody></table>
-  <p class="fine" style="margin-top:12px">Organizacije, ki delujejo v več regijah, so štete v vsaki. Stanje {UPDATED}.</p>
-  <h2>Kaj bo v imeniku</h2>
-  <ul><li>iskanje po regiji, kraju, vrsti programa, starosti in obliki,</li><li>zemljevid izvajalcev po Sloveniji,</li><li>profili z izobrazbo in usposobljenostjo strokovnjakov, programi, konji in dostopnostjo,</li><li>neposredni kontakt izvajalca.</li></ul>
-  <p>Vrstni red bo odvisen samo od vaših izbir in popolnosti podatkov. Plačila nanj ne vplivajo.</p>
-</div>""", "/izvajalci/"))
+pages.append(page("/izvajalci/", "Terapevtski centri", "Javni zavodi in terapevtski centri, ki v Sloveniji izvajajo intervencije s pomočjo konj.",
+                  hero("Centri", "Terapevtski centri v Sloveniji", "Javni zavodi, centri in strokovnjaki, ki izvajajo intervencije s pomočjo konj. Predstavitve dopolnjujemo z obiski na terenu.",
+                       f'<a class="btn btn-dark" href="/za-starse/#iskanje">Pomagamo poiskati izvajalca</a><a class="btn btn-ghost" href="/strokovni-okvir/">Strokovni okvir</a>', seed=13) + f"""
+<section class="section white"><div class="wrap">
+  <div class="head"><p class="kicker">Javni zavodi</p><h2>Programi v javnih zavodih</h2><p class="lede">Centri za usposabljanje, zavodi in bolnišnice, ki konje vključujejo v rehabilitacijo, vzgojo in terapijo.</p></div>
+  {center_cards([c for c in CENTERS if c["kind"].startswith("Javni")])}
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="head"><p class="kicker">Centri in zavodi</p><h2>Terapevtski centri</h2><p class="lede">Izbor centrov s strokovnjaki, vpisanimi v register Zavoda Nazaj na konja.</p></div>
+  {center_cards([c for c in CENTERS if not c["kind"].startswith("Javni")])}
+  <p class="fine">Podatki so povzeti po registru Nazaj na konja in spletnih straneh centrov. Za termine in cene se obrnite neposredno na center.</p>
+</div></section>
+<section class="section white"><div class="wrap split">
+  <div class="head"><p class="kicker">Po Sloveniji</p><h2>Kje so izvajalci</h2><p class="lede">V raziskovalni bazi je 46 organizacij in izvajalskih mest. Nekatera društva programe organizirajo, izvajajo pa jih partnerski strokovnjaki.</p>
+    <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/za-izvajalce/#obrazec">Dodajte svoj center</a></div></div>
+  {regions_chart()}
+</div></section>""", "/izvajalci/"))
 
 # ================= ZA IZVAJALCE =================
 pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pomočjo konj lahko brezplačno potrdijo in dopolnijo podatke o svojem centru.",
@@ -471,7 +489,7 @@ pages.append(page("/o-equeli/", "O Equeli", "Equeli je neodvisna platforma za in
                   hero("O Equeli", "O platformi Equeli", "Equeli zbira in preverja informacije o izvajalcih, pristopih in možnostih vključevanja po vsej Sloveniji, da bi ljudje lažje našli zanesljive informacije in ustrezne programe.", seed=15) + """
 <div class="wrap narrow article">
   <h2>Komu je namenjen</h2><p>Družinam, ki iščejo podporo za svoje otroke; šolam in zavodom, ki iščejo izvajalce; strokovnjakom in centrom, ki želijo predstaviti svoje delo; ter podjetjem in fundacijam, ki želijo podpreti dostopnost programov.</p>
-  <h2>Usposobljeni strokovnjaki</h2><p>Pri preverjanju usposobljenosti izvajalcev se opiramo na register usposobljenih strokovnjakov za intervencije s pomočjo konj, ki ga vodi <a href="https://nakonju.si/">Zavod Nazaj na konja</a>.</p>
+  <h2>Usposobljeni strokovnjaki</h2><p>Pri preverjanju usposobljenosti izvajalcev se opiramo na register usposobljenih strokovnjakov za intervencije s pomočjo konj, ki ga vodi <a href="https://nakonju.si/">Zavod Nazaj na konja</a>, izobraževalno in strokovno središče področja v Sloveniji. Več v <a href="/strokovni-okvir/">strokovnem okviru</a>.</p>
   <h2>Povezovanje</h2><p>Prizadevamo si za jasno in učinkovito povezovanje med izvajalci, uporabniki, vlagatelji in javnimi ustanovami. Družine hitreje najdejo ustrezen program, šole in zavodi preverjene izvajalce, podjetja in fundacije pa konkretne programe, ki jih lahko podprejo. Dogovori in plačila potekajo neposredno med sodelujočimi.</p>
   <h2>Raziskovalna pobuda</h2><p>Obiskujemo izvajalce po Sloveniji. Zanima nas, kako delajo, kakšne so njihove zmogljivosti, kje so ovire pri dostopnosti in katera sodelovanja bi pomagala. Zasebni raziskovalni zapiski so ločeni od javnih vsebin.</p>
   <h2>Ustanoviteljica</h2><p>Equeli je ustanovila Ela Rebolj. Opravila je usposabljanje pri Zavodu Nazaj na konja in je v preteklosti izvajala aktivnosti s pomočjo konj. Danes ne izvaja lastnih programov; platformo vodi kot neodvisna urednica in raziskovalka.</p>
@@ -522,6 +540,94 @@ pages.append(page("/za-podpornike/", "Za donatorje in vlagatelje", "Podjetja, fu
     <div class="opp-bar"><span>Zbrano</span><div><i></i></div></div>
   </div>
 </div></section>""" + form_section("podpora", "Interes", "Izrazite interes za podporo", "Odgovorimo s predlogom programov, ki ustrezajo vašim željam.", supporter_form()), "/za-podpornike/"))
+
+# ================= STROKOVNI OKVIR =================
+pages.append(page("/strokovni-okvir/", "Strokovni okvir", "Zavod Nazaj na konja kot izobraževalno in strokovno središče, register usposobljenih strokovnjakov in mednarodne smernice HETI.",
+                  hero("Stroka", "Strokovni okvir intervencij s pomočjo konj", "Kakovost dela s konji temelji na temeljni strokovni izobrazbi, dodatnem usposabljanju in jasnih etičnih smernicah. Tukaj je pregled, kako je področje urejeno v Sloveniji in v Evropi.", seed=24) + f"""
+<section class="section white"><div class="wrap split">
+  <div class="head"><p class="kicker">Slovenija</p><h2>Zavod Nazaj na konja</h2>
+    <p class="lede">Osrednje izobraževalno in strokovno središče za intervencije s pomočjo konj v Sloveniji. Deluje v Konjeniškem parku Starošince pri Cirkovcah.</p>
+    <ul class="ilist"><li>{icon("book")}Izobraževanje in specializacija za terapevte s pomočjo konja</li><li>{icon("shield")}Register strokovnih delavcev za izvajanje intervenc s pomočjo konja v Sloveniji</li><li>{icon("people")}Strokovni simpoziji o razvoju področja, ki potekajo že več kot desetletje</li><li>{icon("heart")}Lastni programi za otroke in mladostnike</li></ul>
+    <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="https://nakonju.si/" rel="noopener">nakonju.si</a><a class="btn btn-ghost" href="https://nakonju.si/eng/register-strokovnih-delavcev-za-izvajanje-intervenc-s-pomocjo-konja-v-sloveniji/" rel="noopener">Register strokovnjakov</a></div></div>
+  <div class="path">
+    <p class="path-t">Pot do strokovnega dela s konjem</p>
+    <ol>
+      <li>{badge("book")}<div><b>Temeljna stroka</b><span>Na primer fizioterapija, delovna terapija, specialna pedagogika, psihologija ali socialno delo.</span></div></li>
+      <li>{badge("clipboard")}<div><b>Specializacija</b><span>Dodatno usposabljanje za delo s konjem, teorija in praksa pod mentorstvom.</span></div></li>
+      <li>{badge("shield")}<div><b>Vpis v register</b><span>Naziv terapevt s pomočjo konja ali strokovni sodelavec za izvajanje aktivnosti s pomočjo konja.</span></div></li>
+      <li>{badge("leaf")}<div><b>Delo in razvoj</b><span>Izvajanje programov, supervizija in stalno izobraževanje.</span></div></li>
+    </ol>
+  </div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="head"><p class="kicker">Evropa</p><h2>Mednarodne smernice HETI</h2><p class="lede">HETI (Federation of Horses in Education and Therapy International) povezuje organizacije s področja po svetu. Leta 2020 je izdala Etične smernice, posodobljene 2023, ki dopolnjujejo nacionalne standarde. Na njih temelji tudi register HEIR na Irskem in v Združenem kraljestvu.</p></div>
+  <div class="goals">
+    <div>{badge("book")}<b>Strokovnost</b><span>Usposobljenost za delo in stalno strokovno izpopolnjevanje.</span></div>
+    <div>{badge("leaf")}<b>Dobrobit konj</b><span>Visoki standardi oskrbe, počitka in ravnanja s konji.</span></div>
+    <div>{badge("message")}<b>Jasna ponudba</b><span>Razumljivo predstavljene storitve in njihove možne koristi.</span></div>
+    <div>{badge("shield")}<b>Varno delo</b><span>Varnostni postopki, ki ščitijo ljudi in konje.</span></div>
+    <div>{badge("chart")}<b>Učinki</b><span>Spremljanje in premislek o koristih in učinkih programa.</span></div>
+    <div>{badge("clipboard")}<b>Upravljanje</b><span>Urejeno vodenje, zavarovanje in pravila organizacije.</span></div>
+  </div>
+  <p class="fine">Teh šest področij uporabljamo kot vodilo pri pripravi profilov centrov na Equeli. Viri: <a href="https://hetifederation.org/" rel="noopener">HETI Federation</a>, <a href="https://hetifederation.org/wp-content/uploads/2024/09/HEIR-FINAL-REPORT-2024.pdf" rel="noopener">poročilo HEIR 2024</a>.</p>
+</div></section>
+<section class="section white"><div class="wrap">
+  <div class="head"><p class="kicker">Pristopi</p><h2>Različni pristopi, različne stroke</h2><p class="lede">Kdo izvaja program, je odvisno od pristopa. Hipoterapijo na primer izvaja fizioterapevt ali delovni terapevt, pedagoške intervencije pa pedagog.</p></div>
+  <div class="cards">{"".join(f'<div class="gcard"><div class="body"><h3>{e(n)}</h3><p>{e(d)}</p><p class="who"><b>Kdo izvaja:</b> {e(w)}</p></div></div>' for n, d, w in APPROACHES.values())}</div>
+  <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="/hipoterapija/">Več o hipoterapiji</a></div>
+</div></section>"""))
+
+# ================= HIPOTERAPIJA =================
+pages.append(page("/hipoterapija/", "Hipoterapija", "Kaj je hipoterapija, kako poteka, komu je namenjena, kdo jo izvaja in kje v Sloveniji je na voljo.",
+                  hero("Pristop", "Hipoterapija", "Fizioterapevtska ali delovnoterapevtska obravnava, pri kateri je gibanje konja v koraku terapevtsko sredstvo. Udeleženec ne jaha in ne vodi konja: konj nosi, terapevt usmerja.",
+                       '<a class="btn btn-dark" href="#kje">Kje je na voljo</a><a class="btn btn-ghost" href="/za-starse/#iskanje">Pomoč pri iskanju</a>', seed=25) + f"""
+<section class="section white"><div class="wrap split">
+  <div class="head"><p class="kicker">Kako deluje</p><h2>Gibanje konja kot terapevtsko sredstvo</h2>
+    <p class="lede">Hrbet konja se v koraku premika v treh smereh: naprej in nazaj, levo in desno ter gor in dol. To je podobno gibanju medenice pri človekovi hoji. Udeleženec ta ritmični vzorec prejema več sto krat na srečanje, ne da bi moral hoditi sam.</p>
+    <p style="margin-top:16px;color:var(--text-2)">Terapevt prilagaja položaj udeleženca, tempo in smer gibanja konja ter tako vpliva na držo, ravnotežje, mišični tonus in koordinacijo.</p></div>
+  <div class="path">
+    <p class="path-t">Ekipa pri vsakem srečanju</p>
+    <ol>
+      <li>{badge("people")}<div><b>Terapevt</b><span>Fizioterapevt ali delovni terapevt z dodatnim usposabljanjem. Vodi obravnavo in je ob udeležencu.</span></div></li>
+      <li>{badge("leaf")}<div><b>Vodnik konja</b><span>Vodi konja v enakomernem koraku po navodilih terapevta.</span></div></li>
+      <li>{badge("shield")}<div><b>Stranski spremljevalec</b><span>Po potrebi ob konju za dodatno varnost.</span></div></li>
+      <li>{badge("heart")}<div><b>Konj</b><span>Miren, posebej izbran in pripravljen konj z enakomernim korakom.</span></div></li>
+    </ol>
+  </div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="head"><p class="kicker">Komu je namenjena</p><h2>Pogosti razlogi za vključitev</h2></div>
+  <div class="goals">
+    <div>{badge("move")}<b>Cerebralna paraliza</b><span>Drža, ravnotežje, tonus in nadzor trupa.</span></div>
+    <div>{badge("target")}<b>Zaostanek v razvoju</b><span>Gibalni razvoj, koordinacija in vzravnanost.</span></div>
+    <div>{badge("people")}<b>Genetski sindromi</b><span>Na primer Downov sindrom, po presoji zdravnika.</span></div>
+    <div>{badge("grid")}<b>Senzorne težave</b><span>Predelava gibalnih in ravnotežnih dražljajev.</span></div>
+    <div>{badge("leaf")}<b>Nevrološka stanja pri odraslih</b><span>Na primer multipla skleroza ali stanje po možganski kapi.</span></div>
+    <div>{badge("heart")}<b>Gibalne ovire</b><span>Ko je samostojna hoja omejena ali je ni.</span></div>
+  </div>
+</div></section>
+<section class="section white"><div class="wrap">
+  <div class="head"><p class="kicker">Potek</p><h2>Od napotitve do rednih srečanj</h2></div>
+  <ol class="journey">
+    <li><div>{badge("clipboard", "ring")}<b>Mnenje zdravnika</b><span>Večina izvajalcev zahteva zdravniško mnenje ali napotitev.</span></div></li>
+    <li><div>{badge("search", "ring")}<b>Ocena terapevta</b><span>Pregled, cilji in preverjanje morebitnih omejitev.</span></div></li>
+    <li><div>{badge("move", "ring")}<b>Srečanja</b><span>Običajno 15–30 minut na konju, v ciklu več srečanj.</span></div></li>
+    <li><div>{badge("chart", "ring")}<b>Spremljanje</b><span>Terapevt spremlja napredek in prilagaja obravnavo.</span></div></li>
+  </ol>
+  <div class="callout alert" style="margin-top:40px"><strong>Kdaj ni primerna.</strong> Hipoterapija ni primerna za vsakogar. Omejitve so lahko na primer nestabilnost kolkov ali vratne hrbtenice, neurejena epilepsija ali huda osteoporoza. Primernost vedno oceni zdravnik oziroma terapevt.</div>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="head"><p class="kicker">Razlike</p><h2>Hipoterapija ni isto kot terapevtsko jahanje</h2></div>
+  <div class="cmp">
+    <div><b>Hipoterapija</b><ul><li>zdravstvena obravnava,</li><li>izvaja fizioterapevt ali delovni terapevt,</li><li>udeleženec ne vodi konja,</li><li>cilj so gibalne in senzorne funkcije.</li></ul></div>
+    <div><b>Prilagojeno jahanje</b><ul><li>rekreacija in šport,</li><li>vodi inštruktor jahanja,</li><li>udeleženec se uči jahati,</li><li>cilj so gibanje, veselje in vključenost.</li></ul></div>
+  </div>
+</div></section>
+<section class="section white" id="kje"><div class="wrap">
+  <div class="head"><p class="kicker">Kje</p><h2>Hipoterapija v Sloveniji</h2><p class="lede">Hipoterapijo izvajajo predvsem javni zavodi v okviru rehabilitacije. Programe organizirajo tudi društva Sonček za svoje člane.</p></div>
+  {center_cards([c for c in CENTERS if c["hipo"]])}
+  <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="/za-starse/#iskanje">Pomagamo poiskati izvajalca</a><a class="btn btn-ghost" href="/vodnik/gibalne-tezave/">Vodnik: gibalne težave</a></div>
+</div></section>"""))
 
 # ================= RAZISKAVA =================
 pages.append(page("/raziskava/", "Nacionalna raziskava", "Equeli obiskuje izvajalce intervencij s pomočjo konj po Sloveniji in pripravlja pregled stanja, zmogljivosti in potreb.",
