@@ -240,9 +240,10 @@ home = f"""
   <div class="wrap hero2-grid">
     <div class="hero2-copy">
       <p class="kicker reveal">Neodvisna platforma · Slovenija</p>
-      <h1 class="reveal d1">Povezujemo družine in šole s strokovnjaki za <em>intervencije s pomočjo konj.</em></h1>
-      <p class="lede reveal d2">Na enem mestu najdete centre in strokovnjake iz vse Slovenije, razlago pristopov in pomoč pri izbiri programa za otroka, razred ali zase. Brezplačno.</p>
-      <div class="btn-row reveal d3"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/izvajalci/">Spoznajte centre</a></div>
+      <h1 class="reveal d1">Intervencije s&nbsp;pomočjo konj v&nbsp;Sloveniji.<br><em>Na&nbsp;enem&nbsp;mestu.</em></h1>
+      <p class="lede reveal d2"><b>Intervencije s pomočjo konj</b> so terapevtski, pedagoški in rekreativni programi, pri katerih usposobljen strokovnjak v svoje delo vključi konja. Sem sodijo na primer hipoterapija, terapija s pomočjo konja in prilagojeno jahanje.</p>
+      <p class="lede2 reveal d2">Equeli povezuje uporabnike in njihove družine, izvajalce, šole, javne ustanove in podpornike. Pri nas najdete razlago pristopov, centre po vsej Sloveniji in brezplačno pomoč pri izbiri programa.</p>
+      <div class="btn-row reveal d3"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/terapija-s-pomocjo-konja/">Kaj je terapija s pomočjo konja?</a></div>
       <ul class="hero2-facts reveal d3"><li><b class="tnum">24</b>centrov in zavodov</li><li><b class="tnum">11</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
     <div class="hero2-art" aria-hidden="true">
@@ -269,11 +270,11 @@ home = f"""
 
 <section class="section white">
   <div class="wrap">
-    <div class="head center-head"><p class="kicker">Platforma</p><h2>Platforma, ki povezuje</h2><p class="lede">Družine, šole in zavode, strokovnjake in podpornike. Vsak najde svoj vstop in pot do drugih.</p></div>
+    <div class="head center-head"><p class="kicker">Platforma</p><h2>Platforma, ki povezuje</h2><p class="lede">Uporabnike in njihove družine, izvajalce, šole in javne ustanove ter podpornike. Vsak najde svoj vstop in pot do drugih.</p></div>
     <div class="aud">
-      <a class="aud-c" href="/za-starse/">{badge("family", "lg")}<b>Družine</b><p>Vodniki po potrebah in pomoč pri iskanju pravega programa za otroka ali zase.</p><span class="go">Za starše →</span></a>
-      <a class="aud-c" href="/za-sole-in-zavode/">{badge("school", "lg")}<b>Šole in zavodi</b><p>Programi za razrede in skupine, povezava z izvajalci v regiji in možnosti financiranja.</p><span class="go">Za šole in zavode →</span></a>
-      <a class="aud-c" href="/za-izvajalce/">{badge("shield", "lg")}<b>Strokovnjaki in centri</b><p>Brezplačna predstavitev dela, ekipe in konj ter povezave s šolami in podporniki.</p><span class="go">Za izvajalce →</span></a>
+      <a class="aud-c" href="/za-starse/">{badge("family", "lg")}<b>Uporabniki in družine</b><p>Otroci, mladostniki, odrasli in starejši ter njihovi bližnji: vodniki po potrebah in pomoč pri iskanju programa.</p><span class="go">Za starše →</span></a>
+      <a class="aud-c" href="/za-sole-in-zavode/">{badge("school", "lg")}<b>Šole in javne ustanove</b><p>Šole, vrtci, CUDV, domovi, bolnišnice in občine: programi za skupine, povezava z izvajalci in financiranje.</p><span class="go">Za šole in zavode →</span></a>
+      <a class="aud-c" href="/za-izvajalce/">{badge("shield", "lg")}<b>Izvajalci</b><p>Brezplačna predstavitev dela, ekipe in konj ter povezave s šolami in podporniki.</p><span class="go">Za izvajalce →</span></a>
       <a class="aud-c" href="/za-podpornike/">{badge("heart", "lg")}<b>Donatorji in fundacije</b><p>Pregledne priložnosti, da omogočite programe tistim, ki jih potrebujejo.</p><span class="go">Za donatorje →</span></a>
     </div>
   </div>

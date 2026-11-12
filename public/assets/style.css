@@ -610,3 +610,4 @@ table.data td:last-child,table.data th:last-child{text-align:right}
 .area ul{margin:4px 0;padding-left:18px;color:var(--text-2);display:grid;gap:4px}
 .area .who{margin-top:auto;padding-top:12px;border-top:1px solid var(--line-2);font-size:14px;color:var(--muted)}
 .goals.four{grid-template-columns:repeat(4,1fr)}@media (max-width:1000px){.goals.four{grid-template-columns:1fr 1fr}}@media (max-width:560px){.goals.four{grid-template-columns:1fr}}
+.hero2 .lede b{color:var(--text);font-weight:500}.hero2 .lede2{margin-top:14px;font-size:16.5px;line-height:1.6;color:var(--muted);max-width:36em}.hero2 h1{font-size:clamp(38px,5.2vw,68px)}
