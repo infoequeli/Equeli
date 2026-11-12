@@ -16,6 +16,13 @@ def form_section(sid, kicker, title, lede, form_html, bg=True):
     return f'<section class="section form-section{" plain" if not bg else ""}" id="{sid}-sekcija"><div class="wrap"><div class="form-wrap"><div class="form-title"><p class="kicker">{kicker}</p><h2>{title}</h2><p class="lede">{lede}</p></div>{form_html}</div></div></section>'
 
 e = html.escape
+import hashlib as _h
+
+def _v(p):
+    return _h.md5(open(p, 'rb').read()).hexdigest()[:10]
+
+ASSET_V = {'css': _v('public/assets/style.css'), 'js': _v('public/assets/app.js')}
+
 NAV = [("/za-starse/", "Za starše"), ("/za-sole-in-zavode/", "Za šole in zavode"), ("/vodnik/", "Vodniki"),
        ("/izvajalci/", "Imenik"), ("/raziskava/", "Raziskava"), ("/clanki/", "Članki"), ("/o-equeli/", "O Equeli")]
 ARR = '<span class="arr" aria-hidden="true">→</span>'
@@ -90,7 +97,7 @@ def page(path, title, desc, body, active=""):
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link rel="stylesheet" href="https://fonts.bunny.net/css?family=roboto:400,500,700|outfit:400,500,600&display=swap">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v={ASSET_V['css']}">
 </head>
 <body>
 <a class="skip" href="#vsebina">Preskoči na vsebino</a>
@@ -116,7 +123,7 @@ def page(path, title, desc, body, active=""):
     <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma</span><span>Povezujemo izvajalce, družine, ustanove in podpornike.</span></div>
   </div>
 </footer>
-<script src="/assets/app.js" defer></script>
+<script src="/assets/app.js?v={ASSET_V['js']}" defer></script>
 </body>
 </html>
 """
@@ -606,7 +613,8 @@ with open("public/robots.txt", "w", encoding="utf-8") as f:
 with open("public/_headers", "w", encoding="utf-8") as f:
     f.write("/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n"
             "  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  X-Frame-Options: SAMEORIGIN\n"
-            "/assets/*\n  Cache-Control: public, max-age=604800\n")
+            "  Cache-Control: no-cache\n"
+            "/assets/*\n  ! Cache-Control\n  Cache-Control: public, max-age=31536000, immutable\n")
 with open("public/_redirects", "w", encoding="utf-8") as f:
     f.write("/za-ustanove/ /za-sole-in-zavode/ 301\n/za-ustanove /za-sole-in-zavode/ 301\n")
 
