@@ -24,7 +24,7 @@ def _v(p):
 
 ASSET_V = {'css': _v('public/assets/style.css'), 'js': _v('public/assets/app.js')}
 
-NAV = [("/za-starse/", "Za starše"), ("/za-sole-in-zavode/", "Za šole in zavode"),
+NAV = [("/za-starse/", "Za starše"), ("/za-sole-in-zavode/", "Za šole in zavode"), ("/za-podpornike/", "Za donatorje"),
        ("/izvajalci/", "Centri"), ("/raziskava/", "Raziskava"), ("/clanki/", "Članki"), ("/o-equeli/", "O Equeli")]
 ARR = '<span class="arr" aria-hidden="true">→</span>'
 
@@ -118,7 +118,7 @@ def page(path, title, desc, body, active=""):
     <div class="fgrid">
       <div><a class="logo" href="/">{LOGO}Equeli</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
       <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Terapevtski centri</a></li></ul></div>
-      <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Donatorji in vlagatelji</a></li></ul></div>
+      <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Donatorji in fundacije</a></li></ul></div>
       <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
     </div>
     <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma</span><span>Povezujemo izvajalce, družine, ustanove in podpornike.</span></div>
@@ -305,7 +305,7 @@ home = f"""
 <section class="section white">
   <div class="wrap">
     <div class="support-band">
-      <div><p class="kicker">Za donatorje in vlagatelje</p><h2>Podprite dostopnost programov</h2><p>Podjetja, fundacije in posamezniki lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.</p><div class="btn-row"><a class="btn btn-dark" href="/za-podpornike/">Kako lahko pomagate</a></div></div>
+      <div><p class="kicker">Za donatorje in fundacije</p><h2>Podprite dostopnost programov</h2><p>Podjetja, fundacije in posamezniki lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.</p><div class="btn-row"><a class="btn btn-dark" href="/za-podpornike/">Kako lahko pomagate</a></div></div>
       <ul class="ways"><li>{badge("euro")}<b>Financiranje programa</b><span>za razred, skupino ali zavod</span></li><li>{badge("heart")}<b>Sofinanciranje za družine</b><span>nižja cena za tiste, ki jo potrebujejo</span></li><li>{badge("box")}<b>Oprema in znanje</b><span>material, prostovoljstvo, pro bono</span></li></ul>
     </div>
   </div>
@@ -502,8 +502,8 @@ pages.append(page("/kontakt/", "Kontakt", "Pišite Equeli za pomoč pri iskanju 
 </div></div>"""))
 
 # ================= ZA PODPORNIKE =================
-pages.append(page("/za-podpornike/", "Za donatorje in vlagatelje", "Podjetja, fundacije, donatorji in vlagatelji v družbeni učinek lahko podprejo dostopnost programov s pomočjo konj.",
-                  hero("Za donatorje in vlagatelje", "Podprite dostopnost programov", "Podjetja, fundacije, posamezniki in vlagatelji v družbeni učinek lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.",
+pages.append(page("/za-podpornike/", "Za donatorje in fundacije", "Podjetja, fundacije, donatorji in vlagatelji v družbeni učinek lahko podprejo dostopnost programov s pomočjo konj.",
+                  hero("Za donatorje in fundacije", "Podprite dostopnost programov", "Fundacije, podjetja, donatorji in vlagatelji v družbeni učinek lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.",
                        '<a class="btn btn-dark" href="#podpora">Izrazite interes</a><a class="btn btn-ghost" href="#priloznosti">Priložnosti</a>', seed=21) + f"""
 <section class="section white"><div class="wrap">
   <div class="head"><p class="kicker">Načela</p><h2>Pregledno in neposredno</h2></div>

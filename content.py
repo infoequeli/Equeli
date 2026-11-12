@@ -158,7 +158,7 @@ CENTERS = [
          url="https://www.zavod-olsen.si/", reg=REG + "maja-kristan-kirn/"),
     dict(name="Konjeniško-terapevtski zavod Arion", place="Ljubljana in Mislinja", region=["Osrednjeslovenska", "Koroška"], group="register", offer=["P"],
          who="Otroci in mladostniki", team="Tajda Knez, mag. inkluzivne in socialne pedagogike", horses="5",
-         url="https://www.instagram.com/zavod_arion/", reg=REG + "tajda-knez/"),
+         url="", reg=REG + "tajda-knez/"),
     dict(name="Moonrise – terapije s pomočjo konj", place="Domžale", region=["Osrednjeslovenska"], group="register", offer=["D", "T"],
          who="Otroci in odrasli, individualno", team="Tanja Slovenec, dipl. delovna terapevtka", horses="3",
          url="https://moonrise.si/", reg=REG + "tanja-slovenec-terapevtka-s-pomocjo-konja/"),
