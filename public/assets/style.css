@@ -736,3 +736,30 @@ h2{font-size:clamp(32px,4.4vw,56px);line-height:1.07}
 .site-footer{background:var(--surface);font-size:12.5px}
 .site-footer a{color:var(--muted)}
 @media (max-width:560px){.hero2-facts{gap:22px;flex-wrap:nowrap}.hero2-facts b{font-size:24px}.hero2-facts li{font-size:12.5px}}
+/* fotografije */
+.photo-art{background:#dfe9e8;display:block}
+.photo-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.photo-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(0,0,0,.28) 100%);pointer-events:none}
+.credit{position:absolute;right:18px;bottom:14px;margin:0;z-index:2;font-size:11.5px;color:rgba(255,255,255,.85)}
+.what-photo{border-radius:24px;overflow:hidden;aspect-ratio:16/10;background:#dfe9e8}
+.what-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.moments{padding-block:0 clamp(40px,6vw,80px)}
+.mo-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.3fr;gap:12px}
+@media (max-width:900px){.mo-grid{grid-template-columns:1fr 1fr}}
+.mo{position:relative;margin:0;border-radius:24px;overflow:hidden;aspect-ratio:3/4;background:#dfe9e8}
+.mo:nth-child(1),.mo:nth-child(4){aspect-ratio:auto}
+@media (max-width:900px){.mo,.mo:nth-child(1),.mo:nth-child(4){aspect-ratio:4/5}}
+.mo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.mo:hover img{transform:scale(1.04)}
+.mo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.55) 100%)}
+.mo figcaption{position:absolute;left:20px;right:20px;bottom:18px;z-index:1;color:#fff;display:flex;flex-direction:column;gap:4px}
+.mo figcaption b{font:600 22px/1.2 var(--f-head);letter-spacing:-.02em}
+.mo figcaption span{font-size:14px;opacity:.9;line-height:1.4}
+.credit-line{font-size:12px;color:var(--muted);margin-top:14px}
+@media (prefers-reduced-motion:no-preference){
+  .kb{animation:kenburns 22s ease-in-out infinite alternate;transform-origin:60% 40%}
+  .js .reveal-img{clip-path:inset(12% 12% 12% 12% round 24px);opacity:.001;transition:clip-path 1.1s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
+  .js .reveal-img.in{clip-path:inset(0 0 0 0 round 24px);opacity:1}
+  .js .mo-grid .reveal-img:nth-child(2){transition-delay:.12s}.js .mo-grid .reveal-img:nth-child(3){transition-delay:.24s}.js .mo-grid .reveal-img:nth-child(4){transition-delay:.36s}
+}
+@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.12) translate(-1.5%,-1%)}}

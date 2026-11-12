@@ -276,7 +276,7 @@ document.querySelectorAll('.finder').forEach(function (root) {
 
 /* anim-observer: animacije ob prikazu (grafi, zemljevid, štetje) */
 (function () {
-  var els = document.querySelectorAll('.anim'); if (!els.length) return;
+  var els = document.querySelectorAll('.anim, .reveal-img'); if (!els.length) return;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   function count(root) {
     root.querySelectorAll('[data-count]').forEach(function (n) {
