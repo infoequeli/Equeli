@@ -196,8 +196,7 @@ def articles_block(limit=None):
 OFFER = {"H": "Hipoterapija", "T": "Terapija s pomočjo konja", "P": "Pedagoške intervencije", "S": "Psihosocialne intervencije",
          "D": "Delovnoterapevtske intervencije", "J": "Prilagojeno in terapevtsko jahanje", "A": "Aktivnosti s konji"}
 GROUPS = [("javni", "Javni zavodi", "Centri za usposabljanje, zavodi in bolnišnice, ki konje vključujejo v rehabilitacijo, vzgojo in terapijo."),
-          ("register", "Strokovnjaki v registru Nazaj na konja", "Centri in samostojni strokovnjaki z nazivom iz registra Zavoda Nazaj na konja."),
-          ("potrjeni", "Centri, ki so se predstavili sami", "Podatke so nam centri posredovali sami prek obrazca Equeli. Vpis v Equeli ni strokovni naziv.")]
+          ("register", "Strokovnjaki v registru Nazaj na konja", "Centri in samostojni strokovnjaki z nazivom iz registra Zavoda Nazaj na konja.")]
 
 
 def _host(u):
