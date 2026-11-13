@@ -835,7 +835,9 @@ footer .logo{color:var(--text)}
 .logo-text{display:flex;flex-direction:column;gap:3px}
 .logo-name{font:500 21px/1 var(--f-head);letter-spacing:.02em;color:var(--text)}
 .logo-sub{font:500 10.5px/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-@media (max-width:560px){.logo-sub{display:none}.logo-badge{width:36px;height:36px}}
+.logo-sub{white-space:nowrap}
+@media (max-width:1240px){.logo-sub{display:none}}
+@media (max-width:560px){.logo-badge{width:36px;height:36px}}
 .logo-seal{display:inline-block;color:#2e6260}
 .logo-seal .seal{width:132px;height:132px;display:block}
 .seal-name{font:500 40px var(--f-head);letter-spacing:10px}
