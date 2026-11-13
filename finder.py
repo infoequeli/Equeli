@@ -57,7 +57,7 @@ REGION_NAMES = [r for r, _ in REGIONS]
 
 
 def _centers_json():
-    return [dict(n=c["name"], p=c["place"], r=c["region"], o=c["offer"], g=c["group"], u=c["url"] or c["reg"]) for c in CENTERS if c["group"] in ("javni", "register")]
+    return [dict(n=c["name"], p=c["place"], r=c["region"], o=c["offer"], g=c["group"], u=c["url"] or c["reg"]) for c in CENTERS if c["group"] in ("javni", "register", "potrjeni")]
 
 
 def finder(mode):

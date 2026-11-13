@@ -128,7 +128,8 @@ RUBRICS = [
 ARTICLES = []
 
 # Centri – samo javno dostopni podatki (register Nazaj na konja, spletne strani centrov, Konjeniška zveza Slovenije).
-# Brez telefonov in e-pošte. group: javni | register | drugi | organizator
+# Brez telefonov in e-pošte. group: javni | register | potrjeni | drugi | organizator
+# potrjeni = center je podatke sam posredoval prek obrazca Equeli. space: neobvezno, prostori.
 # offer: kode pristopov iz APPROACHES (H, T, P, S, D, J, A). who: komu je program namenjen.
 REG = "https://nakonju.si/terapevti/"
 KZS = "https://www.konj-zveza.org/jahalne-sole-klubi/"
@@ -207,6 +208,11 @@ CENTERS = [
     dict(name="Kmetija Tomaževi", place="Hruševje", region=["Obalno-kraška"], group="register", offer=["A"],
          who="Osebe s posebnimi potrebami", team="Zala Stegel, strokovna sodelavka", horses="2",
          url="", reg=REG + "zala-stegel-strokovna-sodelavka-za-izvajanje-aktivnosti-s-pomocjo-konja/"),
+    # --- centri, ki so se predstavili sami prek obrazca Equeli (podatke so potrdili) ---
+    dict(name="Konjeniški center AMAY", place="Ložnica pri Žalcu", region=["Savinjska"], group="potrjeni", offer=["T", "P", "S", "D", "J", "A"],
+         who="Otroci, mladostniki, odrasli in starejši; individualno, v manjših skupinah, za šole, vrtce in zavode", team="Maja Mlinar, vodja programov; Tajda Knez, strokovna sodelavka", horses="",
+         space="Pokrita jahalnica, dostop za invalidski voziček, sanitarije, parkirišče",
+         url="https://amay-si.com/", reg=""),
     # --- drugi centri (ponudba po navedbah centrov) ---
     dict(name="Konjeniški klub Celje", place="Škofja vas", region=["Savinjska"], group="drugi", offer=["T", "J"],
          who="Individualno, 30-minutna srečanja", team="Nina Korošec Mladenović, mag. inkluzivne pedagogike", horses="",
@@ -218,8 +224,6 @@ CENTERS = [
          who="Terapije in strokovna predavanja", team="", horses="", url="https://zavod-pegaz.si/", reg=""),
     dict(name="Društvo Hippos", place="Slovenska Istra", region=["Obalno-kraška"], group="drugi", offer=["H", "J", "A"],
          who="Otroci; hipoterapija in terapevtsko jahanje", team="", horses="4", url="https://drustvohippos.si/", reg=""),
-    dict(name="Konjeniški center AMAY", place="Žalec", region=["Savinjska"], group="drugi", offer=["T", "A"],
-         who="Tudi za osebe s posebnimi potrebami; cikli najmanj 12 srečanj", team="", horses="", url="https://amay-si.com/", reg=""),
     dict(name="Konjeniški center Si", place="Ljubljana, Stožice", region=["Osrednjeslovenska"], group="drugi", offer=["H", "P", "S", "J"],
          who="Hipoterapija, pedagoško in psihoterapevtsko jahanje, prilagojeno športno jahanje", team="", horses="",
          url="https://www.konjeniskicenter.com/", reg=""),
