@@ -301,7 +301,7 @@ home = f"""
       <ul class="hero2-facts reveal d3"><li><b class="tnum">24</b>centrov in zavodov</li><li><b class="tnum">11</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
     <div class="hero2-art photo-art">
-      {photo("hero", 1600, "kb", True)}
+      <picture><source type="image/webp" srcset="/assets/img/gharib-900.webp 900w, /assets/img/gharib-1600.webp 1600w, /assets/img/gharib-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 50vw"><img class="kb" src="/assets/img/gharib-1600.jpg" srcset="/assets/img/gharib-900.jpg 900w, /assets/img/gharib-1600.jpg 1600w, /assets/img/gharib-2400.jpg 2400w" sizes="(max-width: 900px) 100vw, 50vw" alt="Bel konj se na cvetočem travniku vzpne na zadnje noge" fetchpriority="high" decoding="async"></picture>
     </div>
   </div>
 </section>
