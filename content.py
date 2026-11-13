@@ -1,6 +1,6 @@
 """Equeli – vsebina strani. Tu urejaš besedila; nato zaženi: python3 build.py"""
 
-SITE = "https://equeli.info-equeli.workers.dev"          # zamenjaj z lastno domeno, ko bo
+SITE = "https://equeli.si"
 EMAIL = "info.equeli@gmail.com"
 UPDATED = "12. 11. 2026"
 
