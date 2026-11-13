@@ -191,6 +191,7 @@ def center_card(c):
     facts += f'<li>{icon("people")}<span>{e(c["team"])}</span></li>' if c["team"] else ""
     facts += f'<li>{icon("leaf")}<span>Terapevtski konji: {e(c["horses"])}</span></li>' if c["horses"] else ""
     facts += f'<li>{icon("grid")}<span>{e(c["space"])}</span></li>' if c.get("space") else ""
+    facts += f'<li>{icon("book")}<span>{e(c["programs"])}</span></li>' if c.get("programs") else ""
     links = ""
     if c["url"]:
         links += f'<a href="{c["url"]}" target="_blank" rel="noopener">{e(_host(c["url"]))} ↗</a>'

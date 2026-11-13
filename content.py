@@ -129,7 +129,7 @@ ARTICLES = []
 
 # Centri – samo javno dostopni podatki (register Nazaj na konja, spletne strani centrov, Konjeniška zveza Slovenije).
 # Brez telefonov in e-pošte. group: javni | register | potrjeni | drugi | organizator
-# potrjeni = center je podatke sam posredoval prek obrazca Equeli. space: neobvezno, prostori.
+# potrjeni = center je podatke sam posredoval prek obrazca Equeli. space: neobvezno, prostori. programs: neobvezno, imena programov.
 # offer: kode pristopov iz APPROACHES (H, T, P, S, D, J, A). who: komu je program namenjen.
 REG = "https://nakonju.si/terapevti/"
 KZS = "https://www.konj-zveza.org/jahalne-sole-klubi/"
@@ -178,8 +178,10 @@ CENTERS = [
     dict(name="Terapevtski zavod Pokrov dom", place="Trbovlje", region=["Zasavska"], group="register", offer=["T"],
          who="Samozavest, komunikacija in čustveni izzivi", team="Maruša Čamer, dipl. vzgojiteljica", horses="1",
          url="", reg=REG + "marusa-camer/"),
-    dict(name="Športno-terapevtski klub Pegasus", place="Gabrovka", region=["Zasavska"], group="register", offer=["P"],
-         who="Socialne veščine, pozornost, motorika, čustvena regulacija", team="Irena K. Kovač, kineziologinja", horses="4",
+    dict(name="Športno-terapevtski klub Pegasus", place="Gabrovka", region=["Zasavska"], group="register", offer=["T", "S", "P"],
+         who="Celostni terapevtski programi: osebnostna rast, sprostitev in avtogeni trening, čustveno-vedenjske težave, motorične težave in telesna drža",
+         programs="»Konj moj učitelj« (osebnostna rast) · »Konj moj motivator« (team building) · »Konj moj vodnik k relaksaciji« (sprostitvene tehnike) · »Konj moj pomočnik« (gibalni razvoj)",
+         team="Irena K. Kovač, kineziologinja, terapevtka s pomočjo konj", horses="4",
          url="https://pegasusclub.weebly.com/", reg=REG + "irena-k-kovac/"),
     dict(name="Hijaterapija, Konjeniški klub Rojnik", place="Grosuplje", region=["Osrednjeslovenska"], group="register", offer=["S"],
          who="Otroci in mladostniki", team="Julija Božič, mag. psihologije; Katra Zajc Švara, mag. socialnega dela", horses="2",
