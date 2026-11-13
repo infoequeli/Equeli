@@ -64,7 +64,7 @@ def horse(cls="horse", label=None, v="head"):
     return f'<svg class="{cls}" viewBox="30 14 400 420" preserveAspectRatio="xMidYMid meet" {a}><g fill="currentColor">{SIL}</g></svg>'
 
 
-LOGO = ('<svg class="logo-mark" viewBox="20 4 420 440" aria-hidden="true"><g fill="#4f8f8c">' + LOGO_SIL + '</g></svg>')
+LOGO = ('<svg class="logo-mark" viewBox="20 4 420 440" aria-hidden="true"><g fill="#4f8f8c" stroke="#4f8f8c" stroke-width="14" stroke-linejoin="round">' + LOGO_SIL + '</g></svg>')
 
 # različni izrezi konja za ploščice: (velikost, desno, spodaj)
 CROPS = ["head"] * 7
@@ -226,9 +226,9 @@ PHOTOS = {
     "field": ("https://images.pexels.com/photos/33829387/pexels-photo-33829387.jpeg", "Dekle se na sončnem pašniku dotakne konja"),
     "hero": ("https://images.pexels.com/photos/8947415/pexels-photo-8947415.jpeg", "Dekle s konjem na travniku v večerni svetlobi"),
     "what": ("https://images.pexels.com/photos/7883326/pexels-photo-7883326.jpeg", "Ženska objema konja v svetlem hlevu"),
-    "mo_touch": ("https://images.pexels.com/photos/33870471/pexels-photo-33870471.jpeg", "Roka nežno poboža konja po čelu"),
+    "mo_touch": ("https://images.pexels.com/photos/15990615/pexels-photo-15990615.jpeg", "Otroška roka nežno se dotika lisastega konja"),
     "mo_calm": ("https://images.pexels.com/photos/13578494/pexels-photo-13578494.jpeg", "Deklica mirno stoji ob belem konju v mehki svetlobi"),
-    "mo_bond": ("https://images.pexels.com/photos/17961334/pexels-photo-17961334.jpeg", "Mlada ženska nežno boža konja po glavi"),
+    "mo_bond": ("https://images.pexels.com/photos/28998222/pexels-photo-28998222.jpeg", "Mlado dekle ob konju na travniku v mehki večerni svetlobi"),
     "mo_care": ("https://images.pexels.com/photos/14223887/pexels-photo-14223887.jpeg", "Otroški roki ščetkata belega konja"),
     "touch": ("https://images.pexels.com/photos/7883432/pexels-photo-7883432.jpeg", "Roka nežno gladi konjevo grivo"),
     "meadow": ("https://images.pexels.com/photos/8265890/pexels-photo-8265890.jpeg", "Dekle boža dva konja na travniku"),

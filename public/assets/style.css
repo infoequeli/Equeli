@@ -788,3 +788,5 @@ img{image-rendering:auto}
 .photo-art img{object-position:center 35%}.photo-art img,.ph-photo img,.what-photo img,.mo img{filter:none}
 .photo-art img{object-position:62% center}
 .photo-art{background:#1d2418}.photo-art img{object-position:52% 45%}.hero2-art{aspect-ratio:1/1}@media (max-width:900px){.hero2-art{aspect-ratio:3/2}}
+
+.logo-mark{width:40px;height:40px}.logo{gap:11px}@media (max-width:600px){.logo-mark{width:36px;height:36px}}
