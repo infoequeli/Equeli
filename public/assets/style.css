@@ -792,3 +792,7 @@ img{image-rendering:auto}
 .logo-mark{width:40px;height:40px}.logo{gap:11px}@media (max-width:600px){.logo-mark{width:36px;height:36px}}
 picture{display:contents}
 .hero2-art img.hero-photo{object-position:42% 50%}
+.mo-grid{grid-template-columns:repeat(4,1fr);gap:16px}
+.mo,.mo:nth-child(1),.mo:nth-child(4){aspect-ratio:3/4}
+@media (max-width:900px){.mo-grid{grid-template-columns:1fr 1fr;gap:12px}}
+.hero2-art img.hero-photo{object-position:50% 40%}

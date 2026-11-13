@@ -225,11 +225,11 @@ def research_dash():
 PHOTOS = {
     "field": ("local", "Dekle mirno opazuje belega konja na travniku"),
     "hero": ("https://images.pexels.com/photos/8947415/pexels-photo-8947415.jpeg", "Dekle s konjem na travniku v večerni svetlobi"),
-    "what": ("https://images.pexels.com/photos/7883326/pexels-photo-7883326.jpeg", "Ženska objema konja v svetlem hlevu"),
+    "what": ("local", "Odrasla oseba drži deklico, ki nežno boža konja"),
     "mo_touch": ("local", "Roka nežno se dotika konjevega nosu, konj ima zaprte oči"),
     "mo_calm": ("local", "Svetla griva konja v tihem hlevu"),
     "mo_bond": ("local", "Dekle ob ograji boža konja v večerni svetlobi"),
-    "mo_care": ("local", "Mama in deklica skupaj ščetkata konja"),
+    "mo_care": ("local", "Terapevtka nežno uredi konju čop, konj mirno zapira oči"),
     "touch": ("https://images.pexels.com/photos/7883432/pexels-photo-7883432.jpeg", "Roka nežno gladi konjevo grivo"),
     "meadow": ("https://images.pexels.com/photos/8265890/pexels-photo-8265890.jpeg", "Dekle boža dva konja na travniku"),
     "bond": ("https://images.pexels.com/photos/7883439/pexels-photo-7883439.jpeg", "Ženska z zaprtimi očmi objema konja"),
@@ -310,7 +310,7 @@ home = f"""
       <ul class="hero2-facts reveal d3"><li><b class="tnum">24</b>centrov in zavodov</li><li><b class="tnum">11</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
     <div class="hero2-art photo-art">
-      <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 2352w" sizes="(max-width: 900px) 100vw, 50vw"><img class="kb hero-photo" src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 2352w" sizes="(max-width: 900px) 100vw, 50vw" alt="Terapevtka nežno poravna konju čop, konj mirno zapira oči, udeleženka s čelado je ob njem" fetchpriority="high" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 2352w" sizes="(max-width: 900px) 100vw, 50vw"><img class="kb hero-photo" src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 2352w" sizes="(max-width: 900px) 100vw, 50vw" alt="Mama in deklica skupaj nežno ščetkata konja na travniku" fetchpriority="high" decoding="async"></picture>
     </div>
   </div>
 </section>
