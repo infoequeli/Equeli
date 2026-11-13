@@ -842,3 +842,4 @@ footer .logo{color:var(--text)}
 .logo-seal .seal{width:132px;height:132px;display:block}
 .seal-name{font:500 40px var(--f-head);letter-spacing:10px}
 .seal-sub{font:500 13px var(--f-body);letter-spacing:3px}
+footer .logo-sub{display:none!important}footer .logo{margin-bottom:6px}

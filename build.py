@@ -135,7 +135,7 @@ def page(path, title, desc, body, active=""):
 <footer class="site-footer">
   <div class="wrap">
     <div class="fgrid">
-      <div><a class="logo logo-seal" href="/" aria-label="Equeli, domov">{SEAL}</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
+      <div><a class="logo" href="/" aria-label="Equeli, domov">{LOGO_BADGE}</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
       <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Terapevtski centri</a></li></ul></div>
       <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Donatorji in fundacije</a></li></ul></div>
       <div><h2>Spoznajte</h2><ul><li><a href="/terapija-s-pomocjo-konja/">Terapija s pomočjo konja</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li></ul></div>
