@@ -66,6 +66,24 @@ def horse(cls="horse", label=None, v="head"):
 
 LOGO = ('<svg class="logo-mark" viewBox="20 4 420 440" aria-hidden="true"><g fill="#4f8f8c" stroke="#4f8f8c" stroke-width="14" stroke-linejoin="round">' + LOGO_SIL + '</g></svg>')
 
+
+LOGO_G = '<g fill="currentColor" stroke="currentColor" stroke-width="14" stroke-linejoin="round">' + LOGO_SIL + '</g>'
+# Krožni logotip (nov. 2026): konj v belem krogu + ime + podnapis
+LOGO_BADGE = ('<span class="logo-badge" aria-hidden="true"><svg viewBox="20 4 420 440">' + LOGO_G + '</svg></span>'
+              '<span class="logo-text"><span class="logo-name">Equeli</span>'
+              '<span class="logo-sub">Platforma za intervencije s pomočjo konj</span></span>')
+# Pečat z dvojnim obročem (noga strani, uradni dokumenti)
+SEAL = ('<svg class="seal" viewBox="0 0 480 480" role="img" aria-label="Equeli, platforma za intervencije s pomočjo konj">'
+        '<defs><path id="seal-t" d="M 56 240 A 184 184 0 0 1 424 240"/><path id="seal-b" d="M 40 240 A 200 200 0 0 0 440 240"/></defs>'
+        '<circle cx="240" cy="240" r="239" fill="#ffffff"/>'
+        '<circle cx="240" cy="240" r="232" fill="none" stroke="currentColor" stroke-width="2"/>'
+        '<circle cx="240" cy="240" r="160" fill="none" stroke="currentColor" stroke-width="1"/>'
+        '<circle cx="240" cy="240" r="154" fill="#f5f9f8"/>'
+        '<text class="seal-name" fill="currentColor"><textPath href="#seal-t" startOffset="50%" text-anchor="middle">Equeli</textPath></text>'
+        '<text class="seal-sub" fill="currentColor"><textPath href="#seal-b" startOffset="50%" text-anchor="middle">PLATFORMA ZA INTERVENCIJE S POMOČJO KONJ</textPath></text>'
+        '<circle cx="80" cy="250" r="3" fill="currentColor"/><circle cx="400" cy="250" r="3" fill="currentColor"/>'
+        '<svg x="150" y="140" width="180" height="189" viewBox="20 4 420 440">' + LOGO_G + '</svg></svg>')
+
 # različni izrezi konja za ploščice: (velikost, desno, spodaj)
 CROPS = ["head"] * 7
 
@@ -105,7 +123,7 @@ def page(path, title, desc, body, active=""):
 <a class="skip" href="#vsebina">Preskoči na vsebino</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="Equeli, domov">{LOGO}Equeli</a>
+    <a class="logo" href="/" aria-label="Equeli, domov">{LOGO_BADGE}</a>
     <nav class="nav" id="nav" aria-label="Glavni meni">{nav}</nav>
     <a class="btn btn-ghost btn-sm cta" href="/za-izvajalce/">Za izvajalce</a>
     <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Odpri meni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg></button>
@@ -117,7 +135,7 @@ def page(path, title, desc, body, active=""):
 <footer class="site-footer">
   <div class="wrap">
     <div class="fgrid">
-      <div><a class="logo" href="/">{LOGO}Equeli</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
+      <div><a class="logo logo-seal" href="/" aria-label="Equeli, domov">{SEAL}</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
       <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Terapevtski centri</a></li></ul></div>
       <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Donatorji in fundacije</a></li></ul></div>
       <div><h2>Spoznajte</h2><ul><li><a href="/terapija-s-pomocjo-konja/">Terapija s pomočjo konja</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li></ul></div>
