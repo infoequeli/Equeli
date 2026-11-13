@@ -130,6 +130,7 @@ def page(path, title, desc, body, active=""):
 </body>
 </html>
 """
+    out = version_imgs(out)
     dest = os.path.join("public", "404.html") if path == "/404" else os.path.join("public", path.strip("/"), "index.html")
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     with open(dest, "w", encoding="utf-8") as f:
@@ -252,6 +253,18 @@ KICKER_PHOTO = {"Za starše in družine": "parents", "Za šole, vrtce in zavode"
                 "O Equeli": "about", "Za donatorje in fundacije": "donors", "Razlaga": "therapy", "Raziskava": "field",
                 "Članki in zgodbe": "articles", "Stroka": "stroka", "Pristop": "hipo"}
 
+
+
+import hashlib as _hl, re as _re
+_IMGV = {}
+def version_imgs(html):
+    def rep(m):
+        u = m.group(0)
+        if u not in _IMGV:
+            fp = os.path.join("public", u.lstrip("/"))
+            _IMGV[u] = _hl.md5(open(fp, "rb").read()).hexdigest()[:8] if os.path.exists(fp) else ""
+        return f"{u}?v={_IMGV[u]}" if _IMGV[u] else u
+    return _re.sub(r"/assets/img/[A-Za-z0-9_./-]+\.(?:jpg|webp|png)", rep, html)
 
 def photo(key, w=1200, cls="", eager=False):
     base, alt = PHOTOS[key]
