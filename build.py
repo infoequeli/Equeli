@@ -224,7 +224,7 @@ def research_dash():
 
 # Fotografije (Unsplash License, simbolične). Zamenjaj z lastnimi fotografijami centrov, ko bodo soglasja.
 PHOTOS = {
-    "field": ("local", "Dekle mirno opazuje belega konja na travniku"),
+    "field": ("local", "Obisk v hlevu: dekle in konji ob odprtih vratih"),
     "hero": ("https://images.pexels.com/photos/8947415/pexels-photo-8947415.jpeg", "Dekle s konjem na travniku v večerni svetlobi"),
     "what": ("local", "Odrasla oseba drži deklico, ki nežno boža konja"),
     "mo_touch": ("local", "Roka nežno se dotika konjevega nosu, konj ima zaprte oči"),
@@ -239,9 +239,9 @@ PHOTOS = {
     "school": ("https://images.pexels.com/photos/21835268/pexels-photo-21835268.jpeg", "Dlan ob konjevem obrazu"),
     "donors": ("local", "Mama z otrokoma na sprehodu ob konju"),
     "stable": ("https://images.pexels.com/photos/7883330/pexels-photo-7883330.jpeg", "Konja v čistem, svetlem hlevu"),
-    "pro": ("local", "Izkušena strokovnjakinja neguje konja"),
+    "pro": ("local", "Konja se mirno paseta za leseno ograjo"),
     "articles": ("local", "Roka nežno pod konjevim gobcem"),
-    "about": ("local", "Kobila in žrebiček na zeleni pašniku"),
+    "about": ("local", "Haflinger mirno stoji na travniku"),
     "contact": ("local", "Konji mirno gledajo iz lesenih boksov"),
     "therapy": ("local", "Odrasla oseba drži deklico, ki boža temnega konja"),
     "stroka": ("local", "Sedlo, pripravljeno na leseni ograji hleva"),
@@ -309,7 +309,7 @@ home = f"""
       <ul class="hero2-facts reveal d3"><li><b class="tnum">24</b>centrov in zavodov</li><li><b class="tnum">11</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
     <div class="h3-photo">
-      <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 2352w" sizes="(max-width: 900px) 100vw, 50vw"><img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 2352w" sizes="(max-width: 900px) 100vw, 50vw" alt="Mama in deklica skupaj nežno ščetkata konja na travniku" fetchpriority="high" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 1882w" sizes="(max-width: 900px) 100vw, 50vw"><img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 1882w" sizes="(max-width: 900px) 100vw, 50vw" alt="Hipoterapija: udeleženka se nasloni na konja, ob njej je strokovna pomoč" fetchpriority="high" decoding="async"></picture>
     </div>
   </div>
 </section>

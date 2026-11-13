@@ -826,3 +826,4 @@ footer .legal{display:flex;justify-content:space-between;align-items:center}
 @media (max-width:980px){footer .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}footer .fgrid>div:first-child{grid-column:1/-1}}
 @media (max-width:420px){footer .legal{flex-direction:column;align-items:flex-start}}
 footer .logo{color:var(--text)}
+.h3-photo img{object-position:60% 45%}
