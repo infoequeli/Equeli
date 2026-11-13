@@ -334,7 +334,7 @@ home = f"""
   <div class="wrap h3-grid">
     <div class="h3-copy">
       <h1 class="reveal d1">Intervencije s&nbsp;pomočjo konj v&nbsp;Sloveniji.<br><em>Na&nbsp;enem&nbsp;mestu.</em></h1>
-      <p class="lede reveal d2">Razlaga pristopov, centri po vsej Sloveniji in brezplačna pomoč pri izbiri programa za družine, šole, izvajalce in podpornike.</p>
+      <p class="lede reveal d2">Razlaga pristopov, centri po vsej Sloveniji in brezplačna pomoč pri izbiri programa za družine in šole. Izvajalci se lahko brezplačno predstavijo, podporniki pa najdejo programe, ki jih lahko podprejo.</p>
       <div class="btn-row reveal d3"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/terapija-s-pomocjo-konja/">Kaj je terapija s pomočjo konja?</a></div>
       <ul class="hero2-facts reveal d3"><li><b class="tnum">24</b>centrov in zavodov</li><li><b class="tnum">11</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
