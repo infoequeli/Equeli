@@ -114,7 +114,7 @@ def page(path, title, desc, body, active=""):
 <meta property="og:url" content="{SITE}{path}">
 <meta property="og:locale" content="sl_SI">
 <meta name="theme-color" content="#ffffff">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.svg?v=krog1" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap">
 <link rel="stylesheet" href="/assets/style.css?v={ASSET_V['css']}">
