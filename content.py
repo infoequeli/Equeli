@@ -197,7 +197,7 @@ CENTERS = [
          url="", reg=REG + "sara-krasovec/"),
     dict(name="Zavod Škatlica", place="Sveti Tomaž", region=["Podravska"], group="register", offer=["S", "P"],
          who="Avtizem, ADHD in vedenjski izzivi", team="Dora Klar", horses="2",
-         url="", reg=REG + "dora-klar-terapevt-s-pomocjo-konja/"),
+         url="https://www.skatlica.si/", reg=""),
     dict(name="zGIBka", place="Povir pri Sežani", region=["Obalno-kraška"], group="register", offer=["T", "A"],
          who="Vedenjsko-čustvene in učne težave, tesnoba, samopodoba", team="Taja Tavčar, prof. razrednega pouka", horses="1",
          url="https://www.zgibka.com/", reg=REG + "taja-tavcar-terapevtka-s-pomocjo-konja/"),

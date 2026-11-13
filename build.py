@@ -120,9 +120,10 @@ def page(path, title, desc, body, active=""):
       <div><a class="logo" href="/">{LOGO}Equeli</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
       <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Terapevtski centri</a></li></ul></div>
       <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Donatorji in fundacije</a></li></ul></div>
-      <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/terapija-s-pomocjo-konja/">Kaj je terapija s pomočjo konja</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
+      <div><h2>Spoznajte</h2><ul><li><a href="/terapija-s-pomocjo-konja/">Terapija s pomočjo konja</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li></ul></div>
+      <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
     </div>
-    <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma</span><span>Povezujemo izvajalce, družine, ustanove in podpornike.</span></div>
+    <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma za intervencije s pomočjo konj</span><span>Slovenija</span></div>
   </div>
 </footer>
 <script src="/assets/app.js?v={ASSET_V['js']}" defer></script>
@@ -299,41 +300,41 @@ pages = []
 
 # ================= DOMOV =================
 home = f"""
-<section class="hero2">
-  <div class="wrap hero2-grid">
-    <div class="hero2-copy">
-      <p class="kicker reveal">Neodvisna platforma · Slovenija</p>
+<section class="hero2 h3">
+  <div class="wrap h3-grid">
+    <div class="h3-copy">
       <h1 class="reveal d1">Intervencije s&nbsp;pomočjo konj v&nbsp;Sloveniji.<br><em>Na&nbsp;enem&nbsp;mestu.</em></h1>
-      <p class="lede reveal d2"><b>Intervencije s pomočjo konj</b> so terapevtski, pedagoški in rekreativni programi, pri katerih usposobljen strokovnjak v svoje delo vključi konja. Sem sodijo na primer hipoterapija, terapija s pomočjo konja in prilagojeno jahanje.</p>
-      <p class="lede2 reveal d2">Equeli povezuje uporabnike in njihove družine, izvajalce, šole, javne ustanove in podpornike. Pri nas najdete razlago pristopov, centre po vsej Sloveniji in brezplačno pomoč pri izbiri programa.</p>
+      <p class="lede reveal d2">Razlaga pristopov, centri po vsej Sloveniji in brezplačna pomoč pri izbiri programa za družine, šole, izvajalce in podpornike.</p>
       <div class="btn-row reveal d3"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/terapija-s-pomocjo-konja/">Kaj je terapija s pomočjo konja?</a></div>
       <ul class="hero2-facts reveal d3"><li><b class="tnum">24</b>centrov in zavodov</li><li><b class="tnum">11</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
-    <div class="hero2-art photo-art">
-      <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 2352w" sizes="(max-width: 900px) 100vw, 50vw"><img class="kb hero-photo" src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 2352w" sizes="(max-width: 900px) 100vw, 50vw" alt="Mama in deklica skupaj nežno ščetkata konja na travniku" fetchpriority="high" decoding="async"></picture>
+    <div class="h3-photo">
+      <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 2352w" sizes="(max-width: 900px) 100vw, 50vw"><img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 2352w" sizes="(max-width: 900px) 100vw, 50vw" alt="Mama in deklica skupaj nežno ščetkata konja na travniku" fetchpriority="high" decoding="async"></picture>
     </div>
   </div>
 </section>
 
-
-<section class="section what">
-  <div class="wrap split">
-    <div class="head"><p class="kicker">Kaj je terapija s pomočjo konja?</p><h2>Konj kot sodelavec v strokovnem delu</h2>
-      <p class="lede">Pri intervencijah s pomočjo konj usposobljen strokovnjak vključi konja v svoje delo, da bi s posameznikom ali skupino dosegel jasno zastavljene cilje: gibalne, čustvene, socialne ali učne.</p>
-      <p class="what-p">Strokovnjak ima temeljno izobrazbo, na primer iz fizioterapije, delovne terapije, psihologije ali specialne pedagogike, in dodatno usposabljanje za delo s konjem. Konj je posebej izbran in pripravljen, srečanja pa potekajo po načrtu in v varnem okolju.</p>
-      <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="/terapija-s-pomocjo-konja/">Več o terapiji s pomočjo konja</a><a class="btn btn-ghost" href="/hipoterapija/">Hipoterapija</a></div></div>
-    <div class="what-cards">
-      <div class="what-photo reveal-img">{photo("what", 1000)}</div>
-      <div class="wc">{badge("heart")}<div><b>Terapija</b><p>Zdravstvena, psihološka ali delovnoterapevtska obravnava. Sem sodi tudi hipoterapija.</p></div></div>
-      <div class="wc">{badge("book")}<div><b>Učenje</b><p>Pedagoške in specialnopedagoške intervencije za pozornost, učenje in socialne veščine.</p></div></div>
-      <div class="wc">{badge("sun")}<div><b>Aktivnosti</b><p>Prilagojeno jahanje, nega in druženje s konji z rekreativnim ali izobraževalnim namenom.</p></div></div>
+<section class="section what w3">
+  <div class="wrap">
+    <div class="w3-grid">
+      <div class="w3-copy">
+        <h2>Konj kot sodelavec v&nbsp;strokovnem delu</h2>
+        <p class="lede">Usposobljen strokovnjak, na primer fizioterapevt, psiholog ali specialni pedagog, vključi v svoje delo posebej pripravljenega konja. Srečanja potekajo po načrtu, v varnem okolju in z jasnimi cilji.</p>
+        <div class="btn-row"><a class="btn btn-dark" href="/terapija-s-pomocjo-konja/">Več o terapiji</a><a class="btn btn-ghost" href="/hipoterapija/">Hipoterapija</a></div>
+      </div>
+      <div class="w3-photo reveal-img">{photo("what", 1000)}</div>
+    </div>
+    <div class="w3-cards">
+      <div class="wc">{badge("heart")}<div><b>Terapija</b><p>Zdravstvena, psihološka ali delovnoterapevtska obravnava, tudi hipoterapija.</p></div></div>
+      <div class="wc">{badge("book")}<div><b>Učenje</b><p>Pedagoško delo za pozornost, učenje in socialne veščine.</p></div></div>
+      <div class="wc">{badge("sun")}<div><b>Aktivnosti</b><p>Prilagojeno jahanje, nega konja in druženje.</p></div></div>
     </div>
   </div>
 </section>
 
 <section class="section white">
   <div class="wrap">
-    <div class="head center-head"><p class="kicker">Platforma</p><h2>Platforma, ki povezuje</h2><p class="lede">Uporabnike in njihove družine, izvajalce, šole in javne ustanove ter podpornike. Vsak najde svoj vstop in pot do drugih.</p></div>
+    <div class="head center-head"><h2>Platforma, ki povezuje</h2><p class="lede">Uporabnike in njihove družine, izvajalce, šole in javne ustanove ter podpornike. Vsak najde svoj vstop in pot do drugih.</p></div>
     <div class="aud">
       <a class="aud-c" href="/za-starse/">{badge("family", "lg")}<b>Uporabniki in družine</b><p>Otroci, mladostniki, odrasli in starejši ter njihovi bližnji: vodniki po potrebah in pomoč pri iskanju programa.</p><span class="go">Za starše →</span></a>
       <a class="aud-c" href="/za-sole-in-zavode/">{badge("school", "lg")}<b>Šole in javne ustanove</b><p>Šole, vrtci, CUDV, domovi, bolnišnice in občine: programi za skupine, povezava z izvajalci in financiranje.</p><span class="go">Za šole in zavode →</span></a>
@@ -356,7 +357,7 @@ home = f"""
 
 <section class="section">
   <div class="wrap">
-    <div class="head"><p class="kicker">Kako vam pomagamo</p><h2>Od vprašanja do pravega stika</h2><p class="lede">Ni vam treba poznati strokovnih izrazov. Začnite tam, kjer ste.</p></div>
+    <div class="head"><h2>Od vprašanja do pravega stika</h2><p class="lede">Ni vam treba poznati strokovnih izrazov. Začnite tam, kjer ste.</p></div>
     <ol class="journey">
       <li><a href="#vodnik-start">{badge("compass", "ring")}<b>Opišite situacijo</b><span>Dve vprašanji v interaktivnem vodniku.</span></a></li>
       <li><a href="/vodnik/">{badge("book", "ring")}<b>Razumite možnosti</b><span>Pristopi, kdo jih izvaja in kaj vprašati.</span></a></li>
@@ -370,7 +371,7 @@ home = f"""
 
 <section class="section">
   <div class="wrap">
-    <div class="head-row"><div class="head"><p class="kicker">Vodniki</p><h2>Vodniki po potrebah</h2><p class="lede">Pristopi, ki se pogosto ponujajo, kdo jih izvaja in katera vprašanja zastaviti izvajalcu.</p></div><a class="link-arrow" href="/vodnik/">Vsi vodniki →</a></div>
+    <div class="head-row"><div class="head"><h2>Vodniki po potrebah</h2><p class="lede">Pristopi, ki se pogosto ponujajo, kdo jih izvaja in katera vprašanja zastaviti izvajalcu.</p></div><a class="link-arrow" href="/vodnik/">Vsi vodniki →</a></div>
     <div class="cards">{guide_cards()}</div>
   </div>
 </section>
@@ -379,7 +380,7 @@ home = f"""
 
 <section class="section white">
   <div class="wrap split">
-    <div class="head"><p class="kicker">Nacionalna raziskava</p><h2>Kdo, kje in kako dela s konji v Sloveniji</h2>
+    <div class="head"><h2>Kdo, kje in kako dela s konji v Sloveniji</h2>
       <p class="lede">Obiskujemo izvajalce, se pogovarjamo s strokovnjaki in zbiramo podatke o programih, zmogljivostih in ovirah pri dostopnosti.</p>
       <ul class="ilist"><li>{icon("pin")}Obiski in intervjuji na terenu</li><li>{icon("clipboard")}Vprašalnik za izvajalce</li><li>{icon("chart")}Pregled stanja in potreb</li></ul>
       <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/raziskava/">O raziskavi</a></div></div>
@@ -390,7 +391,7 @@ home = f"""
 
 <section class="section">
   <div class="wrap">
-    <div class="head-row"><div class="head"><p class="kicker">Članki in zgodbe</p><h2>Ljudje, konji in programi</h2><p class="lede">Zapisi z obiskov, pogovori s strokovnjaki in odgovori na vprašanja staršev.</p></div><a class="btn btn-ghost btn-sm" href="/clanki/">Vsi članki</a></div>
+    <div class="head-row"><div class="head"><h2>Ljudje, konji in programi</h2><p class="lede">Zapisi z obiskov, pogovori s strokovnjaki in odgovori na vprašanja staršev.</p></div><a class="btn btn-ghost btn-sm" href="/clanki/">Vsi članki</a></div>
     {articles_block(3)}
   </div>
 </section>
@@ -398,7 +399,7 @@ home = f"""
 <section class="section white">
   <div class="wrap">
     <div class="support-band">
-      <div><p class="kicker">Za donatorje in fundacije</p><h2>Podprite dostopnost programov</h2><p>Podjetja, fundacije in posamezniki lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.</p><div class="btn-row"><a class="btn btn-dark" href="/za-podpornike/">Kako lahko pomagate</a></div></div>
+      <div><h2>Podprite dostopnost programov</h2><p>Podjetja, fundacije in posamezniki lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.</p><div class="btn-row"><a class="btn btn-dark" href="/za-podpornike/">Kako lahko pomagate</a></div></div>
       <ul class="ways"><li>{badge("euro")}<b>Financiranje programa</b><span>za razred, skupino ali zavod</span></li><li>{badge("heart")}<b>Sofinanciranje za družine</b><span>nižja cena za tiste, ki jo potrebujejo</span></li><li>{badge("box")}<b>Oprema in znanje</b><span>material, prostovoljstvo, pro bono</span></li></ul>
     </div>
   </div>
@@ -406,13 +407,13 @@ home = f"""
 
 <section class="section white">
   <div class="wrap">
-    <div class="cta-card"><p class="kicker">Za izvajalce</p><h2 style="margin-top:14px">Predstavite svoj center</h2><p>Potrdite in dopolnite podatke o ekipi, programih in konjih. Predstavitev je brezplačna. Profil objavimo po vaši potrditvi.</p><div class="btn-row"><a class="btn btn-light" href="/za-izvajalce/">Izpolnite obrazec</a></div></div>
+    <div class="cta-card"><h2>Predstavite svoj center</h2><p>Potrdite in dopolnite podatke o ekipi, programih in konjih. Predstavitev je brezplačna. Profil objavimo po vaši potrditvi.</p><div class="btn-row"><a class="btn btn-light" href="/za-izvajalce/">Izpolnite obrazec</a></div></div>
   </div>
 </section>
 
 <section class="closing">
   <div class="wrap">
-    <p class="kicker">Equeli</p>
+    
     <h2>Povezujemo ljudi, strokovnjake in možnosti.</h2>
     <p class="lede">Equeli je nastal iz preproste želje: da bi družine, šole in strokovnjaki lažje našli drug drugega. Če ne veste, kje začeti, nam pišite. Skupaj bomo poiskali naslednji korak.</p>
     <div class="btn-row"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/kontakt/">Pišite nam</a></div>
