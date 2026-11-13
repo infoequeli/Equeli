@@ -791,3 +791,4 @@ img{image-rendering:auto}
 
 .logo-mark{width:40px;height:40px}.logo{gap:11px}@media (max-width:600px){.logo-mark{width:36px;height:36px}}
 picture{display:contents}
+.hero2-art img.hero-photo{object-position:42% 50%}

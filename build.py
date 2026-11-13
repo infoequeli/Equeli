@@ -242,7 +242,7 @@ PHOTOS = {
     "articles": ("local", "Roka nežno pod konjevim gobcem"),
     "about": ("local", "Kobila in žrebiček na zeleni pašniku"),
     "contact": ("local", "Konji mirno gledajo iz lesenih boksov"),
-    "therapy": ("local", "Terapevtka ob konju, ki ima zaprte oči, udeleženka ob njem"),
+    "therapy": ("local", "Odrasla oseba drži deklico, ki boža temnega konja"),
     "stroka": ("local", "Sedlo, pripravljeno na leseni ograji hleva"),
     "hipo": ("local", "Hipoterapija: udeleženka leži na konju, ob njej strokovna pomoč"),
 }
@@ -310,7 +310,7 @@ home = f"""
       <ul class="hero2-facts reveal d3"><li><b class="tnum">24</b>centrov in zavodov</li><li><b class="tnum">11</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
     <div class="hero2-art photo-art">
-      <picture><source type="image/webp" srcset="/assets/img/gharib-900.webp 900w, /assets/img/gharib-1600.webp 1600w, /assets/img/gharib-2400.webp 2400w" sizes="(max-width: 900px) 100vw, 50vw"><img class="kb" src="/assets/img/gharib-1600.jpg" srcset="/assets/img/gharib-900.jpg 900w, /assets/img/gharib-1600.jpg 1600w, /assets/img/gharib-2400.jpg 2400w" sizes="(max-width: 900px) 100vw, 50vw" alt="Bel konj se na cvetočem travniku vzpne na zadnje noge" fetchpriority="high" decoding="async"></picture>
+      <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 2352w" sizes="(max-width: 900px) 100vw, 50vw"><img class="kb hero-photo" src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 2352w" sizes="(max-width: 900px) 100vw, 50vw" alt="Terapevtka nežno poravna konju čop, konj mirno zapira oči, udeleženka s čelado je ob njem" fetchpriority="high" decoding="async"></picture>
     </div>
   </div>
 </section>
