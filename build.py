@@ -223,28 +223,28 @@ def research_dash():
 
 # Fotografije (Unsplash License, simbolične). Zamenjaj z lastnimi fotografijami centrov, ko bodo soglasja.
 PHOTOS = {
-    "field": ("https://images.pexels.com/photos/33829387/pexels-photo-33829387.jpeg", "Dekle se na sončnem pašniku dotakne konja"),
+    "field": ("local", "Dekle mirno opazuje belega konja na travniku"),
     "hero": ("https://images.pexels.com/photos/8947415/pexels-photo-8947415.jpeg", "Dekle s konjem na travniku v večerni svetlobi"),
     "what": ("https://images.pexels.com/photos/7883326/pexels-photo-7883326.jpeg", "Ženska objema konja v svetlem hlevu"),
-    "mo_touch": ("https://images.pexels.com/photos/15990615/pexels-photo-15990615.jpeg", "Otroška roka nežno se dotika lisastega konja"),
-    "mo_calm": ("https://images.pexels.com/photos/13578494/pexels-photo-13578494.jpeg", "Deklica mirno stoji ob belem konju v mehki svetlobi"),
-    "mo_bond": ("https://images.pexels.com/photos/28998222/pexels-photo-28998222.jpeg", "Mlado dekle ob konju na travniku v mehki večerni svetlobi"),
-    "mo_care": ("https://images.pexels.com/photos/14223887/pexels-photo-14223887.jpeg", "Otroški roki ščetkata belega konja"),
+    "mo_touch": ("local", "Roka nežno se dotika konjevega nosu, konj ima zaprte oči"),
+    "mo_calm": ("local", "Svetla griva konja v tihem hlevu"),
+    "mo_bond": ("local", "Dekle ob ograji boža konja v večerni svetlobi"),
+    "mo_care": ("local", "Mama in deklica skupaj ščetkata konja"),
     "touch": ("https://images.pexels.com/photos/7883432/pexels-photo-7883432.jpeg", "Roka nežno gladi konjevo grivo"),
     "meadow": ("https://images.pexels.com/photos/8265890/pexels-photo-8265890.jpeg", "Dekle boža dva konja na travniku"),
     "bond": ("https://images.pexels.com/photos/7883439/pexels-photo-7883439.jpeg", "Ženska z zaprtimi očmi objema konja"),
     "care": ("https://images.pexels.com/photos/7882325/pexels-photo-7882325.jpeg", "Ščetkanje konjeve grive"),
-    "parents": ("https://images.pexels.com/photos/7698940/pexels-photo-7698940.jpeg", "Deklica na invalidskem vozičku ob poniju s spremljevalko"),
+    "parents": ("local", "Deklica objema ponija in ga ščetka"),
     "school": ("https://images.pexels.com/photos/21835268/pexels-photo-21835268.jpeg", "Dlan ob konjevem obrazu"),
-    "donors": ("https://images.pexels.com/photos/28378042/pexels-photo-28378042.jpeg", "Nasmejano dekle z belim konjem"),
+    "donors": ("local", "Mama z otrokoma na sprehodu ob konju"),
     "stable": ("https://images.pexels.com/photos/7883330/pexels-photo-7883330.jpeg", "Konja v čistem, svetlem hlevu"),
-    "pro": ("https://images.pexels.com/photos/7882832/pexels-photo-7882832.jpeg", "Strokovnjakinja ob rjavem konju"),
-    "articles": ("https://images.pexels.com/photos/30507387/pexels-photo-30507387.jpeg", "Roka boža ponija v toplem hlevu"),
-    "about": ("https://images.pexels.com/photos/7883130/pexels-photo-7883130.jpeg", "Dlan na konjevem obrazu"),
-    "contact": ("https://images.pexels.com/photos/33312263/pexels-photo-33312263.jpeg", "Dekle se dotika konja v svetlem hlevu"),
-    "therapy": ("https://images.pexels.com/photos/33565494/pexels-photo-33565494.jpeg", "Odrasla oseba drži otroka, ki se dotika konja"),
-    "stroka": ("https://images.pexels.com/photos/7882324/pexels-photo-7882324.jpeg", "Nega konja v urejenem hlevu"),
-    "hipo": ("https://images.pexels.com/photos/9864749/pexels-photo-9864749.jpeg", "Mlado dekle s konjem v naravi"),
+    "pro": ("local", "Izkušena strokovnjakinja neguje konja"),
+    "articles": ("local", "Roka nežno pod konjevim gobcem"),
+    "about": ("local", "Kobila in žrebiček na zeleni pašniku"),
+    "contact": ("local", "Konji mirno gledajo iz lesenih boksov"),
+    "therapy": ("local", "Terapevtka ob konju, ki ima zaprte oči, udeleženka ob njem"),
+    "stroka": ("local", "Sedlo, pripravljeno na leseni ograji hleva"),
+    "hipo": ("local", "Hipoterapija: udeleženka leži na konju, ob njej strokovna pomoč"),
 }
 # Fotografije: Pexels (brezplačna licenca, pripis ni obvezen). Izbrane ročno po ogledu. Zamenjaj z lastnimi, ko bodo soglasja centrov.
 KICKER_PHOTO = {"Za starše in družine": "parents", "Za šole, vrtce in zavode": "school", "Centri": "contact", "Za izvajalce": "pro",
@@ -254,6 +254,11 @@ KICKER_PHOTO = {"Za starše in družine": "parents", "Za šole, vrtce in zavode"
 
 def photo(key, w=1200, cls="", eager=False):
     base, alt = PHOTOS[key]
+    load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+    if base == "local":
+        d = f"/assets/img/p/{key}"
+        srcset = ", ".join(f"{d}-{x}.webp {x}w" for x in (640, 1000, 1600))
+        return f'<picture><source type="image/webp" srcset="{srcset}" sizes="(max-width: 900px) 100vw, 60vw"><img class="{cls}" src="{d}-1000.jpg" alt="{e(alt)}" {load} decoding="async"></picture>'
     q = "?auto=compress&cs=tinysrgb&w="
     srcset = ", ".join(f"{base}{q}{x} {x}w" for x in (640, 1000, 1600))
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
