@@ -226,6 +226,10 @@ PHOTOS = {
     "field": ("https://images.pexels.com/photos/33829387/pexels-photo-33829387.jpeg", "Dekle se na sončnem pašniku dotakne konja"),
     "hero": ("https://images.pexels.com/photos/8947415/pexels-photo-8947415.jpeg", "Dekle s konjem na travniku v večerni svetlobi"),
     "what": ("https://images.pexels.com/photos/7883326/pexels-photo-7883326.jpeg", "Ženska objema konja v svetlem hlevu"),
+    "mo_touch": ("https://images.pexels.com/photos/33870471/pexels-photo-33870471.jpeg", "Roka nežno poboža konja po čelu"),
+    "mo_calm": ("https://images.pexels.com/photos/13578494/pexels-photo-13578494.jpeg", "Deklica mirno stoji ob belem konju v mehki svetlobi"),
+    "mo_bond": ("https://images.pexels.com/photos/17961334/pexels-photo-17961334.jpeg", "Mlada ženska nežno boža konja po glavi"),
+    "mo_care": ("https://images.pexels.com/photos/14223887/pexels-photo-14223887.jpeg", "Otroški roki ščetkata belega konja"),
     "touch": ("https://images.pexels.com/photos/7883432/pexels-photo-7883432.jpeg", "Roka nežno gladi konjevo grivo"),
     "meadow": ("https://images.pexels.com/photos/8265890/pexels-photo-8265890.jpeg", "Dekle boža dva konja na travniku"),
     "bond": ("https://images.pexels.com/photos/7883439/pexels-photo-7883439.jpeg", "Ženska z zaprtimi očmi objema konja"),
@@ -337,10 +341,10 @@ home = f"""
 <section class="moments">
   <div class="wrap">
     <div class="mo-grid">
-      <figure class="mo reveal-img">{photo("touch", 900)}<figcaption><b>Dotik</b><span>Prvi stik pogosto ni na konju, ampak ob njem.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("stable", 900)}<figcaption><b>Mir</b><span>Urejen hlev in mirni konji.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("bond", 900)}<figcaption><b>Odnos</b><span>Konj se odzove na to, kako se mu približamo.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("care", 900)}<figcaption><b>Skrb</b><span>Nega konja je del srečanja.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("mo_touch", 900)}<figcaption><b>Dotik</b><span>Prvi stik pogosto ni na konju, ampak ob njem.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("mo_calm", 900)}<figcaption><b>Mir</b><span>Tiha bližina, brez naglice.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("mo_bond", 900)}<figcaption><b>Odnos</b><span>Konj se odzove na to, kako se mu približamo.</span></figcaption></figure>
+      <figure class="mo reveal-img">{photo("mo_care", 900)}<figcaption><b>Skrb</b><span>Nega konja je del srečanja.</span></figcaption></figure>
     </div>
   </div>
 </section>
