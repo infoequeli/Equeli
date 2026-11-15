@@ -583,14 +583,14 @@ _CF = f"""  <div class="cfilter" id="cfilter">
 mx = max(n for _, n in REGIONS)
 rows = "".join(f'<tr><td>{r}</td><td class="tnum">{n if n else "še ni zapisov"}' + (f'<span class="bar" style="width:{round(n / mx * 100)}px" aria-hidden="true"></span>' if n else "") + '</td></tr>' for r, n in REGIONS)
 pages.append(page("/izvajalci/", "Terapevtski centri", "Javni zavodi in terapevtski centri, ki v Sloveniji izvajajo intervencije s pomočjo konj.",
-                  hero("Centri", "Terapevtski centri v Sloveniji", "Na seznamu so centri, ki so potrdili sodelovanje z Equeli. Seznam sproti dopolnjujemo, ko se centri prijavijo.",
+                  hero("Centri", "Terapevtski centri v Sloveniji", "Javni zavodi in centri, ki izvajajo intervencije s pomočjo konj. Seznam sproti dopolnjujemo, ko se centri prijavijo.",
                        f'<a class="btn btn-dark" href="/za-starse/#iskanje">Pomagamo poiskati izvajalca</a><a class="btn btn-ghost" href="/strokovni-okvir/">Strokovni okvir</a>', seed=13) + f"""
 <section class="section white"><div class="wrap">
   {_CF if len([c for c in CENTERS if c.get("confirmed")]) > 3 else ""}
   {"".join(f'<div class="cgroup" data-group="{g}"><div class="head"><h2>{t}</h2><p class="lede">{d}</p></div>{center_cards([c for c in CENTERS if c["group"] == g and c.get("confirmed")])}</div>' for g, t, d in GROUPS if any(c["group"] == g and c.get("confirmed") for c in CENTERS))}
   <div class="stroka-link" style="margin-top:32px">{badge("pin", "lg")}<div><h3>Vašega centra še ni na seznamu?</h3><p>Predstavitev je brezplačna. Profil objavimo, ko potrdite podatke.</p></div><a class="go" href="/za-izvajalce/#obrazec">Prijavite center →</a></div>
   <div class="cf-empty" hidden><h3>Za ta izbor še nimamo centra.</h3><p>Pišite nam, pomagamo poiskati izvajalca v bližini.</p><a class="btn btn-dark" href="/za-starse/#iskanje">Pomoč pri iskanju</a></div>
-  <p class="fine">Podatke so posredovali centri sami. Za termine in cene se obrnite neposredno na center. Če iščete izvajalca v svoji regiji, vam pri iskanju pomagamo.</p>
+  <p class="fine">Podatki so povzeti po registru Nazaj na konja, spletnih straneh centrov in prijavah centrov. Za termine in cene se obrnite neposredno na center. Če iščete izvajalca v svoji regiji, vam pri iskanju pomagamo.</p>
 </div></section>
 <section class="section"><div class="wrap">
   <a class="stroka-link" href="/strokovni-okvir/">{badge("shield", "lg")}<div><p class="kicker">Stroka</p><h3>Kdo je usposobljen za delo s konjem?</h3><p>Zavod Nazaj na konja, register strokovnjakov, mednarodne smernice HETI in razlike med pristopi.</p></div><span class="go">Strokovni okvir →</span></a>
