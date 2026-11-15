@@ -228,16 +228,16 @@ def center_cards(items):
 
 def research_dash():
     from collections import Counter
-    cs = [c for c in CENTERS if c["group"] in ("javni", "register", "potrjeni")]
+    cs = [c for c in CENTERS if c["group"] in ("javni", "register", "drugi")]
     cnt = Counter(o for c in cs for o in c["offer"])
-    horses = sum(int(c["horses"].split()[0]) for c in cs if c["horses"])
+    shown = len([c for c in CENTERS if c.get("confirmed")])
     mx = max(cnt.values())
     bars = "".join(f'<li><span class="ab-l">{OFFER[k]}</span><span class="ab-b"><i style="--w:{v / mx * 100:.0f}%"></i></span><b class="tnum" data-count="{v}">{v}</b></li>'
                    for k, v in sorted(cnt.items(), key=lambda x: -x[1]))
-    tiles = [("46", "organizacij v raziskovalni bazi"), ("11", "od 12 regij z izvajalcem"), (str(len(cs)), "predstavljenih centrov in zavodov"), (str(horses), "terapevtskih konj pri predstavljenih centrih")]
+    tiles = [("46", "organizacij v raziskovalni bazi"), ("11", "od 12 regij z izvajalcem"), (str(len(cs)), "izvajalcev s podatki o ponudbi"), (str(shown), "centrov je potrdilo sodelovanje")]
     t = "".join(f'<div class="dt"><b class="tnum" data-count="{v}">{v}</b><span>{l}</span></div>' for v, l in tiles)
     return (f'<div class="dash anim"><div class="dtiles">{t}</div>'
-            f'<div class="abars"><p class="ab-t">Kaj ponujajo predstavljeni centri</p><ol>{bars}</ol></div></div>')
+            f'<div class="abars"><p class="ab-t">Kaj ponujajo izvajalci v raziskovalni bazi</p><ol>{bars}</ol></div></div>')
 
 
 # Fotografije (Unsplash License, simbolične). Zamenjaj z lastnimi fotografijami centrov, ko bodo soglasja.
@@ -336,7 +336,7 @@ home = f"""
       <h1 class="reveal d1">Intervencije s&nbsp;pomočjo konj v&nbsp;Sloveniji.<br><em>Na&nbsp;enem&nbsp;mestu.</em></h1>
       <p class="lede reveal d2">Razlaga pristopov, centri po vsej Sloveniji in brezplačna pomoč pri izbiri programa za družine in šole. Izvajalci se lahko brezplačno predstavijo, podporniki pa najdejo programe, ki jih lahko podprejo.</p>
       <div class="btn-row reveal d3"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/terapija-s-pomocjo-konja/">Kaj je terapija s pomočjo konja?</a></div>
-      <ul class="hero2-facts reveal d3"><li><b class="tnum">24</b>centrov in zavodov</li><li><b class="tnum">11</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
+      <ul class="hero2-facts reveal d3"><li><b class="tnum">46</b>organizacij v raziskavi</li><li><b class="tnum">12</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
     <div class="h3-photo">
       <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 1882w" sizes="(max-width: 900px) 100vw, 50vw"><img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 1882w" sizes="(max-width: 900px) 100vw, 50vw" alt="Hipoterapija: udeleženka se nasloni na konja, ob njej je strokovna pomoč" fetchpriority="high" decoding="async"></picture>
@@ -575,20 +575,22 @@ pages.append(page("/kako-izbrati/", "Kako izbrati program", "Vprašanja, ki jih 
   <div class="cta-card"><h2>Vodniki po potrebah</h2><p>Pristopi in vprašanja glede na situacijo.</p><div class="btn-row"><a class="btn btn-light" href="/vodnik/">Odprite vodnike</a></div></div>
 </div>""", "/vodnik/"))
 
+_CF = f"""  <div class="cfilter" id="cfilter">
+    <div class="cf-row"><span class="cf-l">Pristop</span><div class="cf-chips"><button type="button" class="cf-chip" aria-pressed="true" data-offer="">Vsi</button>{"".join(f'<button type="button" class="cf-chip" aria-pressed="false" data-offer="{k}">{v}</button>' for k, v in OFFER.items())}</div></div>
+    <div class="cf-row"><label class="cf-l" for="cf-reg">Regija</label><select id="cf-reg"><option value="">Vsa Slovenija</option>{"".join(f'<option>{r}</option>' for r, _ in REGIONS)}</select><span class="cf-count" aria-live="polite"></span></div>
+  </div>"""
 # ================= IMENIK =================
 mx = max(n for _, n in REGIONS)
 rows = "".join(f'<tr><td>{r}</td><td class="tnum">{n if n else "še ni zapisov"}' + (f'<span class="bar" style="width:{round(n / mx * 100)}px" aria-hidden="true"></span>' if n else "") + '</td></tr>' for r, n in REGIONS)
 pages.append(page("/izvajalci/", "Terapevtski centri", "Javni zavodi in terapevtski centri, ki v Sloveniji izvajajo intervencije s pomočjo konj.",
-                  hero("Centri", "Terapevtski centri v Sloveniji", "Javni zavodi, centri in strokovnjaki, ki izvajajo intervencije s pomočjo konj. Predstavitve dopolnjujemo z obiski na terenu.",
+                  hero("Centri", "Terapevtski centri v Sloveniji", "Na seznamu so centri, ki so potrdili sodelovanje z Equeli. Seznam sproti dopolnjujemo, ko se centri prijavijo.",
                        f'<a class="btn btn-dark" href="/za-starse/#iskanje">Pomagamo poiskati izvajalca</a><a class="btn btn-ghost" href="/strokovni-okvir/">Strokovni okvir</a>', seed=13) + f"""
 <section class="section white"><div class="wrap">
-  <div class="cfilter" id="cfilter">
-    <div class="cf-row"><span class="cf-l">Pristop</span><div class="cf-chips"><button type="button" class="cf-chip" aria-pressed="true" data-offer="">Vsi</button>{"".join(f'<button type="button" class="cf-chip" aria-pressed="false" data-offer="{k}">{v}</button>' for k, v in OFFER.items())}</div></div>
-    <div class="cf-row"><label class="cf-l" for="cf-reg">Regija</label><select id="cf-reg"><option value="">Vsa Slovenija</option>{"".join(f'<option>{r}</option>' for r, _ in REGIONS)}</select><span class="cf-count" aria-live="polite"></span></div>
-  </div>
-  {"".join(f'<div class="cgroup" data-group="{g}"><div class="head"><h2>{t}</h2><p class="lede">{d}</p></div>{center_cards([c for c in CENTERS if c["group"] == g])}</div>' for g, t, d in GROUPS)}
+  {_CF if len([c for c in CENTERS if c.get("confirmed")]) > 3 else ""}
+  {"".join(f'<div class="cgroup" data-group="{g}"><div class="head"><h2>{t}</h2><p class="lede">{d}</p></div>{center_cards([c for c in CENTERS if c["group"] == g and c.get("confirmed")])}</div>' for g, t, d in GROUPS if any(c["group"] == g and c.get("confirmed") for c in CENTERS))}
+  <div class="stroka-link" style="margin-top:32px">{badge("pin", "lg")}<div><h3>Vašega centra še ni na seznamu?</h3><p>Predstavitev je brezplačna. Profil objavimo, ko potrdite podatke.</p></div><a class="go" href="/za-izvajalce/#obrazec">Prijavite center →</a></div>
   <div class="cf-empty" hidden><h3>Za ta izbor še nimamo centra.</h3><p>Pišite nam, pomagamo poiskati izvajalca v bližini.</p><a class="btn btn-dark" href="/za-starse/#iskanje">Pomoč pri iskanju</a></div>
-  <p class="fine">Podatki so povzeti po registru Nazaj na konja, spletnih straneh centrov in obrazcih, ki so jih izpolnili centri sami. Za termine in cene se obrnite neposredno na center.</p>
+  <p class="fine">Podatke so posredovali centri sami. Za termine in cene se obrnite neposredno na center. Če iščete izvajalca v svoji regiji, vam pri iskanju pomagamo.</p>
 </div></section>
 <section class="section"><div class="wrap">
   <a class="stroka-link" href="/strokovni-okvir/">{badge("shield", "lg")}<div><p class="kicker">Stroka</p><h3>Kdo je usposobljen za delo s konjem?</h3><p>Zavod Nazaj na konja, register strokovnjakov, mednarodne smernice HETI in razlike med pristopi.</p></div><span class="go">Strokovni okvir →</span></a>
@@ -796,8 +798,8 @@ pages.append(page("/hipoterapija/", "Hipoterapija", "Kaj je hipoterapija, kako p
   </div>
 </div></section>
 <section class="section white" id="kje"><div class="wrap">
-  <div class="head"><p class="kicker">Kje</p><h2>Hipoterapija v Sloveniji</h2><p class="lede">Hipoterapijo izvajajo predvsem javni zavodi v okviru rehabilitacije.</p></div>
-  {center_cards([c for c in CENTERS if "H" in c["offer"] and c["group"] in ("javni", "register", "potrjeni")])}
+  <div class="head"><p class="kicker">Kje</p><h2>Hipoterapija v Sloveniji</h2><p class="lede">Hipoterapijo izvajajo predvsem javni zavodi v okviru rehabilitacije ter fizioterapevti in delovni terapevti z dodatnim usposabljanjem. Pišite nam in pomagamo poiskati izvajalca v vaši regiji.</p></div>
+  {center_cards([c for c in CENTERS if "H" in c["offer"] and c.get("confirmed")])}
   <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="/za-starse/#iskanje">Pomagamo poiskati izvajalca</a><a class="btn btn-ghost" href="/vodnik/gibalne-tezave/">Vodnik: gibalne težave</a></div>
 </div></section>"""))
 

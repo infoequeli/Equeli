@@ -54,7 +54,7 @@ GUIDES = [
                    "Kako je urejeno nameščanje na konja (rampa, podest, pomoč)?",
                    "Ali je prostor dostopen z vozičkom? Ali so na voljo dostopne sanitarije?",
                    "Kako spremljate napredek in kako pogosto se srečujemo?"],
-     "slovenia": "Hipoterapijo izvajajo nekateri centri za usposabljanje, delo in varstvo (CUDV), CIRIUS Kamnik in zasebni izvajalci. V raziskovalni bazi Equeli je 20 organizacij, ki navajajo hipoterapijo, delovno terapijo s konjem ali delo z gibalnimi izzivi."},
+     "slovenia": "Hipoterapijo izvajajo nekateri javni zavodi za usposabljanje in rehabilitacijo ter zasebni izvajalci. V raziskovalni bazi Equeli je 20 organizacij, ki navajajo hipoterapijo, delovno terapijo s konjem ali delo z gibalnimi izzivi."},
     {"slug": "adhd", "title": "ADHD in težave s pozornostjo",
      "card": "Pozornost, samoregulacija in samozavest, povezano s šolo.",
      "lede": "Za starše otrok, ki težko ohranjajo pozornost, so zelo nemirni ali impulzivni. Kateri programi s konji obstajajo in kako izbrati.",
@@ -128,6 +128,7 @@ RUBRICS = [
 ARTICLES = []
 
 # Centri – samo javno dostopni podatki (register Nazaj na konja, spletne strani centrov, Konjeniška zveza Slovenije).
+# confirmed=True: center je potrdil sodelovanje z Equeli -> javno prikazan. Ostali so v bazi, a skriti.
 # Brez telefonov in e-pošte. group: javni | register | potrjeni | drugi | organizator
 # potrjeni = center je podatke sam posredoval prek obrazca Equeli. space: neobvezno, prostori. programs: neobvezno, imena programov.
 # offer: kode pristopov iz APPROACHES (H, T, P, S, D, J, A). who: komu je program namenjen.
@@ -207,7 +208,7 @@ CENTERS = [
     dict(name="Konjeniški center AMAY", place="Ložnica pri Žalcu", region=["Savinjska"], group="register", offer=["T", "P", "S", "D", "J", "A"],
          who="Otroci, mladostniki, odrasli in starejši; individualno, v manjših skupinah, za šole, vrtce in zavode", team="Maya Mlinar, vodja programov; Tajda Knez, strokovna sodelavka", horses="",
          space="Pokrita jahalnica, dostop za invalidski voziček, sanitarije, parkirišče",
-         url="https://amay-si.com/", reg=""),
+         url="https://amay-si.com/", reg="", confirmed=True),
     dict(name="Zavod Na drugačni poti", place="Sodražica", region=["Jugovzhodna Slovenija"], group="register", offer=["S"],
          who="Otroci in mladostniki; programi za šole", team="Ajda Čampa, mag. psihosocialnega svetovanja", horses="",
          url="https://katalog.zanvo.org/aktivnost/na-konju-zaupam-vase-principi-cujecnosti/", reg=""),
@@ -260,3 +261,8 @@ CENTERS = [
     dict(name="Društvo za cerebralno paralizo Ponikve", place="Videm-Dobrepolje", region=["Osrednjeslovenska"], group="organizator", offer=["H"],
          who="Člani, tudi odrasli", team="", horses="", url="https://www.soncek.org/drustva/", reg=""),
 ]
+
+
+def shown_centers():
+    """Centri, ki so potrdili sodelovanje in so javno prikazani."""
+    return [c for c in CENTERS if c.get("confirmed")]
