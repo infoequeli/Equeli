@@ -170,6 +170,17 @@ GUIDE_ICONS = {"avtizem": "grid", "gibalne-tezave": "move", "adhd": "target", "m
                "ucne-custvene-vedenjske-tezave": "book", "tesnoba-samopodoba-odnosi": "leaf", "aktivnost-ob-konjih": "sun"}
 
 
+# Žive številke: izračunane iz centrov, ki so potrdili sodelovanje (confirmed=True v content.py).
+SHOWN = [c for c in CENTERS if c.get("confirmed")]
+N_SHOWN = len(SHOWN)
+SHOWN_REGIONS = [(r, sum(1 for c in SHOWN if r in c["region"])) for r, _ in REGIONS]
+N_REG = sum(1 for _, n in SHOWN_REGIONS if n)
+
+
+def shown_regions_chart():
+    return regions_map(SHOWN_REGIONS, f"Stanje {UPDATED}. Velikost kroga pomeni število centrov na seznamu Equeli. Centri v več regijah so šteti v vsaki.")
+
+
 def regions_chart(full=False):
     return regions_map(REGIONS, f"Stanje {UPDATED}. Velikost kroga pomeni število organizacij. Organizacije v več regijah so štete v vsaki.")
 
@@ -311,7 +322,7 @@ def approaches_html(keys):
         for k in keys) + '</div>'
 
 
-TRUST = """
+TRUST = f"""
 <section class="section sand">
   <div class="wrap trust">
     <div class="head" style="margin-bottom:0"><p class="kicker">Preverjanje</p><h2>Kako preverjamo podatke</h2>
@@ -319,8 +330,8 @@ TRUST = """
       <div class="btn-row" style="margin-top:32px"><a class="link-arrow" href="/strokovni-okvir/">Strokovni okvir →</a><a class="link-arrow" href="/uredniska-politika/">Uredniška politika →</a></div></div>
     <div>
       <div class="figures">
-        <div class="figure"><div class="v tnum">46</div><p class="l">organizacij in izvajalskih mest v raziskovalni bazi</p></div>
-        <div class="figure"><div class="v tnum">11/12</div><p class="l">slovenskih regij z vsaj enim izvajalcem</p></div>
+        <div class="figure"><div class="v tnum">{N_SHOWN}</div><p class="l">centrov s potrjenim profilom na seznamu Equeli</p></div>
+        <div class="figure"><div class="v tnum">{N_REG}/12</div><p class="l">slovenskih regij s centrom na seznamu</p></div>
       </div>
     </div>
   </div>
@@ -336,7 +347,7 @@ home = f"""
       <h1 class="reveal d1">Intervencije s&nbsp;pomočjo konj v&nbsp;Sloveniji.<br><em>Na&nbsp;enem&nbsp;mestu.</em></h1>
       <p class="lede reveal d2">Razlaga pristopov, centri po vsej Sloveniji in brezplačna pomoč pri izbiri programa za družine in šole. Izvajalci se lahko brezplačno predstavijo, podporniki pa najdejo programe, ki jih lahko podprejo.</p>
       <div class="btn-row reveal d3"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/terapija-s-pomocjo-konja/">Kaj je terapija s pomočjo konja?</a></div>
-      <ul class="hero2-facts reveal d3"><li><b class="tnum">46</b>organizacij v raziskavi</li><li><b class="tnum">12</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
+      <ul class="hero2-facts reveal d3"><li><b class="tnum">{N_SHOWN}</b>centrov na seznamu</li><li><b class="tnum">{N_REG}</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
     </div>
     <div class="h3-photo">
       <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 1882w" sizes="(max-width: 900px) 100vw, 50vw"><img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 1882w" sizes="(max-width: 900px) 100vw, 50vw" alt="Hipoterapija: udeleženka se nasloni na konja, ob njej je strokovna pomoč" fetchpriority="high" decoding="async"></picture>
@@ -596,9 +607,9 @@ pages.append(page("/izvajalci/", "Terapevtski centri", "Javni zavodi in terapevt
   <a class="stroka-link" href="/strokovni-okvir/">{badge("shield", "lg")}<div><p class="kicker">Stroka</p><h3>Kdo je usposobljen za delo s konjem?</h3><p>Zavod Nazaj na konja, register strokovnjakov, mednarodne smernice HETI in razlike med pristopi.</p></div><span class="go">Strokovni okvir →</span></a>
 </div></section>
 <section class="section white"><div class="wrap split">
-  <div class="head"><p class="kicker">Po Sloveniji</p><h2>Kje so izvajalci</h2><p class="lede">V raziskovalni bazi je 46 organizacij in izvajalskih mest. Nekatera društva programe organizirajo, izvajajo pa jih partnerski strokovnjaki.</p>
+  <div class="head"><p class="kicker">Po Sloveniji</p><h2>Kje so izvajalci</h2><p class="lede">Na seznamu je {N_SHOWN} centrov v {N_REG} od 12 regij. Seznam dopolnjujemo, ko se centri prijavijo.</p>
     <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/za-izvajalce/#obrazec">Dodajte svoj center</a></div></div>
-  {regions_chart()}
+  {shown_regions_chart()}
 </div></section>""", "/izvajalci/"))
 
 # ================= ZA IZVAJALCE =================
