@@ -352,9 +352,9 @@ home = f"""
   <div class="wrap h3-grid">
     <div class="h3-copy">
       <h1 class="reveal d1">Intervencije s&nbsp;pomočjo konj v&nbsp;Sloveniji.</h1>
-      <p class="lede reveal d2">Izberite, za kaj iščete pomoč. Pokažemo pristope in centre.</p>
+      <p class="lede reveal d2">Pomagamo vam najti pravi terapevtski center za vaše potrebe. Izberite področje, ki vas zanima.</p>
       <nav class="needs reveal d3" aria-label="Iskanje po potrebah">{need_tiles}</nav>
-      <p class="h4-facts reveal d3"><b class="tnum">{N_SHOWN}</b> centrov · <b class="tnum">{N_REG}</b> regij · brezplačno</p>
+      <p class="h4-facts reveal d3"><b class="tnum">{N_SHOWN}</b> centrov v <b class="tnum">{N_REG}</b> regijah · pomoč pri iskanju je brezplačna</p>
     </div>
     <div class="h3-photo">
       <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 1882w" sizes="(max-width: 900px) 100vw, 50vw"><img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 1882w" sizes="(max-width: 900px) 100vw, 50vw" alt="Hipoterapija: udeleženka se nasloni na konja, ob njej je strokovna pomoč" fetchpriority="high" decoding="async"></picture>
