@@ -340,14 +340,21 @@ TRUST = f"""
 pages = []
 
 # ================= DOMOV =================
+NEEDS = [("avtizem", "grid", "Avtizem"), ("gibalne-tezave", "move", "Gibalne težave"), ("adhd", "target", "ADHD in pozornost"),
+         ("motnje-v-dusevnem-razvoju", "heart", "Motnje v duševnem razvoju"), ("ucne-custvene-vedenjske-tezave", "book", "Učne in vedenjske težave"),
+         ("tesnoba-samopodoba-odnosi", "leaf", "Tesnoba in samopodoba"), ("aktivnost-ob-konjih", "sun", "Aktivnost in sprostitev")]
+need_tiles = "".join(f'<a class="need" href="/vodnik/{s_}/">{icon(ic)}<span>{t}</span></a>' for s_, ic, t in NEEDS)
+need_tiles += f'<a class="need" href="/za-sole-in-zavode/">{icon("school")}<span>Šole in skupine</span></a>'
+need_tiles += f'<a class="need need-dark" href="#vodnik-start">{icon("compass")}<span>Ne vem, kje začeti</span></a>'
+
 home = f"""
-<section class="hero2 h3">
+<section class="hero2 h3 h4">
   <div class="wrap h3-grid">
     <div class="h3-copy">
-      <h1 class="reveal d1">Intervencije s&nbsp;pomočjo konj v&nbsp;Sloveniji.<br><em>Na&nbsp;enem&nbsp;mestu.</em></h1>
-      <p class="lede reveal d2">Razlaga pristopov, centri po vsej Sloveniji in brezplačna pomoč pri izbiri programa za družine in šole. Izvajalci se lahko brezplačno predstavijo, podporniki pa najdejo programe, ki jih lahko podprejo.</p>
-      <div class="btn-row reveal d3"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/terapija-s-pomocjo-konja/">Kaj je terapija s pomočjo konja?</a></div>
-      <ul class="hero2-facts reveal d3"><li><b class="tnum">{N_SHOWN}</b>centrov na seznamu</li><li><b class="tnum">{N_REG}</b>regij</li><li><b>Brezplačno</b>za vse</li></ul>
+      <h1 class="reveal d1">Intervencije s&nbsp;pomočjo konj v&nbsp;Sloveniji.</h1>
+      <p class="lede reveal d2">Izberite, za kaj iščete pomoč. Pokažemo pristope in centre.</p>
+      <nav class="needs reveal d3" aria-label="Iskanje po potrebah">{need_tiles}</nav>
+      <p class="h4-facts reveal d3"><b class="tnum">{N_SHOWN}</b> centrov · <b class="tnum">{N_REG}</b> regij · brezplačno</p>
     </div>
     <div class="h3-photo">
       <picture><source type="image/webp" srcset="/assets/img/hero-900.webp 900w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2352.webp 1882w" sizes="(max-width: 900px) 100vw, 50vw"><img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-900.jpg 900w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2352.jpg 1882w" sizes="(max-width: 900px) 100vw, 50vw" alt="Hipoterapija: udeleženka se nasloni na konja, ob njej je strokovna pomoč" fetchpriority="high" decoding="async"></picture>
@@ -355,109 +362,28 @@ home = f"""
   </div>
 </section>
 
+{guide_widget()}
+
 <section class="section what w3">
   <div class="wrap">
     <div class="w3-grid">
       <div class="w3-copy">
-        <h2>Konj kot sodelavec v&nbsp;strokovnem delu</h2>
+        <h2>Kaj je terapija s&nbsp;pomočjo konja?</h2>
         <p class="lede">Usposobljen strokovnjak, na primer fizioterapevt, psiholog ali specialni pedagog, vključi v svoje delo posebej pripravljenega konja. Srečanja potekajo po načrtu, v varnem okolju in z jasnimi cilji.</p>
-        <div class="btn-row"><a class="btn btn-dark" href="/terapija-s-pomocjo-konja/">Več o terapiji</a><a class="btn btn-ghost" href="/hipoterapija/">Hipoterapija</a></div>
+        <div class="btn-row"><a class="btn btn-dark" href="/terapija-s-pomocjo-konja/">Več o terapiji</a><a class="btn btn-ghost" href="/izvajalci/">Centri</a></div>
       </div>
       <div class="w3-photo reveal-img">{photo("what", 1000)}</div>
     </div>
-    <div class="w3-cards">
-      <div class="wc">{badge("heart")}<div><b>Terapija</b><p>Zdravstvena, psihološka ali delovnoterapevtska obravnava, tudi hipoterapija.</p></div></div>
-      <div class="wc">{badge("book")}<div><b>Učenje</b><p>Pedagoško delo za pozornost, učenje in socialne veščine.</p></div></div>
-      <div class="wc">{badge("sun")}<div><b>Aktivnosti</b><p>Prilagojeno jahanje, nega konja in druženje.</p></div></div>
-    </div>
   </div>
 </section>
 
 <section class="section white">
   <div class="wrap">
-    <div class="head center-head"><h2>Platforma, ki povezuje</h2><p class="lede">Uporabnike in njihove družine, izvajalce, šole in javne ustanove ter podpornike. Vsak najde svoj vstop in pot do drugih.</p></div>
     <div class="aud">
-      <a class="aud-c" href="/za-starse/">{badge("family", "lg")}<b>Uporabniki in družine</b><p>Otroci, mladostniki, odrasli in starejši ter njihovi bližnji: vodniki po potrebah in pomoč pri iskanju programa.</p><span class="go">Za starše →</span></a>
-      <a class="aud-c" href="/za-sole-in-zavode/">{badge("school", "lg")}<b>Šole in javne ustanove</b><p>Šole, vrtci, CUDV, domovi, bolnišnice in občine: programi za skupine, povezava z izvajalci in financiranje.</p><span class="go">Za šole in zavode →</span></a>
-      <a class="aud-c" href="/za-izvajalce/">{badge("shield", "lg")}<b>Izvajalci</b><p>Brezplačna predstavitev dela, ekipe in konj ter povezave s šolami in podporniki.</p><span class="go">Za izvajalce →</span></a>
-      <a class="aud-c" href="/za-podpornike/">{badge("heart", "lg")}<b>Donatorji in fundacije</b><p>Pregledne priložnosti, da omogočite programe tistim, ki jih potrebujejo.</p><span class="go">Za donatorje →</span></a>
+      <a class="aud-c" href="/za-sole-in-zavode/">{badge("school", "lg")}<b>Šole in ustanove</b><p>Programi za skupine in povezava z izvajalci.</p><span class="go">Za šole in zavode →</span></a>
+      <a class="aud-c" href="/za-izvajalce/">{badge("shield", "lg")}<b>Izvajalci</b><p>Brezplačna predstavitev vašega centra.</p><span class="go">Za izvajalce →</span></a>
+      <a class="aud-c" href="/za-podpornike/">{badge("heart", "lg")}<b>Donatorji in fundacije</b><p>Omogočite programe tistim, ki jih potrebujejo.</p><span class="go">Za donatorje →</span></a>
     </div>
-  </div>
-</section>
-
-<section class="moments">
-  <div class="wrap">
-    <div class="mo-grid">
-      <figure class="mo reveal-img">{photo("mo_touch", 900)}<figcaption><b>Dotik</b><span>Prvi stik pogosto ni na konju, ampak ob njem.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("mo_calm", 900)}<figcaption><b>Mir</b><span>Tiha bližina, brez naglice.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("mo_bond", 900)}<figcaption><b>Odnos</b><span>Konj se odzove na to, kako se mu približamo.</span></figcaption></figure>
-      <figure class="mo reveal-img">{photo("mo_care", 900)}<figcaption><b>Skrb</b><span>Nega konja je del srečanja.</span></figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="head"><h2>Od vprašanja do pravega stika</h2><p class="lede">Ni vam treba poznati strokovnih izrazov. Začnite tam, kjer ste.</p></div>
-    <ol class="journey">
-      <li><a href="#vodnik-start">{badge("compass", "ring")}<b>Opišite situacijo</b><span>Dve vprašanji v interaktivnem vodniku.</span></a></li>
-      <li><a href="/vodnik/">{badge("book", "ring")}<b>Razumite možnosti</b><span>Pristopi, kdo jih izvaja in kaj vprašati.</span></a></li>
-      <li><a href="/za-starse/#iskanje">{badge("pin", "ring")}<b>Poiščite izvajalca</b><span>Predlog izvajalcev v vaši regiji.</span></a></li>
-      <li><a href="/kontakt/">{badge("message", "ring")}<b>Stopite v stik</b><span>Neposredno z izvajalcem, brez posrednika.</span></a></li>
-    </ol>
-  </div>
-</section>
-
-{guide_widget()}
-
-<section class="section">
-  <div class="wrap">
-    <div class="head-row"><div class="head"><h2>Vodniki po potrebah</h2><p class="lede">Pristopi, ki se pogosto ponujajo, kdo jih izvaja in katera vprašanja zastaviti izvajalcu.</p></div><a class="link-arrow" href="/vodnik/">Vsi vodniki →</a></div>
-    <div class="cards">{guide_cards()}</div>
-  </div>
-</section>
-
-{TRUST}
-
-<section class="section white">
-  <div class="wrap split">
-    <div class="head"><h2>Kdo, kje in kako dela s konji v Sloveniji</h2>
-      <p class="lede">Obiskujemo izvajalce, se pogovarjamo s strokovnjaki in zbiramo podatke o programih, zmogljivostih in ovirah pri dostopnosti.</p>
-      <ul class="ilist"><li>{icon("pin")}Obiski in intervjuji na terenu</li><li>{icon("clipboard")}Vprašalnik za izvajalce</li><li>{icon("chart")}Pregled stanja in potreb</li></ul>
-      <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/raziskava/">O raziskavi</a></div></div>
-    {research_dash()}
-    {regions_chart()}
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="head-row"><div class="head"><h2>Ljudje, konji in programi</h2><p class="lede">Zapisi z obiskov, pogovori s strokovnjaki in odgovori na vprašanja staršev.</p></div><a class="btn btn-ghost btn-sm" href="/clanki/">Vsi članki</a></div>
-    {articles_block(3)}
-  </div>
-</section>
-
-<section class="section white">
-  <div class="wrap">
-    <div class="support-band">
-      <div><h2>Podprite dostopnost programov</h2><p>Podjetja, fundacije in posamezniki lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.</p><div class="btn-row"><a class="btn btn-dark" href="/za-podpornike/">Kako lahko pomagate</a></div></div>
-      <ul class="ways"><li>{badge("euro")}<b>Financiranje programa</b><span>za razred, skupino ali zavod</span></li><li>{badge("heart")}<b>Sofinanciranje za družine</b><span>nižja cena za tiste, ki jo potrebujejo</span></li><li>{badge("box")}<b>Oprema in znanje</b><span>material, prostovoljstvo, pro bono</span></li></ul>
-    </div>
-  </div>
-</section>
-
-<section class="section white">
-  <div class="wrap">
-    <div class="cta-card"><h2>Predstavite svoj center</h2><p>Potrdite in dopolnite podatke o ekipi, programih in konjih. Predstavitev je brezplačna. Profil objavimo po vaši potrditvi.</p><div class="btn-row"><a class="btn btn-light" href="/za-izvajalce/">Izpolnite obrazec</a></div></div>
-  </div>
-</section>
-
-<section class="closing">
-  <div class="wrap">
-    
-    <h2>Povezujemo ljudi, strokovnjake in možnosti.</h2>
-    <p class="lede">Equeli je nastal iz preproste želje: da bi družine, šole in strokovnjaki lažje našli drug drugega. Če ne veste, kje začeti, nam pišite. Skupaj bomo poiskali naslednji korak.</p>
-    <div class="btn-row"><a class="btn btn-dark btn-lg" href="#vodnik-start">Začnite iskanje</a><a class="btn btn-ghost btn-lg" href="/kontakt/">Pišite nam</a></div>
   </div>
 </section>
 """

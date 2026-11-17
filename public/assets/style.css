@@ -843,3 +843,20 @@ footer .logo{color:var(--text)}
 .seal-name{font:500 40px var(--f-head);letter-spacing:10px}
 .seal-sub{font:500 13px var(--f-body);letter-spacing:3px}
 footer .logo-sub{display:none!important}footer .logo{margin-bottom:6px}
+/* === naslovna: iskanje po potrebah === */
+.h4 h1{font-size:clamp(34px,3.8vw,54px)}
+.h4 .lede{margin-top:14px}
+.needs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:26px}
+.need{display:flex;align-items:center;gap:10px;padding:14px 14px;border-radius:16px;background:#f2f6f5;border:1px solid #e3ecea;color:#1d1d1f;font-weight:600;font-size:15px;line-height:1.25;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;min-height:58px}
+.need .ic{width:22px;height:22px;flex:none;stroke:#3f7f7d}
+.need:hover{background:#e6f0ee;transform:translateY(-2px);box-shadow:0 6px 18px rgba(30,60,58,.08)}
+.need-dark{background:#2f5f5d;border-color:#2f5f5d;color:#fff}
+.need-dark .ic{stroke:#fff}
+.need-dark:hover{background:#264f4d}
+.h4-facts{margin-top:18px;font-size:14px;color:#6e6e73}
+.h4-facts b{color:#1d1d1f}
+@media (max-width:1100px){.needs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.h4 .h3-photo{display:none}}
+@media (max-width:420px){.need{font-size:14px;padding:12px}}
+.aud{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.aud{grid-template-columns:1fr}}
