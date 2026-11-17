@@ -878,3 +878,17 @@ footer .logo-sub{display:none!important}footer .logo{margin-bottom:6px}
 .net-empty h3{margin:0 0 6px}
 .net-empty .btn-row{margin-top:16px;flex-wrap:wrap}
 @media (max-width:760px){.net-row{grid-template-columns:1fr;gap:4px}.net-link{display:none}}
+/* filter centrov: telefon */
+.cfilter{max-width:100%;overflow:hidden}
+.cf-row{min-width:0;flex-wrap:wrap}
+.cf-chips{min-width:0;flex-wrap:wrap}
+@media (max-width:700px){
+ .cf-row{display:flex;flex-direction:column;align-items:stretch;gap:10px}
+ .cf-chips{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:8px;padding-bottom:6px;margin-inline:-4px;padding-inline:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .cf-chips::-webkit-scrollbar{display:none}
+ .cf-chip{flex:none;white-space:nowrap}
+ .cf-row select{width:100%}
+ .cf-count{align-self:flex-start}
+ .center{padding:20px}
+}
+.cfilter{grid-template-columns:minmax(0,1fr)}.cf-row>*{min-width:0;max-width:100%}
