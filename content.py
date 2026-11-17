@@ -279,8 +279,14 @@ def shown_centers():
 
 
 # ---------------- MREŽA SODELOVANJ ----------------
-# Vpišite samo sodelovanja, ki sta jih potrdili obe strani (center in ustanova) in privolili v objavo.
-# center = točno ime centra iz CENTERS; partner = ime ustanove; vrsta = šola / vrtec / zavod / društvo / občina / drugo
-# Primer: dict(center="Marengo dežela", partner="OŠ Koprivnica", kraj="Koprivnica", vrsta="šola", kaj="Redne delavnice za 3. razred", od="2024"),
+# Obstoječa sodelovanja med centri in ustanovami (šole, vrtci, zavodi, društva).
+# center  = točno ime centra iz CENTERS (center mora biti prikazan, confirmed=True)
+# partner = ime ustanove; kraj; regija (ena od REGIONS); vrsta = Šola / Vrtec / Zavod / Društvo / Občina / Drugo
+# kaj     = kratko, kaj izvajajo skupaj
+# vir     = "potrjeno" (potrdili obe strani) | "center" (navedel center) | "javno" (javni vir, npr. spletna stran ustanove)
 PARTNERSHIPS = [
+    dict(center="Zavod Hipo Team", partner="CIRIUS Vipava", kraj="Vipava", regija="Goriška", vrsta="Zavod", kaj="Hipoterapija", vir="center"),
+    dict(center="Zavod Hipo Team", partner="Sonček – Primorsko društvo za cerebralno paralizo", kraj="Nova Gorica", regija="Goriška", vrsta="Društvo", kaj="Hipoterapija in aktivnosti s konji", vir="center"),
+    dict(center="Zavod Hipo Team", partner="Sožitje Ajdovščina-Vipava", kraj="Ajdovščina", regija="Goriška", vrsta="Društvo", kaj="Aktivnosti s konji", vir="center"),
+    dict(center="Zavod Hipo Team", partner="Sonček – Notranjsko društvo za cerebralno paralizo", kraj="Slavinje", regija="Primorsko-notranjska", vrsta="Društvo", kaj="Hipoterapija", vir="center"),
 ]

@@ -179,7 +179,7 @@ N_REG = sum(1 for _, n in SHOWN_REGIONS if n)
 
 
 def shown_regions_chart():
-    return regions_map(SHOWN_REGIONS, f"Stanje {UPDATED}. Velikost kroga pomeni število centrov na seznamu Equeli. Centri v več regijah so šteti v vsaki.")
+    return regions_map(SHOWN_REGIONS, f"Stanje {UPDATED}. Velikost kroga pomeni število centrov. Centri v več regijah so šteti v vsaki.", "Centri na seznamu Equeli", "centrov")
 
 
 def regions_chart(full=False):
@@ -341,21 +341,39 @@ TRUST = f"""
 pages = []
 
 
+VIR = {"potrjeno": ("Potrjeno", "ok"), "center": ("Po navedbi centra", "c"), "javno": ("Javni vir", "c")}
+
+
 def network_section():
     rows = [p for p in PARTNERSHIPS if any(c["name"] == p["center"] and c.get("confirmed") for c in CENTERS)]
-    if rows:
-        body = '<div class="net">' + "".join(
-            f'<div class="net-row"><div class="net-c"><b>{e(p["center"])}</b></div><span class="net-link" aria-hidden="true">↔</span>'
-            f'<div class="net-p"><b>{e(p["partner"])}</b><span>{e(p["kraj"])} · {e(p["vrsta"])}</span></div>'
-            f'<div class="net-w">{e(p["kaj"])}{(" · od " + e(p["od"])) if p.get("od") else ""}</div></div>' for p in rows) + '</div>'
-    else:
-        body = ('<div class="net-empty">' + badge("link", "lg") + '<div><h3>Mrežo začenjamo zapisovati</h3>'
-                '<p>Centri ob prijavi navedejo šole, vrtce in zavode, s katerimi sodelujejo. Sodelovanje objavimo, ko ga potrdita obe strani.</p>'
-                '<div class="btn-row"><a class="btn btn-dark btn-sm" href="#povprasevanje">Vaša ustanova že sodeluje s centrom? Sporočite nam</a>'
-                '<a class="btn btn-ghost btn-sm" href="/za-izvajalce/#obrazec">Prijava centra</a></div></div></div>')
+    reg_names = [r for r, _ in REGIONS]
+    counts = [(r, len({p["partner"] for p in rows if p["regija"] == r})) for r in reg_names]
+    by_reg = ""
+    for r in reg_names:
+        rr = [p for p in rows if p["regija"] == r]
+        if not rr:
+            continue
+        partners = []
+        for p in rr:
+            if p["partner"] not in partners:
+                partners.append(p["partner"])
+        items = ""
+        for pn in partners:
+            ps = [p for p in rr if p["partner"] == pn]
+            centers = "".join(f'<li><span class="nw-c">{icon("link")}{e(p["center"])}</span><span class="nw-k">{e(p["kaj"])}</span><span class="nw-v {VIR[p["vir"]][1]}">{VIR[p["vir"]][0]}</span></li>' for p in ps)
+            items += f'<div class="nw-i"><div class="nw-h"><b>{e(pn)}</b><span>{e(ps[0]["vrsta"])} · {e(ps[0]["kraj"])}</span></div><ul>{centers}</ul></div>'
+        by_reg += f'<div class="nw-reg"><h3>{e(r)}</h3>{items}</div>'
+    if not rows:
+        by_reg = '<p class="lede">Sodelovanja zapisujemo sproti.</p>'
+    n_inst = len({p["partner"] for p in rows})
     return f"""<section class="section white" id="mreza"><div class="wrap">
-  <div class="head"><h2>Kdo s kom sodeluje</h2><p class="lede">Šole, vrtci in zavodi, ki že sodelujejo s terapevtskimi centri. Pregled pomaga ustanovam najti preverjene partnerje v svoji regiji.</p></div>
-  {body}
+  <div class="head"><h2>Obstoječa sodelovanja</h2><p class="lede">{n_inst} ustanov po Sloveniji že sodeluje s terapevtskimi centri. Ob vsaki ustanovi je center, s katerim sodeluje.</p></div>
+  <div class="nw-grid">
+    {regions_map(counts, f"Stanje {UPDATED}. Število ustanov s sodelovanjem po regijah.", "Ustanove s sodelovanjem", "ustanov")}
+    <div class="nw-list">{by_reg}
+      <p class="fine">Ustanova že sodeluje s centrom, pa je ni na seznamu? <a href="#povprasevanje">Sporočite nam</a>. Centri sodelovanja navedejo ob <a href="/za-izvajalce/#obrazec">prijavi</a>.</p>
+    </div>
+  </div>
 </div></section>"""
 
 
@@ -429,51 +447,26 @@ pages.append(page("/za-starse/", "Za starše", "Vodnik za starše: od tega, kar 
 
 # ================= ZA ŠOLE IN ZAVODE =================
 schools = hero("Za šole, vrtce in zavode", "Programi s pomočjo konj za skupine",
-               "Šolam, vrtcem, CUDV, domovom in društvom pomagamo najti ustrezne izvajalce, pripraviti povpraševanje in poiskati možnosti financiranja. Dogovor in plačilo urejate neposredno z izvajalcem.",
-               '<a class="btn btn-dark" href="#povprasevanje">Oddajte povpraševanje</a><a class="btn btn-ghost" href="#potek">Kako poteka sodelovanje</a>', seed=3)
-schools += finder("schools")
+               "Povežemo vas s centrom v vaši regiji. Dogovor in plačilo urejate neposredno s centrom.",
+               '<a class="btn btn-dark" href="#povprasevanje">Oddajte povpraševanje</a><a class="btn btn-ghost" href="#mreza">Obstoječa sodelovanja</a>', seed=3)
 schools += f"""
-<section class="section white">
-  <div class="wrap">
-    <div class="head"><p class="kicker">Kaj lahko organizirate</p><h2>Vrste programov</h2><p class="lede">Ponudba se razlikuje med izvajalci. Spodaj so oblike, ki jih izvajalci v Sloveniji najpogosteje navajajo.</p></div>
-    <div class="cards four">
-      <div class="gcard">{tile(1)}<div class="body"><h3>Delavnice za razred ali skupino</h3><p>Pedagoško usmerjene delavnice ob konjih za sodelovanje, komunikacijo in samozavest. Primerne tudi za dneve dejavnosti.</p></div></div>
-      <div class="gcard">{tile(3)}<div class="body"><h3>Programi za otroke s posebnimi potrebami</h3><p>Individualno ali v manjših skupinah: specialnopedagoški, delovnoterapevtski ali psihosocialni programi.</p></div></div>
-      <div class="gcard">{tile(4)}<div class="body"><h3>Prilagojeno jahanje in aktivnosti</h3><p>Rekreacija, gibanje in druženje ob konjih, tudi kot del šole v naravi ali tabora.</p></div></div>
-      <div class="gcard">{tile(6)}<div class="body"><h3>Predavanja za strokovne delavce</h3><p>Nekateri izvajalci ponujajo predstavitve in izobraževanja za učitelje, vzgojitelje in strokovne time.</p></div></div>
-    </div>
+<section class="section"><div class="wrap">
+  <div class="kinds">
+    <div>{badge("people")}<b>Delavnice za razred</b><span>Sodelovanje, komunikacija, samozavest</span></div>
+    <div>{badge("heart")}<b>Posebne potrebe</b><span>Individualno ali v manjših skupinah</span></div>
+    <div>{badge("sun")}<b>Aktivnosti in tabori</b><span>Gibanje in druženje ob konjih</span></div>
+    <div>{badge("book")}<b>Predavanja</b><span>Za učitelje in strokovne time</span></div>
   </div>
-</section>
-<section class="section" id="potek">
-  <div class="wrap">
-    <div class="head"><p class="kicker">Kako poteka</p><h2>Od povpraševanja do programa</h2></div>
-    <ol class="process">
-      <li><h3>Povpraševanje</h3><p>Opišete skupino, namen, obdobje in okvirni proračun. Brez osebnih podatkov o udeležencih.</p></li>
-      <li><h3>Pregled in predlog</h3><p>Povpraševanje pregledamo in poiščemo izvajalce v vaši regiji, ki ustrezajo potrebam.</p></li>
-      <li><h3>Povezava</h3><p>Po vašem soglasju vas povežemo z izvajalci. Ponudbo in pogoje uskladite neposredno.</p></li>
-      <li><h3>Izvedba</h3><p>Pogodbo in plačilo uredite z izvajalcem. Po potrebi pomagamo poiskati zunanje financiranje.</p></li>
-    </ol>
-  </div>
-</section>
-<section class="section white">
-  <div class="wrap">
-    <div class="two">
-      <div class="box"><h3>Kaj pripravite za povpraševanje</h3><ul style="margin-top:14px;padding-left:20px;color:var(--muted)"><li>starost in velikost skupine,</li><li>namen programa in posebne potrebe skupine (brez imen),</li><li>želeno obdobje in pogostost,</li><li>okvirni proračun,</li><li>potrebne prilagoditve dostopnosti in prevoz.</li></ul></div>
-      <div class="box"><h3>Kaj preverimo pri izvajalcih</h3><ul style="margin-top:14px;padding-left:20px;color:var(--muted)"><li>izobrazbo in usposobljenost strokovnjakov,</li><li>izkušnje z vašo ciljno skupino,</li><li>varnostne postopke in zavarovanje odgovornosti,</li><li>dostopnost prostorov,</li><li>razpoložljivost in okvirno ceno.</li></ul></div>
-    </div>
-  </div>
-</section>
-<section class="section">
-  <div class="wrap narrow">
-    <div class="head"><p class="kicker">Pogosta vprašanja</p><h2>Pogosta vprašanja</h2></div>
-    <details><summary>Ali programi potekajo na naši lokaciji?</summary><div>Praviloma potekajo pri izvajalcu, kjer so konji in ustrezna infrastruktura. Zato je pomembno vnaprej urediti prevoz. Nekateri izvajalci ponujajo predavanja tudi na vaši lokaciji.</div></details>
+</div></section>
+{network_section()}
+{form_section("povprasevanje", "Povpraševanje", "Povpraševanje ustanove", "Opišite skupino in kaj iščete. Predlagamo centre v vaši regiji. Približno 5 minut.", school_form())}
+<section class="section"><div class="wrap narrow">
+  <div class="head"><h2>Pogosta vprašanja</h2></div>
+  <details><summary>Ali programi potekajo na naši lokaciji?</summary><div>Praviloma potekajo pri izvajalcu, kjer so konji in ustrezna infrastruktura. Zato je pomembno vnaprej urediti prevoz. Nekateri izvajalci ponujajo predavanja tudi na vaši lokaciji.</div></details>
     <details><summary>Kdo sklene pogodbo in komu plačamo?</summary><div>Ustanova sklene dogovor in plača neposredno izvajalcu. Povezovanje prek Equeli je brezplačno.</div></details>
     <details><summary>Kako lahko program financiramo?</summary><div>Ustanove programe financirajo iz lastnih sredstev, prispevkov staršev, razpisov ali s podporo podjetij. Če potrebujete dodatno financiranje, to označite v povpraševanju.</div></details>
     <details><summary>Kakšne soglasja potrebujemo?</summary><div>Za mladoletne udeležence potrebujete soglasje staršev za udeležbo. Za fotografiranje in snemanje je potrebno ločeno soglasje.</div></details>
-  </div>
-</section>
-{network_section()}
-{form_section("povprasevanje", "Povpraševanje", "Povpraševanje ustanove", "Opišite, kaj iščete. Pripravimo predlog ustreznih izvajalcev v vaši regiji. Približno 5 minut.", school_form())}"""
+</div></section>"""
 pages.append(page("/za-sole-in-zavode/", "Za šole in zavode", "Šolam, vrtcem, CUDV in drugim ustanovam pomagamo najti izvajalce programov s pomočjo konj in možnosti financiranja.", schools, "/za-sole-in-zavode/"))
 
 # ================= VODNIKI =================
