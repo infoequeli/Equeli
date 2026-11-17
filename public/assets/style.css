@@ -860,3 +860,9 @@ footer .logo-sub{display:none!important}footer .logo{margin-bottom:6px}
 @media (max-width:420px){.need{font-size:14px;padding:12px}}
 .aud{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:900px){.aud{grid-template-columns:1fr}}
+.gcent .head-row{align-items:flex-end;gap:24px;flex-wrap:wrap}
+.gc-f{display:flex;align-items:center;gap:10px}
+.gc-l{font-size:14px;color:#6e6e73}
+.gc-reg{padding:10px 14px;border-radius:12px;border:1px solid #d9e3e1;background:#fff;font:inherit}
+.gc-empty{margin-top:16px}
+.center[hidden]{display:none!important}

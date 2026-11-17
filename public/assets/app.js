@@ -292,3 +292,14 @@ document.querySelectorAll('.finder').forEach(function (root) {
   }, { threshold: 0.25 });
   els.forEach(function (e) { io.observe(e); });
 })();
+
+/* vodnik: filter centrov po regiji */
+(function () {
+  var sel = document.getElementById('gc-reg'); if (!sel) return;
+  var cards = document.querySelectorAll('.gcent .center'), empty = document.querySelector('.gc-empty');
+  sel.addEventListener('change', function () {
+    var r = sel.value, n = 0;
+    cards.forEach(function (c) { var ok = !r || c.getAttribute('data-region').split('|').indexOf(r) > -1; c.hidden = !ok; if (ok) n++; });
+    if (empty) empty.hidden = n > 0;
+  });
+})();

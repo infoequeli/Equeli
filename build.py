@@ -345,7 +345,7 @@ NEEDS = [("avtizem", "grid", "Avtizem"), ("gibalne-tezave", "move", "Gibalne te�
          ("tesnoba-samopodoba-odnosi", "leaf", "Tesnoba in samopodoba"), ("aktivnost-ob-konjih", "sun", "Aktivnost in sprostitev")]
 need_tiles = "".join(f'<a class="need" href="/vodnik/{s_}/">{icon(ic)}<span>{t}</span></a>' for s_, ic, t in NEEDS)
 need_tiles += f'<a class="need" href="/za-sole-in-zavode/">{icon("school")}<span>Šole in skupine</span></a>'
-need_tiles += f'<a class="need need-dark" href="#vodnik-start">{icon("compass")}<span>Ne vem, kje začeti</span></a>'
+need_tiles += f'<a class="need need-dark" href="/za-starse/#iskanje">{icon("message")}<span>Ne vem, kje začeti</span></a>'
 
 home = f"""
 <section class="hero2 h3 h4">
@@ -361,8 +361,6 @@ home = f"""
     </div>
   </div>
 </section>
-
-{guide_widget()}
 
 <section class="section what w3">
   <div class="wrap">
@@ -478,11 +476,28 @@ pages.append(page("/vodnik/", "Vodniki po potrebah", "Vodniki po intervencijah s
                   hero("Vodniki", "Vodniki po potrebah", "Izberite situacijo, ki je najbližja vaši. Vsak vodnik pojasni pristope, kdo jih izvaja in katera vprašanja zastaviti.", seed=4) +
                   f'<section class="section"><div class="wrap"><div class="cards">{guide_cards()}</div></div></section>', "/vodnik/"))
 
+GUIDE_OFFERS = {"gibalne-tezave": "HDJ", "avtizem": "TPD", "adhd": "PTS", "motnje-v-dusevnem-razvoju": "TDJ",
+                "ucne-custvene-vedenjske-tezave": "PS", "tesnoba-samopodoba-odnosi": "ST", "aktivnost-ob-konjih": "AJ"}
+
+
+def guide_centers(slug):
+    offs = GUIDE_OFFERS.get(slug, "")
+    cs = [c for c in CENTERS if c.get("confirmed") and any(o in c["offer"] for o in offs)]
+    regs = sorted({r for c in cs for r in c["region"]}, key=lambda r: [x for x, _ in REGIONS].index(r) if r in [x for x, _ in REGIONS] else 99)
+    sel = f'<label class="gc-l" for="gc-reg">Regija</label><select id="gc-reg" class="gc-reg"><option value="">Vsa Slovenija</option>{"".join(f"<option>{r}</option>" for r in regs)}</select>' if len(cs) > 3 else ""
+    return f"""<section class="section white gcent" id="centri"><div class="wrap">
+  <div class="head-row"><div class="head"><h2>Centri za to področje</h2><p class="lede">{len(cs)} centrov s seznama Equeli ponuja pristope, ki so pri tem pogosti. Pokličite ali pišite neposredno centru.</p></div><div class="gc-f">{sel}</div></div>
+  {center_cards(cs)}
+  <p class="gc-empty" hidden>V tej regiji še nimamo centra za to področje. <a href="/za-starse/#iskanje">Pomagamo vam poiskati izvajalca →</a></p>
+  <p class="fine">Vrstni red ni odvisen od plačil. O primernosti programa odloči strokovnjak v centru.</p>
+</div></section>"""
+
+
 for i, g in enumerate(GUIDES):
     alert = f'<div class="callout alert" role="note">{g["alert"]}</div>' if g.get("alert") else ""
     others = " · ".join(f'<a href="/vodnik/{o["slug"]}/">{e(o["title"])}</a>' for o in GUIDES if o is not g)
-    body = hero("", e(g["title"]), e(g["lede"]), crumbs='<a href="/vodnik/">Vodniki</a> &nbsp;/&nbsp; Za koga iščete', seed=5 + i) + f"""
-<div class="wrap narrow article">
+    body = hero("", e(g["title"]), e(g["lede"]), crumbs='<a href="/vodnik/">Vodniki</a> &nbsp;/&nbsp; Za koga iščete', seed=5 + i) + guide_centers(g["slug"]) + f"""
+<div class="wrap narrow article" style="margin-top:56px">
   <div class="summary"><p class="kicker">Na kratko</p><ul>{"".join(f"<li>{e(s)}</li>" for s in g["summary"])}</ul></div>
   <h2>Pristopi, ki jih izvajalci pogosto ponujajo</h2>
   {approaches_html(g["approaches"])}
@@ -491,7 +506,7 @@ for i, g in enumerate(GUIDES):
   <h2>V Sloveniji</h2>
   <p>{e(g["slovenia"])}</p>
   {alert}
-  <div class="cta-card"><h2>Pomoč pri iskanju izvajalca</h2><p>Sporočite regijo in starost. Dokler imenik ni objavljen, odgovorimo z informacijami iz raziskovalne baze.</p><div class="btn-row"><a class="btn btn-light" href="/kontakt/">Pišite nam</a><a class="btn btn-line" href="/kako-izbrati/">Kako izbrati program</a></div></div>
+  <div class="cta-card"><h2>Ne najdete pravega centra?</h2><p>Sporočite regijo in starost, pomagamo vam poiskati izvajalca.</p><div class="btn-row"><a class="btn btn-light" href="/za-starse/#iskanje">Pomoč pri iskanju</a><a class="btn btn-line" href="/kako-izbrati/">Kako izbrati program</a></div></div>
   <p class="fine">Vodnik je informativen. O primernosti programa odloči usposobljen strokovnjak. Zadnja posodobitev {UPDATED}.</p>
   <p class="fine" style="margin-top:10px">Drugi vodniki: {others}</p>
 </div>"""
