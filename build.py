@@ -389,38 +389,22 @@ pages.append(page("/", "Equeli · Intervencije s pomočjo konj v Sloveniji",
                   "Neodvisna platforma za intervencije s pomočjo konj v Sloveniji: vodniki za starše, izvajalci za šole in zavode.", home))
 
 # ================= ZA STARŠE =================
-parents = hero("Za starše in družine", "Informacije za starše",
-               "Začnite pri situaciji, ki jo poznate. Vodniki pojasnijo pristope, izvajalce in vprašanja pred vključitvijo.",
-               f'<a class="btn btn-dark" href="#vodnik-start">Odprite vodnik</a><a class="btn btn-ghost" href="/kako-izbrati/">Kako izbrati program</a>', seed=2)
-parents += guide_widget()
+parents = hero("Za starše in družine", "Poiščite center za svojega otroka",
+               "Izberite področje in pokažemo centre, ki delajo z otroki s podobnimi potrebami. Če ne veste, kje začeti, nam pišite.",
+               '<a class="btn btn-dark" href="#iskanje">Pomoč pri iskanju</a><a class="btn btn-ghost" href="/kako-izbrati/">Kako izbrati program</a>', seed=2)
 parents += f"""
-<section class="section">
-  <div class="wrap">
-    <div class="head"><p class="kicker">Vodniki po potrebah</p><h2>Vodniki po potrebah</h2></div>
-    <div class="cards">{guide_cards()}</div>
-  </div>
-</section>
-<section class="section white">
-  <div class="wrap">
-    <div class="head"><p class="kicker">Potek</p><h2>Kako običajno poteka vključitev</h2><p class="lede">Potek se razlikuje med izvajalci, a strokovno voden program ima praviloma te korake.</p></div>
-    <ol class="process">
-      <li><h3>Prvi pogovor</h3><p>Izvajalec spozna otroka in vaša pričakovanja ter preveri, ali je program primeren.</p></li>
-      <li><h3>Dogovor o ciljih</h3><p>Skupaj določite, kaj želite doseči in kako boste spremljali napredek.</p></li>
-      <li><h3>Redna srečanja</h3><p>Srečanja potekajo v dogovorjenem ritmu, pogosto v ciklu več srečanj.</p></li>
-      <li><h3>Pregled in naprej</h3><p>Izvajalec z vami pregleda napredek in predlaga nadaljevanje ali drugo obliko pomoči.</p></li>
-    </ol>
-  </div>
-</section>
-<section class="section">
-  <div class="wrap narrow">
-    <div class="head"><p class="kicker">Pogosta vprašanja</p><h2>Pogosta vprašanja</h2></div>
-    <details><summary>Ali potrebujemo napotnico ali diagnozo?</summary><div>Za večino programov ne. Nekateri izvajalci pred vključitvijo, zlasti pri hipoterapiji, zahtevajo mnenje zdravnika ali fizioterapevta. Vprašajte izvajalca vnaprej.</div></details>
+<section class="section white"><div class="wrap">
+  <div class="head"><h2>Za kaj iščete pomoč?</h2></div>
+  <nav class="needs needs-wide" aria-label="Iskanje po potrebah">{need_tiles}</nav>
+</div></section>
+{form_section("iskanje", "Pomoč pri iskanju", "Pomagamo vam najti izvajalca", "Opišite situacijo in regijo. Odgovorimo vam s predlogom centrov. Približno 3 minute.", parent_form())}
+<section class="section"><div class="wrap narrow">
+  <div class="head"><h2>Pogosta vprašanja</h2></div>
+  <details><summary>Ali potrebujemo napotnico ali diagnozo?</summary><div>Za večino programov ne. Nekateri izvajalci pred vključitvijo, zlasti pri hipoterapiji, zahtevajo mnenje zdravnika ali fizioterapevta. Vprašajte izvajalca vnaprej.</div></details>
     <details><summary>Koliko stane?</summary><div>Cene se razlikujejo glede na pristop, trajanje in obliko. Nekateri programi v javnih zavodih in društvih so sofinancirani. Vprašajte izvajalca za ceno srečanja in cikla ter za morebitno sofinanciranje.</div></details>
     <details><summary>Kako vem, da je izvajalec usposobljen?</summary><div>Vprašajte za temeljno izobrazbo, dodatno usposabljanje za delo s konjem in vpis v strokovni register.</div></details>
     <details><summary>Ali lahko Equeli presodi, kaj je primerno za mojega otroka?</summary><div>Ne. Equeli pomaga z informacijami in iskanjem. O primernosti odloči usposobljen strokovnjak po osebnem pogovoru.</div></details>
-  </div>
-</section>
-{form_section("iskanje", "Pomoč pri iskanju", "Pomagamo vam najti izvajalca", "Odgovorite na nekaj vprašanj. Iz baze izvajalcev vam predlagamo ustrezne programe v vaši regiji. Približno 3 minute.", parent_form())}"""
+</div></section>"""
 pages.append(page("/za-starse/", "Za starše", "Vodnik za starše: od tega, kar veste o svojem otroku, do ustreznih pristopov s pomočjo konj, vprašanj in izvajalcev.", parents, "/za-starse/"))
 
 # ================= ZA ŠOLE IN ZAVODE =================
