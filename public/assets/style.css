@@ -868,3 +868,13 @@ footer .logo-sub{display:none!important}footer .logo{margin-bottom:6px}
 .center[hidden]{display:none!important}
 .needs-wide{grid-template-columns:repeat(3,minmax(0,1fr));max-width:900px}
 @media (max-width:700px){.needs-wide{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* mreža sodelovanj */
+.net{display:grid;gap:10px}
+.net-row{display:grid;grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr) minmax(0,1.3fr);gap:14px;align-items:center;padding:16px 20px;border-radius:16px;background:#f5f8f7}
+.net-link{color:#3f7f7d;text-align:center;font-size:18px}
+.net-p span{display:block;font-size:13px;color:#6e6e73}
+.net-w{font-size:14px;color:#424245}
+.net-empty{display:flex;gap:18px;align-items:flex-start;padding:28px;border-radius:20px;background:#f5f8f7;max-width:820px}
+.net-empty h3{margin:0 0 6px}
+.net-empty .btn-row{margin-top:16px;flex-wrap:wrap}
+@media (max-width:760px){.net-row{grid-template-columns:1fr;gap:4px}.net-link{display:none}}

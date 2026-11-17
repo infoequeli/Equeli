@@ -266,3 +266,11 @@ CENTERS = [
 def shown_centers():
     """Centri, ki so potrdili sodelovanje in so javno prikazani."""
     return [c for c in CENTERS if c.get("confirmed")]
+
+
+# ---------------- MREŽA SODELOVANJ ----------------
+# Vpišite samo sodelovanja, ki sta jih potrdili obe strani (center in ustanova) in privolili v objavo.
+# center = točno ime centra iz CENTERS; partner = ime ustanove; vrsta = šola / vrtec / zavod / društvo / občina / drugo
+# Primer: dict(center="Marengo dežela", partner="OŠ Koprivnica", kraj="Koprivnica", vrsta="šola", kaj="Redne delavnice za 3. razred", od="2024"),
+PARTNERSHIPS = [
+]

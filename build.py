@@ -7,6 +7,7 @@ Rezultat je mapa public/, ki jo objavi Cloudflare Pages.
 import html
 import os
 from datetime import date
+from content import PARTNERSHIPS
 from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES, ARTICLES, RUBRICS, CENTERS
 from icons import icon, badge
 from finder import finder
@@ -339,6 +340,25 @@ TRUST = f"""
 
 pages = []
 
+
+def network_section():
+    rows = [p for p in PARTNERSHIPS if any(c["name"] == p["center"] and c.get("confirmed") for c in CENTERS)]
+    if rows:
+        body = '<div class="net">' + "".join(
+            f'<div class="net-row"><div class="net-c"><b>{e(p["center"])}</b></div><span class="net-link" aria-hidden="true">↔</span>'
+            f'<div class="net-p"><b>{e(p["partner"])}</b><span>{e(p["kraj"])} · {e(p["vrsta"])}</span></div>'
+            f'<div class="net-w">{e(p["kaj"])}{(" · od " + e(p["od"])) if p.get("od") else ""}</div></div>' for p in rows) + '</div>'
+    else:
+        body = ('<div class="net-empty">' + badge("link", "lg") + '<div><h3>Mrežo začenjamo zapisovati</h3>'
+                '<p>Centri ob prijavi navedejo šole, vrtce in zavode, s katerimi sodelujejo. Sodelovanje objavimo, ko ga potrdita obe strani.</p>'
+                '<div class="btn-row"><a class="btn btn-dark btn-sm" href="#povprasevanje">Vaša ustanova že sodeluje s centrom? Sporočite nam</a>'
+                '<a class="btn btn-ghost btn-sm" href="/za-izvajalce/#obrazec">Prijava centra</a></div></div></div>')
+    return f"""<section class="section white" id="mreza"><div class="wrap">
+  <div class="head"><h2>Kdo s kom sodeluje</h2><p class="lede">Šole, vrtci in zavodi, ki že sodelujejo s terapevtskimi centri. Pregled pomaga ustanovam najti preverjene partnerje v svoji regiji.</p></div>
+  {body}
+</div></section>"""
+
+
 # ================= DOMOV =================
 NEEDS = [("avtizem", "grid", "Avtizem"), ("gibalne-tezave", "move", "Gibalne težave"), ("adhd", "target", "ADHD in pozornost"),
          ("motnje-v-dusevnem-razvoju", "heart", "Motnje v duševnem razvoju"), ("ucne-custvene-vedenjske-tezave", "book", "Učne in vedenjske težave"),
@@ -452,6 +472,7 @@ schools += f"""
     <details><summary>Kakšne soglasja potrebujemo?</summary><div>Za mladoletne udeležence potrebujete soglasje staršev za udeležbo. Za fotografiranje in snemanje je potrebno ločeno soglasje.</div></details>
   </div>
 </section>
+{network_section()}
 {form_section("povprasevanje", "Povpraševanje", "Povpraševanje ustanove", "Opišite, kaj iščete. Pripravimo predlog ustreznih izvajalcev v vaši regiji. Približno 5 minut.", school_form())}"""
 pages.append(page("/za-sole-in-zavode/", "Za šole in zavode", "Šolam, vrtcem, CUDV in drugim ustanovam pomagamo najti izvajalce programov s pomočjo konj in možnosti financiranja.", schools, "/za-sole-in-zavode/"))
 
