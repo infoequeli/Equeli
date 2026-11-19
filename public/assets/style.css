@@ -919,3 +919,26 @@ footer .logo-sub{display:none!important}footer .logo{margin-bottom:6px}
 @media (max-width:900px){.nw-grid .regions-map{position:static}}
 
 .nw-r{font-size:12px;margin-left:6px}
+
+/* Interaktivni zemljevid mreže */
+.nw-grid{grid-template-columns:1fr!important}
+.nmap{display:flex;flex-direction:column;gap:12px}
+.nmap-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.nmap-bar input{flex:1 1 280px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;font:inherit;background:#fff}
+.nmap-bar input:focus{outline:2px solid var(--blue);outline-offset:1px}
+.nmap-f{display:flex;flex-wrap:wrap;gap:6px}
+.nmap-f button{min-height:40px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;font:500 14px/1 var(--f-head);color:var(--text-2);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.nmap-f button[aria-pressed="true"]{background:var(--blue-50);border-color:var(--blue-100);color:var(--blue-ink)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
+.dot.c{background:#2e6260}.dot.s{background:#c2742f}.dot.z{background:#5b6bb5}.dot.d{background:#8a5aa8}
+.nmap-map{height:520px;border-radius:var(--r-lg);border:1px solid var(--line);overflow:hidden;background:#eef3f2;z-index:0}
+@media (max-width:700px){.nmap-map{height:420px}}
+.nmap-res{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.nmap-res button{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font:inherit;font-size:14px;cursor:pointer}
+.nmap-res button span{color:var(--muted)}
+.nmap-res .empty{color:var(--muted);font-size:14px}
+.np b{display:block;font-size:15px;margin-bottom:2px}.np>span{display:block;color:#5a6b6c;font-size:13px;margin-bottom:6px}
+.np p{margin:8px 0 4px;font-weight:500;font-size:13px}.np ul{margin:0;padding-left:16px;font-size:13px}.np li{margin:3px 0}
+.np button{background:none;border:0;padding:0;color:var(--blue);font:inherit;cursor:pointer;text-decoration:underline}
+.np em{font-style:normal;color:#5a6b6c}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}

@@ -7,7 +7,7 @@ Rezultat je mapa public/, ki jo objavi Cloudflare Pages.
 import html
 import os
 from datetime import date
-from content import PARTNERSHIPS
+from content import PARTNERSHIPS, COORDS
 from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES, ARTICLES, RUBRICS, CENTERS
 from icons import icon, badge
 from finder import finder
@@ -139,7 +139,7 @@ def page(path, title, desc, body, active=""):
       <div><a class="logo" href="/" aria-label="Equeli, domov">{LOGO_BADGE}</a><p class="tag-line">Svet intervencij s pomočjo konj. Na enem mestu.</p><p style="margin-top:18px;font-size:15px">{EMAIL}</p></div>
       <div><h2>Za starše</h2><ul><li><a href="/za-starse/">Začnite tukaj</a></li><li><a href="/vodnik/">Vodniki po potrebah</a></li><li><a href="/kako-izbrati/">Kako izbrati program</a></li><li><a href="/izvajalci/">Terapevtski centri</a></li></ul></div>
       <div><h2>Za organizacije</h2><ul><li><a href="/za-sole-in-zavode/">Šole in zavodi</a></li><li><a href="/za-izvajalce/">Izvajalci</a></li><li><a href="/za-podpornike/">Donatorji in fundacije</a></li></ul></div>
-      <div><h2>Spoznajte</h2><ul><li><a href="/terapija-s-pomocjo-konja/">Terapija s pomočjo konja</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li></ul></div>
+      <div><h2>Spoznajte</h2><ul><li><a href="/terapija-s-pomocjo-konja/">Terapija s pomočjo konja</a></li><li><a href="/hipoterapija/">Hipoterapija</a></li><li><a href="/strokovni-okvir/">Strokovni okvir</a></li><li><a href="/mreza/">Mreža sodelovanj</a></li><li><a href="/raziskava/">Raziskava</a></li><li><a href="/clanki/">Članki</a></li></ul></div>
       <div><h2>Equeli</h2><ul><li><a href="/o-equeli/">O Equeli</a></li><li><a href="/kontakt/">Kontakt</a></li><li><a href="/zasebnost/">Zasebnost</a></li><li><a href="/uredniska-politika/">Uredniška politika</a></li><li><a href="/dostopnost/">Dostopnost</a></li></ul></div>
     </div>
     <div class="legal"><span>© {date.today().year} Equeli · Neodvisna platforma za intervencije s pomočjo konj</span><span>Slovenija</span></div>
@@ -347,6 +347,43 @@ pages = []
 VIR = {"potrjeno": ("Potrjeno", "ok"), "center": ("Po navedbi centra", "c"), "javno": ("Javni vir", "c")}
 
 
+
+import json as _json
+def network_map(rows):
+    """Interaktivni zemljevid (Leaflet + OpenStreetMap). Brez JavaScripta ostane seznam pod njim."""
+    nodes = {}
+    for c in SHOWN:
+        if c["name"] in COORDS:
+            nodes[c["name"]] = dict(n=c["name"], t="c", k="Terapevtski center" if c["group"] != "javni" else "Javni zavod",
+                                    p=c["place"], u=c["url"] or "", ll=COORDS[c["name"]])
+    for p in rows:
+        if p["partner"] in COORDS and p["partner"] not in nodes:
+            nodes[p["partner"]] = dict(n=p["partner"], t={"Šola": "s", "Vrtec": "s", "Društvo": "d"}.get(p["vrsta"], "z"),
+                                       k=p["vrsta"], p=p["kraj"], u="", ll=COORDS[p["partner"]])
+    links = [dict(a=p["center"], b=p["partner"], w=p["kaj"], v=VIR[p["vir"]][0], r=p.get("porocilo", "")) for p in rows
+             if p["center"] in nodes and p["partner"] in nodes]
+    data = _json.dumps(dict(nodes=list(nodes.values()), links=links), ensure_ascii=False).replace("</", "<\\/")
+    return f"""<div class="nmap">
+      <div class="nmap-bar">
+        <label class="sr" for="nmap-q">Iskanje po mreži</label>
+        <input id="nmap-q" type="search" placeholder="Poiščite center, šolo, društvo ali kraj" autocomplete="off">
+        <div class="nmap-f" role="group" aria-label="Prikaži">
+          <button type="button" data-f="all" aria-pressed="true">Vse</button>
+          <button type="button" data-f="c" aria-pressed="false"><i class="dot c"></i>Centri</button>
+          <button type="button" data-f="s" aria-pressed="false"><i class="dot s"></i>Šole</button>
+          <button type="button" data-f="z" aria-pressed="false"><i class="dot z"></i>Zavodi</button>
+          <button type="button" data-f="d" aria-pressed="false"><i class="dot d"></i>Društva</button>
+        </div>
+      </div>
+      <div id="nmap" class="nmap-map" aria-label="Zemljevid mreže sodelovanj"></div>
+      <ul id="nmap-res" class="nmap-res" aria-live="polite"></ul>
+      <p class="fine">Lega na zemljevidu je približna, po kraju. Črta pomeni sodelovanje. Zemljevid © sodelavci <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>.</p>
+      <script type="application/json" id="nmap-data">{data}</script>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="" defer></script>
+      <script src="/assets/mreza.js?v={_v('public/assets/mreza.js')}" defer></script>
+    </div>"""
+
 def network_section():
     rows = [p for p in PARTNERSHIPS if any(c["name"] == p["center"] and c.get("confirmed") for c in CENTERS)]
     reg_names = [r for r, _ in REGIONS]
@@ -370,9 +407,9 @@ def network_section():
         by_reg = '<p class="lede">Sodelovanja zapisujemo sproti.</p>'
     n_inst = len({p["partner"] for p in rows})
     return f"""<section class="section white" id="mreza"><div class="wrap">
-  <div class="head"><h2>Obstoječa sodelovanja</h2><p class="lede">{n_inst} ustanov po Sloveniji že sodeluje s terapevtskimi centri. Ob vsaki ustanovi je center, s katerim sodeluje.</p></div>
+  <div class="head"><h2>Mreža: kdo s kom sodeluje</h2><p class="lede">{n_inst} ustanov po Sloveniji že sodeluje s terapevtskimi centri. Premikajte in povečajte zemljevid, poiščite center ali ustanovo in kliknite točko: pokažejo se sodelovanja in povezava do spletne strani.</p></div>
   <div class="nw-grid">
-    {regions_map(counts, f"Stanje {UPDATED}. Število ustanov s sodelovanjem po regijah.", "Ustanove s sodelovanjem", "ustanov")}
+    {network_map(rows)}
     <div class="nw-list">{by_reg}
       <p class="fine">Ob skupnih programih, ki jih podprejo donatorji ali razpisi, bomo tukaj objavili tudi poročila o izvedbi. Oznaka »Po navedbi centra« pomeni, da je sodelovanje navedel center, ustanova pa ga še ni potrdila.</p>
       <p class="fine">Ustanova že sodeluje s centrom, pa je ni na seznamu? <a href="#povprasevanje">Sporočite nam</a>. Centri sodelovanja navedejo ob <a href="/za-izvajalce/#obrazec">prijavi</a>.</p>
@@ -626,6 +663,11 @@ pages.append(page("/za-podpornike/", "Za donatorje in fundacije", "Podjetja, fun
     <div class="opp-bar"><span>Zbrano</span><div><i></i></div></div>
   </div>
 </div></section>""" + form_section("podpora", "Interes", "Izrazite interes za podporo", "Odgovorimo s predlogom programov, ki ustrezajo vašim željam.", supporter_form()), "/za-podpornike/"))
+
+# ================= MREŽA =================
+pages.append(page("/mreza/", "Mreža sodelovanj", "Interaktivni zemljevid: kateri terapevtski centri s pomočjo konj sodelujejo s šolami, zavodi in društvi po Sloveniji.",
+                  hero("Mreža", "Kdo s kom sodeluje", "Zemljevid centrov za terapije in aktivnosti s pomočjo konj ter šol, zavodov in društev, s katerimi že sodelujejo. Mreža je osnova za skupne projekte in razpise.",
+                       '<a class="btn btn-dark" href="/za-izvajalce/#obrazec">Dodajte svoj center</a><a class="btn btn-ghost" href="/za-sole-in-zavode/#povprasevanje">Ustanova išče izvajalca</a>', seed=31) + network_section(), "/za-sole-in-zavode/"))
 
 # ================= TERAPIJA S POMOČJO KONJA =================
 pages.append(page("/terapija-s-pomocjo-konja/", "Terapija s pomočjo konja", "Kaj so intervencije s pomočjo konj, zakaj konj, katera področja obstajajo, kako poteka srečanje in kdo jih izvaja.",

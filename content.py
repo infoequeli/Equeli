@@ -296,3 +296,31 @@ PARTNERSHIPS = [
     dict(center="Marengo dežela", partner="OŠ dr. Mihajla Rostoharja Krško", kraj="Krško", regija="Posavska", vrsta="Šola", kaj="Občasno sodelovanje", vir="center"),
     dict(center="Marengo dežela", partner="OŠ Ane Gale Sevnica", kraj="Sevnica", regija="Posavska", vrsta="Šola", kaj="Občasno sodelovanje", vir="center"),
 ]
+
+
+# ---------------- KOORDINATE ZA ZEMLJEVID MREŽE ----------------
+# Približna lega po kraju (lat, lng). Ključ = ime centra iz CENTERS ali ime partnerja iz PARTNERSHIPS.
+# Nov center ali partner brez koordinat se na zemljevidu ne pokaže (v seznamu pa je).
+COORDS = {
+    "CUDV Dobrna": (46.3366, 15.2264),
+    "CUDV Draga": (45.9612, 14.5282),
+    "CIRIUS Vipava": (45.8466, 13.9620),
+    "Zavod Nazaj na konja": (46.3890, 15.7980),
+    "Terapevtsko-konjeniški zavod Olsen": (45.6820, 14.1960),
+    "Konjeniško-terapevtski zavod Arion": (46.0700, 14.4700),
+    "Moonrise – terapije s pomočjo konj": (46.1360, 14.6000),
+    "Zavedno delo s konji, Rock Ranč": (45.9530, 14.8430),
+    "Marengo dežela": (46.0130, 15.3900),
+    "Konjeniški zavod EPONA": (45.7880, 15.1250),
+    "Športno-terapevtski klub Pegasus": (45.9980, 14.9290),
+    "Konjeniški center AMAY": (46.2630, 15.1780),
+    "Zavod Hipo Team": (45.8870, 13.7740),
+    "Društvo Sožitje Krško": (45.9590, 15.4920),
+    "Društvo Sožitje Brežice": (45.9040, 15.5920),
+    "Društvo za cerebralno paralizo Sonček Posavje": (45.9370, 15.4620),
+    "OŠ dr. Mihajla Rostoharja Krško": (45.9640, 15.4850),
+    "OŠ Ane Gale Sevnica": (46.0080, 15.3150),
+    "Sonček – Primorsko društvo za cerebralno paralizo": (45.9560, 13.6480),
+    "Sožitje Ajdovščina-Vipava": (45.8870, 13.9090),
+    "Sonček – Notranjsko društvo za cerebralno paralizo": (45.7160, 14.2450),
+}
