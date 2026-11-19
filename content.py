@@ -284,9 +284,15 @@ def shown_centers():
 # partner = ime ustanove; kraj; regija (ena od REGIONS); vrsta = Šola / Vrtec / Zavod / Društvo / Občina / Drugo
 # kaj     = kratko, kaj izvajajo skupaj
 # vir     = "potrjeno" (potrdili obe strani) | "center" (navedel center) | "javno" (javni vir, npr. spletna stran ustanove)
+# porocilo = (neobvezno) povezava do javnega poročila o skupnem programu; prikaže se le, če obstaja
 PARTNERSHIPS = [
     dict(center="Zavod Hipo Team", partner="CIRIUS Vipava", kraj="Vipava", regija="Goriška", vrsta="Zavod", kaj="Hipoterapija", vir="center"),
     dict(center="Zavod Hipo Team", partner="Sonček – Primorsko društvo za cerebralno paralizo", kraj="Nova Gorica", regija="Goriška", vrsta="Društvo", kaj="Hipoterapija in aktivnosti s konji", vir="center"),
     dict(center="Zavod Hipo Team", partner="Sožitje Ajdovščina-Vipava", kraj="Ajdovščina", regija="Goriška", vrsta="Društvo", kaj="Aktivnosti s konji", vir="center"),
     dict(center="Zavod Hipo Team", partner="Sonček – Notranjsko društvo za cerebralno paralizo", kraj="Slavinje", regija="Primorsko-notranjska", vrsta="Društvo", kaj="Hipoterapija", vir="center"),
+    dict(center="Marengo dežela", partner="Društvo Sožitje Krško", kraj="Krško", regija="Posavska", vrsta="Društvo", kaj="Redno sodelovanje", vir="center"),
+    dict(center="Marengo dežela", partner="Društvo Sožitje Brežice", kraj="Brežice", regija="Posavska", vrsta="Društvo", kaj="Redno sodelovanje", vir="center"),
+    dict(center="Marengo dežela", partner="Društvo za cerebralno paralizo Sonček Posavje", kraj="Leskovec pri Krškem", regija="Posavska", vrsta="Društvo", kaj="Redno sodelovanje", vir="center"),
+    dict(center="Marengo dežela", partner="OŠ dr. Mihajla Rostoharja Krško", kraj="Krško", regija="Posavska", vrsta="Šola", kaj="Občasno sodelovanje", vir="center"),
+    dict(center="Marengo dežela", partner="OŠ Ane Gale Sevnica", kraj="Sevnica", regija="Posavska", vrsta="Šola", kaj="Občasno sodelovanje", vir="center"),
 ]

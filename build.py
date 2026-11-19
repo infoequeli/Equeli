@@ -223,6 +223,9 @@ def center_card(c):
     facts += f'<li>{icon("leaf")}<span>Terapevtski konji: {e(c["horses"])}</span></li>' if c["horses"] else ""
     facts += f'<li>{icon("grid")}<span>{e(c["space"])}</span></li>' if c.get("space") else ""
     facts += f'<li>{icon("book")}<span>{e(c["programs"])}</span></li>' if c.get("programs") else ""
+    _parts = [p["partner"] for p in PARTNERSHIPS if p["center"] == c["name"]]
+    if _parts:
+        facts += f'<li>{icon("link")}<span>Sodeluje z: {e(", ".join(_parts))} <a href="/za-sole-in-zavode/#mreza">Mreža</a></span></li>'
     links = ""
     if c["url"]:
         links += f'<a href="{c["url"]}" target="_blank" rel="noopener">{e(_host(c["url"]))} ↗</a>'
@@ -360,7 +363,7 @@ def network_section():
         items = ""
         for pn in partners:
             ps = [p for p in rr if p["partner"] == pn]
-            centers = "".join(f'<li><span class="nw-c">{icon("link")}{e(p["center"])}</span><span class="nw-k">{e(p["kaj"])}</span><span class="nw-v {VIR[p["vir"]][1]}">{VIR[p["vir"]][0]}</span></li>' for p in ps)
+            centers = "".join(f'<li><span class="nw-c">{icon("link")}{e(p["center"])}</span><span class="nw-k">{e(p["kaj"])}</span><span class="nw-v {VIR[p["vir"]][1]}">{VIR[p["vir"]][0]}</span>' + (f' <a class="nw-r" href="{p["porocilo"]}">Poročilo</a>' if p.get("porocilo") else '') + '</li>' for p in ps)
             items += f'<div class="nw-i"><div class="nw-h"><b>{e(pn)}</b><span>{e(ps[0]["vrsta"])} · {e(ps[0]["kraj"])}</span></div><ul>{centers}</ul></div>'
         by_reg += f'<div class="nw-reg"><h3>{e(r)}</h3>{items}</div>'
     if not rows:
@@ -371,6 +374,7 @@ def network_section():
   <div class="nw-grid">
     {regions_map(counts, f"Stanje {UPDATED}. Število ustanov s sodelovanjem po regijah.", "Ustanove s sodelovanjem", "ustanov")}
     <div class="nw-list">{by_reg}
+      <p class="fine">Ob skupnih programih, ki jih podprejo donatorji ali razpisi, bomo tukaj objavili tudi poročila o izvedbi. Oznaka »Po navedbi centra« pomeni, da je sodelovanje navedel center, ustanova pa ga še ni potrdila.</p>
       <p class="fine">Ustanova že sodeluje s centrom, pa je ni na seznamu? <a href="#povprasevanje">Sporočite nam</a>. Centri sodelovanja navedejo ob <a href="/za-izvajalce/#obrazec">prijavi</a>.</p>
     </div>
   </div>
@@ -645,6 +649,16 @@ pages.append(page("/terapija-s-pomocjo-konja/", "Terapija s pomočjo konja", "Ka
   </div>
 </div></section>
 <section class="section white"><div class="wrap">
+  <div class="head"><p class="kicker">Modeli dela</p><h2>TPK, EAGALA in drugi pristopi</h2><p class="lede">V Sloveniji večina strokovnjakov dela po programu terapij s pomočjo konja (TPK) Zavoda Nazaj na konja. Ob tem obstajajo tudi mednarodni modeli z lastnimi usposabljanji in certifikati. Equeli predstavlja vse, ki delo izvajajo strokovno.</p></div>
+  <div class="goals four">
+    <div>{badge("book")}<b>TPK – terapija s pomočjo konja</b><span>Strokovnjak s temeljno stroko (psiholog, socialni delavec, pedagog, delovni terapevt) z dodatnim usposabljanjem vključi konja v svoje delo. Register vodi Zavod Nazaj na konja.</span></div>
+    <div>{badge("move")}<b>Hipoterapija</b><span>Fizioterapevt ali delovni terapevt uporabi gibanje konja v koraku. Udeleženec je na konju, konja vodi vodnik.</span></div>
+    <div>{badge("people")}<b>Model EAGALA</b><span>Psihoterapija in učenje s pomočjo konja v timu: strokovnjak za duševno zdravje, strokovnjak za konje in konj. Delo poteka samo na tleh, brez jahanja. V Sloveniji je bilo prvo usposabljanje leta 2010 v CIRIUS Kamnik.</span></div>
+    <div>{badge("leaf")}<b>Drugi pristopi</b><span>Učenje in osebna rast ob konjih, psihoterapija s konji drugih šol, prilagojeno jahanje. Vprašajte izvajalca, po katerem modelu dela in kje se je usposobil.</span></div>
+  </div>
+  <p class="fine" style="margin-top:20px">Certifikat EAGALA ali drug certifikat za delo s konji ne nadomesti temeljne strokovne izobrazbe. Ste izvajalec, ki dela po drugem modelu? <a href="/za-izvajalce/#obrazec">Predstavite svoj center</a>.</p>
+</div></section>
+<section class="section"><div class="wrap">
   <div class="head"><p class="kicker">Srečanje</p><h2>Kako običajno poteka</h2></div>
   <ol class="journey">
     <li><div>{badge("message", "ring")}<b>Pogovor in cilji</b><span>Strokovnjak spozna udeleženca in skupaj določita, kaj želita doseči.</span></div></li>
@@ -653,7 +667,7 @@ pages.append(page("/terapija-s-pomocjo-konja/", "Terapija s pomočjo konja", "Ka
     <li><div>{badge("chart", "ring")}<b>Spremljanje</b><span>Pogovor o doživetem in spremljanje napredka skozi več srečanj.</span></div></li>
   </ol>
 </div></section>
-<section class="section"><div class="wrap split">
+<section class="section white"><div class="wrap split">
   <div class="head"><p class="kicker">Varnost in dobrobit</p><h2>Dobro za človeka in za konja</h2><p class="lede">Strokovni programi skrbijo za varnost udeležencev in za dobrobit konj: konji imajo dovolj počitka, ustrezno delovno obremenitev in so izbrani glede na svoj značaj.</p>
     <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/strokovni-okvir/">Strokovni okvir in smernice</a></div></div>
   <div class="path"><p class="path-t">Vprašajte izvajalca</p><ol>

@@ -917,3 +917,5 @@ footer .logo-sub{display:none!important}footer .logo{margin-bottom:6px}
 .nw-grid .regions-map{display:block;position:sticky;top:90px}
 .nw-grid .regions-map svg{width:100%;height:auto;display:block;margin-top:10px}
 @media (max-width:900px){.nw-grid .regions-map{position:static}}
+
+.nw-r{font-size:12px;margin-left:6px}
