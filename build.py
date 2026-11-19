@@ -516,7 +516,7 @@ schools += f"""
   <div class="head"><h2>Pogosta vprašanja</h2></div>
   <details><summary>Ali programi potekajo na naši lokaciji?</summary><div>Praviloma potekajo pri izvajalcu, kjer so konji in ustrezna infrastruktura. Zato je pomembno vnaprej urediti prevoz. Nekateri izvajalci ponujajo predavanja tudi na vaši lokaciji.</div></details>
     <details><summary>Kdo sklene pogodbo in komu plačamo?</summary><div>Ustanova sklene dogovor in plača neposredno izvajalcu. Povezovanje prek Equeli je brezplačno.</div></details>
-    <details><summary>Kako lahko program financiramo?</summary><div>Ustanove programe financirajo iz lastnih sredstev, prispevkov staršev, razpisov ali s podporo podjetij. Če potrebujete dodatno financiranje, to označite v povpraševanju.</div></details>
+    <details><summary>Kako lahko program financiramo?</summary><div>Ustanove programe financirajo iz lastnih sredstev, prispevkov staršev, razpisov ali s podporo podjetij. Če potrebujete dodatno financiranje, to označite v povpraševanju. Pri prijavah na razpise vam z veseljem pomagamo: pri iskanju primernih razpisov, povezovanju z izvajalci in pripravi prijave.</div></details>
     <details><summary>Kakšne soglasja potrebujemo?</summary><div>Za mladoletne udeležence potrebujete soglasje staršev za udeležbo. Za fotografiranje in snemanje je potrebno ločeno soglasje.</div></details>
 </div></section>"""
 pages.append(page("/za-sole-in-zavode/", "Za šole in zavode", "Šolam, vrtcem, CUDV in drugim ustanovam pomagamo najti izvajalce programov s pomočjo konj in možnosti financiranja.", schools, "/za-sole-in-zavode/"))
@@ -615,6 +615,7 @@ pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pom
   <h2>Kaj vas bomo vprašali</h2>
   <ul><li>organizacija, lokacije izvajanja in kontaktna oseba,</li><li>strokovna ekipa, izobrazba in usposabljanje za delo s konjem,</li><li>programi, starostne skupine, oblike, trajanje in cena (če jo želite objaviti),</li><li>konji, infrastruktura in dostopnost,</li><li>sodelovanja ter interes za povezovanje s šolami in zunanje financirane projekte.</li></ul>
   <div class="callout"><strong>Kaj bo javno in kaj ne.</strong> Javno objavimo samo podatke o organizaciji, ekipi in programih, ki jih potrdite. Podatki o zmogljivostih, omejitvah, financiranju in sodelovanjih ostanejo zasebni.</div>
+  <div class="callout"><strong>Pomoč pri prijavah na razpise.</strong> Če pripravljate prijavo na razpis ali iščete sredstva za svoj program, vam pri tem brezplačno pomagamo: pri iskanju primernih razpisov in partnerjev ter pri pripravi prijave. Pišite nam na <a href="mailto:info.equeli@gmail.com">info.equeli@gmail.com</a> ali pa se vam oglasimo sami, ko najdemo priložnost za vaš center.</div>
 </div>
 {form_section("obrazec", "Obrazec", "Prijava izvajalca", "Izpolnite, kar veste. Manjkajoče dopolnimo po telefonu ali ob obisku. Profil objavimo šele, ko ga potrdite. Približno 15 minut.", provider_form())}""", "/za-izvajalce/"))
 
