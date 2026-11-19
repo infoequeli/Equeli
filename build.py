@@ -587,21 +587,25 @@ rows = "".join(f'<tr><td>{r}</td><td class="tnum">{n if n else "še ni zapisov"}
 pages.append(page("/izvajalci/", "Terapevtski centri", "Javni zavodi in terapevtski centri, ki v Sloveniji izvajajo intervencije s pomočjo konj.",
                   hero("Centri", "Terapevtski centri v Sloveniji", "Javni zavodi in centri, ki izvajajo intervencije s pomočjo konj. Seznam sproti dopolnjujemo, ko se centri prijavijo.",
                        f'<a class="btn btn-dark" href="/za-starse/#iskanje">Pomagamo poiskati izvajalca</a><a class="btn btn-ghost" href="/strokovni-okvir/">Strokovni okvir</a>', seed=13) + f"""
-<section class="section white"><div class="wrap">
+<section class="section white" id="zemljevid"><div class="wrap">
+  <div class="head"><h2>Kje so izvajalci</h2><p class="lede">Na seznamu je {N_SHOWN} centrov v {N_REG} od 12 regij. Kliknite regijo na zemljevidu ali izberite pristop in prikazali se bodo centri v njej.</p></div>
+  <div class="nw-grid" id="cmap">
+  <div class="nw-side">
   {_CF if len([c for c in CENTERS if c.get("confirmed")]) > 3 else ""}
+  {shown_regions_chart()}
+  <p class="fine" id="cmap-sel" hidden><span></span> <button type="button" class="linkbtn" id="cmap-all">Pokaži vse regije</button></p>
+  </div>
+  <div class="nw-list">
   {"".join(f'<div class="cgroup" data-group="{g}"><div class="head"><h2>{t}</h2><p class="lede">{d}</p></div>{center_cards([c for c in CENTERS if c["group"] == g and c.get("confirmed")])}</div>' for g, t, d in GROUPS if any(c["group"] == g and c.get("confirmed") for c in CENTERS))}
   <div class="stroka-link" style="margin-top:32px">{badge("pin", "lg")}<div><h3>Vašega centra še ni na seznamu?</h3><p>Predstavitev je brezplačna. Profil objavimo, ko potrdite podatke.</p></div><a class="go" href="/za-izvajalce/#obrazec">Prijavite center →</a></div>
   <div class="cf-empty" hidden><h3>Za ta izbor še nimamo centra.</h3><p>Pišite nam, pomagamo poiskati izvajalca v bližini.</p><a class="btn btn-dark" href="/za-starse/#iskanje">Pomoč pri iskanju</a></div>
+  </div></div>
   <p class="fine">Podatki so povzeti po registru Nazaj na konja, spletnih straneh centrov in prijavah centrov. Za termine in cene se obrnite neposredno na center. Če iščete izvajalca v svoji regiji, vam pri iskanju pomagamo.</p>
 </div></section>
 <section class="section"><div class="wrap">
   <a class="stroka-link" href="/strokovni-okvir/">{badge("shield", "lg")}<div><p class="kicker">Stroka</p><h3>Kdo je usposobljen za delo s konjem?</h3><p>Zavod Nazaj na konja, register strokovnjakov, mednarodne smernice HETI in razlike med pristopi.</p></div><span class="go">Strokovni okvir →</span></a>
 </div></section>
-<section class="section white"><div class="wrap split">
-  <div class="head"><p class="kicker">Po Sloveniji</p><h2>Kje so izvajalci</h2><p class="lede">Na seznamu je {N_SHOWN} centrov v {N_REG} od 12 regij. Seznam dopolnjujemo, ko se centri prijavijo.</p>
-    <div class="btn-row" style="margin-top:28px"><a class="btn btn-ghost" href="/za-izvajalce/#obrazec">Dodajte svoj center</a></div></div>
-  {shown_regions_chart()}
-</div></section>""", "/izvajalci/"))
+""", "/izvajalci/"))
 
 # ================= ZA IZVAJALCE =================
 pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pomočjo konj lahko brezplačno potrdijo in dopolnijo podatke o svojem centru.",

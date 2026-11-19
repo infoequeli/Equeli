@@ -269,6 +269,25 @@ document.querySelectorAll('.finder').forEach(function (root) {
     apply();
   });
   sel.addEventListener('change', apply);
+  /* klik na regijo na zemljevidu izbere regijo v seznamu */
+  var dots = Array.prototype.slice.call(document.querySelectorAll('#cmap .rm-dot'));
+  var msel = document.getElementById('cmap-sel'), mall = document.getElementById('cmap-all');
+  function mark() {
+    var r = sel.value;
+    dots.forEach(function (d) { d.classList.toggle('on', d.getAttribute('data-r') === r); });
+    if (msel) { msel.hidden = !r; msel.querySelector('span').textContent = r ? 'Prikazana regija: ' + r + '.' : ''; }
+  }
+  dots.forEach(function (d) {
+    d.setAttribute('tabindex', '0'); d.setAttribute('role', 'button');
+    function pick() {
+      var r = d.getAttribute('data-r'); sel.value = sel.value === r ? '' : r; apply(); mark();
+      if (window.innerWidth < 900) { var l = document.querySelector('#cmap .nw-list'); if (l) l.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }
+    d.addEventListener('click', pick);
+    d.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); pick(); } });
+  });
+  sel.addEventListener('change', mark);
+  if (mall) mall.addEventListener('click', function () { sel.value = ''; apply(); mark(); });
   var m = location.hash.match(/^#(H|T|P|S|D|J|A)$/); if (m) { var b = f.querySelector('[data-offer="' + m[1] + '"]'); if (b) b.click(); }
   apply();
 })();
