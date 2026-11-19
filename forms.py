@@ -80,7 +80,7 @@ def form(fid, subject, intro, groups, consent, submit):
     <label class="choice block"><input type="checkbox" name="Soglasje" value="da" required><span>{consent} Več v <a href="/zasebnost/">obvestilu o zasebnosti</a>.</span></label>
   </div>
   <div class="form-error" role="alert" hidden>Prosimo, izpolnite označena polja.</div>
-  <div class="form-foot"><button class="btn btn-dark btn-lg" type="submit">{submit}</button><span class="form-time">Odgovorimo v nekaj delovnih dneh.</span></div>
+  <div class="form-foot"><button class="btn btn-dark btn-lg" type="submit">{submit}</button><span class="form-time">Odgovorimo v nekaj delovnih dneh. Če pošiljanje ne uspe, nam pišite na <a href="mailto:info.equeli@gmail.com">info.equeli@gmail.com</a>.</span></div>
 </form>"""
 
 
