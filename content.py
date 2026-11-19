@@ -2,7 +2,7 @@
 
 SITE = "https://equeli.si"
 EMAIL = "info.equeli@gmail.com"
-UPDATED = "12. 11. 2026"
+UPDATED = "19. 11. 2026"
 
 # Obrazci so na strani sami (glej forms.py). Povezave do njih:
 FORMS = {

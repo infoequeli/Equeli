@@ -411,7 +411,7 @@ def network_section():
         by_reg = '<p class="lede">Sodelovanja zapisujemo sproti.</p>'
     n_inst = len({p["partner"] for p in rows})
     return f"""<section class="section white" id="mreza"><div class="wrap">
-  <div class="head"><h2>Mreža: kdo s kom sodeluje</h2><p class="lede">{n_inst} ustanov po Sloveniji že sodeluje s terapevtskimi centri. Premikajte in povečajte zemljevid, poiščite center ali ustanovo in kliknite točko: pokažejo se sodelovanja in povezava do spletne strani.</p></div>
+  <div class="head"><h2>Mreža: kdo s kom sodeluje</h2><p class="lede">{n_inst} ustanov po Sloveniji že sodeluje s terapevtskimi centri. Poiščite center ali ustanovo ali kliknite regijo na zemljevidu. Ob vsakem centru je povezava do njegove spletne strani.</p></div>
   <div class="nw-grid">
     <div class="nw-side">
       <div class="nmap-bar"><label class="sr" for="nmap-q">Iskanje po mreži</label><input id="nmap-q" type="search" placeholder="Poiščite center, šolo, društvo ali kraj" autocomplete="off"></div>
