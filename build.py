@@ -404,7 +404,7 @@ def network_section():
         items = ""
         for pn in partners:
             ps = [p for p in rr if p["partner"] == pn]
-            centers = "".join(f'<li><span class="nw-c">{icon("link")}{_clink(p["center"])}</span><span class="nw-k">{e(p["kaj"])}</span>' + (f' <a class="nw-r" href="{p["porocilo"]}">Poročilo</a>' if p.get("porocilo") else '') + '</li>' for p in ps)
+            centers = "".join(f'<li><span class="nw-c">{icon("link")}{_clink(p["center"])}</span><span class="nw-k">{e(p["kaj"])}</span>' + (f' <a class="nw-r" href="{p["porocilo"]}">Poročilo</a>' if p.get("porocilo") else '') + (f' <a class="nw-r" href="{p["vir_url"]}" target="_blank" rel="noopener">Vir ↗</a>' if p.get("vir_url") else '') + '</li>' for p in ps)
             _pu = PARTNER_URLS.get(pn)
             _pn = f'<a href="{_pu}" target="_blank" rel="noopener">{e(pn)} ↗</a>' if _pu else e(pn)
             items += f'<div class="nw-i"><div class="nw-h"><b>{_pn}</b><span>{e(ps[0]["vrsta"])} · {e(ps[0]["kraj"])}</span></div><ul>{centers}</ul></div>'

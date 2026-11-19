@@ -286,6 +286,10 @@ def shown_centers():
 # vir     = "potrjeno" (potrdili obe strani) | "center" (navedel center) | "javno" (javni vir, npr. spletna stran ustanove)
 # porocilo = (neobvezno) povezava do javnega poročila o skupnem programu; prikaže se le, če obstaja
 PARTNERSHIPS = [
+    # Iz javnih virov (19. 11. 2026) – v potrditev poslano centrom po e-pošti; vir_url = kje je sodelovanje objavljeno.
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="Vzgojni zavod Kranj", kraj="Kranj", regija="Gorenjska", vrsta="Zavod", kaj="Srečanja s konji za mladostnike", vir="javno", vir_url="https://vzkranj.splet.arnes.si/2026/08/02/rock-ranc/"),
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="Vzgojni zavod Veržej", kraj="Veržej", regija="Pomurska", vrsta="Zavod", kaj="Erasmus+ projekt Konjerastniki", vir="javno", vir_url="https://www.vzgojni-zavod-verzej.si/2026/06/01/konjerastniki-zakljucek-projekta/"),
+    dict(center="Zavod Škatlica", partner="Vzgojni zavod Veržej", kraj="Veržej", regija="Pomurska", vrsta="Zavod", kaj="Erasmus+ projekt Konjerastniki", vir="javno", vir_url="https://www.vzgojni-zavod-verzej.si/2026/06/01/konjerastniki-zakljucek-projekta/"),
     dict(center="Zavod Hipo Team", partner="CIRIUS Vipava", kraj="Vipava", regija="Goriška", vrsta="Zavod", kaj="Hipoterapija", vir="center"),
     dict(center="Zavod Hipo Team", partner="Sonček – Primorsko društvo za cerebralno paralizo", kraj="Nova Gorica", regija="Goriška", vrsta="Društvo", kaj="Hipoterapija in aktivnosti s konji", vir="center"),
     dict(center="Zavod Hipo Team", partner="Sožitje Ajdovščina-Vipava", kraj="Ajdovščina", regija="Goriška", vrsta="Društvo", kaj="Aktivnosti s konji", vir="center"),
@@ -330,6 +334,8 @@ COORDS = {
 # Kjer ustanova nima svoje strani, je povezava na stran zveze, ki jo navaja.
 PARTNER_URLS = {
     "CIRIUS Vipava": "https://www.cirius-vipava.si/",
+    "Vzgojni zavod Kranj": "https://vzkranj.splet.arnes.si/",
+    "Vzgojni zavod Veržej": "https://www.vzgojni-zavod-verzej.si/",
     "OŠ dr. Mihajla Rostoharja Krško": "https://osmr.splet.arnes.si/",
     "OŠ Ane Gale Sevnica": "https://www.os-anegale.si/",
     "Društvo Sožitje Krško": "https://www.zveza-sozitje.si/zasavsko-posavsko-in-dolenjsko-podrocje.html",
