@@ -324,3 +324,18 @@ COORDS = {
     "Sožitje Ajdovščina-Vipava": (45.8870, 13.9090),
     "Sonček – Notranjsko društvo za cerebralno paralizo": (45.7160, 14.2450),
 }
+
+
+# Spletne strani partnerjev v mreži (ime iz PARTNERSHIPS -> povezava).
+# Kjer ustanova nima svoje strani, je povezava na stran zveze, ki jo navaja.
+PARTNER_URLS = {
+    "CIRIUS Vipava": "https://www.cirius-vipava.si/",
+    "OŠ dr. Mihajla Rostoharja Krško": "https://osmr.splet.arnes.si/",
+    "OŠ Ane Gale Sevnica": "https://www.os-anegale.si/",
+    "Društvo Sožitje Krško": "https://www.zveza-sozitje.si/zasavsko-posavsko-in-dolenjsko-podrocje.html",
+    "Društvo Sožitje Brežice": "https://www.zveza-sozitje.si/zasavsko-posavsko-in-dolenjsko-podrocje.html",
+    "Sožitje Ajdovščina-Vipava": "https://www.zveza-sozitje.si/",
+    "Društvo za cerebralno paralizo Sonček Posavje": "https://www.soncek.org/drustva/",
+    "Sonček – Primorsko društvo za cerebralno paralizo": "https://www.soncek.org/drustva/",
+    "Sonček – Notranjsko društvo za cerebralno paralizo": "https://www.soncek.org/drustva/",
+}

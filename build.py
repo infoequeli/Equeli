@@ -7,7 +7,7 @@ Rezultat je mapa public/, ki jo objavi Cloudflare Pages.
 import html
 import os
 from datetime import date
-from content import PARTNERSHIPS, COORDS
+from content import PARTNERSHIPS, COORDS, PARTNER_URLS
 from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES, ARTICLES, RUBRICS, CENTERS
 from icons import icon, badge
 from finder import finder
@@ -404,8 +404,10 @@ def network_section():
         items = ""
         for pn in partners:
             ps = [p for p in rr if p["partner"] == pn]
-            centers = "".join(f'<li><span class="nw-c">{icon("link")}{_clink(p["center"])}</span><span class="nw-k">{e(p["kaj"])}</span><span class="nw-v {VIR[p["vir"]][1]}">{VIR[p["vir"]][0]}</span>' + (f' <a class="nw-r" href="{p["porocilo"]}">Poročilo</a>' if p.get("porocilo") else '') + '</li>' for p in ps)
-            items += f'<div class="nw-i"><div class="nw-h"><b>{e(pn)}</b><span>{e(ps[0]["vrsta"])} · {e(ps[0]["kraj"])}</span></div><ul>{centers}</ul></div>'
+            centers = "".join(f'<li><span class="nw-c">{icon("link")}{_clink(p["center"])}</span><span class="nw-k">{e(p["kaj"])}</span>' + (f' <a class="nw-r" href="{p["porocilo"]}">Poročilo</a>' if p.get("porocilo") else '') + '</li>' for p in ps)
+            _pu = PARTNER_URLS.get(pn)
+            _pn = f'<a href="{_pu}" target="_blank" rel="noopener">{e(pn)} ↗</a>' if _pu else e(pn)
+            items += f'<div class="nw-i"><div class="nw-h"><b>{_pn}</b><span>{e(ps[0]["vrsta"])} · {e(ps[0]["kraj"])}</span></div><ul>{centers}</ul></div>'
         by_reg += f'<div class="nw-reg" data-r="{e(r)}"><h3>{e(r)}</h3>{items}</div>'
     if not rows:
         by_reg = '<p class="lede">Sodelovanja zapisujemo sproti.</p>'
@@ -420,7 +422,7 @@ def network_section():
     </div>
     <script src="/assets/mreza.js?v={_v('public/assets/mreza.js')}" defer></script>
     <div class="nw-list">{by_reg}
-      <p class="fine">Ob skupnih programih, ki jih podprejo donatorji ali razpisi, bomo tukaj objavili tudi poročila o izvedbi. Oznaka »Po navedbi centra« pomeni, da je sodelovanje navedel center, ustanova pa ga še ni potrdila.</p>
+      <p class="fine">Ob skupnih programih, ki jih podprejo donatorji ali razpisi, bomo tukaj objavili tudi poročila o izvedbi.</p>
       <p class="fine">Ustanova že sodeluje s centrom, pa je ni na seznamu? <a href="#povprasevanje">Sporočite nam</a>. Centri sodelovanja navedejo ob <a href="/za-izvajalce/#obrazec">prijavi</a>.</p>
     </div>
   </div>
