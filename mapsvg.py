@@ -34,10 +34,10 @@ def regions_map(regions, caption="", title="Organizacije v raziskovalni bazi", u
         rad = 9 + (n / mx) ** 0.5 * 34 if n else 9
         lab = SHORT.get(r, r)
         if n:
-            dots.append(f'<g class="rm-dot" style="--d:{order[r] * 90}ms;--x:{x:.0f}px;--y:{y:.0f}px"><title>{e(r)}: {n}</title><circle cx="{x:.0f}" cy="{y:.0f}" r="{rad:.0f}" class="rm-ring"/><circle cx="{x:.0f}" cy="{y:.0f}" r="{rad:.0f}" class="rm-c" style="--o:{0.35 + 0.65 * n / mx:.2f}"/>'
+            dots.append(f'<g class="rm-dot" data-r="{e(r)}" style="--d:{order[r] * 90}ms;--x:{x:.0f}px;--y:{y:.0f}px"><title>{e(r)}: {n}</title><circle cx="{x:.0f}" cy="{y:.0f}" r="{rad:.0f}" class="rm-ring"/><circle cx="{x:.0f}" cy="{y:.0f}" r="{rad:.0f}" class="rm-c" style="--o:{0.35 + 0.65 * n / mx:.2f}"/>'
                         f'<text x="{x:.0f}" y="{y + 5:.0f}" class="rm-n">{n}</text><text x="{x:.0f}" y="{y + rad + 16:.0f}" class="rm-l">{e(lab)}</text></g>')
         else:
-            dots.append(f'<g class="rm-dot" style="--d:{order[r] * 90}ms;--x:{x:.0f}px;--y:{y:.0f}px"><title>{e(r)}: še ni podatka</title><circle cx="{x:.0f}" cy="{y:.0f}" r="{rad:.0f}" class="rm-c0"/>'
+            dots.append(f'<g class="rm-dot" data-r="{e(r)}" style="--d:{order[r] * 90}ms;--x:{x:.0f}px;--y:{y:.0f}px"><title>{e(r)}: še ni podatka</title><circle cx="{x:.0f}" cy="{y:.0f}" r="{rad:.0f}" class="rm-c0"/>'
                         f'<text x="{x:.0f}" y="{y + rad + 16:.0f}" class="rm-l">{e(lab)}</text></g>')
     svg = (f'<svg class="rmap" viewBox="0 0 710 470" role="img" aria-label="Zemljevid Slovenije s številom {unit} po regijah">'
            f'<path d="{outline}" class="rm-land"/>{"".join(dots)}</svg>')

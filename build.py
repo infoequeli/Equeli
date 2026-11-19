@@ -384,6 +384,10 @@ def network_map(rows):
       <script src="/assets/mreza.js?v={_v('public/assets/mreza.js')}" defer></script>
     </div>"""
 
+def _clink(name):
+    c = next((x for x in CENTERS if x["name"] == name), None)
+    return f'<a href="{c["url"]}" target="_blank" rel="noopener">{e(name)} ↗</a>' if c and c["url"] else e(name)
+
 def network_section():
     rows = [p for p in PARTNERSHIPS if any(c["name"] == p["center"] and c.get("confirmed") for c in CENTERS)]
     reg_names = [r for r, _ in REGIONS]
@@ -400,16 +404,21 @@ def network_section():
         items = ""
         for pn in partners:
             ps = [p for p in rr if p["partner"] == pn]
-            centers = "".join(f'<li><span class="nw-c">{icon("link")}{e(p["center"])}</span><span class="nw-k">{e(p["kaj"])}</span><span class="nw-v {VIR[p["vir"]][1]}">{VIR[p["vir"]][0]}</span>' + (f' <a class="nw-r" href="{p["porocilo"]}">Poročilo</a>' if p.get("porocilo") else '') + '</li>' for p in ps)
+            centers = "".join(f'<li><span class="nw-c">{icon("link")}{_clink(p["center"])}</span><span class="nw-k">{e(p["kaj"])}</span><span class="nw-v {VIR[p["vir"]][1]}">{VIR[p["vir"]][0]}</span>' + (f' <a class="nw-r" href="{p["porocilo"]}">Poročilo</a>' if p.get("porocilo") else '') + '</li>' for p in ps)
             items += f'<div class="nw-i"><div class="nw-h"><b>{e(pn)}</b><span>{e(ps[0]["vrsta"])} · {e(ps[0]["kraj"])}</span></div><ul>{centers}</ul></div>'
-        by_reg += f'<div class="nw-reg"><h3>{e(r)}</h3>{items}</div>'
+        by_reg += f'<div class="nw-reg" data-r="{e(r)}"><h3>{e(r)}</h3>{items}</div>'
     if not rows:
         by_reg = '<p class="lede">Sodelovanja zapisujemo sproti.</p>'
     n_inst = len({p["partner"] for p in rows})
     return f"""<section class="section white" id="mreza"><div class="wrap">
   <div class="head"><h2>Mreža: kdo s kom sodeluje</h2><p class="lede">{n_inst} ustanov po Sloveniji že sodeluje s terapevtskimi centri. Premikajte in povečajte zemljevid, poiščite center ali ustanovo in kliknite točko: pokažejo se sodelovanja in povezava do spletne strani.</p></div>
   <div class="nw-grid">
-    {network_map(rows)}
+    <div class="nw-side">
+      <div class="nmap-bar"><label class="sr" for="nmap-q">Iskanje po mreži</label><input id="nmap-q" type="search" placeholder="Poiščite center, šolo, društvo ali kraj" autocomplete="off"></div>
+      {regions_map(counts, f"Stanje {UPDATED}. Kliknite regijo za sodelovanja v njej.", "Ustanove s sodelovanjem", "ustanov")}
+      <p class="fine" id="nmap-sel" hidden><span></span> <button type="button" class="linkbtn" id="nmap-all">Pokaži vse regije</button></p>
+    </div>
+    <script src="/assets/mreza.js?v={_v('public/assets/mreza.js')}" defer></script>
     <div class="nw-list">{by_reg}
       <p class="fine">Ob skupnih programih, ki jih podprejo donatorji ali razpisi, bomo tukaj objavili tudi poročila o izvedbi. Oznaka »Po navedbi centra« pomeni, da je sodelovanje navedel center, ustanova pa ga še ni potrdila.</p>
       <p class="fine">Ustanova že sodeluje s centrom, pa je ni na seznamu? <a href="#povprasevanje">Sporočite nam</a>. Centri sodelovanja navedejo ob <a href="/za-izvajalce/#obrazec">prijavi</a>.</p>
