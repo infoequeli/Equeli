@@ -151,7 +151,7 @@ CENTERS = [
          programs="Hipoterapija dvakrat na teden",
          url="https://www.cirius-vipava.si/", reg="", confirmed=True),
     dict(name="CUDV Radovljica", place="Radovljica", region=["Gorenjska"], group="javni", offer=["H"],
-         who="Uporabniki centra; hipoterapija je del programov zavoda in za uporabnike ni samoplačniška",
+         who="Uporabniki centra; hipoterapija je del rednih programov zavoda in je omogočena vsem uporabnikom, pri katerih ni kontraindikacij",
          team="Diplomirani fizioterapevt s specializacijo za hipoterapijo; v timu še športni pedagog, delovni terapevt, habilitator in varuh",
          horses="", programs="Hipoterapija na kmetiji hipoterapevta",
          url="", reg="", confirmed=True),
