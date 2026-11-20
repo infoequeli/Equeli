@@ -193,7 +193,7 @@ CENTERS = [
          who="Otroci, mladostniki in odrasli; individualno in v manjših skupinah",
          programs="Terapija s pomočjo konja s poudarkom na celostnem razvoju: socialne veščine, osebnostna rast, samoopazovanje, koncentracija, učno področje in motorika",
          team="Irena K. Kovač, prof. športne vzgoje, kineziologinja, terapevtka s pomočjo konja (specializacija 2013)",
-         horses="4", space="Zunanja jahalnica ali ograda, sanitarije, parkirišče",
+         horses="2", space="Zunanja jahalnica ali ograda, sanitarije, parkirišče",
          url="https://pegasusclub.weebly.com/", reg=REG + "irena-k-kovac/", confirmed=True),
     dict(name="Hijaterapija, Konjeniški klub Rojnik", place="Grosuplje", region=["Osrednjeslovenska"], group="register", offer=["S"],
          who="Otroci in mladostniki", team="Julija Božič, mag. psihologije; Katra Zajc Švara, mag. socialnega dela", horses="2",
