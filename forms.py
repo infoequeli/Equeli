@@ -5,7 +5,7 @@ Ob prvi oddaji pride na info.equeli@gmail.com e-pošta za aktivacijo – kliknit
 Polja urejate tukaj; nato zaženite: python3 build.py
 """
 from html import escape as e
-from content import SITE, EMAIL, REGIONS, APPROACHES, GUIDES
+from content import SITE, EMAIL, REGIONS, APPROACHES, GUIDES, PROJECTS
 
 ACTION = f"https://formsubmit.co/{EMAIL}"
 REGION_NAMES = [r for r, _ in REGIONS]
@@ -230,6 +230,7 @@ def supporter_form():
                 text("Telefon", "Telefon", type="tel", auto="tel"),
             ),
             group("Kaj vas zanima",
+                select("Projekt", "Projekt", [f'{p["center"]}: {p["title"]}' for p in PROJECTS] + ["Splošna podpora programom"]),
                 checks("Oblika podpore", "Oblika podpore", ["Financiranje programa za šolo ali zavod", "Sofinanciranje za družine", "Oprema ali material", "Prostovoljno delo zaposlenih", "Strokovno ali pro bono znanje"]),
                 checks("Skupina", "Komu bi radi pomagali", ["Otroci s posebnimi potrebami", "Mladostniki", "Odrasli z oviranostmi", "Starejši", "Ni pomembno"]),
                 select("Regija", "Regija", REGION_NAMES + ["Vsa Slovenija"]),

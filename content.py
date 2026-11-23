@@ -2,7 +2,7 @@
 
 SITE = "https://equeli.si"
 EMAIL = "info.equeli@gmail.com"
-UPDATED = "19. 11. 2026"
+UPDATED = "23. 11. 2026"
 
 # Obrazci so na strani sami (glej forms.py). Povezave do njih:
 FORMS = {
@@ -180,8 +180,8 @@ CENTERS = [
     dict(name="Marengo dežela", place="Koprivnica", region=["Posavska"], group="register", offer=["T", "A"],
          who="Downov sindrom, avtizem, cerebralna paraliza, motnje v duševnem razvoju", team="Natalija Oštir, univ. dipl. socialna delavka", horses="3",
          url="https://www.facebook.com/MarengoDezela/", reg=REG + "natalija-ostir/", confirmed=True),
-    dict(name="Konjeniški zavod EPONA", place="Novo mesto", region=["Jugovzhodna Slovenija"], group="register", offer=["T"],
-         who="Cerebralna paraliza in druge posebne potrebe", team="Sabina Devjak Novak", horses="2",
+    dict(name="Konjeniški zavod EPONA", place="Novo mesto", region=["Jugovzhodna Slovenija"], group="register", offer=["T", "H", "A"],
+         who="Otroci, mladostniki in odrasli s posebnimi potrebami z najrazličnejšimi primanjkljaji", team="dr. Sabina Devjak Novak", horses="2",
          url="", reg=REG + "sabina-devjak-novak/", confirmed=True),
     dict(name="Terapija s pomočjo konja Češča vas", place="Novo mesto", region=["Jugovzhodna Slovenija"], group="register", offer=["T"],
          who="Otroci in odrasli s posebnimi potrebami", team="Polona Pušavec, univ. dipl. socialna delavka", horses="2",
@@ -358,3 +358,22 @@ PARTNER_URLS = {
     "Sonček – Primorsko društvo za cerebralno paralizo": "https://www.soncek.org/drustva/",
     "Sonček – Notranjsko društvo za cerebralno paralizo": "https://www.soncek.org/drustva/",
 }
+
+
+# Projekti za podporo (Equeli Impact). Objavimo samo projekte, ki jih je izvajalec potrdil.
+# Denar gre neposredno izvajalcu; Equeli sredstev ne zbira in ne posreduje.
+PROJECTS = [
+    dict(slug="epona-terapije-2027", kind="Terapije", center="Konjeniški zavod EPONA", place="Novo mesto · Jugovzhodna Slovenija",
+         title="Redne terapije s pomočjo konja za otroke v letu 2027",
+         goal="Otrokom s posebnimi potrebami iz družin, ki si rednih obravnav ne morejo privoščiti, omogočiti celoten cikel terapije s pomočjo konja.",
+         who="Otroci s posebnimi potrebami; Epona sodeluje z društvoma Polžek in Sonček",
+         budget=[("Pet obravnav za enega otroka", "220 €"), ("Cel cikel desetih obravnav za enega otroka", "400 €"), ("Cikel desetih obravnav za pet otrok", "2.000 €")],
+         total="400 € na otroka", note="Zneski temeljijo na cenah Epone. Podpora je mogoča kot donacija ali sponzorstvo."),
+    dict(slug="epona-raziskava-myotonpro", kind="Raziskava", center="Konjeniški zavod EPONA", place="Novo mesto · Jugovzhodna Slovenija",
+         title="Klinična raziskava: hipoterapija pri spastični cerebralni paralizi",
+         goal="Epona načrtuje klinično raziskavo, kako hipoterapija vpliva na viskoelastične lastnosti ledvenega dela fascije pri osebah s spastično obliko cerebralne paralize. Meritve so neinvazivne in neboleče. Raziskavo je odobrila Komisija za etiko RS.",
+         who="Osebe s spastično obliko cerebralne paralize; meritve vsak dan, najmanj šest mesecev",
+         budget=[("Naprava MyotonPRO za merjenje lastnosti mehkih tkiv", "6.000 €")],
+         total="6.000 €", note="Cena je okvirna; Epona preverja aktualno ponudbo proizvajalca.",
+         link=("myoton.com", "https://www.myoton.com/")),
+]

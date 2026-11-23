@@ -7,7 +7,7 @@ Rezultat je mapa public/, ki jo objavi Cloudflare Pages.
 import html
 import os
 from datetime import date
-from content import PARTNERSHIPS, COORDS, PARTNER_URLS
+from content import PARTNERSHIPS, COORDS, PARTNER_URLS, PROJECTS
 from content import SITE, EMAIL, UPDATED, FORMS, REGIONS, APPROACHES, GUIDES, ARTICLES, RUBRICS, CENTERS
 from icons import icon, badge
 from finder import finder
@@ -226,6 +226,9 @@ def center_card(c):
     _parts = [p["partner"] for p in PARTNERSHIPS if p["center"] == c["name"]]
     if _parts:
         facts += f'<li>{icon("link")}<span>Sodeluje z: {e(", ".join(_parts))} <a href="/za-sole-in-zavode/#mreza">Mreža</a></span></li>'
+    _pr = [pr for pr in PROJECTS if pr["center"] == c["name"]]
+    if _pr:
+        facts += f'<li>{icon("heart")}<span>Projekti za podporo: <a href="/za-podpornike/#priloznosti">{len(_pr)} ' + ("projekt" if len(_pr) == 1 else "projekta" if len(_pr) == 2 else "projekti") + '</a></span></li>'
     links = ""
     if c["url"]:
         links += f'<a href="{c["url"]}" target="_blank" rel="noopener">{e(_host(c["url"]))} ↗</a>'
@@ -234,6 +237,23 @@ def center_card(c):
     return (f'<article class="center" data-offer="{" ".join(c["offer"])}" data-region="{"|".join(c["region"])}">'
             f'<h3>{e(c["name"])}</h3><p class="center-meta">{icon("pin")}{e(meta)}</p><div class="otags">{tags}</div>'
             f'<ul class="center-facts">{facts}</ul><div class="center-links">{links}</div></article>')
+
+
+def project_card(pr):
+    rows = "".join(f'<li><span>{e(a)}</span><b class="tnum">{e(b)}</b></li>' for a, b in pr["budget"])
+    ic = "chart" if pr["kind"] == "Raziskava" else "heart"
+    ext = f'<a href="{pr["link"][1]}" target="_blank" rel="noopener">{e(pr["link"][0])} ↗</a>' if pr.get("link") else ""
+    return (f'<article class="proj" id="{pr["slug"]}"><p class="opp-tag">{e(pr["kind"])}</p>'
+            f'<div class="opp-head">{badge(ic)}<div><b>{e(pr["title"])}</b><span>{e(pr["center"])} · {e(pr["place"])}</span></div></div>'
+            f'<p class="proj-goal">{e(pr["goal"])}</p>'
+            f'<ul class="center-facts"><li>{icon("people")}<span>{e(pr["who"])}</span></li>'
+            f'<li>{icon("shield")}<span>Izvajalka v registru Zavoda Nazaj na konja</span></li></ul>'
+            f'<div class="proj-budget"><p>{icon("euro")}Proračun</p><ul>{rows}</ul><p class="proj-note">{e(pr["note"])}</p></div>'
+            f'<div class="center-links"><a class="btn btn-dark" href="/za-podpornike/?projekt={pr["slug"]}#podpora">Podprite projekt</a>{ext}</div></article>')
+
+
+def project_cards():
+    return '<div class="projs">' + "".join(project_card(p) for p in PROJECTS) + '</div>'
 
 
 def center_cards(items):
@@ -664,20 +684,9 @@ pages.append(page("/za-podpornike/", "Za donatorje in fundacije", "Podjetja, fun
     <li><div>{badge("chart", "ring")}<b>Poročilo</b><span>Izvajalec poroča o izvedbi.</span></div></li>
   </ol>
 </div></section>
-<section class="section white" id="priloznosti"><div class="wrap split">
-  <div class="head"><p class="kicker">Priložnosti za podporo</p><h2>Konkretne potrebe šol, zavodov in izvajalcev</h2><p class="lede">Prve priložnosti objavimo, ko jih potrdijo sodelujoče ustanove in izvajalci. Vsaka bo prikazana tako, da boste na prvi pogled videli, kaj podpirate.</p>
-    <div class="btn-row" style="margin-top:28px"><a class="btn btn-dark" href="#podpora">Obvestite me o priložnostih</a></div></div>
-  <div class="opp" aria-label="Prikaz, kako bo videti objava priložnosti">
-    <p class="opp-tag">Tako bo videti objava</p>
-    <div class="opp-head">{badge("school")}<div><b>Ime programa</b><span>Ustanova · regija</span></div></div>
-    <dl>
-      <div><dt>{icon("target")}Cilj</dt><dd><i style="width:80%"></i></dd></div>
-      <div><dt>{icon("people")}Udeleženci</dt><dd><i style="width:40%"></i></dd></div>
-      <div><dt>{icon("shield")}Izvajalec</dt><dd><i style="width:60%"></i><em>preverjen</em></dd></div>
-      <div><dt>{icon("euro")}Proračun</dt><dd><i style="width:50%"></i></dd></div>
-    </dl>
-    <div class="opp-bar"><span>Zbrano</span><div><i></i></div></div>
-  </div>
+<section class="section white" id="priloznosti"><div class="wrap">
+  <div class="head"><p class="kicker">Priložnosti za podporo</p><h2>Konkretni projekti izvajalcev</h2><p class="lede">Vsak projekt je potrdil izvajalec. Podpora gre neposredno izvajalcu: pogodbo in plačilo uredite z njim, Equeli sredstev ne zbira in ne posreduje. Z veseljem vas povežemo.</p></div>
+  {project_cards()}
 </div></section>""" + form_section("podpora", "Interes", "Izrazite interes za podporo", "Odgovorimo s predlogom programov, ki ustrezajo vašim željam.", supporter_form()), "/za-podpornike/"))
 
 # ================= MREŽA =================

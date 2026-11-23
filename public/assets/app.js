@@ -322,3 +322,6 @@ document.querySelectorAll('.finder').forEach(function (root) {
     if (empty) empty.hidden = n > 0;
   });
 })();
+
+/* Predizbira projekta v obrazcu za podpornike (?projekt=slug) */
+(function(){try{var q=new URLSearchParams(location.search).get("projekt");if(!q)return;var c=document.getElementById(q);var sel=document.querySelector('#podpora select[name="Projekt"]');if(!c||!sel)return;var t=c.querySelector(".opp-head b").textContent;for(var i=0;i<sel.options.length;i++){if(sel.options[i].text.indexOf(t)>-1){sel.selectedIndex=i;break;}}}catch(e){}})();
