@@ -303,7 +303,13 @@ def shown_centers():
 # porocilo = (neobvezno) povezava do javnega poročila o skupnem programu; prikaže se le, če obstaja
 PARTNERSHIPS = [
     # Iz javnih virov (19. 11. 2026) – v potrditev poslano centrom po e-pošti; vir_url = kje je sodelovanje objavljeno.
-    dict(center="Zavedno delo s konji, Rock Ranč", partner="Vzgojni zavod Kranj", kraj="Kranj", regija="Gorenjska", vrsta="Zavod", kaj="Srečanja s konji za mladostnike", vir="javno", vir_url="https://vzkranj.splet.arnes.si/2026/08/02/rock-ranc/"),
+    # Rock Ranč – navedla Živa Logar v obrazcu (22. 11. 2026), objava potrjena
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="Strokovni center Kranj", kraj="Kranj", regija="Gorenjska", vrsta="Zavod", kaj="Srečanja s konji za mladostnike", vir="center", vir_url="https://vzkranj.splet.arnes.si/2026/08/02/rock-ranc/"),
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="OŠ Ferda Vesela Šentvid pri Stični", kraj="Šentvid pri Stični", regija="Osrednjeslovenska", vrsta="Šola", kaj="Sodelovanje s šolo", vir="center"),
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="CSD Grosuplje (Palčica)", kraj="Grosuplje", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Sodelovanje s CSD", vir="center"),
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="Strokovni center Višnja Gora", kraj="Višnja Gora", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Sodelovanje z zavodom", vir="center"),
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="Bolnišnica za otroke Šentvid pri Stični", kraj="Šentvid pri Stični", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Sodelovanje z bolnišnico", vir="center"),
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="Zavod Nazaj na konja", kraj="Starošince", regija="Podravska", vrsta="Drugo", kaj="Strokovno sodelovanje", vir="center"),
     dict(center="Zavedno delo s konji, Rock Ranč", partner="Vzgojni zavod Veržej", kraj="Veržej", regija="Pomurska", vrsta="Zavod", kaj="Erasmus+ projekt Konjerastniki", vir="javno", vir_url="https://www.vzgojni-zavod-verzej.si/2026/06/01/konjerastniki-zakljucek-projekta/"),
     dict(center="Zavod Škatlica", partner="Vzgojni zavod Veržej", kraj="Veržej", regija="Pomurska", vrsta="Zavod", kaj="Erasmus+ projekt Konjerastniki", vir="javno", vir_url="https://www.vzgojni-zavod-verzej.si/2026/06/01/konjerastniki-zakljucek-projekta/"),
     dict(center="Zavod Hipo Team", partner="CIRIUS Vipava", kraj="Vipava", regija="Goriška", vrsta="Zavod", kaj="Hipoterapija", vir="center"),
@@ -347,6 +353,12 @@ COORDS = {
     "Sonček – Primorsko društvo za cerebralno paralizo": (45.9560, 13.6480),
     "Sožitje Ajdovščina-Vipava": (45.8870, 13.9090),
     "Sonček – Notranjsko društvo za cerebralno paralizo": (45.7160, 14.2450),
+    "Strokovni center Kranj": (46.2390, 14.3556),
+    "Vzgojni zavod Veržej": (46.5840, 16.1650),
+    "OŠ Ferda Vesela Šentvid pri Stični": (45.9500, 14.8410),
+    "CSD Grosuplje (Palčica)": (45.9550, 14.6580),
+    "Strokovni center Višnja Gora": (45.9580, 14.7460),
+    "Bolnišnica za otroke Šentvid pri Stični": (45.9545, 14.8470),
 }
 
 
@@ -355,7 +367,7 @@ COORDS = {
 PARTNER_URLS = {
     "Polžek – društvo za otroke s posebnimi potrebami": "http://www.polzek.si/",
     "CIRIUS Vipava": "https://www.cirius-vipava.si/",
-    "Vzgojni zavod Kranj": "https://vzkranj.splet.arnes.si/",
+    "Strokovni center Kranj": "https://vzkranj.splet.arnes.si/",
     "Vzgojni zavod Veržej": "https://www.vzgojni-zavod-verzej.si/",
     "OŠ dr. Mihajla Rostoharja Krško": "https://osmr.splet.arnes.si/",
     "OŠ Ane Gale Sevnica": "https://www.os-anegale.si/",
