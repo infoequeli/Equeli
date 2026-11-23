@@ -311,6 +311,8 @@ PARTNERSHIPS = [
     dict(center="Marengo dežela", partner="Društvo Sožitje Brežice", kraj="Brežice", regija="Posavska", vrsta="Društvo", kaj="Redno sodelovanje", vir="center"),
     dict(center="Marengo dežela", partner="Društvo za cerebralno paralizo Sonček Posavje", kraj="Leskovec pri Krškem", regija="Posavska", vrsta="Društvo", kaj="Redno sodelovanje", vir="center"),
     dict(center="Marengo dežela", partner="OŠ dr. Mihajla Rostoharja Krško", kraj="Krško", regija="Posavska", vrsta="Šola", kaj="Občasno sodelovanje", vir="center"),
+    dict(center="Konjeniški zavod EPONA", partner="Polžek – društvo za otroke s posebnimi potrebami", kraj="Novo mesto", regija="Jugovzhodna Slovenija", vrsta="Društvo", kaj="Terapije s pomočjo konja za otroke", vir="center"),
+    dict(center="Konjeniški zavod EPONA", partner="Sonček – Društvo za cerebralno paralizo Dolenjske in Bele krajine", kraj="Novo mesto", regija="Jugovzhodna Slovenija", vrsta="Društvo", kaj="Terapije s pomočjo konja", vir="center"),
     dict(center="Marengo dežela", partner="OŠ Ane Gale Sevnica", kraj="Sevnica", regija="Posavska", vrsta="Šola", kaj="Občasno sodelovanje", vir="center"),
 ]
 
@@ -329,6 +331,8 @@ COORDS = {
     "Zavedno delo s konji, Rock Ranč": (45.9530, 14.8430),
     "Marengo dežela": (46.0130, 15.3900),
     "Konjeniški zavod EPONA": (45.7880, 15.1250),
+    "Polžek – društvo za otroke s posebnimi potrebami": (45.8040, 15.1560),
+    "Sonček – Društvo za cerebralno paralizo Dolenjske in Bele krajine": (45.8075, 15.1610),
     "Športno-terapevtski klub Pegasus": (45.9980, 14.9290),
     "Konjeniški center AMAY": (46.2630, 15.1780),
     "Zavod Hipo Team": (45.8870, 13.7740),
@@ -346,6 +350,7 @@ COORDS = {
 # Spletne strani partnerjev v mreži (ime iz PARTNERSHIPS -> povezava).
 # Kjer ustanova nima svoje strani, je povezava na stran zveze, ki jo navaja.
 PARTNER_URLS = {
+    "Polžek – društvo za otroke s posebnimi potrebami": "http://www.polzek.si/",
     "CIRIUS Vipava": "https://www.cirius-vipava.si/",
     "Vzgojni zavod Kranj": "https://vzkranj.splet.arnes.si/",
     "Vzgojni zavod Veržej": "https://www.vzgojni-zavod-verzej.si/",
@@ -366,7 +371,7 @@ PROJECTS = [
     dict(slug="epona-terapije-2027", kind="Terapije", center="Konjeniški zavod EPONA", place="Novo mesto · Jugovzhodna Slovenija",
          title="Redne terapije s pomočjo konja za otroke v letu 2027",
          goal="Otrokom s posebnimi potrebami iz družin, ki si rednih obravnav ne morejo privoščiti, omogočiti celoten cikel terapije s pomočjo konja.",
-         who="Otroci s posebnimi potrebami; Epona sodeluje z društvoma Polžek in Sonček",
+         who="Otroci s posebnimi potrebami; Epona sodeluje z društvom Polžek in Društvom Sonček Dolenjske in Bele krajine",
          budget=[("Pet obravnav za enega otroka", "220 €"), ("Cel cikel desetih obravnav za enega otroka", "400 €"), ("Cikel desetih obravnav za pet otrok", "2.000 €")],
          total="400 € na otroka", note="Zneski temeljijo na cenah Epone. Podpora je mogoča kot donacija ali sponzorstvo."),
     dict(slug="epona-raziskava-myotonpro", kind="Raziskava", center="Konjeniški zavod EPONA", place="Novo mesto · Jugovzhodna Slovenija",
