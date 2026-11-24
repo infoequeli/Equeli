@@ -223,7 +223,7 @@ def center_card(c):
     facts += f'<li>{icon("leaf")}<span>Terapevtski konji: {e(c["horses"])}</span></li>' if c["horses"] else ""
     facts += f'<li>{icon("grid")}<span>{e(c["space"])}</span></li>' if c.get("space") else ""
     facts += f'<li>{icon("book")}<span>{e(c["programs"])}</span></li>' if c.get("programs") else ""
-    _parts = [p["partner"] for p in PARTNERSHIPS if p["center"] == c["name"]]
+    _parts = [p["partner"] for p in PARTNERSHIPS if p["center"] == c["name"] and is_institution(p)]
     if _parts:
         facts += f'<li>{icon("link")}<span>Sodeluje z: {e(", ".join(_parts))} <a href="/za-sole-in-zavode/#mreza">Mreža</a></span></li>'
     _pr = [pr for pr in PROJECTS if pr["center"] == c["name"]]
@@ -404,12 +404,20 @@ def network_map(rows):
       <script src="/assets/mreza.js?v={_v('public/assets/mreza.js')}" defer></script>
     </div>"""
 
+_CENTER_NAMES = {c["name"].lower() for c in CENTERS if c["group"] not in ("javni", "organizator")}
+
+
+def is_institution(p):
+    """Mreža prikazuje samo sodelovanja centrov z ustanovami (šole, vrtci, zavodi, društva), ne sodelovanj med centri."""
+    return p.get("vrsta") != "Center" and p["partner"].lower() not in _CENTER_NAMES
+
+
 def _clink(name):
     c = next((x for x in CENTERS if x["name"] == name), None)
     return f'<a href="{c["url"]}" target="_blank" rel="noopener">{e(name)} ↗</a>' if c and c["url"] else e(name)
 
 def network_section():
-    rows = [p for p in PARTNERSHIPS if any(c["name"] == p["center"] and c.get("confirmed") for c in CENTERS)]
+    rows = [p for p in PARTNERSHIPS if is_institution(p) and any(c["name"] == p["center"] and c.get("confirmed") for c in CENTERS)]
     reg_names = [r for r, _ in REGIONS]
     counts = [(r, len({p["partner"] for p in rows if p["regija"] == r})) for r in reg_names]
     by_reg = ""

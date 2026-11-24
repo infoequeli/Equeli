@@ -297,7 +297,7 @@ def shown_centers():
 # ---------------- MREŽA SODELOVANJ ----------------
 # Obstoječa sodelovanja med centri in ustanovami (šole, vrtci, zavodi, društva).
 # center  = točno ime centra iz CENTERS (center mora biti prikazan, confirmed=True)
-# partner = ime ustanove; kraj; regija (ena od REGIONS); vrsta = Šola / Vrtec / Zavod / Društvo / Občina / Drugo
+# partner = ime ustanove; kraj; regija (ena od REGIONS); vrsta = Šola / Vrtec / Zavod / Društvo / Občina / Drugo / Center (sodelovanje med centri – ne prikažemo med ustanovami)
 # kaj     = kratko, kaj izvajajo skupaj
 # vir     = "potrjeno" (potrdili obe strani) | "center" (navedel center) | "javno" (javni vir, npr. spletna stran ustanove)
 # porocilo = (neobvezno) povezava do javnega poročila o skupnem programu; prikaže se le, če obstaja
@@ -309,7 +309,7 @@ PARTNERSHIPS = [
     dict(center="Zavedno delo s konji, Rock Ranč", partner="CSD Grosuplje (Palčica)", kraj="Grosuplje", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Sodelovanje s CSD", vir="center"),
     dict(center="Zavedno delo s konji, Rock Ranč", partner="Strokovni center Višnja Gora", kraj="Višnja Gora", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Sodelovanje z zavodom", vir="center"),
     dict(center="Zavedno delo s konji, Rock Ranč", partner="Bolnišnica za otroke Šentvid pri Stični", kraj="Šentvid pri Stični", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Sodelovanje z bolnišnico", vir="center"),
-    dict(center="Zavedno delo s konji, Rock Ranč", partner="Zavod Nazaj na konja", kraj="Starošince", regija="Podravska", vrsta="Drugo", kaj="Strokovno sodelovanje", vir="center"),
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="Zavod Nazaj na konja", kraj="Starošince", regija="Podravska", vrsta="Center", kaj="Strokovno sodelovanje", vir="center"),
     dict(center="Zavedno delo s konji, Rock Ranč", partner="Vzgojni zavod Veržej", kraj="Veržej", regija="Pomurska", vrsta="Zavod", kaj="Erasmus+ projekt Konjerastniki", vir="javno", vir_url="https://www.vzgojni-zavod-verzej.si/2026/06/01/konjerastniki-zakljucek-projekta/"),
     dict(center="Zavod Škatlica", partner="Vzgojni zavod Veržej", kraj="Veržej", regija="Pomurska", vrsta="Zavod", kaj="Erasmus+ projekt Konjerastniki", vir="javno", vir_url="https://www.vzgojni-zavod-verzej.si/2026/06/01/konjerastniki-zakljucek-projekta/"),
     dict(center="Zavod Hipo Team", partner="CIRIUS Vipava", kraj="Vipava", regija="Goriška", vrsta="Zavod", kaj="Hipoterapija", vir="center"),
