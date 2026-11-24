@@ -666,7 +666,11 @@ pages.append(page("/kontakt/", "Kontakt", "Pišite Equeli za pomoč pri iskanju 
 # ================= ZA PODPORNIKE =================
 pages.append(page("/za-podpornike/", "Za donatorje in fundacije", "Podjetja, fundacije, donatorji in vlagatelji v družbeni učinek lahko podprejo dostopnost programov s pomočjo konj.",
                   hero("Za donatorje in fundacije", "Podprite dostopnost programov", "Fundacije, podjetja, donatorji in vlagatelji v družbeni učinek lahko omogočijo programe za otroke, šole in zavode. Povežemo vas s preverjenimi izvajalci in konkretnimi potrebami.",
-                       '<a class="btn btn-dark" href="#podpora">Izrazite interes</a><a class="btn btn-ghost" href="#priloznosti">Priložnosti</a>', seed=21) + f"""
+                       '<a class="btn btn-dark" href="#priloznosti">Odprti projekti</a><a class="btn btn-ghost" href="#podpora">Izrazite interes</a>', seed=21) + f"""
+<section class="section white" id="priloznosti"><div class="wrap">
+  <div class="head"><h2>Odprti projekti</h2><p class="lede">Vsak projekt je potrdil izvajalec. Podpora gre neposredno izvajalcu: pogodbo in plačilo uredite z njim, Equeli sredstev ne zbira in ne posreduje. Z veseljem vas povežemo.</p></div>
+  {project_cards()}
+</div></section>
 <section class="section white"><div class="wrap">
   <div class="head"><p class="kicker">Načela</p><h2>Pregledno in neposredno</h2></div>
   <div class="goals three">
@@ -684,10 +688,7 @@ pages.append(page("/za-podpornike/", "Za donatorje in fundacije", "Podjetja, fun
     <li><div>{badge("chart", "ring")}<b>Poročilo</b><span>Izvajalec poroča o izvedbi.</span></div></li>
   </ol>
 </div></section>
-<section class="section white" id="priloznosti"><div class="wrap">
-  <div class="head"><p class="kicker">Priložnosti za podporo</p><h2>Konkretni projekti izvajalcev</h2><p class="lede">Vsak projekt je potrdil izvajalec. Podpora gre neposredno izvajalcu: pogodbo in plačilo uredite z njim, Equeli sredstev ne zbira in ne posreduje. Z veseljem vas povežemo.</p></div>
-  {project_cards()}
-</div></section>""" + form_section("podpora", "Interes", "Izrazite interes za podporo", "Odgovorimo s predlogom programov, ki ustrezajo vašim željam.", supporter_form()), "/za-podpornike/"))
+""" + form_section("podpora", "Interes", "Izrazite interes za podporo", "Odgovorimo s predlogom programov, ki ustrezajo vašim željam.", supporter_form()), "/za-podpornike/"))
 
 # ================= MREŽA =================
 pages.append(page("/mreza/", "Mreža sodelovanj", "Interaktivni zemljevid: kateri terapevtski centri s pomočjo konj sodelujejo s šolami, zavodi in društvi po Sloveniji.",
