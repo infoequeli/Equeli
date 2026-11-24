@@ -393,7 +393,7 @@ PROJECTS = [
          title="Klinična raziskava: hipoterapija pri spastični cerebralni paralizi",
          goal="Epona načrtuje klinično raziskavo, kako hipoterapija vpliva na viskoelastične lastnosti ledvenega dela fascije pri osebah s spastično obliko cerebralne paralize. Meritve so neinvazivne in neboleče. Raziskavo je odobrila Komisija za etiko RS.",
          who="Osebe s spastično obliko cerebralne paralize; meritve vsak dan, najmanj šest mesecev",
-         budget=[("Naprava MyotonPRO za merjenje lastnosti mehkih tkiv", "6.000 €")],
-         total="6.000 €", note="Cena je okvirna; Epona preverja aktualno ponudbo proizvajalca.",
+         budget=[("Naprava MyotonPRO s programsko opremo in trajno licenco", "5.775 €"), ("Dostava v Slovenijo", "100 €"), ("DDV 24 % (Estonija)", "1.410 €"), ("Skupaj", "7.285 €")],
+         total="7.285 €", note="Po ponudbi proizvajalca (november 2026, veljavna 6 mesecev, plačilo vnaprej). Popustov ne ponujajo.",
          link=("myoton.com", "https://www.myoton.com/")),
 ]
