@@ -943,3 +943,16 @@ footer .logo-sub{display:none!important}footer .logo{margin-bottom:6px}
 .linkbtn{background:none;border:0;padding:0;color:var(--blue);font:inherit;cursor:pointer;text-decoration:underline}
 .nw-empty{color:var(--muted)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* Erasmus poziv */
+.erz{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px;align-items:center;padding:22px 26px;border-radius:20px;background:#2f5f5d;color:#fff;text-decoration:none}
+.erz h3{margin:0;color:#fff;font-size:19px}
+.erz p{margin:4px 0 0;color:rgba(255,255,255,.82);font-size:15px}
+.erz-tag{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.16);white-space:nowrap}
+.erz .go{color:#fff;font-weight:600;white-space:nowrap}
+.erz:hover{background:#264f4d}
+@media (max-width:760px){.erz{grid-template-columns:1fr;gap:10px}.erz-tag{justify-self:start}}
+.erz-facts{display:grid;gap:12px;margin:0 0 28px}
+.erz-facts>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:16px 20px;border-radius:16px;background:#f5f8f7}
+.erz-facts dt{font-weight:700;color:#2f5f5d}
+.erz-facts dd{margin:0}
+@media (max-width:560px){.erz-facts>div{grid-template-columns:1fr;gap:4px}}

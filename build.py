@@ -449,6 +449,30 @@ def network_section():
 </div></section>"""
 
 
+
+def erasmus_teaser():
+    return f"""<section class="section"><div class="wrap"><a class="erz" href="/erasmus-2027/">
+  <span class="erz-tag">Poziv · do 15. 1. 2027</span>
+  <div><h3>Erasmus+ 2027: iščemo partnerje za skupni projekt</h3><p>Za terapevtske centre s pomočjo konj ter šole, vrtce in zavode. Prijavo pripravimo skupaj.</p></div>
+  <span class="go">Preberite poziv →</span></a></div></section>"""
+
+
+ERASMUS = f"""
+<div class="wrap narrow article erz-page">
+  <dl class="erz-facts">
+    <div><dt>Kdo</dt><dd>Terapevtski centri s pomočjo konj ter šole, vrtci in zavodi, ki delajo z otroki in mladimi s posebnimi potrebami.</dd></div>
+    <div><dt>Kaj</dt><dd>Pripravljamo prijavo na Erasmus+ za mednarodno partnerstvo s centri iz tujine: izmenjava dobrih praks, obiski pri partnerjih, usposabljanje strokovnih delavcev in skupna gradiva o intervencijah s pomočjo konj.</dd></div>
+    <div><dt>Koliko</dt><dd>Malo partnerstvo (KA210) v višini 30.000 ali 60.000 € za celoten konzorcij in večje partnerstvo (KA220). Sredstva so namenjena delu, potem in gradivom projekta.</dd></div>
+    <div><dt>Rok</dt><dd>Izraz interesa do <b>15. januarja 2027</b>. Rok Erasmus+ za oddajo prijave je predvidoma v začetku marca 2027.</dd></div>
+  </dl>
+  <h2>Kaj potrebujete za sodelovanje</h2>
+  <ul><li>organizacijo s pravno obliko (zavod, društvo, javni zavod),</li><li>osebo, ki bo projekt spremljala v vaši organizaciji,</li><li>pripravljenost na obiske in sodelovanje s partnerji iz tujine.</li></ul>
+  <p>Prijavo, registracijo organizacije in koordinacijo pripravimo skupaj z vami.</p>
+  <div class="callout"><strong>Kako se javite.</strong> Pišite na <a href="mailto:{EMAIL}">{EMAIL}</a> in navedite ime organizacije, kontaktno osebo in nekaj stavkov o tem, kaj delate.</div>
+  <p class="fine">Pripravljamo prijavo na javni razpis; o financiranju odloči nacionalna agencija CMEPIUS. Razpis Erasmus+ za leto 2027 še ni objavljen, zato se pogoji lahko spremenijo. Zneski so povzeti po razpisu 2026.</p>
+</div>"""
+
+
 # ================= DOMOV =================
 NEEDS = [("avtizem", "grid", "Avtizem"), ("gibalne-tezave", "move", "Gibalne težave"), ("adhd", "target", "ADHD in pozornost"),
          ("motnje-v-dusevnem-razvoju", "heart", "Motnje v duševnem razvoju"), ("ucne-custvene-vedenjske-tezave", "book", "Učne in vedenjske težave"),
@@ -521,7 +545,7 @@ pages.append(page("/za-starse/", "Za starše", "Vodnik za starše: od tega, kar 
 schools = hero("Za šole, vrtce in zavode", "Programi s pomočjo konj za skupine",
                "Povežemo vas s centrom v vaši regiji. Dogovor in plačilo urejate neposredno s centrom.",
                '<a class="btn btn-dark" href="#povprasevanje">Oddajte povpraševanje</a><a class="btn btn-ghost" href="#mreza">Obstoječa sodelovanja</a>', seed=3)
-schools += f"""
+schools += erasmus_teaser() + f"""
 <section class="section"><div class="wrap">
   <div class="kinds">
     <div>{badge("people")}<b>Delavnice za razred</b><span>Sodelovanje, komunikacija, samozavest</span></div>
@@ -630,7 +654,7 @@ pages.append(page("/izvajalci/", "Terapevtski centri", "Javni zavodi in terapevt
 # ================= ZA IZVAJALCE =================
 pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pomočjo konj lahko brezplačno potrdijo in dopolnijo podatke o svojem centru.",
                   hero("Za izvajalce", "Predstavite svoj center", "Equeli pripravlja neodvisen pregled intervencij s pomočjo konj v Sloveniji. Predstavitev je brezplačna, profil objavimo šele po vaši potrditvi.",
-                       '<a class="btn btn-dark" href="#obrazec">Izpolnite obrazec</a><a class="btn btn-ghost" href="/kontakt/">Imate vprašanje?</a>', seed=14) + f"""
+                       '<a class="btn btn-dark" href="#obrazec">Izpolnite obrazec</a><a class="btn btn-ghost" href="/kontakt/">Imate vprašanje?</a>', seed=14) + erasmus_teaser() + f"""
 <section class="section white"><div class="wrap">
   <div class="head"><p class="kicker">Kako poteka</p><h2>Potek</h2></div>
   <ol class="process"><li><h3>Obrazec</h3><p>Izpolnite, kar veste (približno 15 minut). Manjkajoče lahko dopolnimo po telefonu.</p></li><li><h3>Preverjanje</h3><p>Podatke preverimo in vas po potrebi kontaktiramo.</p></li><li><h3>Osnutek profila</h3><p>Pripravimo osnutek in vam ga pošljemo v pregled.</p></li><li><h3>Objava</h3><p>Profil objavimo šele po vaši potrditvi.</p></li></ol>
@@ -642,6 +666,11 @@ pages.append(page("/za-izvajalce/", "Za izvajalce", "Izvajalci intervencij s pom
   <div class="callout"><strong>Pomoč pri prijavah na razpise.</strong> Če pripravljate prijavo na razpis ali iščete sredstva za svoj program, vam pri tem brezplačno pomagamo: pri iskanju primernih razpisov in partnerjev ter pri pripravi prijave. Pišite nam na <a href="mailto:info.equeli@gmail.com">info.equeli@gmail.com</a> ali pa se vam oglasimo sami, ko najdemo priložnost za vaš center.</div>
 </div>
 {form_section("obrazec", "Obrazec", "Prijava izvajalca", "Izpolnite, kar veste. Manjkajoče dopolnimo po telefonu ali ob obisku. Profil objavimo šele, ko ga potrdite. Približno 15 minut.", provider_form())}""", "/za-izvajalce/"))
+
+# ================= ERASMUS+ 2027 =================
+pages.append(page("/erasmus-2027/", "Erasmus+ 2027: poziv partnerjem", "Iščemo terapevtske centre s pomočjo konj ter šole, vrtce in zavode za skupno prijavo na Erasmus+ 2027.",
+                  hero("Poziv", "Erasmus+ 2027: iščemo partnerje za skupni projekt", "Za terapevtske centre s pomočjo konj ter šole, vrtce in zavode, ki delajo z otroki in mladimi s posebnimi potrebami.",
+                       f'<a class="btn btn-dark" href="mailto:{EMAIL}?subject=Erasmus%2B%202027">Javite se</a><a class="btn btn-ghost" href="/mreza/">Mreža sodelovanj</a>', seed=32) + ERASMUS, "/za-izvajalce/"))
 
 # ================= O Equeli =================
 pages.append(page("/o-equeli/", "O Equeli", "Equeli je neodvisna platforma za intervencije s pomočjo konj v Sloveniji.",
