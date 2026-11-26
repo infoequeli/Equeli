@@ -399,4 +399,11 @@ PROJECTS = [
          budget=[("Naprava MyotonPRO za merjenje lastnosti mehkih tkiv", "7.285 €")],
          total="7.285 €", note="Znesek po aktualni ponudbi proizvajalca.",
          link=("myoton.com", "https://www.myoton.com/")),
+    dict(slug="rock-ranc-zavodi-2027", kind="Delavnice in terapije", center="Zavedno delo s konji, Rock Ranč", place="Šentvid pri Stični · Osrednjeslovenska",
+         title="Otroci iz zavodov ob konjih v letu 2027",
+         goal="Skupinam iz zavodov omogočiti, da tudi v letu 2027 redno prihajajo na ranč. Otroci ob konjih, v naravi in z vrstniki gradijo sodelovanje, zaupanje, zdrave meje in samoregulacijo. Programi so se izkazali, projektna sredstva pa se iztekajo.",
+         who="Otroci in mladostniki s posebnimi potrebami ter iz ranljivih okolij; Rock Ranč sodeluje s Strokovnim centrom Kranj, SC Višnja Gora, Bolnišnico za otroke Šentvid pri Stični in CSD Grosuplje (Palčica)",
+         budget=[("Dvourna delavnica s konji za skupino petih mladostnikov", "300 €"), ("Dan dejavnosti s konji za cel razred (25 učencev)", "375 €"), ("Deset ur redne terapije s pomočjo konja za enega otroka", "600 €"), ("Deset delavnic za skupino iz zavoda, celo leto", "3.000 €")],
+         total="od 300 €", note="Zneski temeljijo na cenah Rock Ranča. Podpora je mogoča kot donacija ali sponzorstvo.",
+         link=("rockranch.si", "https://rockranch.si/")),
 ]
