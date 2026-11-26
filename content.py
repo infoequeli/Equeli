@@ -171,8 +171,11 @@ CENTERS = [
     dict(name="Konjeniško-terapevtski zavod Arion", place="Ljubljana in Mislinja", region=["Osrednjeslovenska", "Koroška"], group="register", offer=["P"],
          who="Otroci in mladostniki", team="Tajda Knez, mag. inkluzivne in socialne pedagogike", horses="5",
          url="", reg=REG + "tajda-knez/", confirmed=True),
-    dict(name="Moonrise – terapije s pomočjo konj", place="Domžale", region=["Osrednjeslovenska"], group="register", offer=["D", "T"],
-         who="Otroci in odrasli, individualno", team="Tanja Slovenec, dipl. delovna terapevtka", horses="3",
+    dict(name="Moonrise – terapije s pomočjo konj", place="Domžale", region=["Osrednjeslovenska"], group="register", offer=["T", "D", "A"],
+         who="Otroci, mladostniki, odrasli in starejši, šolske in vrtčevske skupine ter uporabniki zavodov; individualno, v manjših skupinah ali za razrede",
+         programs="Terapije s pomočjo konj (30 ali 45 minut, individualno); Poni jezdeci za otroke do 8 let (priprava in nega konja, vodene aktivnosti v maneži, vodeno jahanje); sprostitveno jahanje za tiste, ki želijo stik s konjem brez učenja jahanja; aktivnosti s konji za skupine s poudarkom na komunikaciji, zaupanju, odnosih in sodelovanju. Cena individualnega dela od 20 do 70 €.",
+         team="Tanja Slovenec, dipl. delovna terapevtka in terapevtka s pomočjo konj", horses="3",
+         space="Zunanja jahalnica ali ograda, sanitarije, parkirišče",
          url="https://moonrise.si/", reg=REG + "tanja-slovenec-terapevtka-s-pomocjo-konja/", confirmed=True),
     dict(name="Zavedno delo s konji, Rock Ranč", place="Šentvid pri Stični", region=["Osrednjeslovenska"], group="register", offer=["T", "P", "S", "J", "A"],
          who="Otroci, mladostniki, odrasli in starejši, šolske in vrtčevske skupine ter uporabniki zavodov; individualno, v manjših skupinah ali za razrede",
@@ -304,10 +307,10 @@ def shown_centers():
 PARTNERSHIPS = [
     # Iz javnih virov (19. 11. 2026) – v potrditev poslano centrom po e-pošti; vir_url = kje je sodelovanje objavljeno.
     # Rock Ranč – navedla Živa Logar v obrazcu (22. 11. 2026), objava potrjena
-    dict(center="Zavedno delo s konji, Rock Ranč", partner="Strokovni center Kranj", kraj="Kranj", regija="Gorenjska", vrsta="Zavod", kaj="Srečanja s konji za mladostnike", vir="center", vir_url="https://vzkranj.splet.arnes.si/2026/08/02/rock-ranc/"),
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="Strokovni center Kranj", kraj="Kranj", regija="Gorenjska", vrsta="Zavod", kaj="Projekt aktivnosti s pomočjo konj za mladostnike (2026), načrtujejo nadaljevanje", vir="potrjeno", vir_url="https://vzkranj.splet.arnes.si/2026/08/02/rock-ranc/"),
     dict(center="Zavedno delo s konji, Rock Ranč", partner="OŠ Ferda Vesela Šentvid pri Stični", kraj="Šentvid pri Stični", regija="Osrednjeslovenska", vrsta="Šola", kaj="Sodelovanje s šolo", vir="center"),
     dict(center="Zavedno delo s konji, Rock Ranč", partner="CSD Grosuplje (Palčica)", kraj="Grosuplje", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Sodelovanje s CSD", vir="center"),
-    dict(center="Zavedno delo s konji, Rock Ranč", partner="Strokovni center Višnja Gora", kraj="Višnja Gora", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Sodelovanje z zavodom", vir="center"),
+    dict(center="Zavedno delo s konji, Rock Ranč", partner="Strokovni center Višnja Gora", kraj="Višnja Gora", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Izobraževanje strokovnih delavk in obisk mladostnikov na ranču", vir="potrjeno"),
     dict(center="Zavedno delo s konji, Rock Ranč", partner="Bolnišnica za otroke Šentvid pri Stični", kraj="Šentvid pri Stični", regija="Osrednjeslovenska", vrsta="Zavod", kaj="Sodelovanje z bolnišnico", vir="center"),
     dict(center="Zavedno delo s konji, Rock Ranč", partner="Zavod Nazaj na konja", kraj="Starošince", regija="Podravska", vrsta="Center", kaj="Strokovno sodelovanje", vir="center"),
     dict(center="Zavedno delo s konji, Rock Ranč", partner="Vzgojni zavod Veržej", kraj="Veržej", regija="Pomurska", vrsta="Zavod", kaj="Erasmus+ projekt Konjerastniki", vir="javno", vir_url="https://www.vzgojni-zavod-verzej.si/2026/06/01/konjerastniki-zakljucek-projekta/"),
@@ -367,7 +370,7 @@ COORDS = {
 PARTNER_URLS = {
     "Polžek – društvo za otroke s posebnimi potrebami": "http://www.polzek.si/",
     "CIRIUS Vipava": "https://www.cirius-vipava.si/",
-    "Strokovni center Kranj": "https://vzkranj.splet.arnes.si/",
+    "Strokovni center Kranj": "https://www.sc-kranj.si/",
     "Vzgojni zavod Veržej": "https://www.vzgojni-zavod-verzej.si/",
     "OŠ dr. Mihajla Rostoharja Krško": "https://osmr.splet.arnes.si/",
     "OŠ Ane Gale Sevnica": "https://www.os-anegale.si/",
