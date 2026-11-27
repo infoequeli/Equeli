@@ -252,8 +252,23 @@ def project_card(pr):
             f'<div class="center-links"><a class="btn btn-dark" href="/za-podpornike/?projekt={pr["slug"]}#podpora">Podprite projekt</a>{ext}</div></article>')
 
 
-def project_cards():
-    return '<div class="projs">' + "".join(project_card(p) for p in PROJECTS) + '</div>'
+def project_cards(items=None):
+    items = PROJECTS if items is None else items
+    return '<div class="projs">' + "".join(project_card(p) for p in items) + '</div>'
+
+
+def project_groups():
+    groups = [
+        ("terapije", "Podpora terapijam in delavnicam", "Donacije, ki otrokom in skupinam omogočijo redne terapije in delavnice s pomočjo konja.",
+         [p for p in PROJECTS if p["kind"] != "Raziskava"]),
+        ("raziskave", "Podpora raziskavam", "Donacije za raziskave, ki prispevajo k strokovnemu razvoju in dokazom o učinkih dela s konji.",
+         [p for p in PROJECTS if p["kind"] == "Raziskava"]),
+    ]
+    out = ""
+    for gid, title, sub, items in groups:
+        if items:
+            out += f'<div class="proj-group" id="{gid}"><h3>{e(title)}</h3><p>{e(sub)}</p></div>' + project_cards(items)
+    return out
 
 
 def center_cards(items):
@@ -706,7 +721,7 @@ pages.append(page("/za-podpornike/", "Za donatorje in fundacije", "Podjetja, fun
                        '<a class="btn btn-dark" href="#priloznosti">Odprti projekti</a><a class="btn btn-ghost" href="#podpora">Izrazite interes</a>', seed=21) + f"""
 <section class="section white" id="priloznosti"><div class="wrap">
   <div class="head"><h2>Odprti projekti</h2><p class="lede">Vsak projekt je potrdil izvajalec. Podpora gre neposredno izvajalcu: pogodbo in plačilo uredite z njim, Equeli sredstev ne zbira in ne posreduje. Z veseljem vas povežemo.</p></div>
-  {project_cards()}
+  {project_groups()}
 </div></section>
 <section class="section white"><div class="wrap">
   <div class="head"><p class="kicker">Načela</p><h2>Pregledno in neposredno</h2></div>
