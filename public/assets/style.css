@@ -957,3 +957,12 @@ footer .logo-sub{display:none!important}footer .logo{margin-bottom:6px}
 .erz-facts dt{font-weight:700;color:#2f5f5d}
 .erz-facts dd{margin:0}
 @media (max-width:560px){.erz-facts>div{grid-template-columns:1fr;gap:4px}}
+.art-meta{font-size:15px;color:#6e6e73}
+.art-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0 8px}
+.art-stats>div{padding:18px;border-radius:16px;background:#f5f8f7}
+.art-stats b{display:block;font-size:32px;color:#2f5f5d;letter-spacing:-.02em}
+.art-stats span{font-size:14px;color:#55575c;line-height:1.35}
+.article blockquote{margin:18px 0;padding:16px 20px;border-left:3px solid #3f7f7d;background:#f7faf9;border-radius:0 14px 14px 0}
+.article blockquote p{margin:0}
+.refs li{font-size:14px;color:#55575c}
+@media (max-width:640px){.art-stats{grid-template-columns:1fr}}

@@ -119,13 +119,55 @@ RUBRICS = [
     ("strokovnjaki", "Pogovori s strokovnjaki", "mic", "Kako delajo, kaj jih vodi in kaj svetujejo."),
     ("starsi", "Vprašanja staršev", "message", "Odgovori na pogosta vprašanja družin."),
     ("raziskava", "Iz raziskave", "chart", "Ugotovitve nacionalnega pregleda področja."),
+    ("analize", "Strokovne analize", "book", "Analize in raziskovalni prispevki o intervencijah s pomočjo konj."),
 ]
 
 # Članki. Dodaj nov slovar in zaženi build.py. Objavi samo potrjene vsebine (soglasja za fotografije in izjave!).
 # Primer:
 # {"slug": "obisk-pri-...", "title": "...", "rubric": "obiski", "date": "2027-01-15", "lede": "Kratek povzetek.",
 #  "body": "<p>Besedilo članka v HTML.</p>"}
-ARTICLES = []
+ARTICLES = [
+    dict(slug="meja-kot-dinamika-blizine-in-razdalje", rubric="analize", date="2026-11-27",
+         title="Meja kot dinamika bližine in razdalje",
+         lede="Kvalitativna analiza individualne terapije s pomočjo konja: kako se osebne meje pokažejo v telesu in prostoru ob konju, ki se giblje prosto.",
+         body="""
+<p class="art-meta">Avtorica: Ela Rebolj · Kvalitativna analiza · <a href="/assets/doc/meja-kot-dinamika-blizine-in-razdalje.pdf" target="_blank" rel="noopener">Celotna analiza (PDF, 10 strani)</a></p>
+<div class="art-stats">
+  <div><b>18/20</b><span>udeležencem je konj vsaj enkrat sam pristopil</span></div>
+  <div><b>17/20</b><span>udeležencev je doživelo, da se konj odmakne zaradi svojih potreb</span></div>
+  <div><b>17/20</b><span>udeležencev je izkušnjo povezalo s svojimi odnosi</span></div>
+</div>
+<h2>Izhodišče</h2>
+<p>Meje navadno razumemo kot nekaj, kar izrečemo z besedami. Kaj pa, če se meja najprej pokaže v telesu in v prostoru? Ko se nam približa nekdo z jeznim izrazom, si izberemo večjo razdaljo. Tudi konj kot čredna žival razdaljo uravnava glede na to, kako varno se počuti. Razdalja med človekom in konjem je zato viden pokazatelj odnosa.</p>
+<p>Analiza je odgovarjala na dve vprašanji: kako se v odnosu s prosto gibajočim se konjem kaže dinamika bližine in razdalje ter kako jo udeleženci doživljajo in prenašajo v svoje odnose.</p>
+<h2>Kako je potekala</h2>
+<ul>
+  <li><strong>Udeleženci:</strong> 20 odraslih (11 žensk, 9 moških) v individualni terapiji s pomočjo konja.</li>
+  <li><strong>Program:</strong> »Moje meje«, zasnovan v okviru izobraževanja za terapijo s pomočjo konja pri Zavodu Nazaj na konja: 12 srečanj po 60 minut, enkrat tedensko, z delom na tleh ob kobili Nutelli.</li>
+  <li><strong>Vaje:</strong> opazovanje konja za ograjo, razdalja v istem prostoru, bližina in umik, vodenje konja ter hoja med točkami v prostoru.</li>
+  <li><strong>Podatki in analiza:</strong> terapevtski zapiski in pisne refleksije udeležencev, tematska analiza. Podatki so anonimizirani.</li>
+</ul>
+<h2>Kaj se je pokazalo</h2>
+<p><strong>Vsakdanji vzorci postanejo vidni.</strong> Prilagajanje drugim, potreba po potrditvi, napetost in zadrževanje čustev so se ob konju pokazali v prostoru: kot razdalja, čas v stiku in odziv na konjev prihod ali odhod. Tam jih je bilo mogoče opazovati brez obsojanja.</p>
+<p><strong>Ograda kot prostor za raziskovanje.</strong> Konjevo približevanje in umikanje je pri sedmih udeležencih prebudilo teme iz življenja doma, v partnerstvu in na delu. Sprememba položaja, korak nazaj ali v stran, je odprla nov pogled nase in na drugega.</p>
+<p><strong>Od drugih k sebi.</strong> Udeleženci, ki so konjev odhod sprva razumeli osebno, so postopno ločili, kaj pripada konju in kaj njim. Ker konj ohranja svojo voljo, se je pozornost premaknila k lastnemu dihu, nameri in umiku.</p>
+<blockquote><p>Na začetku: »V začetku ure sem samo z opazovanjem konja takoj šla v občutek, da me NE MARA.«<br>Proti koncu: »Sprejemam, da ima svoj prostor in sem s tem ok.«</p></blockquote>
+<blockquote><p>Na začetku: »… prepozno prepoznam, da svoj prostor potrebujem …«<br>Proti koncu: »… kako fino je tudi stopiti korak nazaj ali se obrniti stran …«</p></blockquote>
+<h2>Sklep</h2>
+<p>Meja ni le nekaj, kar izrečemo. Je dinamika bližine in razdalje med dvema bitjema z lastno voljo. Konj, ki prihaja in odhaja v svojem ritmu, pokaže, da v odnosu najbolj vplivamo na svoj odziv.</p>
+<div class="callout"><strong>Omejitve.</strong> Zapiske je vodila izvajalka sama, refleksije so samoporočila, število srečanj se je med udeleženci razlikovalo, analiza je opisna in vključuje eno skupino. Kodiranje je preliminarno, naslednji korak je preverba z drugim koderjem.</div>
+<p><a class="btn btn-dark" href="/assets/doc/meja-kot-dinamika-blizine-in-razdalje.pdf" target="_blank" rel="noopener">Preberite celotno analizo (PDF)</a></p>
+<h2>Viri</h2>
+<ul class="refs">
+  <li>Callara, A. L. idr. (2024). Unveiling directional physiological coupling in human–horse interactions. <em>iScience</em>, 27, 110857.</li>
+  <li>Cartaud, A. idr. (2018). Physiological response to facial expressions in peripersonal space determines interpersonal distance in a social interaction context. <em>Frontiers in Psychology</em>, 9, 657.</li>
+  <li>Mellody, P. <em>Facing Codependence</em>.</li>
+  <li>Starling, M., McLean, A. in McGreevy, P. (2016). The contribution of equitation science to minimising horse-related risks to humans. <em>Animals</em>, 6(3), 15.</li>
+  <li>Van Dierendonck, M. (2005). Social contact in horses. V: <em>The Human-Animal Relationship</em>.</li>
+  <li>von Mohr, M. idr. (2023). My social comfort zone: Attachment anxiety shapes peripersonal and interpersonal space. <em>iScience</em>, 26(2), 105955.</li>
+</ul>
+"""),
+]
 
 # Centri – samo javno dostopni podatki (register Nazaj na konja, spletne strani centrov, Konjeniška zveza Slovenije).
 # confirmed=True: center je potrdil sodelovanje z Equeli -> javno prikazan. Ostali so v bazi, a skriti.
