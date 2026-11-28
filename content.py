@@ -276,7 +276,7 @@ CENTERS = [
          url="https://www.instagram.com/drugacna_pot/", reg="", confirmed=True),
     dict(name="Zavod Hipo Team", place="Brje pri Dobravljah", region=["Goriška"], group="register", offer=["H", "P", "A"],
          who="Otroci, mladostniki in odrasli s posebnimi potrebami; programi za društva in zavode",
-         team="Kristina Naglost, terapevtka s pomočjo konja (prva generacija usposabljanja v Starošincih)", horses="",
+         team="Kristina Naglost, terapevtka s pomočjo konja (prva generacija usposabljanja v Starošincih)", horses="1",
          programs="Hipoterapija v sodelovanju s fizioterapevti-hipoterapevti z Vipavske doline, pedagoško jahanje in aktivnosti s konji, več kot 25 let",
          url="", reg="", confirmed=True),
     dict(name="Društvo Ha-Li", place="Pivka", region=["Primorsko-notranjska"], group="register", offer=["A"],
